@@ -1,8 +1,13 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from '@/pages/Home';
+
 function App() {
   return (
-    <div className='min-h-screen flex items-center justify-center bg-blue-100 text-3xl font-bold'>
-      Chikahae
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
