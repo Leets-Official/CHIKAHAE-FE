@@ -21,7 +21,7 @@ let tokens;
 try {
     tokens = JSON.parse(fs.readFileSync(tokensPath, 'utf-8'));
 } catch (e) {
-    console.error('토큰 파일을 읽는 데 실패했습니다:', e);
+    console.error(`${tokensPath} 파일을 읽거나 파싱하는 데 실패했습니다:`, e);
     process.exit(1);
 }
 
