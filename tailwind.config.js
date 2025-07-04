@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-
-import tokens from './src/tokens/design-tokens.json' assert { type: 'json' };
+import tailwindTokens from './src/styles/tokens.tailwind.json' assert { type: 'json' };
 
 export default {
     content: [
@@ -9,8 +8,7 @@ export default {
     ],
     theme: {
         extend: {
-            colors: tokens.colors,
-            fontSize: tokens.fontSizes,
+            ...tailwindTokens,
         },
     },
     plugins: [],
