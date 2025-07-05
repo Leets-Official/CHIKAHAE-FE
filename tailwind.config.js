@@ -1,11 +1,15 @@
 /** @type {import('tailwindcss').Config} */
+import tailwindTokens from './src/styles/tokens.tailwind.json' assert { type: 'json' };
+
 export default {
     content: [
         './index.html',
         './src/**/*.{js,ts,jsx,tsx}',
     ],
     theme: {
-        extend: {},
+        extend: {
+            ...tailwindTokens,
+        },
     },
     plugins: [],
 }
