@@ -3,7 +3,6 @@ import tailwindTokens from './src/styles/tokens.tailwind.json' assert { type: 'j
 
 export default {
     content: [
-        './index.html',
         './src/**/*.{js,ts,jsx,tsx}',
     ],
     theme: {
