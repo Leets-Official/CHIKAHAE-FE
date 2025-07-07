@@ -23,12 +23,11 @@ const Toast = ({ message, type = 'info', duration = 3000, onClose }: ToastProps)
     return () => clearTimeout(timer);
   }, [duration, onClose]);
 
-
   // 타입별 css 디자인
 
   return (
     <div
-      className={`text-white px-4 py-2 rounded shadow-md transition-opacity ${typeStyles[type]}`}
+      className={`fixed top-5 right-5 z-[9999] text-white px-4 py-2 rounded shadow-md transition-opacity ${typeStyles[type]}`}
     >
       {message}
     </div>
