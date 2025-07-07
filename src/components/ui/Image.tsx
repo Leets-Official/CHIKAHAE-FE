@@ -11,7 +11,6 @@ interface ImageProps {
   className?: string; //tailwind 클래스 외부에서 유연하게 전달할 수 있도록
   style?: React.CSSProperties; // 부모에서 원하는 스타일 props로 전달하도록
   onClick?: () => void;
-  isRound?: boolean;
 }
 
 const Image = ({
@@ -23,7 +22,6 @@ const Image = ({
   className,
   style,
   onClick,
-  isRound = true,
 }: ImageProps) => {
   const [currentSrc, setCurrentSrc] = useState(src);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -44,7 +42,7 @@ const Image = ({
         alt={alt}
         width={width}
         height={height}
-        className={`transition-transform hover:scale-105 ${isRound ? 'rounded-full aspect-square object-cover' : ''} ${className ?? ''}`}
+        className={`transition-transform hover:scale-105 rounded-2xl ${className ?? ''}`}
         onLoad={() => setIsLoaded(true)}
         onError={() => {
           if (fallbackSrc && currentSrc !== fallbackSrc) {
