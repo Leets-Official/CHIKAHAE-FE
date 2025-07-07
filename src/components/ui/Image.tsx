@@ -31,7 +31,7 @@ const Image = ({
     setCurrentSrc(src);
     setIsLoaded(false);
     setHasError(false);
-  }, [src, fallbackSrc]); // src,fallbackSrc 변경될 경우, IsLoaded와 HasError의 값 false로 초기화
+  }, [src]); // src,fallbackSrc 변경될 경우, IsLoaded와 HasError의 값 false로 초기화
 
   return (
     <>
