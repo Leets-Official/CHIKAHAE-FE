@@ -7,10 +7,11 @@ interface ImageProps {
   src: string;
   width?: number;
   height?: number;
-  fallbackSrc?: string; //image 파일 잘못된 경로 입력 시 보여줄 image 
-  className?: string; //tailwind 클래스 외부에서 유연하게 전달할 수 있도록 
-  style?: React.CSSProperties; // 부모에서 원하는 스타일 props로 전달하도록 
-  onClick?: () => void; 
+  fallbackSrc?: string; //image 파일 잘못된 경로 입력 시 보여줄 image
+  className?: string; //tailwind 클래스 외부에서 유연하게 전달할 수 있도록
+  style?: React.CSSProperties; // 부모에서 원하는 스타일 props로 전달하도록
+  onClick?: () => void;
+  isRound?: boolean;
 }
 
 const Image = ({
@@ -22,6 +23,7 @@ const Image = ({
   className,
   style,
   onClick,
+  isRound = true,
 }: ImageProps) => {
   const [currentSrc, setCurrentSrc] = useState(src);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -42,7 +44,7 @@ const Image = ({
         alt={alt}
         width={width}
         height={height}
-        className={`transition-transform hover:scale-105 ${className ?? ''}`} //hover 기능 
+        className={`transition-transform hover:scale-105 ${isRound ? 'rounded-full aspect-square object-cover' : ''} ${className ?? ''}`}
         onLoad={() => setIsLoaded(true)}
         onError={() => {
           if (fallbackSrc && currentSrc !== fallbackSrc) {
@@ -55,7 +57,7 @@ const Image = ({
         style={{
           ...style,
           display: isLoaded && !hasError ? 'block' : 'none',
-          transition: 'opacity 0.5s ease-in-out', //애니메이션 기능 
+          transition: 'opacity 0.5s ease-in-out', //애니메이션 기능
           opacity: isLoaded ? 1 : 0,
         }}
       />
