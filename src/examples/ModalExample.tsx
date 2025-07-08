@@ -1,7 +1,6 @@
 // src/examples/ModalExample.tsx
 
 import React, { useState } from "react";
-import ReactDOM from "react-dom/client";
 import { Modal } from "@/components/common/Modal";
 import Button from "@/components/ui/Button";
 
@@ -45,16 +44,5 @@ const ModalExample: React.FC = () => {
     </div>
   );
 };
-
-// 개발 중 테스트 시 root에 렌더링
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
-
-root.render(
-  <React.StrictMode>
-    <ModalExample />
-  </React.StrictMode>
-);
 
 export default ModalExample;
