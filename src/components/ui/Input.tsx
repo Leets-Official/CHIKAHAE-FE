@@ -1,4 +1,5 @@
 import React, { useState, forwardRef } from 'react';
+import clsx from 'clsx';
 import type { InputHTMLAttributes, CSSProperties } from 'react';
 
 // Input 상태 타입 - 기본(default), 클릭됨(click), 비활성화(disabled)
@@ -15,7 +16,7 @@ interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
 const Input = forwardRef<HTMLInputElement, TextInputProps>(
   (
     {
-      width,
+      width = '320px',
       maxWidth,
       disabled,
       name,
@@ -33,51 +34,47 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
     // 포커스 시 상태를 'click'으로 변경
     const handleFocus = () => setState('click');
 
-    // 블러 시 상태를 'default'로 되돌리고 외부 onBlur가 있다면 호출
     const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
       setState('default');
       if (onBlur) onBlur(e);
     };
 
-    let containerClass = 'flex items-center transition-colors bg-white rounded-[4px] border ';
-    if (disabled) {
-      containerClass += 'text-gray-400 border-gray-200 bg-gray-100 cursor-not-allowed ';
-    } else if (state === 'click') {
-      containerClass += 'text-black border-gray-500 ';
-    } else {
-      containerClass += 'text-black border-gray-300 ';
-    }
+    const containerClass = clsx('flex flex-col items-start gap-2 w-[320px]');
 
-    const inputClass =
-      'w-full bg-transparent text-sm text-inherit outline-none border-none px-4 py-3';
+    const inputWrapperClass = clsx(
+      'flex items-center transition-colors rounded-[4px] border w-full',
+      {
+        'text-[#CED6DD] bg-[#E9EEF2] border-gray-200 cursor-not-allowed': disabled,
+        'text-black border-gray-500 bg-white': !disabled && state === 'click',
+        'text-black border-gray-300 bg-white': !disabled && state === 'default',
+      },
+    );
+
+    const inputClass = clsx(
+      'w-full bg-transparent text-sm text-inherit outline-none border-none px-4 py-3',
+    );
 
     return (
-      <div
-        className={`${containerClass} ${className || ''}`}
-        style={{
-          width: width || '100%',
-          maxWidth: maxWidth || 'none',
-          ...style,
-        }}
-      >
-        <input
-          {...props}
-          ref={ref}
-          id={name}
-          name={name}
-          type={type}
-          disabled={disabled}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          onChange={onChange}
-          className={inputClass}
-        />
+      <div className={containerClass} style={{ maxWidth, ...style }}>
+        <div className={inputWrapperClass}>
+          <input
+            {...props}
+            ref={ref}
+            id={name}
+            name={name}
+            type={type}
+            disabled={disabled}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            onChange={onChange}
+            className={inputClass}
+          />
+        </div>
       </div>
     );
   },
 );
 
-// displayName 설정 (디버깅 시 컴포넌트 이름으로 표시)
 Input.displayName = 'Input';
 
 export default Input;
