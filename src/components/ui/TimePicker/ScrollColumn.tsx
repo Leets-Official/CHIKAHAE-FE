@@ -1,31 +1,59 @@
 import { motion, useMotionValue, animate } from 'framer-motion';
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
+import { clsx } from 'clsx';
 
 type ScrollColumnProps = {
   items: string[];
   selected: string;
   onSelect: (val: string) => void;
+  loop?: boolean;
 };
 
-// 항목 하나의 높이
-const ITEM_HEIGHT = 48;
-// 화면에 보이는 항목 개수
-const VISIBLE_COUNT = 3;
-// 가운데 항목이 정확히 중앙에 오도록 계산
-const MIDDLE_OFFSET = (VISIBLE_COUNT * ITEM_HEIGHT) / 2 - ITEM_HEIGHT / 2;
+const ITEM_HEIGHT = 63;
+const ITEM_VISIBLE_COUNT = 3;
+const SPRING_STIFFNESS = 300;
+const SCROLL_DURATION = 0.1;
+const REPEAT_COUNT = 15;
 
-export function ScrollColumn({ items, selected, onSelect }: ScrollColumnProps) {
+const MIDDLE_OFFSET = (ITEM_VISIBLE_COUNT * ITEM_HEIGHT) / 2 - ITEM_HEIGHT / 2;
+
+const OVERLAY_CLASS = clsx(
+  'absolute top-1/2 left-1/2 -translate-x-1/2',
+  `-translate-y-[${ITEM_HEIGHT / 2}px]`,
+  'h-12 w-[61px] bg-[#F5F7FA] rounded-lg z-10 pointer-events-none',
+);
+
+const ITEM_CLASS = clsx(
+  'w-[61px] h-12 px-4',
+  'flex justify-center items-center',
+  'text-base transition-all',
+);
+
+export function ScrollColumn({ items, selected, onSelect, loop = false }: ScrollColumnProps) {
   const y = useMotionValue(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // 선택된 항목이 변경되면 해당 항목이 가운데에 오도록 애니메이션 이동
-  useEffect(() => {
-    const index = items.findIndex((item) => item === selected);
-    const targetY = -index * ITEM_HEIGHT + MIDDLE_OFFSET;
-    animate(y, targetY, { type: 'spring', stiffness: 300 });
-  }, [selected]);
+  const extendedItems = useMemo(() => {
+    return loop ? Array.from({ length: REPEAT_COUNT }).flatMap(() => items) : items;
+  }, [items, loop]);
+
+  const baseIndex = useMemo(() => {
+    if (!loop) return items.findIndex((item) => item === selected);
+    const start = Math.floor((extendedItems.length - items.length) / 2);
+    const end = start + items.length;
+    for (let i = start; i < end; i++) {
+      if (extendedItems[i] === selected) return i;
+    }
+    return start;
+  }, [items, extendedItems, selected, loop]);
 
   // 마우스 휠 스크롤로 항목을 선택할 수 있게 처리
+  useEffect(() => {
+    const targetY = -baseIndex * ITEM_HEIGHT + MIDDLE_OFFSET;
+    animate(y, targetY, { type: 'spring', stiffness: SPRING_STIFFNESS });
+  }, [baseIndex]);
+
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
@@ -33,60 +61,56 @@ export function ScrollColumn({ items, selected, onSelect }: ScrollColumnProps) {
       const nextY = currentY - e.deltaY;
 
       // 스크롤 가능 범위 설정
-      const minY = -((items.length - 1) * ITEM_HEIGHT) + MIDDLE_OFFSET;
+      const minY = -((extendedItems.length - 1) * ITEM_HEIGHT) + MIDDLE_OFFSET;
       const maxY = MIDDLE_OFFSET;
 
       // 부드럽게 이동
       const clampedY = Math.max(minY, Math.min(maxY, nextY));
-      animate(y, clampedY, { type: 'tween', duration: 0.1 });
+      animate(y, clampedY, { type: 'tween', duration: SCROLL_DURATION });
 
       // 가장 가까운 항목을 선택
       const index = Math.round((MIDDLE_OFFSET - clampedY) / ITEM_HEIGHT);
-      onSelect(items[index]);
+      onSelect(extendedItems[index]);
     };
 
     const container = containerRef.current;
     if (container) {
       container.addEventListener('wheel', handleWheel, { passive: false });
     }
-
-    return () => {
-      if (container) {
-        container.removeEventListener('wheel', handleWheel);
-      }
-    };
-  }, [items, y, onSelect]);
+    return () => container?.removeEventListener('wheel', handleWheel);
+  }, [extendedItems, y, onSelect]);
 
   // 드래그가 끝났을 때 가장 가까운 항목으로 스냅
   const handleDragEnd = () => {
     const currentY = y.get();
     const index = Math.round((MIDDLE_OFFSET - currentY) / ITEM_HEIGHT);
-    const clampedIndex = Math.max(0, Math.min(items.length - 1, index));
+    const clampedIndex = Math.max(0, Math.min(extendedItems.length - 1, index));
     const targetY = -clampedIndex * ITEM_HEIGHT + MIDDLE_OFFSET;
-    animate(y, targetY, { type: 'spring', stiffness: 300 });
-    onSelect(items[clampedIndex]);
+    animate(y, targetY, { type: 'spring', stiffness: SPRING_STIFFNESS });
+    onSelect(extendedItems[clampedIndex]);
   };
 
   return (
-    <div ref={containerRef} className='relative h-[144px] w-[64px] overflow-hidden scrollbar-hide'>
-      <div className='absolute top-1/2 left-0 right-0 h-[46px] -translate-y-1/2 bg-[#E9EEF2] rounded-[8px] z-10 pointer-events-none mx-2' />
+    <div ref={containerRef} className='relative h-[189px] w-[61px] overflow-hidden scrollbar-hide'>
+      <div className={OVERLAY_CLASS} />
 
       <motion.div
         drag='y'
         style={{ y }}
         dragConstraints={{
-          top: -((items.length - 1) * ITEM_HEIGHT) + MIDDLE_OFFSET,
+          top: -((extendedItems.length - 1) * ITEM_HEIGHT) + MIDDLE_OFFSET,
           bottom: MIDDLE_OFFSET,
         }}
         onDragEnd={handleDragEnd}
-        className='flex flex-col cursor-grab relative z-20'
+        className='flex flex-col gap-[15px] cursor-grab relative z-20'
       >
-        {items.map((item) => (
+        {extendedItems.map((item, idx) => (
           <div
-            key={item}
-            className={`h-[48px] flex items-center justify-center transition-all ${
-              item === selected ? 'text-black font-bold' : 'text-gray-400'
-            }`}
+            key={`${item}-${idx}`}
+            className={clsx(
+              ITEM_CLASS,
+              item === selected ? 'text-black font-bold' : 'text-gray-400',
+            )}
           >
             {item}
           </div>
