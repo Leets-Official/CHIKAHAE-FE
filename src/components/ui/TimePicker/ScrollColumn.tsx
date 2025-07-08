@@ -17,18 +17,6 @@ const REPEAT_COUNT = 15;
 
 const MIDDLE_OFFSET = (ITEM_VISIBLE_COUNT * ITEM_HEIGHT) / 2 - ITEM_HEIGHT / 2;
 
-const OVERLAY_CLASS = clsx(
-  'absolute top-1/2 left-1/2 -translate-x-1/2',
-  `-translate-y-[${ITEM_HEIGHT / 2}px]`,
-  'h-12 w-[61px] bg-[#F5F7FA] rounded-lg z-10 pointer-events-none',
-);
-
-const ITEM_CLASS = clsx(
-  'w-[61px] h-12 px-4',
-  'flex justify-center items-center',
-  'text-base transition-all',
-);
-
 export function ScrollColumn({ items, selected, onSelect, loop = false }: ScrollColumnProps) {
   const y = useMotionValue(0);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -90,9 +78,24 @@ export function ScrollColumn({ items, selected, onSelect, loop = false }: Scroll
     onSelect(extendedItems[clampedIndex]);
   };
 
+  const selectorOverlayClass = clsx(
+    'absolute',
+    'top-1/2 left-1/2',
+    '-translate-x-1/2 -translate-y-[31.5px]',
+    'h-[48px] w-[61px]',
+    'bg-[#F5F7FA] rounded-[8px]',
+    'z-10 pointer-events-none',
+  );
+
+  const itemBaseClass = clsx(
+    'w-[61px] h-[48px] px-4',
+    'flex flex-col justify-center items-center',
+    'self-stretch text-[16px] transition-all',
+  );
+
   return (
     <div ref={containerRef} className='relative h-[189px] w-[61px] overflow-hidden scrollbar-hide'>
-      <div className={OVERLAY_CLASS} />
+      <div className={selectorOverlayClass} />
 
       <motion.div
         drag='y'
@@ -108,7 +111,7 @@ export function ScrollColumn({ items, selected, onSelect, loop = false }: Scroll
           <div
             key={`${item}-${idx}`}
             className={clsx(
-              ITEM_CLASS,
+              itemBaseClass,
               item === selected ? 'text-black font-bold' : 'text-gray-400',
             )}
           >
