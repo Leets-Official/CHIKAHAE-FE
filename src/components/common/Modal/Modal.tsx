@@ -10,7 +10,6 @@ const Modal: React.FC<ModalProps> = ({
   title,
   children,
   footer,
-  size = "md",
   position = "center",
   closeOnOverlayClick = true,
   closeOnEsc = true,
