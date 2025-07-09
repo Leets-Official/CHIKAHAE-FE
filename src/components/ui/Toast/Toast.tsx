@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import clsx from 'clsx';
 
 //토스트 유형(메세지, 유형 별 분류위한 속성, 노출 시간, onClose)
 interface ToastProps {
@@ -21,19 +22,15 @@ const Toast = ({
   const [isVisible, setIsVisible] = useState(true); // 토스트 가시성
 
   useEffect(() => {
-    let timer: ReturnType<typeof setTimeout>;
-    // duration이 null이 아닐 때만 타이머 설정
     if (duration) {
-      timer = setTimeout(() => {
+      const timer = setTimeout(() => {
         setIsVisible(false);
       }, duration);
-    }
 
-    return () => {
-      if (timer) {
+      return () => {
         clearTimeout(timer);
-      }
-    };
+      };
+    }
   }, [id, duration]);
 
   useEffect(() => {
@@ -52,6 +49,8 @@ const Toast = ({
     setIsVisible(false);
   };
 
+  const baseTextStyles =
+    'text-[#CED6DD] font-extrabold text-[14px] leading-[20px] tracking-[-0.14px]';
   return (
     <div
       className={`
@@ -68,19 +67,14 @@ const Toast = ({
             `} // 상태에 따른 애니메이션 변화
     >
       <span
-        className='
-        text-[#CED6DD]
-        font-extrabold
-        text-[14px]
-        leading-[20px]
-        tracking-[-0.14px]
-        font-[NanumSquareRound]
-        w-[246px]
-        overflow-hidden
-        text-ellipsis
-        whitespace-nowrap
-        flex-shrink-0
-        '
+        className={clsx(
+          baseTextStyles,
+          'w-[246px]',
+          'overflow-hidden',
+          'text-ellipsis',
+          'whitespace-nowrap',
+          'flex-shrink-0',
+        )}
       >
         {message}
       </span>
@@ -88,17 +82,7 @@ const Toast = ({
       {actionText && (
         <button
           onClick={handleActionClick}
-          className='
-          self-stretch
-          text-[#CED6DD]
-           font-extrabold
-          text-[14px]
-          leading-[20px]
-          tracking-[-0.14px]
-          font-[NanumSquareRound]
-          hover:opacity-80
-          px-2
-          py-1'
+          className={clsx(baseTextStyles, 'self-stretch', 'hover:opacity-80', 'px-2', 'py-1')}
         >
           {actionText}
         </button>
