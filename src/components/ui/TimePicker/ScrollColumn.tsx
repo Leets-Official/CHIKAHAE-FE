@@ -58,7 +58,10 @@ export function ScrollColumn({ items, selected, onSelect, loop = false }: Scroll
 
       // 가장 가까운 항목을 선택
       const index = Math.round((MIDDLE_OFFSET - clampedY) / ITEM_HEIGHT);
-      onSelect(extendedItems[index]);
+      const nextValue = extendedItems[index];
+      if (nextValue !== selected) {
+        onSelect(nextValue);
+      }
     };
 
     const container = containerRef.current;
@@ -75,7 +78,10 @@ export function ScrollColumn({ items, selected, onSelect, loop = false }: Scroll
     const clampedIndex = Math.max(0, Math.min(extendedItems.length - 1, index));
     const targetY = -clampedIndex * ITEM_HEIGHT + MIDDLE_OFFSET;
     animate(y, targetY, { type: 'spring', stiffness: SPRING_STIFFNESS });
-    onSelect(extendedItems[clampedIndex]);
+    const nextValue = extendedItems[clampedIndex];
+    if (nextValue !== selected) {
+      onSelect(nextValue);
+    }
   };
 
   const selectorOverlayClass = clsx(
