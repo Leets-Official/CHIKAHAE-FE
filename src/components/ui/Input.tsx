@@ -39,7 +39,7 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
       if (onBlur) onBlur(e);
     };
 
-    const containerClass = clsx('flex flex-col items-start gap-2 w-[320px]');
+    const containerClass = clsx('flex flex-col items-start gap-2');
 
     const inputWrapperClass = clsx(
       'flex items-center transition-colors rounded-[4px] border w-full',
@@ -55,7 +55,7 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
     );
 
     return (
-      <div className={containerClass} style={{ maxWidth, ...style }}>
+      <div className={containerClass} style={{ width, maxWidth, ...style }}>
         <div className={inputWrapperClass}>
           <input
             {...props}
