@@ -25,13 +25,6 @@ const Modal: React.FC<ModalProps> = ({
 
   if (!isOpen) return null;
 
-  const sizeClasses = {
-    sm: "max-w-sm",
-    md: "max-w-md",
-    lg: "max-w-lg",
-    full: "w-full h-full",
-  }[size];
-
   const posClasses = {
     center: "items-center",
     bottom: "items-end pb-6",
@@ -51,24 +44,36 @@ const Modal: React.FC<ModalProps> = ({
         className={`fixed inset-0 flex justify-center ${posClasses} z-50 px-4`}
       >
         <div
-          className={`relative bg-white rounded-lg shadow-lg w-full ${sizeClasses}`}
+          className={`
+            fixed
+            top-[20px]
+            left-[20px]
+            w-[320px]
+            h-[173px]
+            rounded-[8px]
+            opacity-100
+            bg-white
+            shadow-lg
+            flex
+            flex-col
+            gap-[1px]
+          `}
           onClick={(e) => e.stopPropagation()}
         >
 
-          {/* ========== Header ========== */}
-          <div className="px-6 pt-6 relative">
-            
+          {/* ========== Header + Body ========== */}
+          <div
+            className="flex flex-col items-center justify-center w-[320px] h-[112px] gap-[10px] opacity-100 pt-[30px] pr-[20px] pb-[32px] pl-[20px]"
+          >
             {title && (
-              <h2 className="text-center text-xl font-semibold">{title}</h2>
+              <h2 className="text-center text-xl font-semibold mb-0">{title}</h2>
             )}
+            <div className="text-center text-gray-500 text-sm w-full">{children}</div>
           </div>
-
-          {/* ========== Body ========== */}
-          <div className="px-6 py-4 text-center">{children}</div>
 
           {/* ========== Footer ========== */}
           {footer && (
-            <div className="px-6 py-4 flex justify-end gap-2">
+            <div className="w-[320px] h-[60px] px-[20px] pb-[20px] flex justify-end items-end gap-[10px]">
               {footer}
             </div>
           )}

@@ -16,19 +16,21 @@ const ModalExample: React.FC = () => {
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        title="모달 예제"
+        title="타이틀"
         footer={
           <>
             <Button
-              variant="secondary"
-              className="w-full"
+              variant="assistive"
+              size={"medium" as const}
+              className="w-[135px]"
               onClick={() => setIsModalOpen(false)}
             >
               버튼
             </Button>
             <Button
               variant="primary"
-              className="w-full"
+              size={"medium" as const}
+              className="w-[135px]"
               onClick={() => {
                 alert("확인되었습니다!");
                 setIsModalOpen(false);
