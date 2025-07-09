@@ -6,6 +6,9 @@ export default {
   theme: {
     extend: {
       ...tailwindTokens,
+      fontFamily: {
+        nanum: ['"NanumSquareRound"', 'sans-serif'],
+      },
     },
   },
   plugins: [require('tailwind-scrollbar-hide')],
