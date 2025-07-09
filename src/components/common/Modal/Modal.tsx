@@ -4,16 +4,16 @@ import React, { useEffect } from "react";
 import type { ModalProps } from "./Modal.types";
 import ModalPortal from "./ModalPortal";
 
-const Modal: React.FC<ModalProps> = ({
-  isOpen,
-  onClose,
-  title,
-  children,
-  footer,
-  position = "center",
-  closeOnOverlayClick = true,
-  closeOnEsc = true,
-}) => {
+  const Modal = ({
+    isOpen,
+    onClose,
+    title,
+    children,        
+    footer,
+    position = "center",
+    closeOnOverlayClick = true,
+    closeOnEsc = true,
+  }: ModalProps) => {
   // ========== ESC 키로 모달 닫기 ========== //
   useEffect(() => {
     if (!isOpen || !closeOnEsc) return;
