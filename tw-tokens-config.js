@@ -5,7 +5,7 @@ const sd = new StyleDictionary(
   makeSdTailwindConfig({
     type: 'all',
     source: ['./src/tokens/tokens.json'],
-    buildPath: '.',
+    buildPath: './',
   }),
 );
 

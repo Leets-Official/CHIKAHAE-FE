@@ -1,6 +1,3 @@
-// design-tokens.json
-// ref, sys 토큰을 사용하고, comp 토큰은 사용하지 않는 경우
-
 import * as fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -28,16 +25,19 @@ try {
 // 토큰 세트 순서
 const tokenSets = tokens.$metadata?.tokenSetOrder || [];
 
-for (const set of tokenSets) {
-    // 사용하지 않는 세트 필터링
-    if (set === 'comp') continue;
+// 경로 변환 함수 (공백 → -, 슬래시 → -)
+const sanitizeKey = (key) =>
+    key.toLowerCase().replace(/\s+/g, '-').replace(/[\/\\]/g, '-');
 
-    if (tokens[set]) {
-        const data = JSON.stringify(tokens[set], null, 2);
-        const outputPath = path.join(outputDir, `sd-${set}.json`);
-        fs.writeFileSync(outputPath, data);
-        console.log(`sd-${set}.json 파일이 생성되었습니다.`);
-    }
+for (const set of tokenSets) {
+    if (!tokens[set]) continue;
+
+    const sanitizedName = sanitizeKey(set);
+    const outputPath = path.join(outputDir, `sd-${sanitizedName}.json`);
+    const data = JSON.stringify(tokens[set], null, 2);
+
+    fs.writeFileSync(outputPath, data);
+    console.log(` ${outputPath} 생성 완료`);
 }
 
 console.log('🎉 토큰 분리 완료!');
