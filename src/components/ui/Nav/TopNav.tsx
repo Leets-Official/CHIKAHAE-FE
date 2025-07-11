@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import Gear from '@/assets/images/Gear.svg';
-import Bell from '@/assets/images/Bell.svg';
+import Gear from '@/assets/images/gear.svg';
+import Bell from '@/assets/images/bell.svg';
 
 export const Topnav = () => {
   return (

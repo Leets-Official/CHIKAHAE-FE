@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Chevron_left from '@/assets/images/Chevron_left.svg?react';
+import Chevron_left from '@/assets/images/chevron_left.svg?react';
 export const Bottomnav = () => {
   return (
     <nav
