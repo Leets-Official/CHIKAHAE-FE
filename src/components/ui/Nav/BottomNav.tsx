@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import LessSign from './svg/LessSign.svg?react';
+import Chevron_left from '@/assets/images/Chevron_left.svg?react';
 export const Bottomnav = () => {
   return (
     <nav
@@ -12,19 +12,19 @@ export const Bottomnav = () => {
                 w-full`}
     >
       <Link to='/'>
-        <LessSign className='w-6 h-6 text-blue-500' />
+        <Chevron_left className='w-6 h-6 text-blue-500' />
         치카해
       </Link>
       <Link to='/'>
-        <LessSign className='w-6 h-6 text-blue-500' />
+        <Chevron_left className='w-6 h-6 text-blue-500' />
         치카해
       </Link>
       <Link to='/'>
-        <LessSign className='w-6 h-6 text-blue-500' />
+        <Chevron_left className='w-6 h-6 text-blue-500' />
         치카해
-      </Link>{' '}
+      </Link>
       <Link to='/'>
-        <LessSign className='w-6 h-6 text-blue-500' />
+        <Chevron_left className='w-6 h-6 text-blue-500' />
         치카해
       </Link>
     </nav>

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import Setting from './svg/Setting.svg';
-import Bell from './svg/Bell.svg';
+import Gear from '@/assets/images/Gear.svg';
+import Bell from '@/assets/images/Bell.svg';
 
 export const Topnav = () => {
   return (
@@ -15,7 +15,7 @@ export const Topnav = () => {
     >
       <Link to='/'>치카해</Link>
       <Link to='/'>
-        <img src={Setting} alt='Setting' height='30' width='30'></img>
+        <img src={Gear} alt='Gear' height='30' width='30'></img>
       </Link>
       <Link to='/'>
         <img src={Bell} alt='Bell' height='30' width='30'></img>
