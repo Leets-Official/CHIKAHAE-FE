@@ -43,6 +43,12 @@
     letter-spacing: -0.01em;
     font-weight: 800;
   }
+  .body-16-b {
+    font-size: 16px;
+    line-height: 16px;
+    letter-spacing: -0.01em;
+    font-weight: 700;
+  }
   .body-14-eb {
     font-size: 14px;
     line-height: 16px;
@@ -55,17 +61,17 @@
     letter-spacing: -0.01em;
     font-weight: 400;
   }
-  .body-12-eb {
-    font-size: 12px;
-    line-height: 14px;
-    letter-spacing: -0.01em;
-    font-weight: 800;
-  }
   .body-14-r {
     font-size: 12px;
     line-height: 14px;
     letter-spacing: -0.01em;
     font-weight: 400;
+  }
+  .body-12-eb {
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: -0.01em;
+    font-weight: 800;
   }
   .body-12-r {
     font-size: 12px;
@@ -117,8 +123,11 @@
   .fg-accent-blue-weak {
     color: #3dafd9;
   }
-  .fg-accent-pink {
+  .fg-accent-pink-strong {
     color: #e04d73;
+  }
+  .fg-accent-pink-weak {
+    color: #f05f83;
   }
   .fg-veryweak {
     color: #f5f7fa;
