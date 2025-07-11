@@ -2,9 +2,7 @@
 import tailwindTokens from './src/styles/tokens.tailwind.json' assert { type: 'json' };
 
 export default {
-
-    },
-    plugins: [
-        require('tailwind-scrollbar-hide'),
-    ],
-}
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  theme: {},
+  plugins: [require('tailwind-scrollbar-hide')],
+};
