@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import Chevron_left from '@/assets/images/chevron_left.svg?react';
-export const Bottomnav = () => {
+import { ReactComponent as LeftIcon } from '@/assets/images/chevron_left.svg';
+
+export const BottomNav = () => {
   return (
     <nav
       className={`
@@ -12,19 +13,19 @@ export const Bottomnav = () => {
                 w-full`}
     >
       <Link to='/'>
-        <Chevron_left className='w-6 h-6 text-blue-500' />
+        <LeftIcon className='w-6 h-6 text-blue-500' />
         치카해
       </Link>
       <Link to='/'>
-        <Chevron_left className='w-6 h-6 text-blue-500' />
+        <LeftIcon className='w-6 h-6 text-blue-500' />
         치카해
       </Link>
       <Link to='/'>
-        <Chevron_left className='w-6 h-6 text-blue-500' />
+        <LeftIcon className='w-6 h-6 text-blue-500' />
         치카해
       </Link>
       <Link to='/'>
-        <Chevron_left className='w-6 h-6 text-blue-500' />
+        <LeftIcon className='w-6 h-6 text-blue-500' />
         치카해
       </Link>
     </nav>

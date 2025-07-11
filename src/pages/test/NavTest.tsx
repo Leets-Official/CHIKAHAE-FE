@@ -1,12 +1,12 @@
-import { Bottomnav } from '@/components/ui/Nav/BottomNav';
-import { Topnav } from '@/components/ui/Nav/TopNav';
+import { BottomNav } from '@/components/ui/Nav/BottomNav';
+import { TopNav } from '@/components/ui/Nav/TopNav';
 
 const NavTest = ({ children }: { children?: React.ReactNode }) => {
   return (
     <div>
-      <Topnav />
+      <TopNav />
       {children}
-      <Bottomnav />
+      <BottomNav />
     </div>
   );
 };

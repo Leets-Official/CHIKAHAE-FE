@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import Gear from '@/assets/images/gear.svg';
-import Bell from '@/assets/images/bell.svg';
+import { ReactComponent as GearIcon } from '@/assets/images/gear.svg';
+import { ReactComponent as BellIcon } from '@/assets/images/bell.svg';
 
-export const Topnav = () => {
+export const TopNav = () => {
   return (
     <nav
       className={`
@@ -15,10 +15,10 @@ export const Topnav = () => {
     >
       <Link to='/'>치카해</Link>
       <Link to='/'>
-        <img src={Gear} alt='Gear' height='30' width='30'></img>
+        <GearIcon className='h-[30px] w-[30px]' />
       </Link>
       <Link to='/'>
-        <img src={Bell} alt='Bell' height='30' width='30'></img>
+        <BellIcon className='h-[30px] w-[30px]' />
       </Link>
     </nav>
   );

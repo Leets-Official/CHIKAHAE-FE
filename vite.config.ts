@@ -1,15 +1,21 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import svgr from 'vite-plugin-svgr';
+import svgr from '@svgr/rollup';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), svgr(), tailwindcss()],
+  plugins: [
+    svgr({
+      exportAsDefault: false,
+    }),
+    react(),
+    tailwindcss(),
+  ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'), // 🔹 런타임에서 @ 인식하도록 설정
+      '@': path.resolve(__dirname, './src'),
     },
   },
   server: {
