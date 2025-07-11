@@ -1,0 +1,53 @@
+import TextButton from '@/components/ui/TextButton';
+import { useState } from 'react';
+
+const TextButtonTest = () => {
+  const [loading, setLoading] = useState(false);
+
+  return (
+    <div className='p-8 space-y-6'>
+      <div className='space-x-4'>
+        <TextButton size='small' variant='primary'>
+          small 버튼
+        </TextButton>
+        <TextButton size='medium' variant='primary'>
+          small 버튼
+        </TextButton>
+        <TextButton size='large' variant='primary'>
+          small 버튼
+        </TextButton>
+        <TextButton size='maxi' variant='primary'>
+          small 버튼
+        </TextButton>
+
+        <TextButton size='small' variant='default'>
+          small 버튼
+        </TextButton>
+        <TextButton size='medium' variant='default'>
+          small 버튼
+        </TextButton>
+        <TextButton size='large' variant='default'>
+          small 버튼
+        </TextButton>
+        <TextButton size='maxi' variant='default'>
+          small 버튼
+        </TextButton>
+
+        <TextButton size='small' variant='assistive'>
+          small 버튼
+        </TextButton>
+        <TextButton size='medium' variant='assistive'>
+          small 버튼
+        </TextButton>
+        <TextButton size='large' variant='assistive'>
+          small 버튼
+        </TextButton>
+        <TextButton size='maxi' variant='assistive'>
+          small 버튼
+        </TextButton>
+      </div>
+    </div>
+  );
+};
+
+export default TextButtonTest;

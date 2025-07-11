@@ -3,6 +3,7 @@ import Home from '@/pages/Home';
 import ToastTest from './pages/test/ToastTest';
 import NavTest from './pages/test/NavTest';
 import RadioButtonTest from './pages/test/RadioButtonTest';
+import TextButtonTest from './pages/test/TextButtonTest';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path='/toast-test' element={<ToastTest />} />
         <Route path='/nav-test' element={<NavTest />} />
         <Route path='/radio-test' element={<RadioButtonTest />} />
+        <Route path='/textbutton-test' element={<TextButtonTest />} />
       </Routes>
     </BrowserRouter>
   );

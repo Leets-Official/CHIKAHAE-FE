@@ -5,7 +5,7 @@ const RadioButtonTest = () => {
   const [selected, setSelected] = useState('male');
 
   return (
-    <div className='space-x-4'>
+    <div className='flex space-x-4'>
       <RadioButton
         id='male'
         name='gender'
