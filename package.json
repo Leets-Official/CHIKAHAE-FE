@@ -7,16 +7,11 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "tokens:split": "node split-tokens.js",
-    "tokens:build:sd": "node sd-tokens-config.js",
-    "tokens:build:tw": "node tw-tokens-config.js",
-    "tokens:build": "npm run tokens:split && npm run tokens:build:sd && npm run tokens:build:tw"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.81.5",
     "@tanstack/react-query-devtools": "^5.81.5",
-    "@tokens-studio/sd-transforms": "^2.0.1",
     "axios": "^1.10.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.0",
@@ -24,8 +19,6 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.3",
-    "sd-tailwindcss-transformer": "^2.1.0",
-    "style-dictionary": "^5.0.0",
     "tailwind-merge": "^3.3.1",
     "tailwind-scrollbar-hide": "^4.0.0",
     "zustand": "^5.0.6"
