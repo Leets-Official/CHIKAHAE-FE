@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 interface RadioButtonProps {
   id: string; // 클릭 영역을 넓힌다(label과 함께)
   name: string; // 같은 name 공유하는 버튼끼리는 하나만 선택이 가능하게
@@ -37,7 +35,7 @@ const RadioButton = ({ id, name, value, label, checked, onChange, required }: Ra
                 transition-colors duration-200
                 ${checked ? 'border-blue_weak' : 'border-border_default'} `}
         >
-          {checked && <div className='w-2 h-2 rounded-full bg-blue_weak' />}
+          {checked && <div className='w-2 h-2 rounded-full bg-fg-accent-blue-weak' />}
         </div>
         <span className='text-sm text-black'>{label}</span>
       </label>
