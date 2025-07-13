@@ -10,10 +10,12 @@ export const TopNav = () => {
             flex h-14 px-4
             justify-between
             items-center
-            bg-white
+            bg-bg-tertiary-gray: #FAFBFC;
             w-full`}
     >
-      <Link to='/'>치카해</Link>
+      <Link to='/'>
+        <div className='text-fg-accent-blue-strong'>치카해</div>
+      </Link>
       <Link to='/'>
         <GearIcon className='h-[30px] w-[30px]' />
       </Link>

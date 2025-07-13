@@ -9,7 +9,7 @@ export const BottomNav = () => {
                 flex h-14 px-4
                 justify-between
                 items-center
-                bg-white
+                bg-bg-tertiary-gray: #FAFBFC;
                 w-full`}
     >
       <Link to='/'>
