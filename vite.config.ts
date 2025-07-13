@@ -4,10 +4,6 @@ import svgr from '@svgr/rollup';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 
-interface SVGRPluginOptions {
-  exportAsDefault?: boolean;
-}
-
 export default defineConfig({
   plugins: [
     svgr({
