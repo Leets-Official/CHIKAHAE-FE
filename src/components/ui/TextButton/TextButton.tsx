@@ -1,53 +1,40 @@
-import type { TextButtonProps } from "./TextButton.types";
+import type { TextButtonProps } from './TextButton.types';
 import { twMerge } from 'tailwind-merge';
 
 const sizeMap: Record<
-  'small' | 'medium' | 'large' | 'maxi',
-  { w: string; h: string; px: string;}
+  'small' | 'medium' | 'large' | 'extralarge',
+  { w: string; h: string; px: string; text: string }
 > = {
   small: {
     w: 'w-[46px]',
     h: 'h-[32px]',
     px: 'px-[12px]',
+    text: 'text-[12px]',
   },
-
   medium: {
     w: 'w-[46px]',
     h: 'h-[40px]',
     px: 'px-[12px]',
+    text: 'text-[12px]',
   },
   large: {
     w: 'w-[58px]',
     h: 'h-[48px]',
     px: 'px-[16px]',
+    text: 'text-[14px]',
   },
-  maxi: {
+  extralarge: {
     w: 'w-[61px]',
     h: 'h-[48px]',
     px: 'px-[16px]',
+    text: 'text-[16px]',
   },
 };
 
-const textStyleMap: Record<'primary' | 'default' | 'assistive',
-Record<'small' | 'medium' | 'large' | 'maxi',string>> = {
-  primary: {
-    small: 'text-[#F2545B] text-[12px]',
-    medium: 'text-[#F2545B] text-[12px]',
-    large: 'text-[#F2545B] text-[14px]',
-    maxi: 'text-[#F2545B] text-[16px]',
-  },
-  default: {
-    small: 'text-[#181B1F] text-[12px]',
-    medium: 'text-[#181B1F] text-[12px]',
-    large: 'text-[#181B1F] text-[14px]',
-    maxi: 'text-[#181B1F] text-[16px]',
-  },
-  assistive: {
-    small: 'text-[#BAC3CB] text-[12px]',
-    medium: 'text-[#BAC3CB] text-[12px]',
-    large: 'text-[#BAC3CB] text-[14px]',
-    maxi: 'text-[#BAC3CB] text-[16px]',
-  },
+const textStyleMap: Record<'primary' | 'default' | 'assistive', string> = {
+  primary: 'text-[#F2545B]',
+  default: 'text-[#181B1F]',
+  assistive: 'text-[#BAC3CB]',
 };
 
 // size, variant 타입을 명확히 지정
@@ -64,7 +51,7 @@ const TextButton: React.FC<TextButtonProps> = ({
   const baseStyles =
     'flex flex-col justify-center items-center gap-[8px] rounded-[8px] font-semibold transition-all duration-200';
   const sizeStyles = sizeMap[size];
-  const textStyles = textStyleMap[variant][size];
+  const textStyles = textStyleMap[variant];
 
   return (
     <button

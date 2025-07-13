@@ -16,7 +16,7 @@ const TextButtonTest = () => {
         <TextButton size='large' variant='primary'>
           small 버튼
         </TextButton>
-        <TextButton size='maxi' variant='primary'>
+        <TextButton size='extralarge' variant='primary'>
           small 버튼
         </TextButton>
 
@@ -29,7 +29,7 @@ const TextButtonTest = () => {
         <TextButton size='large' variant='default'>
           small 버튼
         </TextButton>
-        <TextButton size='maxi' variant='default'>
+        <TextButton size='extralarge' variant='default'>
           small 버튼
         </TextButton>
 
@@ -42,7 +42,7 @@ const TextButtonTest = () => {
         <TextButton size='large' variant='assistive'>
           small 버튼
         </TextButton>
-        <TextButton size='maxi' variant='assistive'>
+        <TextButton size='extralarge' variant='assistive'>
           small 버튼
         </TextButton>
       </div>
