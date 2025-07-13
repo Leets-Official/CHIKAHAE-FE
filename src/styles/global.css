@@ -91,6 +91,7 @@
   --color-bg-secondary-gray: #e9eef2;
   --color-bg-tertiary-pink: #ffe1ea;
   --color-bg-tertiary-blue: #d6f3ff;
+  --color bg-tertiary-gray: #FAFBFC;
 
   /* Foreground Colors (icon, text) */
   --color-fg-verystrong: #000000;
