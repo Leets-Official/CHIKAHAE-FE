@@ -6,28 +6,29 @@ export const BottomNav = () => {
     <nav
       className={`
                 fixed bottom-0 left-0 right-0
-                flex h-14 px-4
+                flex h-14 px-1
                 justify-between
-                items-center
                 bg-bg-tertiary-gray: #FAFBFC;
                 w-full`}
     >
-      <Link to='/'>
-        <LeftIcon className='w-6 h-6 text-blue-500' />
-        치카해
+      <Link to='/' className='flex w-full flex-col items-center justify-center'>
+        <LeftIcon className='w-6 h-6  text-fg-clear-blue' />
+        <span>치카해</span>
       </Link>
-      <Link to='/'>
-        <LeftIcon className='w-6 h-6 text-blue-500' />
-        치카해
+      <Link to='/' className='flex w-full flex-col items-center justify-center'>
+        <LeftIcon className='w-6 h-6 text-fg-clear-blue' />
+        <span>치카해</span>
       </Link>
-      <Link to='/'>
-        <LeftIcon className='w-6 h-6 text-blue-500' />
-        치카해
+      <Link to='/' className='flex w-full flex-col items-center justify-center'>
+        <LeftIcon className='w-6 h-6 text-fg-clear-blue' />
+        <span>치카해</span>
       </Link>
-      <Link to='/'>
-        <LeftIcon className='w-6 h-6 text-blue-500' />
-        치카해
+      <Link to='/' className='flex w-full flex-col items-center justify-center'>
+        <LeftIcon className='w-6 h-6 text-fg-clear-blue' />
+        <span>치카해</span>
       </Link>
     </nav>
   );
 };
+
+export default BottomNav;
