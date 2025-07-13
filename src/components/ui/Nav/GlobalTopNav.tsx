@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ReactComponent as CancelIcon } from '@/assets/images/cancel.svg';
-import { ReactComponent as LeftIcon } from '@/assets/images/cancel.svg';
+import { ReactComponent as LeftIcon } from '@/assets/images/Chevron_left.svg';
 
 export const GlobalTopNav = () => {
   return (
