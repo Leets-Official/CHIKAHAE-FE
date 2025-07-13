@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": "src",
+    "composite": true,
+    "noEmit": false,
+    "outDir": "dist",
     "paths": {
       "@/*": ["*"]
     },
@@ -13,17 +16,14 @@
 
     /* Bundler mode */
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
-    "noEmit": true,
     "jsx": "react-jsx",
 
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },

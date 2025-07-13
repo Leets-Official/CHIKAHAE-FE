@@ -4,12 +4,15 @@ import svgr from '@svgr/rollup';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
 
-// https://vite.dev/config/
+interface SVGRPluginOptions {
+  exportAsDefault?: boolean;
+}
+
 export default defineConfig({
   plugins: [
     svgr({
       exportAsDefault: false,
-    }),
+    } as unknown as Parameters<typeof svgr>[0]), // 타입 충돌 완전 방지
     react(),
     tailwindcss(),
   ],
