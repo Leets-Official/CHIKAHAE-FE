@@ -28,12 +28,12 @@
     letter-spacing: -0.01em;
     font-weight: 800;
   }
-  // 퀴즈 타이틀 용
+  /* 퀴즈 타이틀 용 */
   .head-24-eb {
     font-size: 24px;
     letter-spacing: -0.01em;
     font-weight: 800;
-    line-height: 36px;
+    line-height: 38px;
   }
   .head-20-eb {
     font-size: 20px;
