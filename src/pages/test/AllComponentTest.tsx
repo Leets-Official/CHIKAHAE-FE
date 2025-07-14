@@ -1,8 +1,7 @@
 import TextButtonTest from './TextButtonTest';
-import RadioButtonTest from './RadioButtonTest';
 import NavTest from './NavTest';
-import Input from '@/components/ui/Input';
-import InputBox from '@/components/ui/InputBox';
+import RadioButtonContainer from '@/components/ui/Button/RadioButton/RadioButtonContainer';
+import InputContainer from '@/components/ui/Input/InputContainer';
 
 const AllComponentsTest = () => {
   return (
@@ -11,16 +10,14 @@ const AllComponentsTest = () => {
         <section>
           <NavTest />
         </section>
-
         <section>
-          <h2 className='text-lg font-semibold mb-2'>RadioButton</h2>
-          <RadioButtonTest />
-        </section>
-        <section><InputBox/></section>
-
-        <section>
-          <h2 className='text-lg font-semibold mb-2'>TextButton</h2>
           <TextButtonTest />
+        </section>
+        <section>
+          <RadioButtonContainer />
+        </section>
+        <section>
+          <InputContainer />
         </section>
       </div>
     </div>

@@ -5,8 +5,8 @@ const TextButtonTest = () => {
   const [loading, setLoading] = useState(false);
 
   return (
-    <div className='p-8 space-y-6'>
-      <div className='space-x-4'>
+    <div className='flex justify-center align-center p-8 space-y-6 gap-2'>
+      <div className='space-x-4 '>
         <TextButton size='small' variant='primary'>
           small 버튼
         </TextButton>
@@ -19,7 +19,8 @@ const TextButtonTest = () => {
         <TextButton size='extralarge' variant='primary'>
           small 버튼
         </TextButton>
-
+      </div>
+      <div className='space-x-4'>
         <TextButton size='small' variant='default'>
           small 버튼
         </TextButton>
@@ -32,7 +33,8 @@ const TextButtonTest = () => {
         <TextButton size='extralarge' variant='default'>
           small 버튼
         </TextButton>
-
+      </div>
+      <div className='space-x-4'>
         <TextButton size='small' variant='assistive'>
           small 버튼
         </TextButton>
