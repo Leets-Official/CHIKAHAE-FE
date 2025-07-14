@@ -27,7 +27,7 @@ const stateClassMap: Record<InputState, { border: string; bg: string; icon: stri
   },
 };
 
-const InputBox = () => {
+const InputContainer = () => {
   const [state, setState] = useState<InputState>('enabled');
   const { border, bg, icon } = stateClassMap[state];
   return (
@@ -69,4 +69,4 @@ const InputBox = () => {
   );
 };
 
-export default InputBox;
+export default InputContainer;
