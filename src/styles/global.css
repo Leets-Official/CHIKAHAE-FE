@@ -93,6 +93,7 @@
   --color-bg-tertiary-blue: #d6f3ff;
   --color bg-tertiary-gray: #FAFBFC;
 
+
   /* Foreground Colors (icon, text) */
   --color-fg-verystrong: #000000;
   --color-fg-strong: #5e6975;
@@ -109,11 +110,14 @@
   --color-fg-weak: #ced6dd;
   --color-fg-system-success: #199b6a;
   --color-fg-system-error: #d8444a;
+  --color-fg-clear-blue: #4C98F5;
+  --color-fg-accent-red: #DE473D;
 
   /* Border */
   --color-border-blue: #5fc6f0;
   --color-border-pink: #f05f83;
   --color-border-gray: #9ca6af;
+  --color-border-medium: #bac3cb;
 
   /* Shadow */
   --color-shadow-gray: #9ca6af;

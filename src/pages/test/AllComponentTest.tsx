@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom';
 import TextButtonTest from './TextButtonTest';
 import RadioButtonTest from './RadioButtonTest';
-
 import NavTest from './NavTest';
+import Input from '@/components/ui/Input';
+import InputBox from '@/components/ui/InputBox';
 
 const AllComponentsTest = () => {
   return (
@@ -16,6 +16,7 @@ const AllComponentsTest = () => {
           <h2 className='text-lg font-semibold mb-2'>RadioButton</h2>
           <RadioButtonTest />
         </section>
+        <section><InputBox/></section>
 
         <section>
           <h2 className='text-lg font-semibold mb-2'>TextButton</h2>
