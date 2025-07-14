@@ -10,9 +10,9 @@ interface RadioButtonProps {
 }
 
 const stateClassMap = {
-  enabled: { border: 'border-[#BAC3CB]', bg: 'bg-white' },
+  enabled: { border: 'border-[#9CA6AF]', bg: 'bg-white' },
   select: { border: 'border-[#3DAFD9]', bg: 'bg-white' },
-  disabled: { border: 'border-[#BAC3CB]', bg: 'bg-[#BAC3CB]' },
+  disabled: { border: 'border-[#9CA6AF]', bg: 'bg-[#BAC3CB]' },
 };
 
 const RadioButton = ({

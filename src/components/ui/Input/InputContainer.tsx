@@ -6,22 +6,23 @@ type InputState = 'enabled' | 'select' | 'error' | 'disabled';
 
 const stateClassMap: Record<InputState, { border: string; bg: string; icon: string }> = {
   enabled: {
-    border: 'border-[#BAC3CB]',
+    border: 'border-[#9CA6AF]',
     bg: 'bg-white',
     icon: 'text-fg-medium',
   },
   select: {
-    border: 'border-[#3DAFD9]',
+    border: 'border-[#5fc6f0]',
     bg: 'bg-white',
     icon: 'text-[#3DAFD9]',
   },
   error: {
-    border: 'border-[#3DAFD9]',
+    border: 'border-[#5fc6f0]',
     bg: 'bg-white',
     icon: 'text-[#3DAFD9]',
+    
   },
   disabled: {
-    border: 'border-[#BAC3CB]',
+    border: 'border-[#9CA6AF]',
     bg: 'bg-[#BAC3CB]',
     icon: 'text-fg-medium',
   },

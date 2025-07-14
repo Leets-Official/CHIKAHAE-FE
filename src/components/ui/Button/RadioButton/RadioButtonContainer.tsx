@@ -5,15 +5,15 @@ type RadioButtonState = 'enabled' | 'select' | 'disabled';
 
 const stateClassMap: Record<RadioButtonState, { border: string; bg: string }> = {
   enabled: {
-    border: 'border-[#BAC3CB]',
+    border: 'border-[#9CA6AF]',
     bg: 'bg-white',
   },
   select: {
-    border: 'border-[#3DAFD9]',
+    border: 'border-[#5fc6f0]',
     bg: 'bg-white',
   },
   disabled: {
-    border: 'border-[#BAC3CB]',
+    border: 'border-[#9CA6AF]',
     bg: 'bg-[#BAC3CB]',
   },
 };
