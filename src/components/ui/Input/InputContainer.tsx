@@ -11,7 +11,7 @@ const InputContainer = ({ variant = 'default' }: { variant?: Variant }) => {
 
   const containerClass = clsx(
     'w-full h-[80px] px-4 py-3 flex flex-col',
-    variant === 'default' && 'rounded-lg border-2 border-b-4 shadow-md',
+    variant === 'default' && 'rounded-lg border-2 border-b-5 shadow-md',
     variant !== 'default' && 'border-t border-[#9CA6AF]',
     variant === 'formTop' && 'rounded-t-lg',
     variant === 'formBottom' && 'rounded-b-lg',
