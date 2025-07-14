@@ -1,8 +1,6 @@
 import React, { useState, forwardRef } from 'react';
 import clsx from 'clsx';
 import type { InputHTMLAttributes, CSSProperties } from 'react';
-
-// Input 상태 타입 - 기본(default), 클릭됨(select), 비활성화(disabled)
 type InputState = 'enabled' | 'select' | 'disabled' | 'error';
 
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -43,7 +41,7 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
         placeholder: 'placeholder:text-[#BAC3CB]',
         text: 'text-black',
         bg: 'bg-white',
-        icon: 'text-fg-medium',
+        icon: 'text-[#9CA6AF]',
       },
       select: {
         border: 'border-[#3DAFD9]',
@@ -64,7 +62,7 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
         placeholder: 'placeholder:text-[#BAC3CB]',
         text: 'text-[#BAC3CB]',
         bg: 'bg-[#BAC3CB]',
-        icon: 'text-fg-medium',
+        icon: 'text-[#9CA6AF]',
       },
     };
 
@@ -98,4 +96,5 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
     );
   },
 );
+
 export default Input;

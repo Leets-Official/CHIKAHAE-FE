@@ -1,9 +1,11 @@
 import RadioButton from './RadioButton';
 import { useState } from 'react';
+import clsx from 'clsx';
 
 type RadioButtonState = 'enabled' | 'select' | 'disabled';
+type Variant = 'default' | 'formTop' | 'formMiddle' | 'formBottom';
 
-const stateClassMap: Record<RadioButtonState, { border: string; bg: string }> = {
+const stateClassMap = {
   enabled: {
     border: 'border-[#9CA6AF]',
     bg: 'bg-white',
@@ -18,62 +20,44 @@ const stateClassMap: Record<RadioButtonState, { border: string; bg: string }> = 
   },
 };
 
-const RadioButtonContainer = () => {
+const RadioButtonContainer = ({ variant = 'default' }: { variant?: Variant }) => {
   const [selected, setSelected] = useState<string | null>(null);
-  const [globalState] = useState<RadioButtonState>('enabled');
+  const state: RadioButtonState = selected ? 'select' : 'enabled';
+  const current = stateClassMap[state];
 
-  const containerState = globalState === 'disabled' ? 'disabled' : selected ? 'select' : 'enabled';
+  const containerClass = clsx(
+    'w-full h-[80px] px-4 py-3 flex flex-col',
+    variant === 'default' && 'rounded-lg border-3 border-b-5 shadow-md',
+    variant !== 'default' && 'border-t border-[#9CA6AF]',
+    variant === 'formTop' && 'rounded-t-lg',
+    variant === 'formBottom' && 'rounded-b-lg',
+    current.border,
+    current.bg,
+  );
 
-  const { border, bg } = stateClassMap[containerState];
-
-  const getRadioState = (value: string): RadioButtonState => {
-    if (globalState === 'disabled') return 'disabled';
+  const getRadioState = (value: string) => {
     return selected === value ? 'select' : 'enabled';
   };
 
   return (
-    <div
-      className={`
-        flex flex-col
-        h-[80px] w-[320px] 
-        rounded-lg border-3 border-b-5 p-4
-        shadow-md ${border} ${bg}
-      `}
-    >
-      <div className='flex items-center text-sm font-bold w-full'>
-        <label className='flex items-center text-[12px] font-bold leading-[14px] tracking-[-0.12px] mb-[6px]'>
-          주제
-          <span className='ml-[4px] text-[14px] font-medium text-fg-accent-red'>*</span>
-        </label>
-      </div>
+    <div className={containerClass}>
+      <label className='flex items-center text-[12px] font-bold leading-[14px] tracking-[-0.12px] mb-[6px]'>
+        주제
+        <span className='ml-[4px] text-[14px] font-medium text-fg-accent-red'>*</span>
+      </label>
       <div className='flex justify-between'>
-        <RadioButton
-          id='male'
-          name='gender'
-          value='male'
-          label='텍스트'
-          checked={selected === 'male'}
-          onChange={setSelected}
-          radioState={getRadioState('male')}
-        />
-        <RadioButton
-          id='female'
-          name='gender'
-          value='female'
-          label='텍스트'
-          checked={selected === 'female'}
-          onChange={setSelected}
-          radioState={getRadioState('female')}
-        />
-        <RadioButton
-          id='any'
-          name='gender'
-          value='any'
-          label='텍스트'
-          checked={selected === 'any'}
-          onChange={setSelected}
-          radioState={getRadioState('any')}
-        />
+        {['male', 'female', 'any'].map((value) => (
+          <RadioButton
+            key={value}
+            id={value}
+            name='gender'
+            value={value}
+            label='텍스트'
+            checked={selected === value}
+            onChange={setSelected}
+            radioState={getRadioState(value)}
+          />
+        ))}
       </div>
     </div>
   );

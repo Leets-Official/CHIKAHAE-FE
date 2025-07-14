@@ -44,15 +44,11 @@ const RadioButton = ({
       />
 
       <div
-        className={`
-          w-4 h-4 rounded-full border-1
-          flex items-center justify-center
-          transition-colors duration-200
-          ${stateClassMap[radioState].border}
-          ${checked ? 'border-blue_weak' : 'border-border_default'}
-        `}
+        className={`w-4 h-4 rounded-full border flex items-center justify-center transition-colors duration-200 ${
+          checked ? 'border-[#3DAFD9]' : 'border-[#9CA6AF]'
+        }`}
       >
-        {checked && <div className='w-2 h-2 rounded-full bg-fg-accent-blue-weak' />}
+        {checked && <div className='w-2 h-2 rounded-full bg-[#3DAFD9]' />}
       </div>
       <span className='text-sm text-black'>{label}</span>
     </label>
