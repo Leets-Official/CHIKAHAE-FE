@@ -13,6 +13,7 @@ const RadioButtonTest = () => {
         label='텍스트'
         checked={selected === 'male'}
         onChange={setSelected}
+        radioState={'enabled'}
       />
       <RadioButton
         id='female'
@@ -21,6 +22,7 @@ const RadioButtonTest = () => {
         label='텍스트'
         checked={selected === 'female'}
         onChange={setSelected}
+        radioState={'enabled'}
       />
       <RadioButton
         id='any'
@@ -29,6 +31,7 @@ const RadioButtonTest = () => {
         label='텍스트'
         checked={selected === 'any'}
         onChange={setSelected}
+        radioState={'enabled'}
       />
     </div>
   );

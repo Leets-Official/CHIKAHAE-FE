@@ -5,7 +5,7 @@ import { HomeTopNav } from '@/components/ui/Nav/HomeTopNav';
 const NavTest = ({ children }: { children?: React.ReactNode }) => {
   return (
     <div>
-      <GlobalTopNav />
+      <GlobalTopNav navState='left'/>
       {/* <HomeTopNav /> */}
       {children}
       <BottomNav />
