@@ -2,6 +2,7 @@ import TextButtonTest from './TextButtonTest';
 import NavTest from './NavTest';
 import RadioButtonContainer from '@/components/ui/Button/RadioButton/RadioButtonContainer';
 import InputContainer from '@/components/ui/Input/InputContainer';
+import UserInfoForm from '@/components/ui/UserInfoForm';
 
 const AllComponentsTest = () => {
   return (
@@ -19,10 +20,10 @@ const AllComponentsTest = () => {
         <section>
           <InputContainer />
         </section>
+        <section>
+          <UserInfoForm />
+        </section>
       </div>
-      {/* <section>
-        <SurveyFormBlock />
-      </section> */}
     </div>
   );
 };

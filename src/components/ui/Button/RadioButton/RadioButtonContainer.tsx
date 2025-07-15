@@ -2,6 +2,12 @@ import RadioButton from './RadioButton';
 import { useState } from 'react';
 import clsx from 'clsx';
 
+interface RadioButtonContainerProps {
+  variant?: Variant;
+  label?: string;
+  importance?: 'important' | 'basic';
+}
+
 type RadioButtonState = 'enabled' | 'select' | 'disabled';
 type Variant = 'default' | 'formTop' | 'formMiddle' | 'formBottom';
 
@@ -20,7 +26,11 @@ const stateClassMap = {
   },
 };
 
-const RadioButtonContainer = ({ variant = 'default' }: { variant?: Variant }) => {
+const RadioButtonContainer = ({
+  variant = 'default',
+  label = '성별',
+  importance = 'important',
+}: RadioButtonContainerProps) => {
   const [selected, setSelected] = useState<string | null>(null);
   const state: RadioButtonState = selected ? 'select' : 'enabled';
   const current = stateClassMap[state];
@@ -42,8 +52,10 @@ const RadioButtonContainer = ({ variant = 'default' }: { variant?: Variant }) =>
   return (
     <div className={containerClass}>
       <label className='flex items-center text-[12px] font-bold leading-[14px] tracking-[-0.12px] mb-[6px]'>
-        주제
-        <span className='ml-[4px] text-[14px] font-medium text-fg-accent-red'>*</span>
+        {label}
+        {importance === 'important' && (
+          <span className='ml-[4px] text-[14px] font-medium text-fg-accent-red'>*</span>
+        )}
       </label>
       <div className='flex justify-between'>
         {['male', 'female', 'any'].map((value) => (
