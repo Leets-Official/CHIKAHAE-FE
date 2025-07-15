@@ -10,6 +10,7 @@ interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   style?: CSSProperties;
   className?: string;
   inputState?: InputState;
+  placeholder?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, TextInputProps>(
@@ -23,6 +24,7 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
       style,
       className,
       inputState = 'enabled',
+      placeholder,
       onChange,
       onBlur,
       ...props
@@ -38,41 +40,41 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
     const stateClassMap = {
       enabled: {
         border: 'border-[#bac3cb]',
-        placeholder: 'placeholder:text-[#BAC3CB]',
+        placeholderColor: 'placeholder:text-[#BAC3CB]',
         text: 'text-black',
         bg: 'bg-white',
         icon: 'text-[#9CA6AF]',
       },
       select: {
         border: 'border-[#3DAFD9]',
-        placeholder: 'placeholder:text-black',
+        placeholderColor: 'placeholder:text-black',
         text: 'text-black',
         bg: 'bg-white',
         icon: 'text-[#3DAFD9]',
       },
       error: {
         border: 'border-[#3DAFD9]',
-        placeholder: 'placeholder:text-black',
+        placeholderColor: 'placeholder:text-black',
         text: 'text-black',
         bg: 'bg-white',
         icon: 'text-[#3DAFD9]',
       },
       disabled: {
         border: 'border-[#bac3cb]',
-        placeholder: 'placeholder:text-[#BAC3CB]',
+        placeholderColor: 'placeholder:text-[#BAC3CB]',
         text: 'text-[#BAC3CB]',
         bg: 'bg-[#BAC3CB]',
         icon: 'text-[#9CA6AF]',
       },
     };
 
-    const { border, placeholder, text, bg } = stateClassMap[inputState];
+    const { border, placeholderColor, text, bg } = stateClassMap[inputState];
 
     const inputClass = clsx(
       'w-full bg-transparent outline-none',
       'text-[14px] leading-[16px] tracking-[-0.14px]',
       'flex-1 min-w-0',
-      placeholder,
+      placeholderColor,
       text,
       bg,
       disabled && 'text-[#CED6DD] cursor-not-allowed',
@@ -85,7 +87,7 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
           ref={ref}
           id={name}
           name={name}
-          placeholder='텍스트를 입력해 주세요.'
+          placeholder={placeholder}
           type={type}
           disabled={disabled}
           onBlur={handleBlur}

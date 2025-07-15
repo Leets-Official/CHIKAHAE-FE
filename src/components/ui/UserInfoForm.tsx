@@ -1,6 +1,7 @@
 import InputContainer from './Input/InputContainer';
 import RadioButtonContainer from './Button/RadioButton/RadioButtonContainer';
 import { useState, useRef } from 'react';
+import { genderOption } from '@/data/radioOptions';
 import clsx from 'clsx';
 
 const UserInfoForm = () => {
@@ -34,7 +35,12 @@ const UserInfoForm = () => {
 
       <div ref={formRef} className={containerClass} onFocus={handleFocus} onBlur={handleBlur}>
         <InputContainer variant='formTop' />
-        <RadioButtonContainer variant='formMiddle' />
+        <RadioButtonContainer
+          message='성별'
+          importance='basic'
+          options={genderOption}
+          variant='formMiddle'
+        />
         <InputContainer variant='formBottom' />
       </div>
     </>

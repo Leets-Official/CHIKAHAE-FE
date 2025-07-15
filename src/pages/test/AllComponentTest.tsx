@@ -3,7 +3,7 @@ import NavTest from './NavTest';
 import RadioButtonContainer from '@/components/ui/Button/RadioButton/RadioButtonContainer';
 import InputContainer from '@/components/ui/Input/InputContainer';
 import UserInfoForm from '@/components/ui/UserInfoForm';
-
+import { genderOption } from '@/data/radioOptions';
 const AllComponentsTest = () => {
   return (
     <div className='flex items-center justify-center'>
@@ -15,10 +15,15 @@ const AllComponentsTest = () => {
           <TextButtonTest />
         </section>
         <section>
-          <RadioButtonContainer />
+          <RadioButtonContainer
+            message='성별'
+            importance='important'
+            variant='default'
+            options={genderOption}
+          />
         </section>
         <section>
-          <InputContainer />
+          <InputContainer label='에시' placeholder='예시' />
         </section>
         <section>
           <UserInfoForm />

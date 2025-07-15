@@ -2,7 +2,7 @@ interface RadioButtonProps {
   id: string;
   name: string;
   value: string;
-  label: string;
+  message: string;
   checked: boolean;
   onChange: (value: string) => void;
   required?: boolean;
@@ -19,7 +19,7 @@ const RadioButton = ({
   id,
   name,
   value,
-  label,
+  message,
   checked,
   onChange,
   required,
@@ -50,7 +50,7 @@ const RadioButton = ({
       >
         {checked && <div className='w-2 h-2 rounded-full bg-[#3DAFD9]' />}
       </div>
-      <span className='text-sm text-black'>{label}</span>
+      <span className='text-sm text-black'>{message}</span>
     </label>
   );
 };

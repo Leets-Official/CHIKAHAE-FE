@@ -5,7 +5,7 @@ import { HomeTopNav } from '@/components/ui/Nav/HomeTopNav';
 const NavTest = ({ children }: { children?: React.ReactNode }) => {
   return (
     <div>
-      <GlobalTopNav navState='left'/>
+      <GlobalTopNav isCenter message='기록하기!' />
       {/* <HomeTopNav /> */}
       {children}
       <BottomNav />

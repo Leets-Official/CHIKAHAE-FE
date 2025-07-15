@@ -20,10 +20,10 @@ export const HomeTopNav = () => {
         className={`flex px-2 m-0 justify-between items-center bg-bg-tertiary-gray:#FAFBFC w-[100px]`}
       >
         <Link to='/'>
-          <GearIcon className='h-[30px] w-[30px]' />
+          <BellIcon/>
         </Link>
         <Link to='/'>
-          <BellIcon className='h-[30px] w-[30px]' />
+          <GearIcon/>
         </Link>
       </div>
     </nav>

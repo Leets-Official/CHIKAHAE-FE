@@ -5,8 +5,17 @@ import clsx from 'clsx';
 
 type InputState = 'enabled' | 'select' | 'disabled';
 type Variant = 'default' | 'formTop' | 'formMiddle' | 'formBottom';
+type InputContainerProps = {
+  variant?: Variant;
+  placeholder?: string;
+  label?: string;
+};
 
-const InputContainer = ({ variant = 'default' }: { variant?: Variant }) => {
+const InputContainer = ({
+  variant = 'default',
+  placeholder = '텍스트를 입력해 주세요',
+  label = '예시',
+}: InputContainerProps) => {
   const [state, setState] = useState<InputState>('enabled');
 
   const containerClass = clsx(
@@ -30,15 +39,15 @@ const InputContainer = ({ variant = 'default' }: { variant?: Variant }) => {
   return (
     <div className={containerClass}>
       <label className='flex items-center text-[12px] font-bold leading-[14px] tracking-[-0.12px] mb-[6px]'>
-        주제
+        {label}
         <span className='ml-[4px] text-[14px] font-medium text-[#DE473D]'>*</span>
       </label>
       <div className='flex justify-between items-center'>
         <Input
           inputState={state}
+          placeholder={placeholder}
           onFocus={() => setState('select')}
           onBlur={() => setState('enabled')}
-          placeholder='텍스트를 입력해 주세요.'
           className='w-full text-sm px-0 py-0 bg-transparent'
         />
         <CalendarIcon className={`h-[30px] w-[30px] ${iconColor}`} />

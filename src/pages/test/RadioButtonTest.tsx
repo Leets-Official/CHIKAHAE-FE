@@ -10,7 +10,7 @@ const RadioButtonTest = () => {
         id='male'
         name='gender'
         value='male'
-        label='텍스트'
+        message='텍스트'
         checked={selected === 'male'}
         onChange={setSelected}
         radioState={'enabled'}
@@ -19,7 +19,7 @@ const RadioButtonTest = () => {
         id='female'
         name='gender'
         value='female'
-        label='텍스트'
+        message='텍스트'
         checked={selected === 'female'}
         onChange={setSelected}
         radioState={'enabled'}
@@ -28,7 +28,7 @@ const RadioButtonTest = () => {
         id='any'
         name='gender'
         value='any'
-        label='텍스트'
+        message='텍스트'
         checked={selected === 'any'}
         onChange={setSelected}
         radioState={'enabled'}
