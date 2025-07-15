@@ -1,5 +1,5 @@
 import Input from './Input';
-import { ReactComponent as CalendarIcon } from '@/assets/images/Calendar.svg';
+import { ReactComponent as CalendarIcon } from '@/assets/images/calendar.svg';
 import { useState } from 'react';
 import clsx from 'clsx';
 
