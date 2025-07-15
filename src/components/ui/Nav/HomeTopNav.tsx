@@ -14,7 +14,7 @@ export const HomeTopNav = () => {
             w-full  max-w-[480px] min-w-[360px]`}
     >
       <Link to='/'>
-        <div className='text-fg-primary-blue'>치카해</div>
+        <div className='text-fg-primary-blue body-16-eb'>치카해</div>
       </Link>
       <div
         className={`flex px-2 m-0 justify-between items-center bg-bg-tertiary-gray:#FAFBFC w-[100px]`}
