@@ -1,5 +1,5 @@
 import Input from './Input';
-import { ReactComponent as CalendarIcon } from '@/assets/images/calendar.svg';
+import { ReactComponent as CalendarIcon } from '@/assets/icons/calendar.svg';
 import { useState } from 'react';
 import clsx from 'clsx';
 
@@ -20,7 +20,7 @@ const InputContainer = ({
 
   const containerClass = clsx(
     'w-full h-[80px] px-4 py-3 flex flex-col',
-    variant === 'default' && 'rounded-lg border-2 border-b-5 shadow-md',
+    variant === 'default' && 'rounded-lg border-[2px] border-b-[5px] shadow-md',
     variant !== 'default' && 'border-t border-[#9CA6AF]',
     variant === 'formTop' && 'rounded-t-lg',
     variant === 'formBottom' && 'rounded-b-lg',

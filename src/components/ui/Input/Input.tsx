@@ -6,7 +6,6 @@ type InputState = 'enabled' | 'select' | 'disabled' | 'error';
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   width?: string;
   maxWidth?: string;
-  disabled?: boolean;
   style?: CSSProperties;
   className?: string;
   inputState?: InputState;
@@ -43,32 +42,28 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
         placeholderColor: 'placeholder:text-[#BAC3CB]',
         text: 'text-black',
         bg: 'bg-white',
-        icon: 'text-[#9CA6AF]',
       },
       select: {
         border: 'border-[#3DAFD9]',
         placeholderColor: 'placeholder:text-black',
         text: 'text-black',
         bg: 'bg-white',
-        icon: 'text-[#3DAFD9]',
       },
       error: {
         border: 'border-[#3DAFD9]',
         placeholderColor: 'placeholder:text-black',
         text: 'text-black',
         bg: 'bg-white',
-        icon: 'text-[#3DAFD9]',
       },
       disabled: {
         border: 'border-[#bac3cb]',
         placeholderColor: 'placeholder:text-[#BAC3CB]',
         text: 'text-[#BAC3CB]',
         bg: 'bg-[#BAC3CB]',
-        icon: 'text-[#9CA6AF]',
       },
     };
 
-    const { border, placeholderColor, text, bg } = stateClassMap[inputState];
+    const { border, placeholderColor, text } = stateClassMap[inputState];
 
     const inputClass = clsx(
       'w-full bg-transparent outline-none',
@@ -76,7 +71,6 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
       'flex-1 min-w-0',
       placeholderColor,
       text,
-      bg,
       disabled && 'text-[#CED6DD] cursor-not-allowed',
     );
 

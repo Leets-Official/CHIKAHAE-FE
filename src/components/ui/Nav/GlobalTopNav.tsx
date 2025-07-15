@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { ReactComponent as CancelIcon } from '@/assets/images/cancel.svg';
-import { ReactComponent as LeftIcon } from '@/assets/images/chevron_left.svg';
+import { ReactComponent as CancelIcon } from '@/assets/icons/cancel.svg';
+import { ReactComponent as LeftIcon } from '@/assets/icons/chevron_left.svg';
 
 interface GlobalTopNavProps {
   message: string;
@@ -14,7 +14,7 @@ export const GlobalTopNav = ({ isCenter, message = '기록하기' }: GlobalTopNa
         <Link to='/'>
           <LeftIcon />
         </Link>
-        <div className='text-fg-primary text-[16px]'>{message}</div>
+        <div className='text-fg-primary body-16-eb'>{message}</div>
       </>
     );
   };
@@ -22,12 +22,13 @@ export const GlobalTopNav = ({ isCenter, message = '기록하기' }: GlobalTopNa
   return (
     <div
       className={`
-                fixed top-0 left-0 right-0
+                fixed top-0 left-1/2 -translate-x-1/2
                 flex h-14 px-4
                 items-center
                 bg-bg-tertiary-gray:#FAFBFC
                 w-full
-                justify-between`}
+                justify-between
+                max-w-[480px] min-w-[360px]`}
     >
       {isCenter ? (
         <NavItem />

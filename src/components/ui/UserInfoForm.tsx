@@ -1,7 +1,7 @@
 import InputContainer from './Input/InputContainer';
 import RadioButtonContainer from './Button/RadioButton/RadioButtonContainer';
 import { useState, useRef } from 'react';
-import { genderOption } from '@/data/radioOptions';
+import { GENDER } from '@/constants/radioOptions';
 import clsx from 'clsx';
 
 const UserInfoForm = () => {
@@ -38,7 +38,7 @@ const UserInfoForm = () => {
         <RadioButtonContainer
           message='성별'
           importance='basic'
-          options={genderOption}
+          options={GENDER}
           variant='formMiddle'
         />
         <InputContainer variant='formBottom' />

@@ -6,13 +6,11 @@ interface RadioButtonProps {
   checked: boolean;
   onChange: (value: string) => void;
   required?: boolean;
-  radioState: 'enabled' | 'select' | 'disabled';
 }
 
 const stateClassMap = {
-  enabled: { border: 'border-[#9CA6AF]', bg: 'bg-white' },
-  select: { border: 'border-[#3DAFD9]', bg: 'bg-white' },
-  disabled: { border: 'border-[#9CA6AF]', bg: 'bg-[#BAC3CB]' },
+  enabled: { border: 'border-[#9CA6AF]' },
+  select: { border: 'border-[#3DAFD9]' },
 };
 
 const RadioButton = ({
@@ -23,14 +21,11 @@ const RadioButton = ({
   checked,
   onChange,
   required,
-  radioState,
 }: RadioButtonProps) => {
-  const { border, bg } = stateClassMap[radioState];
-
   return (
     <label
       htmlFor={id}
-      className={`flex items-center space-x-1 cursor-pointer select-none p-2 rounded-md ${border} ${bg}`}
+      className={`flex items-center space-x-1 cursor-pointer select-none p-2 rounded-md`}
     >
       <input
         type='radio'
@@ -44,13 +39,13 @@ const RadioButton = ({
       />
 
       <div
-        className={`w-4 h-4 rounded-full border flex items-center justify-center transition-colors duration-200 ${
-          checked ? 'border-[#3DAFD9]' : 'border-[#9CA6AF]'
-        }`}
+        className={
+          'w-4 h-4 rounded-full border flex items-center justify-center transition-colors duration-200 border-border-gray-weak'
+        }
       >
-        {checked && <div className='w-2 h-2 rounded-full bg-[#3DAFD9]' />}
+        {checked && <div className='w-2 h-2 rounded-full bg-fg-accent-blue-weak' />}
       </div>
-      <span className='text-sm text-black'>{message}</span>
+      <span className='body-14-r text-fg-primary'>{message}</span>
     </label>
   );
 };
