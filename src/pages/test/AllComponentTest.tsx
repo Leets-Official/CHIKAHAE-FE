@@ -3,6 +3,7 @@ import NavTest from './NavTest';
 import RadioButtonContainer from '@/components/ui/Button/RadioButton/RadioButtonContainer';
 import InputContainer from '@/components/ui/Input/InputContainer';
 import UserInfoForm from '@/components/ui/UserInfoForm';
+import Container from '@/components/Container';
 import { GENDER } from '@/constants/radioOptions';
 const AllComponentsTest = () => {
   return (
@@ -11,9 +12,10 @@ const AllComponentsTest = () => {
         <section>
           <NavTest />
         </section>
-        <section>
+        {/* <section>
           <TextButtonTest />
-        </section>
+        </section> */}
+        <Container/>
         <section>
           <RadioButtonContainer
             message='성별'
@@ -34,3 +36,4 @@ const AllComponentsTest = () => {
 };
 
 export default AllComponentsTest;
+
