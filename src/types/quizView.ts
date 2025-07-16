@@ -7,3 +7,9 @@ export type BaseQuizProps = {
   onSelect: (index: number) => void;
   onTimeout?: () => void;
 };
+
+export type QuizFlowProps = BaseQuizProps & {
+  step: 'quiz' | 'result' | 'final';
+  isLastQuestion: boolean;
+  correctCount: number;
+};
