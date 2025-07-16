@@ -17,10 +17,9 @@ const ToastTest = () => {
       {showToast && (
         <Toast
           id='test-toast'
-          message='토스트 메세지를 입력해주세요'
+          message='치카 코인 1개가 적립되었어요.'
           duration={3000}
           onClose={() => setShowToast(false)}
-          actionText='확인'
           onActionClick={() => {}}
         />
       )}

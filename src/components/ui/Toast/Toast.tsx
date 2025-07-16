@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
+import { ReactComponent as Coin } from '@/assets/images/coin.svg';
 import clsx from 'clsx';
 
-//토스트 유형(메세지, 유형 별 분류위한 속성, 노출 시간, onClose)
+//토스트 유형(메세지, 유형 별 분류 위한 속성, 노출 시간, onClose)
 interface ToastProps {
   id: string;
   message: string;
@@ -9,6 +10,7 @@ interface ToastProps {
   onClose: (id: string) => void;
   actionText?: string;
   onActionClick?: () => void;
+  showIcon?: boolean;
 }
 
 const Toast = ({
@@ -18,8 +20,9 @@ const Toast = ({
   onClose,
   actionText,
   onActionClick,
+  showIcon = true,
 }: ToastProps) => {
-  const [isVisible, setIsVisible] = useState(true); // 토스트 가시성
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     if (duration) {
@@ -49,40 +52,32 @@ const Toast = ({
     setIsVisible(false);
   };
 
-  const baseTextStyles =
-    'text-[#CED6DD] font-extrabold text-[14px] leading-[20px] tracking-[-0.14px]';
   return (
     <div
-      className={`
-            flex
-            w-[320px]
-            h-[48px]
-            items-center
-            justify-between
-            px-4
-            rounded-lg
-            bg-black/70
-            text-white
-            ${isVisible ? 'animate-fade-in' : 'animate-fade-out'} 
-            `} // 상태에 따른 애니메이션 변화
+      className={clsx(
+        'inline-flex',
+        'px-[18px]',
+        'py-[14px]',
+        'justify-center',
+        'items-center',
+        'gap-[10px]',
+        'rounded-[30px]',
+        'bg-bg-primary-white',
+        'shadow-[0px_0px_10px_0px_rgba(34,34,34,0.10)]',
+        isVisible ? 'animate-fade-in' : 'animate-fade-out',
+      )}
     >
-      <span
-        className={clsx(
-          baseTextStyles,
-          'w-[246px]',
-          'overflow-hidden',
-          'text-ellipsis',
-          'whitespace-nowrap',
-          'flex-shrink-0',
-        )}
-      >
+      {/* 조건부 아이콘 렌더링 */}
+      {showIcon && <Coin className='w-[20px] h-[20px]' />}
+
+      <span className={clsx('body-12-eb', 'leading-[14px]', 'text-fg-accent-toast')}>
         {message}
       </span>
 
       {actionText && (
         <button
           onClick={handleActionClick}
-          className={clsx(baseTextStyles, 'self-stretch', 'hover:opacity-80', 'px-2', 'py-1')}
+          className={clsx('body-12-eb', 'text-fg-accent-toast', 'px-2', 'py-1', 'hover:opacity-80')}
         >
           {actionText}
         </button>
