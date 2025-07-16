@@ -26,8 +26,6 @@ export const GlobalTopNav = ({ isCenter, message = '기록하기' }: GlobalTopNa
                 flex h-14 px-4
                 items-center
                 bg-bg-tertiary-gray
-               
-
                 w-full
                 justify-between
                 max-w-[480px] min-w-[360px]`}
