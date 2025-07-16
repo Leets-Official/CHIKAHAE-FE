@@ -1,4 +1,4 @@
-import RadioButton from '@/components/RadioButton';
+import RadioButton from '@/components/ui/Button/RadioButton/RadioButton';
 import { useState } from 'react';
 
 const RadioButtonTest = () => {
@@ -10,7 +10,7 @@ const RadioButtonTest = () => {
         id='male'
         name='gender'
         value='male'
-        label='남성'
+        message='텍스트'
         checked={selected === 'male'}
         onChange={setSelected}
       />
@@ -18,8 +18,16 @@ const RadioButtonTest = () => {
         id='female'
         name='gender'
         value='female'
-        label='여성'
+        message='텍스트'
         checked={selected === 'female'}
+        onChange={setSelected}
+      />
+      <RadioButton
+        id='any'
+        name='gender'
+        value='any'
+        message='텍스트'
+        checked={selected === 'any'}
         onChange={setSelected}
       />
     </div>
