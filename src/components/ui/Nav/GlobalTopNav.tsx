@@ -25,7 +25,9 @@ export const GlobalTopNav = ({ isCenter, message = '기록하기' }: GlobalTopNa
                 fixed top-0 left-1/2 -translate-x-1/2
                 flex h-14 px-4
                 items-center
-                bg-bg-tertiary-gray:#FAFBFC
+                bg-bg-tertiary-gray
+               
+
                 w-full
                 justify-between
                 max-w-[480px] min-w-[360px]`}
@@ -45,3 +47,5 @@ export const GlobalTopNav = ({ isCenter, message = '기록하기' }: GlobalTopNa
   );
 };
 export default GlobalTopNav;
+
+// --color bg-tertiary-gray: #FAFBFC;
