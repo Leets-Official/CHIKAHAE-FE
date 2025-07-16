@@ -124,16 +124,20 @@
   --color-fg-secondary: #fafbfc;
   --color-fg-secondary-strong: #ffffff;
   --color-fg-primary: #181b1f;
+  --color-fg-primary-blue: #5fc6f0;
   --color-fg-weak: #ced6dd;
 
   --color-fg-system-success: #199b6a;
   --color-fg-system-error: #d8444a;
+  --color-fg-clear-blue: #4c98f5;
+  --color-fg-accent-red: #de473d;
 
   /* Border */
   --color-border-blue: #5fc6f0;
   --color-border-pink: #f05f83;
+  --color-border-gray: #9ca6af;
+  --color-border-medium: #bac3cb;
   --color-border-gray-weak: #ced6dd;
-  --color-border-gray-strong: #9ca6af;
 
   /* Shadow */
   --color-shadow-gray: #9ca6af;

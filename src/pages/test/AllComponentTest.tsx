@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
 import TextButtonTest from './TextButtonTest';
-import RadioButtonTest from './RadioButtonTest';
-
 import NavTest from './NavTest';
-
+import RadioButtonContainer from '@/components/ui/Button/RadioButton/RadioButtonContainer';
+import InputContainer from '@/components/ui/Input/InputContainer';
+import UserInfoForm from '@/components/ui/UserInfoForm';
+import Container from '@/components/Container';
+import { GENDER } from '@/constants/radioOptions';
 const AllComponentsTest = () => {
   return (
     <div className='flex items-center justify-center'>
@@ -11,15 +12,23 @@ const AllComponentsTest = () => {
         <section>
           <NavTest />
         </section>
-
-        <section>
-          <h2 className='text-lg font-semibold mb-2'>RadioButton</h2>
-          <RadioButtonTest />
-        </section>
-
-        <section>
-          <h2 className='text-lg font-semibold mb-2'>TextButton</h2>
+        {/* <section>
           <TextButtonTest />
+        </section> */}
+        <Container/>
+        <section>
+          <RadioButtonContainer
+            message='성별'
+            importance='important'
+            variant='default'
+            options={GENDER}
+          />
+        </section>
+        <section>
+          <InputContainer label='예시' placeholder='예시' />
+        </section>
+        <section>
+          <UserInfoForm />
         </section>
       </div>
     </div>
@@ -27,3 +36,4 @@ const AllComponentsTest = () => {
 };
 
 export default AllComponentsTest;
+

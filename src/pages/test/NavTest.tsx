@@ -1,10 +1,12 @@
 import { BottomNav } from '@/components/ui/Nav/BottomNav';
-import { TopNav } from '@/components/ui/Nav/TopNav';
+import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
+import { HomeTopNav } from '@/components/ui/Nav/HomeTopNav';
 
 const NavTest = ({ children }: { children?: React.ReactNode }) => {
   return (
     <div>
-      <TopNav />
+      <GlobalTopNav isCenter message='탑네비' />
+      {/* <HomeTopNav /> */}
       {children}
       <BottomNav />
     </div>
