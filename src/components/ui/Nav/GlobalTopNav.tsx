@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ReactComponent as CancelIcon } from '@/assets/icons/cancel.svg';
 import { ReactComponent as LeftIcon } from '@/assets/icons/chevron_left.svg';
 
@@ -8,12 +8,14 @@ interface GlobalTopNavProps {
 }
 
 export const GlobalTopNav = ({ isCenter, message = '기록하기' }: GlobalTopNavProps) => {
+  const navigate = useNavigate();
+
   const NavItem = () => {
     return (
       <>
-        <Link to='/'>
+        <button onClick={() => navigate(-1)}>
           <LeftIcon />
-        </Link>
+        </button>
         <div className='text-fg-primary body-16-eb'>{message}</div>
       </>
     );
@@ -39,12 +41,11 @@ export const GlobalTopNav = ({ isCenter, message = '기록하기' }: GlobalTopNa
           <NavItem />
         </div>
       )}
-
-      <Link to='/'>
+      {/* FIXME: CancelIcon 클릭하면 어디로 이동할지 논의 필요 */}
+      <button onClick={() => navigate('/')}>
         <CancelIcon className='h-[30px] w-[30px]' />
-      </Link>
+      </button>
     </div>
   );
 };
 export default GlobalTopNav;
-
