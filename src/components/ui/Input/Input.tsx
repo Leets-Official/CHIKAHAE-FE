@@ -10,6 +10,7 @@ interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   inputState?: InputState;
   placeholder?: string;
+  value?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, TextInputProps>(
@@ -24,6 +25,7 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
       className,
       inputState = 'enabled',
       placeholder,
+      value,
       onChange,
       onBlur,
       ...props
@@ -34,7 +36,7 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
       if (onBlur) onBlur(e);
     };
 
-    const containerClass = clsx('w-full', className);
+    const containerClass = clsx(className);
 
     const stateClassMap = {
       enabled: {
@@ -66,16 +68,16 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
     const { border, placeholderColor, text } = stateClassMap[inputState];
 
     const inputClass = clsx(
-      'w-full bg-transparent outline-none',
+      ' bg-transparent outline-none',
       'text-[14px] leading-[16px] tracking-[-0.14px]',
-      'flex-1 min-w-0',
+
       placeholderColor,
       text,
       disabled && 'text-[#CED6DD] cursor-not-allowed',
     );
 
     return (
-      <div className={containerClass} style={{ width, maxWidth, ...style }}>
+      <div className={containerClass}>
         <input
           {...props}
           ref={ref}
@@ -86,6 +88,7 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
           disabled={disabled}
           onBlur={handleBlur}
           onChange={onChange}
+          value={value}
           className={inputClass}
         />
       </div>

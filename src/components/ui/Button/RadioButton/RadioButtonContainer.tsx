@@ -1,5 +1,5 @@
 import RadioButton from './RadioButton';
-import { useState } from 'react';
+
 import clsx from 'clsx';
 import { GENDER } from '@/constants/radioOptions';
 
@@ -8,6 +8,9 @@ interface RadioButtonContainerProps {
   message?: string;
   importance?: 'important' | 'basic';
   options: { name: string; value: string }[];
+
+  selectedValue: string | null;
+  onValueChange: (value: string) => void;
 }
 
 type RadioButtonState = 'enabled' | 'select' | 'disabled';
@@ -33,9 +36,11 @@ const RadioButtonContainer = ({
   message = '성별',
   importance = 'important',
   options = GENDER,
+
+  selectedValue,
+  onValueChange,
 }: RadioButtonContainerProps) => {
-  const [selected, setSelected] = useState<string | null>(null);
-  const state: RadioButtonState = selected ? 'select' : 'enabled';
+  const state: RadioButtonState = selectedValue ? 'select' : 'enabled';
   const current = stateClassMap[state];
 
   const containerClass = clsx(
@@ -47,10 +52,6 @@ const RadioButtonContainer = ({
     current.border,
     current.bg,
   );
-
-  const getRadioState = (value: string) => {
-    return selected === value ? 'select' : 'enabled';
-  };
 
   return (
     <div className={containerClass}>
@@ -68,8 +69,8 @@ const RadioButtonContainer = ({
             name='gender'
             value={value}
             message={name}
-            checked={selected === value}
-            onChange={setSelected}
+            checked={selectedValue === value}
+            onChange={onValueChange}
           />
         ))}
       </div>

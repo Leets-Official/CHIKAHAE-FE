@@ -21,14 +21,21 @@ const AllComponentsTest = () => {
             message='성별'
             importance='important'
             variant='default'
-            options={GENDER}
-          />
+            options={GENDER} selectedValue={null} onValueChange={function (value: string): void {
+              throw new Error('Function not implemented.');
+            } }          />
         </section>
         <section>
-          <InputContainer label='예시' placeholder='예시' />
+          <InputContainer label='예시' placeholder='예시' value={''} onChange={function (e: React.ChangeEvent<HTMLInputElement>): void {
+            throw new Error('Function not implemented.');
+          } } />
         </section>
         <section>
-          <UserInfoForm />
+          <UserInfoForm type={'full'} gender={''} onGenderChange={function (value: string): void {
+            throw new Error('Function not implemented.');
+          } } birthDate={''} onBirthDateChange={function (value: string): void {
+            throw new Error('Function not implemented.');
+          } } />
         </section>
       </div>
     </div>

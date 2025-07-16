@@ -1,10 +1,11 @@
 import Input from './Input';
-import { ReactComponent as CalendarIcon } from '@/assets/icons/calendar.svg';
 import { useState } from 'react';
 import clsx from 'clsx';
+import DateInput from './DateInput';
 
 type InputState = 'enabled' | 'select' | 'disabled';
 type Variant = 'default' | 'formTop' | 'formMiddle' | 'formBottom';
+
 type InputContainerProps = {
   variant?: Variant;
   placeholder?: string;
@@ -13,7 +14,7 @@ type InputContainerProps = {
   star?: boolean;
   className?: string;
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: ((e: React.ChangeEvent<HTMLInputElement>) => void) | ((formattedDate: string) => void);
 };
 
 const InputContainer = ({
@@ -53,18 +54,28 @@ const InputContainer = ({
         {label}
         {star && <span className='ml-[4px] text-[14px] font-medium text-fg-accent-red'>*</span>}
       </label>
-      <div className='flex justify-between items-center'>
+
+      {calender ? (
+        <DateInput
+          value={value}
+          onChange={(val) => {
+            // 타입 좁히기: calender === true → string을 받는 onChange
+            if (typeof onChange === 'function') {
+              (onChange as (formattedDate: string) => void)(val);
+            }
+          }}
+        />
+      ) : (
         <Input
           inputState={state}
           placeholder={placeholder}
           onFocus={() => setState('select')}
           onBlur={() => setState('enabled')}
           value={value}
-          onChange={onChange}
-          className='w-full text-sm px-0 py-0 bg-transparent'
+          onChange={onChange as (e: React.ChangeEvent<HTMLInputElement>) => void}
+          className='text-sm px-0 py-0 bg-transparent'
         />
-        {calender && <CalendarIcon className={`h-[30px] w-[30px] ${iconColor}`} />}
-      </div>
+      )}
     </div>
   );
 };

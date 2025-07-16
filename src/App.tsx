@@ -3,6 +3,8 @@ import Home from '@/pages/Home';
 import AllComponentsTest from './pages/test/AllComponentTest';
 import SignupProfile from './pages/signup/SignupprofilePage';
 import SignupInfo from './pages/signup/SignupInfoPage';
+import SignupGuardianIntro from './pages/signup/SignupGuardianIntroPage';
+import SignupGuardianForm from './pages/signup/SignupGuardianFormPage';
 
 function App() {
   return (
@@ -10,8 +12,9 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/signup' element={<SignupProfile />} />
-        <Route path='/signupinfo' element={<SignupInfo />} />
-        <Route path='/tests/all' element={<AllComponentsTest />} />
+        <Route path='/signup/info' element={<SignupInfo />} />
+        <Route path='/signup/guardian/intro' element={<SignupGuardianIntro />} />
+        <Route path='/signup/guardian/form' element={<SignupGuardianForm />} />
       </Routes>
     </BrowserRouter>
   );

@@ -4,12 +4,11 @@ import { useState } from 'react';
 import UserInfoForm from '@/components/ui/UserInfoForm';
 import { Link } from 'react-router-dom';
 
-const SignupGuardianForm = () => {
-  const [name, setName] = useState('');
+const SignupInfo = () => {
   const [gender, setGender] = useState('');
   const [birthDate, setBirthDate] = useState('');
 
-  const isFormIncomplete = !gender || !birthDate || !name;
+  const isFormIncomplete = !gender || !birthDate;
 
   return (
     <>
@@ -40,7 +39,7 @@ const SignupGuardianForm = () => {
               mb-2.5 
             '
             >
-              보호자 정보를 입력해주세요
+              필수 정보를 입력해주세요
             </p>
 
             <p
@@ -53,7 +52,7 @@ const SignupGuardianForm = () => {
               items-stretch
             '
             >
-              치카해에서 사용할 보호자 정보를 입력해주세요
+              치카해에서 사용할 필수 정보를 입력해주세요
             </p>
           </div>
 
@@ -66,10 +65,9 @@ const SignupGuardianForm = () => {
         '
           >
             <div className='w-full'>
+              {/* 3. 상태와 상태 변경 함수를 props로 내려줍니다. */}
               <UserInfoForm
-                type='full'
-                name={name}
-                onChangeName={setName}
+                type='partial'
                 gender={gender}
                 onGenderChange={setGender}
                 birthDate={birthDate}
@@ -82,9 +80,9 @@ const SignupGuardianForm = () => {
       <div
         className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] min-w-[360px] px-4 py-2.5`}
       >
-        <Link to='/'>
+        <Link to='/signup/guardian/intro'>
           <Button variant='primary' size='large' fullWidth={true} disabled={isFormIncomplete}>
-            완료
+            다음
           </Button>
         </Link>
       </div>
@@ -92,4 +90,4 @@ const SignupGuardianForm = () => {
   );
 };
 
-export default SignupGuardianForm;
+export default SignupInfo;
