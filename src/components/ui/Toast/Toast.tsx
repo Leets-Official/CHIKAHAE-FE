@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ReactComponent as Coin } from '@/assets/images/coin.svg';
+import { ReactComponent as Coin } from '@/assets/icons/coin.svg';
 import clsx from 'clsx';
 
 //토스트 유형(메세지, 유형 별 분류 위한 속성, 노출 시간, onClose)

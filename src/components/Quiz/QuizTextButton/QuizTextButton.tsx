@@ -1,4 +1,4 @@
-import { ReactComponent as Check } from '@/assets/images/check.svg';
+import { ReactComponent as Check } from '@/assets/icons/check.svg';
 import type { QuizTextButtonProps } from './QuizTextButton.types';
 
 const QuizTextButton = ({ text, onClick, isSelected = false }: QuizTextButtonProps) => {

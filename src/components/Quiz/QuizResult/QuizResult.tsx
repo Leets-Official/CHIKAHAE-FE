@@ -1,6 +1,6 @@
 import QuizResultBlock from './QuizResultBlock';
 import type { QuizResultProps } from './QuizResult.types';
-import { ReactComponent as ChikaCoin } from '@/assets/images/chikaCoin.svg';
+import { ReactComponent as ChikaCoin } from '@/assets/icons/chikaCoin.svg';
 
 const QuizResult = ({
   isCorrect,

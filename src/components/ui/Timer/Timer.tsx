@@ -1,4 +1,4 @@
-import { ReactComponent as TimerIcon } from '@/assets/images/timerIcon.svg';
+import { ReactComponent as TimerIcon } from '@/assets/icons/timerIcon.svg';
 import type { TimerProps } from './Timer.types';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';

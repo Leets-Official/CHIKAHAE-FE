@@ -1,5 +1,5 @@
-import { ReactComponent as Quiz_O } from '@/assets/images/Quiz_O.svg';
-import { ReactComponent as Quiz_X } from '@/assets/images/quiz_X.svg';
+import { ReactComponent as Quiz_O } from '@/assets/icons/Quiz_O.svg';
+import { ReactComponent as Quiz_X } from '@/assets/icons/quiz_X.svg';
 import clsx from 'clsx';
 import type { QuizOXButtonProps } from './QuizOXButton.types';
 
