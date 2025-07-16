@@ -18,7 +18,7 @@ const QuizBody = ({
   return (
     <div
       className={clsx(
-        'w-full mx-auto flex items-center flex-col',
+        'w-full max-w-[480px] min-w-[360px] mx-auto flex items-center flex-col',
         step === 'quiz' && 'pt-0',
         step === 'result' && 'pt-[120px]',
         step === 'final' && 'pt-[100px]',

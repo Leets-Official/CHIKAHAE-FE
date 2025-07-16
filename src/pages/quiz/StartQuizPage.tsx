@@ -13,10 +13,10 @@ const StartQuizPage = () => {
   return (
     <>
       <div className='w-full relative min-h-screen flex justify-center'>
-        <div className='flex flex-col w-[360px] px-[20px] gap-[10px]'>
+        <div className='flex flex-col w-full max-w-[430px] min-w-[360px] px-[20px] gap-[10px]'>
           <GlobalTopNav isCenter message='퀴즈' />
           {/* 이미지 영역 */}
-          <div className='flex items-center justify-start mt-14 h-[220px] px-[100px] rounded-[8px] bg-fg-weak mb-[10px]'>
+          <div className='flex items-center justify-start mt-14 h-[220px] px-[130px] rounded-[8px] bg-fg-weak mb-[10px]'>
             <span className='head-24-eb text-center'>이미지 영역</span>
           </div>
           {/* 타이틀 */}

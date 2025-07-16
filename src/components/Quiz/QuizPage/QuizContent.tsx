@@ -24,7 +24,7 @@ const QuizContent = ({
       </div>
 
       {/* 퀴즈 컨텐츠 영역 */}
-      <div className='flex flex-col items-center justify-start max-w-[480px] min-w-[360px] mx-auto'>
+      <div className='flex flex-col items-center justify-start w-full max-w-[480px] min-w-[360px] mx-auto'>
         {/* 문제 제목 표시 (문제 번호 + 질문 텍스트) */}
         <QuizTitle questionNumber={questionNumber} questionText={quiz.question} />
 

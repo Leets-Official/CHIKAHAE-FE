@@ -17,7 +17,7 @@ const QuizFooter = ({ step, selectedAnswer, onNext, onShowSummary }: QuizFooterP
 
   return (
     <div className='fixed bottom-0 left-0 right-0 flex justify-center pb-[20px]'>
-      <div className='w-[360px] px-[20px] flex flex-col items-center gap-[8px]'>
+      <div className='w-full max-w-[480px] min-w-[360px] px-[20px] flex flex-col items-center gap-[8px]'>
         {/* 시작 화면: 퀴즈 시작 버튼 */}
         {step === 'start' ? (
           <Button size='large' variant='primary' fullWidth onClick={() => navigate('/quiz')}>

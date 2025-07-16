@@ -14,7 +14,7 @@ const QuizSummary = ({ quizList, userAnswers, onClose }: Props) => {
   const correctCount = userAnswers.filter((answer, i) => answer === quizList[i].answerIndex).length;
 
   return (
-    <div className='w-full max-w-[360px] px-5 py-10 mx-auto'>
+    <div className='w-full max-w-[480px] min-w-[360px] py-10 mx-auto px-[20px]'>
       {/* 요약 타이틀 */}
       <h2 className='text-xl font-bold mb-2 text-left'>퀴즈 결과 요약</h2>
 
@@ -52,7 +52,7 @@ const QuizSummary = ({ quizList, userAnswers, onClose }: Props) => {
       </ul>
 
       {/* 확인 버튼 */}
-      <div className='mt-10 fixed bottom-0 left-1/2 -translate-x-1/2 flex w-[360px] justify-center pb-[20px]'>
+      <div className='fixed bottom-0 left-1/2 -translate-x-1/2 flex w-full max-w-[480px] min-w-[360px] justify-center pb-[20px] px-[20px]'>
         <Button fullWidth size='large' variant='primary' onClick={onClose}>
           확인
         </Button>
