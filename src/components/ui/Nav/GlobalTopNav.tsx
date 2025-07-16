@@ -48,4 +48,3 @@ export const GlobalTopNav = ({ isCenter, message = '기록하기' }: GlobalTopNa
 };
 export default GlobalTopNav;
 
-// --color bg-tertiary-gray: #FAFBFC;

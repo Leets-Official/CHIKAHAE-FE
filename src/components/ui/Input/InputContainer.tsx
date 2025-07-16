@@ -40,7 +40,7 @@ const InputContainer = ({
     <div className={containerClass}>
       <label className='flex items-center text-[12px] font-bold leading-[14px] tracking-[-0.12px] mb-[6px]'>
         {label}
-        <span className='ml-[4px] text-[14px] font-medium text-[#DE473D]'>*</span>
+        <span className='ml-[4px] text-[14px] font-medium text-fg-accent-red'>*</span>
       </label>
       <div className='flex justify-between items-center'>
         <Input
