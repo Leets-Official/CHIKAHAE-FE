@@ -62,6 +62,7 @@ const QuizPage = () => {
 
   return (
     <div className='relative min-h-screen pt-[18px] flex justify-start items-center flex-col'>
+      <GlobalTopNav isCenter message='퀴즈' />
       {showSummary ? (
         <QuizSummary
           quizList={quizMockData.quizList.map((q) => ({ ...q }))}
@@ -71,7 +72,6 @@ const QuizPage = () => {
       ) : (
         <>
           {/* 본문 (문제 / 결과) */}
-          {step === 'quiz' && <GlobalTopNav isCenter message='퀴즈' />}
           <QuizBody
             step={step}
             questionNumber={currentQuestionIndex + 1}

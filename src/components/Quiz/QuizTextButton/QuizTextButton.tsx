@@ -7,9 +7,7 @@ const QuizTextButton = ({ text, onClick, isSelected = false }: QuizTextButtonPro
       onClick={onClick}
       className='flex w-[320px] h-[84px] px-4 items-center gap-2 shrink-0 rounded-[8px] border-2 justify-between'
       style={{
-        borderColor: isSelected
-          ? 'var(--color-shadow-blue-weak)'
-          : 'var(--color-border-gray-strong)',
+        borderColor: isSelected ? 'var(--color-shadow-blue-weak)' : 'var(--color-border-gray)',
         boxShadow: `0px 3px 0px 0px ${
           isSelected ? 'var(--color-shadow-blue-weak)' : 'var(--color-shadow-gray)'
         }`,
