@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ReactComponent as CancelIcon } from '@/assets/icons/cancel.svg';
 import { ReactComponent as LeftIcon } from '@/assets/icons/chevron_left.svg';
+import { useNavigate } from 'react-router-dom';
 
 interface GlobalTopNavProps {
   message: string;
@@ -8,12 +9,18 @@ interface GlobalTopNavProps {
 }
 
 export const GlobalTopNav = ({ isCenter, message = '기록하기' }: GlobalTopNavProps) => {
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
   const NavItem = () => {
     return (
       <>
-        <Link to='/'>
+        <button onClick={handleGoBack}>
           <LeftIcon />
-        </Link>
+        </button>
+
         <div className='text-fg-primary body-16-eb'>{message}</div>
       </>
     );
@@ -45,4 +52,3 @@ export const GlobalTopNav = ({ isCenter, message = '기록하기' }: GlobalTopNa
   );
 };
 export default GlobalTopNav;
-

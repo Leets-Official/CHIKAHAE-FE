@@ -1,7 +1,13 @@
 import { Link } from 'react-router-dom';
 import { ReactComponent as LeftIcon } from '@/assets/icons/chevron_left.svg';
+import { useNavigate } from 'react-router-dom';
 
 export const SignupTopNav = () => {
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
   return (
     <nav
       className={`
@@ -13,9 +19,9 @@ export const SignupTopNav = () => {
                 justify-between
                 max-w-[480px] min-w-[360px]`}
     >
-      <Link to='/'>
+      <button onClick={handleGoBack}>
         <LeftIcon />
-      </Link>
+      </button>
     </nav>
   );
 };
