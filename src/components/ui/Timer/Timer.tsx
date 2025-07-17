@@ -3,14 +3,19 @@ import type { TimerProps } from './Timer.types';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
-/*
- * 컴포넌트 구성 - [아이콘] [프로그레스바] [남은 시간]
- */
+// 컴포넌트 구성 - [아이콘] [프로그레스바] [남은 시간]
 
 const Timer = ({ showSeconds = true, duration = 15, onComplete }: TimerProps) => {
   const [isActive, setIsActive] = useState(true);
-  const [remainingTime, setRemainingTime] = useState(15);
+  const [remainingTime, setRemainingTime] = useState(duration);
 
+  //  duration 변경되면 remainingTime 초기화
+  useEffect(() => {
+    setRemainingTime(duration);
+    setIsActive(true);
+  }, [duration]);
+
+  //  타이머 감소 로직
   useEffect(() => {
     if (!isActive) return;
 
