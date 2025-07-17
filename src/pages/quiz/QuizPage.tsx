@@ -9,14 +9,20 @@ import QuizSummary from '@/components/Quiz/QuizPage/QuizSummary';
 
 // 퀴즈 (문제 풀이) / 퀴즈 결과 / 최종 결과 화면
 
+type QuizStep = 'quiz' | 'result' | 'final';
+type Answer = number | null;
+
+const TOAST_DURATION = 3000;
+const TIMEOUT_DELAY = 1000;
+
 const QuizPage = () => {
   const { showToast } = useToast();
   const navigate = useNavigate();
 
   // step - 문제 풀이(quiz), 결과(result), 최종 결과(final)
-  const [step, setStep] = useState<'quiz' | 'result' | 'final'>('quiz');
+  const [step, setStep] = useState<QuizStep>('quiz');
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // 현재 퀴즈 인덱스
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null); // 사용자가 선택한 답변
+  const [selectedAnswer, setSelectedAnswer] = useState<Answer>(null); // 사용자가 선택한 답변
   const [userAnswers, setUserAnswers] = useState<number[]>([]); // 사용자 답변 저장
   const [correctCount, setCorrectCount] = useState(0); // 정답 개수
   const [showSummary, setShowSummary] = useState(false); // 최종 결과 화면 이동 여부
@@ -31,22 +37,26 @@ const QuizPage = () => {
   const handleTimeout = () => {
     if (selectedAnswer === null) {
       setSelectedAnswer(-1); // 오답 처리
-      setTimeout(() => handleNextStep(), 1000);
+      setTimeout(() => handleNextStep(), TIMEOUT_DELAY);
     }
+  };
+
+  // 정답 처리 로직
+  const processAnswer = () => {
+    const isCorrect = selectedAnswer === currentQuiz.answerIndex;
+
+    if (isCorrect) {
+      setCorrectCount((prev) => prev + 1);
+      showToast({ message: '치카코인 1개가 적립되었어요.', duration: TOAST_DURATION });
+    }
+
+    setUserAnswers((prev) => [...prev, selectedAnswer ?? -1]);
   };
 
   // 다음 단계로 전환
   const handleNextStep = () => {
     if (step === 'quiz') {
-      const isCorrect = selectedAnswer === currentQuiz.answerIndex;
-
-      if (isCorrect) {
-        setCorrectCount((prev) => prev + 1);
-        showToast({ message: '치카코인 1개가 적립되었어요.', duration: 3000 });
-      }
-
-      setUserAnswers((prev) => [...prev, selectedAnswer ?? -1]);
-
+      processAnswer();
       setStep('result'); // 결과 화면으로 전환
     } else if (step === 'result') {
       if (isLastQuestion)
