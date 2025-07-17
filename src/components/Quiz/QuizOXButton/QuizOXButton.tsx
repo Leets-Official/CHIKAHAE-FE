@@ -6,28 +6,34 @@ import type { QuizOXButtonProps } from './QuizOXButton.types';
 const QuizOXButton = ({ type, selected, onClick }: QuizOXButtonProps) => {
   const isAnswerO = type === 'o';
 
+  const backgroundColor = isAnswerO ? 'bg-bg-tertiary-blue' : 'bg-bg-tertiary-pink';
+
+  const borderAndShadowClass = selected
+    ? isAnswerO
+      ? 'border-border-blue shadow-[0_4px_0_0_var(--color-shadow-blue-medium)]'
+      : 'border-border-pink shadow-[0_4px_0_0_var(--color-shadow-pink-weak)]'
+    : 'border-transparent';
+
+  const iconClass = 'w-[54px] h-[54px] object-contain overflow-visible fill-current';
+  const iconColor = isAnswerO
+    ? 'text-[color:var(--color-fg-accent-blue-weak)]'
+    : 'text-[color:var(--color-fg-accent-pink-weak)]';
+
   return (
     <button
       onClick={onClick}
       className={clsx(
-        // 기본 스타일
         'flex flex-1 h-[140px] px-[43px] py-[24px] justify-center items-center rounded-[8px] transition-all border-[2px] group',
-        // type별 배경색
-        isAnswerO ? 'bg-bg-tertiary-blue' : 'bg-bg-tertiary-pink',
-        // 상태: 선택됨
-        selected
-          ? isAnswerO
-            ? 'border-border-blue shadow-[0_4px_0_0_var(--color-shadow-blue-medium)]'
-            : 'border-border-pink shadow-[0_4px_0_0_var(--color-shadow-pink-weak)]'
-          : 'border-transparent',
+        backgroundColor,
+        borderAndShadowClass,
       )}
     >
       <div className='flex w-[54px] h-full flex-col items-center flex-shrink-0 justify-center'>
         <div className='w-[54px] h-[54px] flex items-center justify-center mb-[16px]'>
           {isAnswerO ? (
-            <Quiz_O className='w-[54px] h-[54px] object-contain overflow-visible fill-current text-[color:var(--color-fg-accent-blue-weak)]' />
+            <Quiz_O className={clsx(iconClass, iconColor)} />
           ) : (
-            <Quiz_X className='w-[54px] h-[54px] object-contain overflow-visible fill-current text-[color:var(--color-fg-accent-pink-weak)]' />
+            <Quiz_X className={clsx(iconClass, iconColor)} />
           )}
         </div>
         <span
