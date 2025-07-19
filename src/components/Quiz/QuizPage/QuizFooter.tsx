@@ -2,6 +2,7 @@ import Button from '@/components/ui/Button';
 import TextButton from '@/components/ui/TextButton';
 import { useNavigate } from 'react-router-dom';
 import type { QuizFlowProps } from '@/types/quizView';
+import clsx from 'clsx';
 
 // 퀴즈 하단부 (하단 버튼 영역 렌더링)
 
@@ -17,7 +18,15 @@ const QuizFooter = ({ step, selectedAnswer, onNext, onShowSummary }: QuizFooterP
 
   return (
     <div className='fixed bottom-0 left-0 right-0 flex justify-center pb-[20px]'>
-      <div className='w-full max-w-[480px] min-w-[360px] px-[20px] flex flex-col items-center gap-[8px]'>
+      <div
+        className={clsx(
+          'w-full max-w-[480px] min-w-[360px] px-[20px] flex flex-col items-center gap-[8px]',
+          {
+            'pb-[70px]': step === 'start',
+            'pb-[20px]': step !== 'start',
+          },
+        )}
+      >
         {/* 시작 화면: 퀴즈 시작 버튼 */}
         {step === 'start' ? (
           <Button size='large' variant='primary' fullWidth onClick={() => navigate('/quiz')}>

@@ -2,6 +2,8 @@ import QuizFooter from '@/components/Quiz/QuizPage/QuizFooter';
 import QuizNoticeList from '@/components/ui/NoticeList';
 import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 import { ReactComponent as Coin } from '@/assets/icons/coin.svg';
+import BottomNav from '@/components/ui/Nav/BottomNav';
+import image from '@/assets/images/image.png'; // 임시
 
 // 퀴즈 시작 화면
 
@@ -12,13 +14,15 @@ const StartQuizPage = () => {
 
   return (
     <>
-      <div className='w-full relative min-h-screen flex justify-center'>
-        <div className='flex flex-col w-full max-w-[430px] min-w-[360px] px-[20px] gap-[10px]'>
-          <GlobalTopNav isCenter message='퀴즈' />
+      <div className='relative min-h-screen flex justify-center'>
+        <div className='flex flex-col w-full max-w-[430px] min-w-[360px] px-[18px] gap-[10px]'>
+          <GlobalTopNav message='퀴즈' showCancel={false} showLeftIcon={false} />
           {/* 이미지 영역 */}
-          <div className='flex items-center justify-start mt-14 h-[220px] px-[130px] rounded-[8px] bg-fg-weak mb-[10px]'>
-            <span className='head-24-eb text-center'>이미지 영역</span>
-          </div>
+          <img
+            src={image}
+            alt='퀴즈 시작 이미지'
+            className='flex items-center justify-start mt-14 h-[220px] rounded-[8px] bg-fg-weak mb-[10px]'
+          />
           {/* 타이틀 */}
           <h1 className='head-24-eb text-left'>매일 퀴즈 도전하기</h1>
 
@@ -35,6 +39,7 @@ const StartQuizPage = () => {
 
       {/* 퀴즈 시작 버튼 (Footer) */}
       <QuizFooter step='start' selectedAnswer={null} onNext={() => {}} />
+      <BottomNav />
     </>
   );
 };
