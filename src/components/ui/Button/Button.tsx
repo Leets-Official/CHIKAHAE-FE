@@ -46,13 +46,13 @@ const Button: React.FC<ButtonProps> = ({
   let variantStyles = '';
   if (variant === 'primary') {
     if (disabled) {
-      variantStyles = 'bg-[#E9EEF2]';
+      variantStyles = 'bg-[#E9EEF2] text-[var(--color-fg-weak)]';
     } else {
       variantStyles = 'bg-[#5FC6F0] text-white shadow-[0_4px_0_0_#3DAFD9]';
     }
   } else if (variant === 'assistive') {
     if (disabled) {
-      variantStyles = 'bg-[#E9EEF2]';
+      variantStyles = 'bg-[#E9EEF2] text-[var(--color-fg-weak)]';
     } else {
       variantStyles = 'bg-[#DCE3E8] text-black border border-[#DCE3E8] shadow-[0_4px_0_0_#9CA6AF]';
     }
