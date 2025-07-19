@@ -6,6 +6,7 @@ import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 import QuizBody from '@/components/Quiz/QuizPage/QuizBody';
 import QuizFooter from '@/components/Quiz/QuizPage/QuizFooter';
 import QuizSummary from '@/components/Quiz/QuizPage/QuizSummary';
+import { Modal } from '@/components/ui/Modal';
 
 // 퀴즈 (문제 풀이) / 퀴즈 결과 / 최종 결과 화면
 
@@ -26,6 +27,7 @@ const QuizPage = () => {
   const [userAnswers, setUserAnswers] = useState<number[]>([]); // 사용자 답변 저장
   const [correctCount, setCorrectCount] = useState(0); // 정답 개수
   const [showSummary, setShowSummary] = useState(false); // 최종 결과 화면 이동 여부
+  const [showExitModal, setShowExitModal] = useState(false);
 
   const currentQuiz = quizMockData.quizList[currentQuestionIndex]; // 현재 퀴즈 정보
   const isLastQuestion = currentQuestionIndex === quizMockData.quizList.length - 1; // 마지막 문제 여부
@@ -59,9 +61,13 @@ const QuizPage = () => {
       processAnswer();
       setStep('result'); // 결과 화면으로 전환
     } else if (step === 'result') {
-      if (isLastQuestion)
+      if (isLastQuestion) {
+        showToast({
+          message: `총 치카코인 ${correctCount}개를 획득하였습니다.`,
+          duration: TOAST_DURATION,
+        });
         setStep('final'); // 최종 결과로 전환
-      else {
+      } else {
         // 다음 문제로 넘어가기
         setCurrentQuestionIndex((prev) => prev + 1);
         setSelectedAnswer(null);
@@ -70,9 +76,18 @@ const QuizPage = () => {
     }
   };
 
+  const handleLeftClick = () => {
+    setShowExitModal(true);
+  };
+
+  const confirmExit = () => {
+    setShowExitModal(false);
+    navigate('/quiz/start'); // 퀴즈 초기화됨
+  };
+
   return (
     <div className='relative min-h-screen pt-[18px] flex justify-start items-center flex-col'>
-      <GlobalTopNav isCenter message='퀴즈' />
+      <GlobalTopNav message='퀴즈' showCancel={false} onClickLeft={handleLeftClick} />
       {showSummary ? (
         <QuizSummary
           quizList={quizMockData.quizList.map((q) => ({ ...q }))}
@@ -101,6 +116,17 @@ const QuizPage = () => {
           />
         </>
       )}
+      {/* 모달 렌더링 */}
+      <Modal
+        isOpen={showExitModal}
+        onClose={() => setShowExitModal(false)}
+        title='나가시겠어요?'
+        cancelText='취소'
+        confirmText='나가기'
+        onConfirm={confirmExit}
+      >
+        지금 나가면 푼 퀴즈는 저장되지 않아요.
+      </Modal>
     </div>
   );
 };
