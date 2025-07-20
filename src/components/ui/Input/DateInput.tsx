@@ -49,16 +49,78 @@ const DateInput = ({ value, onChange }: Props) => {
       customInput={<CustomInput />}
       dateFormat='yyyy.MM.dd'
       popperPlacement='bottom'
-      popperModifiers={[
-        {
-          name: 'offset',
-          options: { offset: [0, 10] },
-          fn: function (state: MiddlewareState): MiddlewareReturn | Promise<MiddlewareReturn> {
-            throw new Error('Function not implemented.');
-          },
-        },
-      ]}
       showPopperArrow={false}
+      renderCustomHeader={({
+        date,
+        changeYear,
+        changeMonth,
+        decreaseMonth,
+        increaseMonth,
+        prevMonthButtonDisabled,
+        nextMonthButtonDisabled,
+      }) => {
+        const years = Array.from({ length: 100 }, (_, i) => new Date().getFullYear() - 50 + i);
+        const months = [
+          '1월',
+          '2월',
+          '3월',
+          '4월',
+          '5월',
+          '6월',
+          '7월',
+          '8월',
+          '9월',
+          '10월',
+          '11월',
+          '12월',
+        ];
+
+        return (
+          <div className='flex items-center justify-between px-4 py-2 border-b border-gray-200 bg-white'>
+            <button
+              onClick={decreaseMonth}
+              disabled={prevMonthButtonDisabled}
+              className='text-gray-600 hover:text-black disabled:text-gray-300 px-2 py-1'
+            >
+              ‹
+            </button>
+
+            <div className='flex items-center gap-2'>
+              <select
+                value={date.getFullYear()}
+                onChange={({ target: { value } }) => changeYear(Number(value))}
+                className='rounded-md border border-gray-300 px-2 py-1 text-sm text-gray-800 focus:outline-none focus:ring focus:ring-blue-200'
+              >
+                {years.map((year) => (
+                  <option key={year} value={year}>
+                    {year}년
+                  </option>
+                ))}
+              </select>
+
+              <select
+                value={date.getMonth()}
+                onChange={({ target: { value } }) => changeMonth(Number(value))}
+                className='rounded-md border border-gray-300 px-2 py-1 text-sm text-gray-800 focus:outline-none focus:ring focus:ring-blue-200'
+              >
+                {months.map((month, index) => (
+                  <option key={month} value={index}>
+                    {month}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <button
+              onClick={increaseMonth}
+              disabled={nextMonthButtonDisabled}
+              className='text-gray-600 hover:text-black disabled:text-gray-300 px-2 py-1'
+            >
+              ›
+            </button>
+          </div>
+        );
+      }}
     />
   );
 };
