@@ -82,7 +82,7 @@ const SignupGuardianForm = () => {
       <div
         className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] min-w-[360px] px-4 py-2.5`}
       >
-        <Link to='/'>
+        <Link to='/signup/complete'>
           <Button variant='primary' size='large' fullWidth={true} disabled={isFormIncomplete}>
             완료
           </Button>
