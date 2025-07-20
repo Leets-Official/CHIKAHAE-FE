@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import url('/fonts/font.css');
+@import url('/fonts/fonts.css');
 
 @layer base {
   html,
@@ -181,4 +181,13 @@
 
 .animate-fade-out {
   animation: fade-out 0.3s ease-out forwards;
+}
+
+/* 스크롤바 숨김 유틸리티 */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }

@@ -1,7 +1,7 @@
 // src/examples/ModalExample.tsx
 
 import React, { useState } from "react";
-import { Modal } from "@/components/common/Modal";
+import { Modal } from "@/components/ui/Modal";
 import Button from "@/components/ui/Button";
 
 const ModalExample: React.FC = () => {

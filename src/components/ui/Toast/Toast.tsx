@@ -9,6 +9,9 @@ interface ToastProps {
   onClose: (id: string) => void;
   actionText?: string;
   onActionClick?: () => void;
+  containerClassName?: string;
+  messageClassName?: string;
+  actionClassName?: string;
 }
 
 const Toast = ({
@@ -51,12 +54,11 @@ const Toast = ({
 
   const baseTextStyles =
     'text-[#CED6DD] font-extrabold text-[14px] leading-[20px] tracking-[-0.14px]';
+  
   return (
     <div
       className={`
             flex
-            w-[320px]
-            h-[48px]
             items-center
             justify-between
             px-4
