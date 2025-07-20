@@ -59,6 +59,8 @@ const Toast = ({
     <div
       className={`
             flex
+            w-[320px]
+            h-[48px]
             items-center
             justify-between
             px-4
