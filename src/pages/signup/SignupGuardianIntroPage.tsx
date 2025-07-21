@@ -1,8 +1,11 @@
 import Button from '@/components/ui/Button';
-import { Link } from 'react-router-dom';
 import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 
-const SignupGuardianIntro = () => {
+interface Props {
+  onNext: () => void;
+}
+
+const SignupGuardianIntro = ({ onNext }: Props) => {
   return (
     <>
       <GlobalTopNav type='signup' message={''} />
@@ -62,11 +65,9 @@ const SignupGuardianIntro = () => {
       <div
         className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] min-w-[360px] px-4 py-2.5`}
       >
-        <Link to='/signup/guardian/form'>
-          <Button variant='primary' size='large' fullWidth={true} disabled={false}>
-            입력하러가기
-          </Button>
-        </Link>
+        <Button variant='primary' onClick={onNext} size='large' fullWidth={true} disabled={false}>
+          입력하러가기
+        </Button>
       </div>
     </>
   );

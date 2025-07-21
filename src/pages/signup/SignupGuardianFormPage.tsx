@@ -1,10 +1,13 @@
 import Button from '@/components/ui/Button';
 import { useState } from 'react';
 import UserInfoForm from '@/components/ui/UserInfoForm';
-import { Link } from 'react-router-dom';
 import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 
-const SignupGuardianForm = () => {
+interface Props {
+  onNext: () => void;
+}
+
+const SignupGuardianForm = ({ onNext }: Props) => {
   const [name, setName] = useState('');
   const [gender, setGender] = useState('');
   const [birthDate, setBirthDate] = useState('');
@@ -82,11 +85,15 @@ const SignupGuardianForm = () => {
       <div
         className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] min-w-[360px] px-4 py-2.5`}
       >
-        <Link to='/signup/complete'>
-          <Button variant='primary' size='large' fullWidth={true} disabled={isFormIncomplete}>
-            완료
-          </Button>
-        </Link>
+        <Button
+          variant='primary'
+          onClick={onNext}
+          size='large'
+          fullWidth={true}
+          disabled={isFormIncomplete}
+        >
+          완료
+        </Button>
       </div>
     </>
   );

@@ -1,11 +1,13 @@
-import Image from '@/components/Image'; // Image 컴포넌트 경로 확인
+import Image from '@/components/Image';
 import InputContainer from '@/components/ui/Input/InputContainer';
 import Button from '@/components/ui/Button';
-import { Link } from 'react-router-dom';
 import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 import { useState } from 'react';
 
-const SignupProfile = () => {
+interface Props {
+  onNext: () => void;
+}
+const SignupProfile = ({ onNext }: Props) => {
   const [nickname, setNickname] = useState('');
   const profileImageUrl = '/'; // 실제 이미지 URL 또는 placeholder URL로 변경 필요
 
@@ -113,11 +115,15 @@ const SignupProfile = () => {
       <div
         className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] min-w-[360px] px-4 py-2.5`}
       >
-        <Link to='/signup/info'>
-          <Button variant='primary' size='large' fullWidth={true} disabled={isNicknameEmpty}>
-            다음
-          </Button>
-        </Link>
+        <Button
+          variant='primary'
+          onClick={onNext}
+          size='large'
+          fullWidth={true}
+          disabled={isNicknameEmpty}
+        >
+          다음
+        </Button>
       </div>
     </>
   );
