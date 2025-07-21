@@ -12,12 +12,19 @@ const firebaseConfig = {
 
 const VAPID_KEY = import.meta.env.VITE_FIREBASE_VAPID_KEY;
 
+// Firebase 앱 초기화
 const app = initializeApp(firebaseConfig);
+
+// FCM 메시징 객체 가져오기
 const messaging = getMessaging(app);
 
-// getToken 호출 시 vapidKey 옵션 넘겨주기
+/**
+ * 브라우저 알림 권한을 요청하고, FCM 토큰을 받아옴
+ * 받은 토큰은 이후 서버에 저장해 사용자에게 알림 전송에 사용
+ */
 async function requestFcmToken() {
   try {
+    // 현재 디바이스의 FCM 토큰 요청
     const currentToken = await getToken(messaging, { vapidKey: VAPID_KEY });
     if (currentToken) {
       console.log('FCM Token:', currentToken);
