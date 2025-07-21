@@ -1,10 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { ReactComponent as LeftIcon } from '@/assets/icons/chevron_left.svg';
 import { NAV_ITEMS } from '@/constants/navItems';
-import { ReactComponent as HomeIcon } from '@/assets/icons/home.svg';
-import { ReactComponent as ChikaIcon } from '@/assets/icons/chika.svg';
-import { ReactComponent as QuizIcon } from '@/assets/icons/quiz.svg';
-import { ReactComponent as MyPageIcon } from '@/assets/icons/mypage.svg';
 
 export const BottomNav = () => {
   const location = useLocation();
