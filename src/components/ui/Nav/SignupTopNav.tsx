@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { ReactComponent as LeftIcon } from '@/assets/icons/chevron_left.svg';
 import { useNavigate } from 'react-router-dom';
 

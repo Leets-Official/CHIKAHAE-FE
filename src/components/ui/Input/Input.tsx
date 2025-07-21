@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import clsx from 'clsx';
 import type { InputHTMLAttributes, CSSProperties } from 'react';
 type InputState = 'enabled' | 'select' | 'disabled' | 'error';

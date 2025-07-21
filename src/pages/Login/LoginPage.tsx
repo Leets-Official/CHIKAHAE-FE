@@ -8,7 +8,7 @@ const LoginPage = () => {
     <>
       <div className='flex flex-col items-center justify-center gap-y-28'>
         <LoginLogo />
-        <KakaoLoginButton/>
+        <KakaoLoginButton />
       </div>
 
       <div
@@ -18,7 +18,6 @@ const LoginPage = () => {
           <span>가입하면 CHIKAHE의 </span>
           <span>이용약관 및 개인정보처리방침에 동의하게 됩니다.</span>
         </p>
-        
       </div>
     </>
   );

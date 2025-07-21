@@ -2,8 +2,6 @@ import React, { forwardRef } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ReactComponent as CalendarIcon } from '@/assets/icons/calendar.svg';
-import type { MiddlewareReturn } from '@floating-ui/core';
-import type { MiddlewareState } from '@floating-ui/dom';
 import './DateInput.css';
 
 type Props = {
