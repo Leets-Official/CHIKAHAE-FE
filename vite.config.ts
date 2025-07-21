@@ -13,9 +13,11 @@ export default defineConfig({
     react(),
     tailwindcss(),
     VitePWA({
-      registerType: 'autoUpdate',
+      registerType: 'autoUpdate', // 서비스 워커가 자동으로 갱신됨
+      injectRegister: 'auto',
       devOptions: {
         enabled: true,
+        type: 'module',
       },
       manifest: {
         name: 'CHIKAHAE',

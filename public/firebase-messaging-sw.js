@@ -7,8 +7,29 @@ self.addEventListener('push', function (event) {
     });
 });
 
+self.addEventListener('install', () => {
+    self.skipWaiting();
+});
+self.addEventListener('activate', () => {
+    clients.claim();
+});
+
 self.addEventListener('notificationclick', function (event) {
     event.notification.close();
-    // 알림 클릭 시 홈페이지로 이동 
-    event.waitUntil(clients.openWindow('/')); //FIXME: 수정 예정
+
+    event.waitUntil(
+        clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+            for (const client of clientList) {
+                // 이미 열린 탭이 있으면 포커싱
+                if (client.url === '/' && 'focus' in client) {
+                    return client.focus();
+                }
+            }
+
+            // 아니면 새 창 열기
+            if (clients.openWindow) {
+                return clients.openWindow('/');
+            }
+        })
+    );
 });
