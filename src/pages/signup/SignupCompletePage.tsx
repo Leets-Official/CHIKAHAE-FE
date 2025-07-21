@@ -1,11 +1,11 @@
-import SignupTopNav from '@/components/ui/Nav/SignupTopNav';
 import Button from '@/components/ui/Button';
 import { Link } from 'react-router-dom';
+import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 
 const SignupComplete = () => {
   return (
     <>
-      <SignupTopNav />
+      <GlobalTopNav type='signup' message={''} />
       <div className='flex flex-col min-h-screen justify-between pt-11'>
         <div
           className='

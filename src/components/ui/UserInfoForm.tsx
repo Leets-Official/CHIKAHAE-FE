@@ -3,11 +3,11 @@ import RadioButtonContainer from './Button/RadioButton/RadioButtonContainer';
 import { useRef } from 'react';
 import { GENDER } from '@/constants/radioOptions';
 import clsx from 'clsx';
-import { useState } from 'react'; // useState는 포커스 효과에만 사용되므로 유지합니다.
+import { useState } from 'react';
 
 type UserInfoFormProps = {
   type: 'full' | 'partial';
-  // 추가된 props
+
   name?: string;
   onChangeName?: (value: string) => void;
   gender: string;
@@ -18,7 +18,6 @@ type UserInfoFormProps = {
 
 const UserInfoForm = ({
   type,
-  // 추가된 props
   name = '',
   onChangeName = () => {},
   gender,
@@ -28,7 +27,6 @@ const UserInfoForm = ({
 }: UserInfoFormProps) => {
   const [isActive, setIsActive] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
-  // const [birthDate, setBirthDate] = useState(''); // 이 상태는 부모 컴포넌트로 이동합니다.
 
   const handleFocus = () => {
     setIsActive(true);
@@ -90,7 +88,7 @@ const UserInfoForm = ({
           placeholder='0000.00.00'
           calender
           value={birthDate}
-          onChange={onBirthDateChange} // 부모로부터 받은 함수를 전달합니다.
+          onChange={onBirthDateChange}
         />
       </div>
     </>

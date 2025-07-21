@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ReactComponent as CalendarIcon } from '@/assets/icons/calendar.svg';
@@ -7,6 +7,7 @@ import './DateInput.css';
 type Props = {
   value: string;
   onChange: (formattedDate: string) => void;
+  iscolor?: string;
 };
 
 const CustomInput = forwardRef<HTMLInputElement, any>(({ value, onClick }, ref) => (

@@ -1,8 +1,8 @@
-import SignupTopNav from '@/components/ui/Nav/SignupTopNav';
 import Button from '@/components/ui/Button';
 import { useState } from 'react';
 import UserInfoForm from '@/components/ui/UserInfoForm';
 import { Link } from 'react-router-dom';
+import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 
 const SignupInfo = () => {
   const [gender, setGender] = useState('');
@@ -12,7 +12,7 @@ const SignupInfo = () => {
 
   return (
     <>
-      <SignupTopNav />
+      <GlobalTopNav type='signup' message={''} />
       <div className='flex flex-col min-h-screen justify-between pt-11'>
         <div
           className='

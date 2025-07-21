@@ -1,12 +1,9 @@
 import React, { forwardRef } from 'react';
 import clsx from 'clsx';
-import type { InputHTMLAttributes, CSSProperties } from 'react';
+import type { InputHTMLAttributes } from 'react';
 type InputState = 'enabled' | 'select' | 'disabled' | 'error';
 
 interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  width?: string;
-  maxWidth?: string;
-  style?: CSSProperties;
   className?: string;
   inputState?: InputState;
   placeholder?: string;
@@ -17,7 +14,6 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
   (
     {
       width,
-      maxWidth,
       disabled,
       name,
       type = 'text',
@@ -65,7 +61,7 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
       },
     };
 
-    const { border, placeholderColor, text } = stateClassMap[inputState];
+    const { placeholderColor, text } = stateClassMap[inputState];
 
     const inputClass = clsx(
       ' bg-transparent outline-none',

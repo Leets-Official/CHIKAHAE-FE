@@ -7,11 +7,14 @@ interface GlobalTopNavProps {
   isCenter?: boolean;
   showCancel?: boolean;
   showLeftIcon?: boolean;
+  showMessage?: boolean;
   onClickLeft?: () => void;
+  type?: 'global' | 'signup';
 }
 
-export const GlobalTopNav = ({
+const GlobalTopNav = ({
   isCenter,
+  type,
   message = '기록하기',
   showCancel = true,
   showLeftIcon = true,
@@ -22,15 +25,14 @@ export const GlobalTopNav = ({
   return (
     <div
       className={`
-                fixed top-0 left-1/2 -translate-x-1/2
-                flex h-14 px-4
-                items-center
-                bg-bg-tertiary-gray
-                w-full
-                justify-between
-                max-w-[480px] min-w-[360px]`}
+        fixed top-0 left-1/2 -translate-x-1/2
+        flex h-14 px-4
+        items-center
+        bg-bg-tertiary-gray
+        w-full
+        justify-between
+        max-w-[480px] min-w-[360px]`}
     >
-      {/* 왼쪽 영역 */}
       <div className='w-[30px] flex justify-start'>
         {showLeftIcon && (
           <button onClick={onClickLeft ?? (() => navigate(-1))}>
@@ -39,26 +41,29 @@ export const GlobalTopNav = ({
         )}
       </div>
 
-      {/* 중앙 메시지 */}
-      <div
-        className={`
-          flex-1 
-          ${isCenter ? 'text-left' : 'text-center'} 
-          text-fg-primary body-16-eb
-        `}
-      >
-        {message}
-      </div>
+      {type === 'global' && (
+        <>
+          <div
+            className={`
+              flex-1 
+              ${isCenter ? 'text-left' : 'text-center'} 
+              text-fg-primary body-16-eb
+            `}
+          >
+            {message}
+          </div>
 
-      {/* 오른쪽 영역 */}
-      <div className='w-[30px] flex justify-end'>
-        {showCancel && (
-          <button onClick={() => navigate('/')}>
-            <CancelIcon className='w-[24px] h-[24px]' />
-          </button>
-        )}
-      </div>
+          <div className='w-[30px] flex justify-end'>
+            {showCancel && (
+              <button onClick={() => navigate('/')}>
+                <CancelIcon className='w-[24px] h-[24px]' />
+              </button>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 };
+
 export default GlobalTopNav;
