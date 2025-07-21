@@ -61,6 +61,7 @@ const TextButton: React.FC<TextButtonProps> = ({
         sizeStyles?.w,
         sizeStyles?.h,
         sizeStyles?.px,
+        sizeStyles?.text,
         textStyles,
         fullWidth && 'w-full',
         (disabled || isLoading) && 'opacity-50 cursor-not-allowed',

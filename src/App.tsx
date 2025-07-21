@@ -7,6 +7,9 @@ import SignupGuardianIntro from './pages/signup/SignupGuardianIntroPage';
 import SignupGuardianForm from './pages/signup/SignupGuardianFormPage';
 import LoginPage from './pages/Login/LoginPage';
 import KakaoCallback from './pages/Login/auth/KakaoCallback';
+import AllComponentsTest from '@/pages/test/AllComponentTest';
+import StartQuizPage from '@/pages/quiz/StartQuizPage';
+import QuizPage from '@/pages/quiz/QuizPage';
 
 function App() {
   return (
@@ -20,6 +23,9 @@ function App() {
         <Route path='/signup/guardian/form' element={<SignupGuardianForm />} />
         <Route path='/signup/complete' element={<SignupComplete />} />
         <Route path='/auth/kakao/callback' element={<KakaoCallback />} />
+        <Route path='/tests/all' element={<AllComponentsTest />} />
+        <Route path='/quiz/start' element={<StartQuizPage />} />
+        <Route path='/quiz' element={<QuizPage />} />
       </Routes>
     </BrowserRouter>
   );

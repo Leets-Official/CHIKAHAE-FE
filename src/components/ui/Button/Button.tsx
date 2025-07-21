@@ -17,13 +17,13 @@ const sizeMap: Record<
     w: 'w-[46px]',
     h: 'h-[40px]',
     px: 'px-[12px]',
-    text: 'text-[10px]',
+    text: 'text-[14px]',
   },
   large: {
     w: 'w-[58px]',
     h: 'h-[48px]',
     px: 'px-[16px]',
-    text: 'text-[12px]',
+    text: 'text-[16px]',
   },
 };
 
@@ -57,10 +57,10 @@ const Button: React.FC<ButtonProps> = ({
   } else if (variant === 'assistive') {
     if (disabled) {
       variantStyles = 'bg-[#E9EEF2]';
-      textStyles = 'tetx-[#CED6DD]';
+      textStyles = 'text-[#CED6DD]';
     } else {
       variantStyles = 'bg-[#DCE3E8] text-black border border-[#DCE3E8] shadow-[0_4px_0_0_#9CA6AF]';
-      textStyles = 'test-black';
+      textStyles = 'text-black';
     }
   }
 
