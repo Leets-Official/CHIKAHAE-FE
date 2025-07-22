@@ -1,5 +1,5 @@
-import QuizContent from '@/components/Quiz/QuizPage/QuizContent';
-import QuizResult from '@/components/Quiz/QuizResult/QuizResult';
+import QuizContent from '@/features/quiz/quizFlow/quizSolve/QuizContent';
+import QuizResult from '@/features/quiz/quizResult/QuizResult';
 import clsx from 'clsx';
 import type { QuizFlowProps } from '@/types/quizView';
 

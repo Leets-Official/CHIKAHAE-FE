@@ -30,7 +30,7 @@ const QuizFooter = ({ step, selectedAnswer, onNext, onShowSummary }: QuizFooterP
         {/* 시작 화면: 퀴즈 시작 버튼 */}
         {step === 'start' ? (
           <Button size='large' variant='primary' fullWidth onClick={() => navigate('/quiz')}>
-            퀴즈 도전하기!
+            시작하기
           </Button>
         ) : // 최종 결과 화면: 결과 확인 + 홈 이동 버튼
         step === 'final' ? (

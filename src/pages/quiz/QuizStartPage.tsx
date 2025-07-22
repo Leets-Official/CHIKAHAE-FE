@@ -1,9 +1,9 @@
-import QuizFooter from '@/components/Quiz/QuizPage/QuizFooter';
+import QuizFooter from '@/features/quiz/quizFlow/quizSolve/QuizFooter';
 import QuizNoticeList from '@/components/ui/NoticeList';
 import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 import { ReactComponent as Coin } from '@/assets/icons/coin.svg';
 import BottomNav from '@/components/ui/Nav/BottomNav';
-import image from '@/assets/images/image.png'; // 임시
+import image from '@/assets/images/quizStart.png'; // 임시
 
 // 퀴즈 시작 화면
 
