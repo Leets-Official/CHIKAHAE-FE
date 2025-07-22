@@ -97,7 +97,7 @@ const SignupProfile = ({ onNext }: Props) => {
                 width={100}
                 height={100}
                 className='object-cover'
-                fallbackSrc='/fallback.png'
+                fallbackSrc='/fallback-profile.png'
               />
             </div>
 
