@@ -10,6 +10,9 @@ type DateInputProps = {
   value: string;
   onChange: (formattedDate: string) => void;
   iscolor?: string;
+  iconColor?: string;
+  onFocus?: React.FocusEventHandler<HTMLInputElement>;
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
 };
 
 const CURRENT_YEAR = new Date().getFullYear();
@@ -28,27 +31,34 @@ export const MONTHS = [
   '11월',
   '12월',
 ];
-const CustomInput = forwardRef<HTMLInputElement, any>(({ value, onClick }, ref) => (
-  <div className='relative w-full flex justify-between items-center'>
-    <input
-      type='text'
-      value={value}
-      onClick={onClick}
-      ref={ref}
-      readOnly
-      placeholder='0000.00.00'
-      className='flex-grow px-0 py-0 bg-transparent outline-none border-none'
-    />
-    <CalendarIcon
-      onClick={onClick}
-      className='ml-2 cursor-pointer h-[24px] w-[24px] text-fg-medium'
-    />
-  </div>
-));
+const CustomInput = forwardRef<HTMLInputElement, any>(
+  ({ value, onClick, iconColor, onFocus, onBlur }, ref) => (
+    <div className='relative w-full flex justify-between items-center'>
+      <input
+        type='text'
+        value={value}
+        onClick={onClick}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        ref={ref}
+        readOnly
+        placeholder='0000.00.00'
+        className='flex-grow px-0 py-0 bg-transparent outline-none border-none'
+      />
+      <CalendarIcon
+        onClick={onClick}
+        className={`
+          ml-2 cursor-pointer 
+          h-[24px] w-[24px] 
+          ${iconColor}`}
+      />
+    </div>
+  ),
+);
 
 CustomInput.displayName = 'CustomInput';
 
-const DateInput = ({ value, onChange }: DateInputProps) => {
+const DateInput = ({ value, onChange, iconColor, onFocus, onBlur }: DateInputProps) => {
   const handleChange = (date: Date | null) => {
     if (!date) return;
     const formatted = dayjs(date).format('YYYY.MM.DD');
@@ -59,7 +69,7 @@ const DateInput = ({ value, onChange }: DateInputProps) => {
     <DatePicker
       selected={value ? new Date(value.replace(/\./g, '-')) : null}
       onChange={handleChange}
-      customInput={<CustomInput />}
+      customInput={<CustomInput iconColor={iconColor} onFocus={onFocus} onBlur={onBlur} />}
       dateFormat='yyyy.MM.dd'
       locale={ko}
       popperPlacement='bottom'

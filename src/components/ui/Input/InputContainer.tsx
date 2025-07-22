@@ -43,10 +43,10 @@ const InputContainer = ({
     className,
   );
 
-  // const iconColor = clsx({
-  //   'text-[#9CA6AF]': state === 'enabled' || state === 'disabled',
-  //   'text-[#3DAFD9]': state === 'select',
-  // });
+  const iconColor = clsx({
+    'text-[#9CA6AF]': state === 'enabled' || state === 'disabled',
+    'text-[#3DAFD9]': state === 'select',
+  });
 
   return (
     <div className={containerClass}>
@@ -64,6 +64,9 @@ const InputContainer = ({
               (onChange as (formattedDate: string) => void)(val);
             }
           }}
+          iconColor={iconColor}
+          onFocus={() => setState('select')}
+          onBlur={() => setState('enabled')}
         />
       ) : (
         <Input
