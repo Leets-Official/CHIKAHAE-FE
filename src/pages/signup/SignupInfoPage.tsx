@@ -71,8 +71,7 @@ const SignupInfo = ({ onNext }: Props) => {
           gap-y-[30px]     
         '
           >
-            <div className='w-full'>
-              {/* 3. 상태와 상태 변경 함수를 props로 내려줍니다. */}
+            <div className='w-full cursor-pointer'>
               <UserInfoForm
                 type='partial'
                 gender={gender}

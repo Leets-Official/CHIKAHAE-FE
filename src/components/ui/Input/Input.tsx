@@ -65,7 +65,7 @@ const Input = forwardRef<HTMLInputElement, TextInputProps>(
 
     const inputClass = clsx(
       ' bg-transparent outline-none',
-      'text-[14px] leading-[16px] tracking-[-0.14px]',
+      'text-[14px] leading-[16px] tracking-[-0.14px] cursor-pointer',
 
       placeholderColor,
       text,

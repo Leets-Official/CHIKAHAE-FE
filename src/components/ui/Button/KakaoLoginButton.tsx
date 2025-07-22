@@ -15,8 +15,8 @@ const KakaoLoginButton = () => {
     flex items-center justify-center 
     bg-bg-primary-yellow
     h-12 rounded-lg 
-    w-full
-    gap-2
+    w-full gap-2
+    cursor-pointer
     
     '
     >

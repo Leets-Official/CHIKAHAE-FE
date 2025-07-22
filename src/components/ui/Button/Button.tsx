@@ -39,7 +39,7 @@ const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    'flex flex-col justify-center items-center gap-[8px] rounded-[8px] font-semibold transition-all duration-200';
+    'flex flex-col justify-center items-center cursor-pointer gap-[8px] rounded-[8px] font-semibold transition-all duration-200';
 
   const sizeStyles = sizeMap[size];
 
