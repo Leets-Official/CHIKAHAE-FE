@@ -7,7 +7,6 @@ interface ImageProps {
   height?: number;
   fallbackSrc?: string; // image 파일 잘못된 경로 입력 시 보여줄 image
   className?: string; // tailwind 클래스 외부에서 유연하게 전달할 수 있도록
-  style?: React.CSSProperties; // 부모에서 원하는 스타일 props로 전달하도록
   onClick?: () => void;
 }
 
@@ -18,7 +17,6 @@ const Image = ({
   height,
   fallbackSrc = '/fallback.png',
   className,
-  style,
   onClick,
 }: ImageProps) => {
   const [currentSrc, setCurrentSrc] = useState(src);
@@ -33,9 +31,6 @@ const Image = ({
 
   return (
     <>
-    <div className='text-[16px] font-extrabold leading-0 tracking-[-0.16px]'>
-      <div>프로필 사진</div>
-    </div>
       <img
         src={currentSrc}
         alt={alt}
@@ -52,7 +47,6 @@ const Image = ({
         }}
         onClick={onClick}
         style={{
-          ...style,
           display: isLoaded && !hasError ? 'block' : 'none',
           transition: 'opacity 0.5s ease-in-out', // 애니메이션 기능
           opacity: isLoaded ? 1 : 0,
