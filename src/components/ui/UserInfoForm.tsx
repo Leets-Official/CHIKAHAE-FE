@@ -7,7 +7,6 @@ import { useState } from 'react';
 
 type UserInfoFormProps = {
   type: 'full' | 'partial';
-
   name?: string;
   onChangeName?: (value: string) => void;
   gender: string;
@@ -41,26 +40,26 @@ const UserInfoForm = ({
   const containerClass = clsx('rounded-lg border shadow-md overflow-hidden', {
     'border-[#9CA6AF] border-b-[5px]': !isActive,
     'border-[#5fc6f0] border-b-[5px]': isActive,
-    'active-block': isActive,
+    // 'active-block': isActive,
   });
 
-  const activeBlockStyle = `
-  .active-block > div:not(:first-child) {
-    border-top-color: #5fc6f0 !important;
-  }
-  ${
-    type === 'partial'
-      ? `
-    .active-block > div:first-child {
-      border-top-color: #5fc6f0 !important;
-    }
-  `
-      : ''
-  }
-`;
+  //   const activeBlockStyle = `
+  //   .active-block > div:not(:first-child) {
+  //     border-top-color: #5fc6f0 !important;
+  //   }
+  //   ${
+  //     type === 'partial'
+  //       ? `
+  //     .active-block > div:first-child {
+  //       border-top-color: #5fc6f0 !important;
+  //     }
+  //   `
+  //       : ''
+  //   }
+  // `;
   return (
     <>
-      <style>{activeBlockStyle}</style>
+      {/* <style>{activeBlockStyle}</style> */}
 
       <div ref={formRef} className={containerClass} onFocus={handleFocus} onBlur={handleBlur}>
         {type === 'full' && (
@@ -70,6 +69,10 @@ const UserInfoForm = ({
             variant='formTop'
             value={name}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeName(e.target.value)}
+            className={clsx({
+              'border-t-border-blue': isActive,
+              'border-t-border-gray': !isActive,
+            })}
           />
         )}
 
@@ -80,6 +83,10 @@ const UserInfoForm = ({
           variant='formMiddle'
           selectedValue={gender}
           onValueChange={onGenderChange}
+          className={clsx({
+            'border-t-border-blue': isActive,
+            'border-t-border-gray': !isActive,
+          })}
         />
 
         <InputContainer
@@ -89,6 +96,10 @@ const UserInfoForm = ({
           calender
           value={birthDate}
           onChange={onBirthDateChange}
+          className={clsx({
+            'border-t-border-blue': isActive,
+            'border-t-border-gray': !isActive,
+          })}
         />
       </div>
     </>

@@ -8,6 +8,7 @@ interface RadioButtonContainerProps {
   message?: string;
   importance?: 'important' | 'basic';
   options: { name: string; value: string }[];
+  className?: string;
 
   selectedValue: string | null;
   onValueChange: (value: string) => void;
@@ -36,7 +37,7 @@ const RadioButtonContainer = ({
   message = '성별',
   importance = 'important',
   options = GENDER,
-
+  className,
   selectedValue,
   onValueChange,
 }: RadioButtonContainerProps) => {
