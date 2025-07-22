@@ -8,11 +8,6 @@ interface RadioButtonProps {
   required?: boolean;
 }
 
-const stateClassMap = {
-  enabled: { border: 'border-[#9CA6AF]' },
-  select: { border: 'border-[#3DAFD9]' },
-};
-
 const RadioButton = ({
   id,
   name,

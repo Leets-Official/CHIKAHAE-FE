@@ -5,6 +5,8 @@ import { ReactComponent as CalendarIcon } from '@/assets/icons/calendar.svg';
 import dayjs from 'dayjs';
 import { ko } from 'date-fns/locale';
 import './DateInput.css';
+import { YEARS } from '@/constants/dateOptions';
+import { MONTHS } from '@/constants/dateOptions';
 
 type DateInputProps = {
   value: string;
@@ -15,22 +17,6 @@ type DateInputProps = {
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
 };
 
-const CURRENT_YEAR = new Date().getFullYear();
-export const YEARS = Array.from({ length: 100 }, (_, i) => CURRENT_YEAR - 50 + i);
-export const MONTHS = [
-  '1월',
-  '2월',
-  '3월',
-  '4월',
-  '5월',
-  '6월',
-  '7월',
-  '8월',
-  '9월',
-  '10월',
-  '11월',
-  '12월',
-];
 const CustomInput = forwardRef<HTMLInputElement, any>(
   ({ value, onClick, iconColor, onFocus, onBlur }, ref) => (
     <div className='relative w-full flex justify-between items-center'>
@@ -99,7 +85,7 @@ const DateInput = ({ value, onChange, iconColor, onFocus, onBlur }: DateInputPro
                 onChange={({ target: { value } }) => changeYear(Number(value))}
                 className='rounded-md border border-gray-300 px-2 py-1 text-sm text-gray-800 focus:outline-none focus:ring focus:ring-blue-200'
               >
-                {YEARS.map((year) => (
+                {YEARS().map((year: number) => (
                   <option key={year} value={year}>
                     {year}년
                   </option>
