@@ -28,7 +28,6 @@ const Image = ({ src, alt, width, height, fallbackSrc, className, onClick }: Ima
         onError={() => {
           if (fallbackSrc && currentSrc !== fallbackSrc) {
             setCurrentSrc(fallbackSrc);
-          } else {
           }
         }}
         onClick={onClick}
