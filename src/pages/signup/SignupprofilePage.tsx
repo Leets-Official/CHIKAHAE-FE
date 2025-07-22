@@ -24,7 +24,6 @@ const SignupProfile = ({ onNext, profileUrl }: SignupProfileProps) => {
 
   return (
     <>
-      <GlobalTopNav type='signup' message={''} />
       <div
         className='
       flex flex-col 

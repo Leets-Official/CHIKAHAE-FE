@@ -16,7 +16,6 @@ const SignupGuardianForm = ({ onNext }: Props) => {
 
   return (
     <>
-      <GlobalTopNav type='signup' message={''} />
       <div
         className='
       flex flex-col 

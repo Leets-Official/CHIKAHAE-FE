@@ -5,7 +5,6 @@ import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 const SignupComplete = () => {
   return (
     <>
-      <GlobalTopNav type='signup' message={''} />
       <div className='flex flex-col min-h-screen justify-between pt-11'>
         <div
           className='
