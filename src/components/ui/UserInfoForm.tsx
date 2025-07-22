@@ -40,27 +40,10 @@ const UserInfoForm = ({
   const containerClass = clsx('rounded-lg border shadow-md overflow-hidden', {
     'border-[#9CA6AF] border-b-[5px]': !isActive,
     'border-[#5fc6f0] border-b-[5px]': isActive,
-    // 'active-block': isActive,
   });
 
-  //   const activeBlockStyle = `
-  //   .active-block > div:not(:first-child) {
-  //     border-top-color: #5fc6f0 !important;
-  //   }
-  //   ${
-  //     type === 'partial'
-  //       ? `
-  //     .active-block > div:first-child {
-  //       border-top-color: #5fc6f0 !important;
-  //     }
-  //   `
-  //       : ''
-  //   }
-  // `;
   return (
     <>
-      {/* <style>{activeBlockStyle}</style> */}
-
       <div ref={formRef} className={containerClass} onFocus={handleFocus} onBlur={handleBlur}>
         {type === 'full' && (
           <InputContainer
