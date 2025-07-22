@@ -1,7 +1,6 @@
 import Button from '@/components/ui/Button';
 import { useState } from 'react';
 import UserInfoForm from '@/components/ui/UserInfoForm';
-import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 
 interface Props {
   onNext: () => void;

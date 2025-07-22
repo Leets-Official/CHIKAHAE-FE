@@ -2,7 +2,6 @@ import Image from '@/components/Image';
 import fallbackProfile from '@/assets/icons/fallbackProfile.svg';
 import InputContainer from '@/components/ui/Input/InputContainer';
 import Button from '@/components/ui/Button';
-import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 import { useState } from 'react';
 
 interface SignupProfileProps {

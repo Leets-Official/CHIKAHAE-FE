@@ -1,5 +1,4 @@
 import Button from '@/components/ui/Button';
-import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 
 interface Props {
   onNext: () => void;

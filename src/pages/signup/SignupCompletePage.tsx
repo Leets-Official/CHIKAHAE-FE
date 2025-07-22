@@ -1,6 +1,5 @@
 import Button from '@/components/ui/Button';
 import { Link } from 'react-router-dom';
-import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 
 const SignupComplete = () => {
   return (
