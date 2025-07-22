@@ -1,15 +1,16 @@
 import Image from '@/components/Image';
+import fallbackProfile from '@/assets/icons/fallbackProfile.svg';
 import InputContainer from '@/components/ui/Input/InputContainer';
 import Button from '@/components/ui/Button';
 import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 import { useState } from 'react';
 
-interface Props {
+interface SignupProfileProps {
   onNext: () => void;
+  profileUrl?: string;
 }
-const SignupProfile = ({ onNext }: Props) => {
+const SignupProfile = ({ onNext, profileUrl }: SignupProfileProps) => {
   const [nickname, setNickname] = useState('');
-  const profileImageUrl = '/'; // 실제 이미지 URL 또는 placeholder URL로 변경 필요
 
   const handleProfileImageClick = () => {
     console.log('프로필 사진 클릭(이미지 업로드 기능 구현 예정)');
@@ -36,7 +37,6 @@ const SignupProfile = ({ onNext }: Props) => {
         max-w-[480px]
         min-w-[360px]
         mx-auto           
-       
       '
         >
           <div className='w-full text-left'>
@@ -81,7 +81,6 @@ const SignupProfile = ({ onNext }: Props) => {
               className='
               w-[108px]
               h-[108px]
-              bg-bg-gray-weak
               flex
               items-center
               justify-center
@@ -92,12 +91,12 @@ const SignupProfile = ({ onNext }: Props) => {
               onClick={handleProfileImageClick}
             >
               <Image
-                src={profileImageUrl}
+                src={profileUrl || fallbackProfile}
                 alt='프로필 사진'
                 width={100}
                 height={100}
                 className='object-cover'
-                fallbackSrc='/fallback-profile.png'
+                fallbackSrc={fallbackProfile}
               />
             </div>
 

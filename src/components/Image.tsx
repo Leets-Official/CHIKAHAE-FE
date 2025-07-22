@@ -10,23 +10,11 @@ interface ImageProps {
   onClick?: () => void;
 }
 
-const Image = ({
-  src,
-  alt,
-  width,
-  height,
-  fallbackSrc = '/fallback.png',
-  className,
-  onClick,
-}: ImageProps) => {
+const Image = ({ src, alt, width, height, fallbackSrc, className, onClick }: ImageProps) => {
   const [currentSrc, setCurrentSrc] = useState(src);
-  // const [isLoaded, setIsLoaded] = useState(false);
-  // const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     setCurrentSrc(src);
-    // setIsLoaded(false);
-    // setHasError(false);
   }, [src]); // src 변경될 경우 초기화
 
   return (
@@ -37,20 +25,13 @@ const Image = ({
         width={width}
         height={height}
         className={`transition-transform hover:scale-105 rounded-2xl ${className ?? ''}`}
-        // onLoad={() => setIsLoaded(true)}
         onError={() => {
           if (fallbackSrc && currentSrc !== fallbackSrc) {
             setCurrentSrc(fallbackSrc);
           } else {
-            // setHasError(true);
           }
         }}
         onClick={onClick}
-        // style={{
-        //   display: isLoaded && !hasError ? 'block' : 'none',
-        //   transition: 'opacity 0.5s ease-in-out', // 애니메이션 기능
-        //   opacity: isLoaded ? 1 : 0,
-        // }}
       />
     </>
   );
