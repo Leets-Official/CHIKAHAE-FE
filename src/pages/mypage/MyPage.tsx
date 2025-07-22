@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import MyPageHeader from "@/components/ui/MypageHeader/MyPageHeader";
 import ProfileSection from "./components/ProfileSection";
+import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 import MenuList from "./components/MenuList";
 import type { MenuItem } from "./components/MenuList";
-import ChikaButton from "../../components/ui/ChikaButton/ChikaButton";
-import { BottomNav } from "@/components/ui/Nav/BottomNav";
-import ProfileIcon from "@/assets/icons/my_profile.svg";
-import ChikaBtnImg from "@/assets/icons/BrushingTeethNotiBtn.svg";
+import BottomNav from '@/components/ui/Nav/BottomNav';
+import profile from "@/assets/icons/profile_default.svg";
 import { useNavigate } from "react-router-dom";
 import Modal from "@/components/ui/Modal/Modal";
+import Button from '@/components/ui/Button';
 
 type ModalType = "logout" | "withdraw" | null;
 
@@ -27,28 +26,24 @@ const MyPage: React.FC = () => {
 
 
   return (
-  <>
-    <div className="w-[360px] max-w-[430px] h-[745px] flex flex-col gap-6 bg-white mx-auto opacity-100">
-        <MyPageHeader />
+    <>
+      <div className="w-[360px] max-w-[430px] h-[745px] flex flex-col gap-6 bg-white mx-auto opacity-100">
+        <div className="w-[360px] h-[44px]">
+          <GlobalTopNav message="마이페이지" showCancel={false} showLeftIcon={false} />
+        </div>
 
       <div className="w-[360px] h-[508px] flex flex-col gap-[32px] opacity-100">
         {/* 프로필 & 메뉴 리스트 */}
         <div className="w-[360px] h-[412px] flex flex-col gap-[32px] opacity-100">
-        <ProfileSection
-          imgSrc={ProfileIcon}
-          nickName="이름"
-          gender="성별"
-          birthday="생년월일"
-        />
+        <ProfileSection imgSrc={profile} nickName="이름" gender="성별" birthday="생년월일" />
 
         <MenuList items={menuData} />
 
           {/* 치카 버튼 */}
-          <div className="flex justify-center">
-              <ChikaButton
-                imgSrc={ChikaBtnImg}
-                onClick={() => navigate("/ChikaAlramPage")}
-              />
+          <div className="w-[320px] h-[48px] rounded-[8px] gap-[8px] opacity-100 rotate-0 pr-[16px] pl-[16px] border border-solid border-[#DCE3E8]">
+            <Button size='large' variant='primary' fullWidth onClick={() => navigate('/mypage/alram')}>
+              양치 알림
+            </Button>
           </div>
         </div>
     
@@ -91,15 +86,15 @@ const MyPage: React.FC = () => {
           <div className="flex gap-[8px]">
             <button
               onClick={closeModal}
-              className="w-[135px] h-[40px] pl-[12px] pr-[12px] rounded-[8px] border-[#CBD5DC] shadow-[0px_4px_0px_0px_#9CA6AF] bg-[#E9EEF2] text-sm font-semibold"
+              className="w-[135px] h-[40px] pl-[12px] pr-[12px] rounded-[8px] border-[#CBD5DC] --color-shadow-gray bg-[#E9EEF2] body-14-eb"
             >
               취소
             </button>
             <button
               onClick={() => navigate("/logout")}
-              className="w-[135px] h-[40px] pl-[12px] pr-[12px] rounded-[8px] bg-[#5FC6F0] shadow-[0px_4px_0px_0px_#3DAFD9] text-white text-sm font-semibold"
+              className="w-[135px] h-[40px] pl-[12px] pr-[12px] rounded-[8px] bg-[#5FC6F0] --color-shadow-blue-medium text-white body-14-eb"
             >
-              로그아웃
+              탈퇴 
             </button>
           </div>
         )}

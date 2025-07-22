@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import chevron_right_grey from "@/assets/icons/chevron_right_grey.svg";
+import { ReactComponent as RightIcon } from "@/assets/icons/chevron_right.svg";
 
 const ChikaAlram = () => {
   const navigate = useNavigate();
@@ -15,80 +15,29 @@ const ChikaAlram = () => {
     <div>
       {/* 알람 리스트 */}
       <div
-        className="w-[320px] h-[188px] rounded-[8px] border-[2px] border-solid flex gap-2"
-        style={{
-          background: "var(--CoolGrey-10, #F5F7FA)",
-          borderColor: "var(--CoolGrey-25, #DCE3E8)",
-          opacity: 1,
-          position: "relative",
-          top: "14px",
-          transform: "rotate(0deg)"
-        }}
+        className="w-[320px] h-[188px] bg-[#F5F7FA] border-[2px] border-[#DCE3E8] rounded-[8px] border-solid flex gap-[2px] relative top-[14px]"
       >
-        <div className="fixed w-[320px] h-[160px] top-[14px] gap-[8px] flex rotate-[0deg] opacity-[1] flex-col">
+        <div className="relative w-[320px] h-[160px] top-[14px] gap-[8px] flex flex-col">
           {alarms.map((alarm) => (
 
             <div
               key={alarm.id}
-              className="w-[320px] h-[48px] flex justify-between rotate-[0deg] opacity-[1] pt-[12px] pr-[20px] pb-[12px] pl-[20px]"
+              className="w-[320px] h-[48px] flex justify-between pt-[12px] pr-[20px] pb-[12px] pl-[20px]"
             >
-              <span
-                className="flex items-center justify-center"
-                style={{
-                  fontFamily: "NanumSquareRound, sans-serif",
-                  fontWeight: 800,
-                  fontStyle: "ExtraBold",
-                  fontSize: "16px",
-                  lineHeight: "22px",
-                  letterSpacing: "-0.01em",
-                  opacity: 1,
-                  transform: "rotate(0deg)"
-                }}
-              >
+              <span className="flex items-center justify-center body-16-eb">
                 {alarm.label}
               </span>
-              <div
-                className="flex items-center gap-1"
-                style={{
-                  width: "72px",
-                  height: "24px",
-                  opacity: 1,
-                  gap: "4px",
-                  transform: "rotate(0deg)"
-                }}
-              >
-                <span
-                  className="flex items-center justify-center"
-                  style={{
-                    fontFamily: "NanumSquareRound, sans-serif",
-                    fontWeight: 700,
-                    fontStyle: "Bold",
-                    fontSize: "16px",
-                    lineHeight: "19px",
-                    letterSpacing: "-0.01em",
-                    opacity: 1,
-                    borderRadius: "4px",
-                    color: "#BAC3CB",
-                    transform: "rotate(0deg)"
-                  }}
+              <div className="w-[72px] h-[24px] flex items-center gap-1">
+                <span className="flex items-center justify-center body-16-b"
+                  style={{ color: "var(--color-fg-medium)" }}
                 >
                   {alarm.time}
                 </span>
                 <button
                   type="button"
-                  onClick={() => navigate("/TimePickerPage")}
-                  style={{ background: "none", border: "none", padding: 0, margin: 0 }}
+                  onClick={() => navigate("/mypage/timepicker")}
                 >
-                  <img
-                    src={chevron_right_grey}
-                    style={{
-                      position: "relative",
-                      top: "2px",
-                      left: "9px",
-                      opacity: 1,
-                      transform: "rotate(0deg)"
-                    }}
-                  />
+                  <RightIcon className='text-gray-500' />
                 </button>
               </div>
             </div>

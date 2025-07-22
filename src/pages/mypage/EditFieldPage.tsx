@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Button from "@/pages/mypage/components/Button";
-import PageHeader from "@/components/ui/MypageHeader/PageHeader";
+import Button from '@/components/ui/Button';
+import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 import { getFieldConfig, fieldConfigMap, type FieldKey } from "@/pages/mypage/constants/fieldConfig";
 import StyledToast from "@/components/ui/Toast/StyledToast";
 
@@ -31,7 +31,7 @@ const EditFieldPage: React.FC = () => {
 
     setTimeout(() => {
       setToastVisible(false);
-      navigate("/editprofile", {
+      navigate("/edit", {
         state: { updatedField: field, updatedValue: value },
       });
     }, 1500);
@@ -50,8 +50,10 @@ const EditFieldPage: React.FC = () => {
 
       {/* 메인 레이아웃 */}
       <div className="w-[360px] h-[744px] flex flex-col justify-between bg-white mx-auto">
-        <div>
-          <PageHeader message="마이페이지" />
+        <div>  
+          <div className="w-[360px] h-[44px] flex justify-between opacity-100 rotate-0 pt-[10px] pr-[20px] pb-[10px] pl-[20px]">
+              <GlobalTopNav message="마이페이지" showCancel={false} />
+            </div>
           <div className="px-5 mt-5 space-y-3">
             <h2 className="text-base font-bold">{label}을 입력해주세요</h2>
 
@@ -73,11 +75,11 @@ const EditFieldPage: React.FC = () => {
               <p className="text-xs text-gray-500">{helperText}</p>
             )}
           </div>
-        </div>
 
         {/* 하단 버튼 */}
-        <div className="w-full flex justify-center px-4 pb-8">
-          <Button onClick={handleSubmit} label="확인" />
+        <Button size='large' variant='primary' fullWidth onClick={handleSubmit}>
+          확인
+        </Button>
         </div>
       </div>
     </>

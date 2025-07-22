@@ -2,36 +2,18 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import TimePicker from "@/components/ui/TimePicker/TimePicker";
 
-const TimePickerModal: React.FC = () => {
+interface TimePickerModalProps {
+  onClose: () => void;
+}
+
+const TimePickerModal: React.FC<TimePickerModalProps> = ({ onClose }) => {
   const navigate = useNavigate();
-  const closeModal = () => navigate(-1);
 
   return (
-    <div
-      className="bg-white shadow-lg"
-      style={{
-        width: "320px",
-        height: "294px",
-        borderRadius: "8px",
-        opacity: 1,
-        transform: "rotate(0deg)"
-      }}
-      >
-        <div
-          style={{
-            width: "320px",
-            height: "234px",
-            gap: "30px",
-            opacity: 1,
-            paddingTop: "30px",
-            paddingRight: "20px",
-            paddingBottom: "30px",
-            paddingLeft: "20px",
-            transform: "rotate(0deg)"
-          }}
-        >
-          <TimePicker />
-        </div>
+    <div className="w-[320px] h-[294px] rounded-[8px] bg-white shadow-lg overflow-hidden">
+      <div className="w-[320px] h-[234px] gap-[30px] pt-[30px] pr-[20px] pb-[30px] pl-[20px]  flex flex-col items-center justify-center bg-white">
+          <TimePicker  />
+      </div>
         <div
           className="flex"
           style={{
@@ -46,7 +28,7 @@ const TimePickerModal: React.FC = () => {
           }}
         >
             <button
-              onClick={closeModal}
+              onClick={onClose}
               className="w-[135px] h-[40px] pl-[12px] pr-[12px] rounded-[8px] border-[#CBD5DC] shadow-[0px_4px_0px_0px_#9CA6AF] bg-[#E9EEF2] text-sm font-semibold"
             >
               취소

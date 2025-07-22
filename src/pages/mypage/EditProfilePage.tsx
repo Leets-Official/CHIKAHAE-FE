@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import EditMenuList from "@/pages/mypage/components/EditMenuList";
-import PageHeader from "@/components/ui/MypageHeader/PageHeader";
+import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 import { BottomNav } from "@/components/ui/Nav/BottomNav";
-import profile from "@/assets/icons/defaultprofile.svg";
+import profile from "@/assets/icons/profile_default.svg";
 import camera from "@/assets/icons/camera.svg";
 import type { EditMenuItemType } from "./components/EditMenuItem";
 
@@ -19,7 +19,9 @@ const EditProfilePage: React.FC = () => {
    
   return (
     <div className="w-[360px] max-w-[430px] h-[745px] flex flex-col gap-6 bg-white mx-auto opacity-100">
-      <PageHeader message="마이페이지" />
+      <div className="w-[360px] h-[44px] flex justify-between opacity-100 rotate-0 pt-[10px] pr-[20px] pb-[10px] pl-[20px]">
+                  <GlobalTopNav message="마이페이지" showCancel={false} />
+      </div>
 
       {/* 프로필 사진 */}
       <div className="w-[360px] h-[665px] flex flex-col gap-[233px] opacity-100">

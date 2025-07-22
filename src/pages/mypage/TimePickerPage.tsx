@@ -11,7 +11,7 @@ const TimePickerPage: React.FC = () => {
 
       {/* 모달: CustomTimePicker (확장) */}
       <div className="fixed inset-0 flex items-center justify-center bg-black/30 z-50">
-          <TimePickerModal />
+          <TimePickerModal onClose={() => {}} />
       </div>  
     </>
   );
