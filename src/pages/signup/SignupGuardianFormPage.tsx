@@ -17,7 +17,13 @@ const SignupGuardianForm = ({ onNext }: Props) => {
   return (
     <>
       <GlobalTopNav type='signup' message={''} />
-      <div className='flex flex-col min-h-screen justify-between pt-11'>
+      <div
+        className='
+      flex flex-col 
+      min-h-screen justify-between 
+      pt-11
+      '
+      >
         <div
           className='
         flex               
@@ -83,7 +89,10 @@ const SignupGuardianForm = ({ onNext }: Props) => {
         </div>
       </div>
       <div
-        className={`fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] min-w-[360px] px-4 py-2.5`}
+        className={`
+          fixed bottom-0 left-1/2 -translate-x-1/2 
+          w-full max-w-[480px] min-w-[360px] 
+          px-4 py-2.5`}
       >
         <Button
           variant='primary'

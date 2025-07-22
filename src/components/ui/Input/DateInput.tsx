@@ -4,7 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { ReactComponent as CalendarIcon } from '@/assets/icons/calendar.svg';
 import './DateInput.css';
 
-type Props = {
+type DateInputProps = {
   value: string;
   onChange: (formattedDate: string) => void;
   iscolor?: string;
@@ -30,7 +30,7 @@ const CustomInput = forwardRef<HTMLInputElement, any>(({ value, onClick }, ref) 
 
 CustomInput.displayName = 'CustomInput';
 
-const DateInput = ({ value, onChange }: Props) => {
+const DateInput = ({ value, onChange }: DateInputProps) => {
   const handleChange = (date: Date | null) => {
     if (!date) return;
 
