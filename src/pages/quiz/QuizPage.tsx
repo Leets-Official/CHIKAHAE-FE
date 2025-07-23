@@ -3,9 +3,9 @@ import { useToast } from '@/contexts/ToastContext';
 import { useNavigate } from 'react-router-dom';
 import { quizMockData } from '@/mocks/quizMock';
 import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
-import QuizBody from '@/components/Quiz/QuizPage/QuizBody';
-import QuizFooter from '@/components/Quiz/QuizPage/QuizFooter';
-import QuizSummary from '@/components/Quiz/QuizPage/QuizSummary';
+import QuizBody from '@/features/quiz/quizFlow/quizSolve/QuizBody';
+import QuizFooter from '@/features/quiz/quizFlow/quizSolve/QuizFooter';
+import QuizSummary from '@/features/quiz/quizFlow/QuizSummary';
 import { Modal } from '@/components/ui/Modal';
 
 // 퀴즈 (문제 풀이) / 퀴즈 결과 / 최종 결과 화면
