@@ -24,6 +24,7 @@ interface ToastData {
   duration?: number;
   actionText?: string;
   onActionClick?: () => void;
+  showIcon?: boolean;
 }
 
 interface ToastContextType {
@@ -61,6 +62,7 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
             duration={toast.duration}
             actionText={toast.actionText}
             onActionClick={toast.onActionClick}
+            showIcon={toast.showIcon}
             onClose={handleClose}
           />
         ))}
