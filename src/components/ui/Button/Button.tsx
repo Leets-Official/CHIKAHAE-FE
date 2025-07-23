@@ -59,8 +59,8 @@ const Button: React.FC<ButtonProps> = ({
       variantStyles = 'bg-[#E9EEF2]';
       textStyles = 'text-[#CED6DD]';
     } else {
-      variantStyles = 'bg-[#DCE3E8] text-black border border-[#DCE3E8] shadow-[0_4px_0_0_#9CA6AF]';
-      textStyles = 'text-black';
+      variantStyles = 'bg-[#DCE3E8] border border-[#DCE3E8] shadow-[0_4px_0_0_#9CA6AF]';
+      textStyles = 'text-fg-primary';
     }
   }
 

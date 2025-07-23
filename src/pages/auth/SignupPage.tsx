@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SignupProfile from '../signup/SignupprofilePage';
-import SignupInfo from '../signup/SignupInfoPage';
-import SignupGuardianIntro from '../signup/SignupGuardianIntroPage';
-import SignupGuardianForm from '../signup/SignupGuardianFormPage';
-import SignupComplete from '../signup/SignupCompletePage';
+import SignupProfile from '@/features/signup/Signupprofile';
+import SignupInfo from '@/features/signup/SignupInfo';
+import SignupGuardianIntro from '@/features/signup/SignupGuardianIntro';
+import SignupGuardianForm from '@/features/signup/SignupGuardianForm';
+import SignupComplete from '@/features/signup/SignupComplete';
 import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 
 type Step = 'profile' | 'info' | 'guardianIntro' | 'guardianForm' | 'complete';

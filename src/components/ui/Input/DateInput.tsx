@@ -85,6 +85,7 @@ const DateInput = ({
           }}
         />
       }
+      portalId='react-datepicker-portal'
       renderCustomHeader={({
         date,
         changeYear,
