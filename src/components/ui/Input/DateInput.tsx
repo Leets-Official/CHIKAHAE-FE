@@ -48,22 +48,21 @@ CustomInput.displayName = 'CustomInput';
 const DateInput = ({
   value,
   onChange,
-  iconColor,
   onClick,
   onFocus,
   onBlur,
   state = 'enabled',
 }: DateInputProps) => {
   const handleChange = (date: Date | null) => {
-    const iconColor = clsx({
-      'text-[#9CA6AF]': state === 'enabled' || state === 'disabled',
-      'text-[#3DAFD9]': state === 'select',
-    });
-
     if (!date) return;
     const formatted = dayjs(date).format('YYYY.MM.DD');
     onChange(formatted);
   };
+
+  const iconColorClass = clsx({
+    'text-[#9CA6AF]': state === 'enabled' || state === 'disabled',
+    'text-[#3DAFD9]': state === 'select',
+  });
 
   return (
     <DatePicker
@@ -80,8 +79,8 @@ const DateInput = ({
             onClick,
             onFocus,
             onBlur,
-            iconColor,
-            onChange, // 타입 요구사항 맞추기 위해 전달
+            onChange,
+            iconColor: iconColorClass,
           }}
         />
       }

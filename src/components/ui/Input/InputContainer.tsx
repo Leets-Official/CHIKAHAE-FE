@@ -18,6 +18,13 @@ type InputContainerProps = {
   onChange: ((e: React.ChangeEvent<HTMLInputElement>) => void) | ((formattedDate: string) => void);
 };
 
+const getBorderColor = (inputState: InputState, isActive?: boolean) => {
+  if (inputState === 'select') return 'border-[#5fc6f0]';
+  if (isActive) return 'border-[#5fc6f0]';
+  if (inputState === 'disabled') return 'border-gray-400';
+  return 'border-[#9CA6AF]';
+};
+
 const InputContainer = ({
   variant = 'default',
   placeholder = '텍스트를 입력해 주세요',
@@ -26,11 +33,11 @@ const InputContainer = ({
   star = false,
   className,
   value,
+  isActive,
   onChange,
-  isActive = false,
 }: InputContainerProps) => {
-  const [internalState, setInternalState] = useState<InputState>('enabled');
-  const borderColorClass = isActive ? 'border-[#5fc6f0]' : 'border-[#9CA6AF]';
+  const [inputState, setinputState] = useState<InputState>('enabled');
+  const borderColorClass = getBorderColor(inputState, isActive);
 
   const containerClass = clsx(
     'h-[80px] px-4 py-3 flex flex-col gap-y-1 justify-center items-start',
@@ -40,17 +47,13 @@ const InputContainer = ({
     variant === 'formTop' && 'rounded-t-lg',
     variant === 'formBottom' && 'rounded-b-lg',
     {
-      'bg-white': internalState === 'enabled' || internalState === 'select',
-      'bg-[#BAC3CB]': internalState === 'disabled',
+      'bg-white': inputState === 'enabled' || inputState === 'select',
+      'bg-[#BAC3CB]': inputState === 'disabled',
     },
     className,
   );
-
-  const iconColor = clsx({
-    'text-[#9CA6AF]': internalState === 'enabled' || internalState === 'disabled',
-    'text-[#3DAFD9]': internalState === 'select',
-  });
-
+  const handleFocus = () => setinputState('select');
+  const handleBlur = () => setinputState('enabled');
   return (
     <div className={containerClass}>
       <label className='flex items-center text-[12px] font-bold leading-[14px] tracking-[-0.12px]  '>
@@ -59,24 +62,23 @@ const InputContainer = ({
       </label>
 
       {calender ? (
-        <DateInput
-          value={value}
-          onChange={(val) => {
-            if (typeof onChange === 'function') {
-              (onChange as (formattedDate: string) => void)(val);
-            }
-          }}
-          iconColor={iconColor}
-          onFocus={() => setInternalState('select')}
-          onBlur={() => setInternalState('enabled')}
-          state='select'
-        />
+        <div className='w-full' tabIndex={-1} onFocus={handleFocus} onBlur={handleBlur}>
+          <DateInput
+            value={value}
+            onChange={(val) => {
+              if (typeof onChange === 'function') {
+                (onChange as (formattedDate: string) => void)(val);
+              }
+            }}
+            state={inputState}
+          />
+        </div>
       ) : (
         <Input
-          inputState={internalState}
+          inputState={inputState}
           placeholder={placeholder}
-          onFocus={() => setInternalState('select')}
-          onBlur={() => setInternalState('enabled')}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           value={value}
           onChange={onChange as (e: React.ChangeEvent<HTMLInputElement>) => void}
         />

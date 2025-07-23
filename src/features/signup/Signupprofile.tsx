@@ -109,7 +109,7 @@ const SignupProfile = ({ onNext, profileUrl }: SignupProfileProps) => {
                 label='닉네임'
                 value={nickname}
                 onChange={handleNicknameChange}
-                isActive={isActive}
+                // isActive={isActive}
               />
             </div>
           </div>
