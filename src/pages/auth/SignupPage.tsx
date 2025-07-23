@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SignupProfile from '@/features/signup/Signupprofile';
+import SignupProfile from '@/features/signup/SignupProfile';
 import SignupInfo from '@/features/signup/SignupInfo';
 import SignupGuardianIntro from '@/features/signup/SignupGuardianIntro';
 import SignupGuardianForm from '@/features/signup/SignupGuardianForm';
