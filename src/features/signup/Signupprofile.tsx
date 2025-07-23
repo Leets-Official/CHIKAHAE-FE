@@ -20,7 +20,6 @@ const SignupProfile = ({ onNext, profileUrl }: SignupProfileProps) => {
   };
 
   const isNicknameEmpty = nickname.trim() === '';
-  const isActive = !isNicknameEmpty;
   return (
     <>
       <div
