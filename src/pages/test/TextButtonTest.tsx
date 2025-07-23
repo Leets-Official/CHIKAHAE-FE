@@ -1,9 +1,6 @@
 import TextButton from '@/components/ui/TextButton';
-import { useState } from 'react';
 
 const TextButtonTest = () => {
-  const [loading, setLoading] = useState(false);
-
   return (
     <div className='flex justify-center align-center p-8 space-y-6 gap-2'>
       <div className='space-x-4 '>
