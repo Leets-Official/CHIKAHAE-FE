@@ -65,8 +65,10 @@ const Modal = ({
               </div>
 
               {/* ========== Footer ========== */}
-              {!footer && (
-                <div className='w-full px-[20px] pb-[20px] flex gap-[10px] items-center justify-center self-stretch'>
+              {footer ? (
+                <div className="flex justify-center w-full">{footer}</div>
+              ) : (
+                <div className='flex justify-center w-full px-[20px] pb-[20px] gap-[10px] items-center self-stretch'>
                   <Button variant='assistive' size='medium' className='w-[135px]' onClick={onClose}>
                     {cancelText}
                   </Button>
