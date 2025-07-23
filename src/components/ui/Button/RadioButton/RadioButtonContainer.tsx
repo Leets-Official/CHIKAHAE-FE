@@ -1,5 +1,4 @@
 import RadioButton from './RadioButton';
-import { useState } from 'react';
 import clsx from 'clsx';
 import { GENDER } from '@/constants/radioOptions';
 
@@ -8,6 +7,10 @@ interface RadioButtonContainerProps {
   message?: string;
   importance?: 'important' | 'basic';
   options: { name: string; value: string }[];
+  className?: string;
+  selectedValue: string | null;
+  onValueChange: (value: string) => void;
+  isActive?: boolean;
 }
 
 type RadioButtonState = 'enabled' | 'select' | 'disabled';
@@ -33,24 +36,22 @@ const RadioButtonContainer = ({
   message = '성별',
   importance = 'important',
   options = GENDER,
+  selectedValue,
+  onValueChange,
+  isActive,
 }: RadioButtonContainerProps) => {
-  const [selected, setSelected] = useState<string | null>(null);
-  const state: RadioButtonState = selected ? 'select' : 'enabled';
+  const state: RadioButtonState = selectedValue ? 'select' : 'enabled';
   const current = stateClassMap[state];
 
   const containerClass = clsx(
     'w-full h-[80px] px-4 py-3 flex flex-col',
     variant === 'default' && 'rounded-lg border-[2px] border-b-5 shadow-md',
-    variant !== 'default' && 'border-t border-[#9CA6AF]',
-    variant === 'formTop' && 'rounded-t-lg',
+    (variant === 'formMiddle' || variant === 'formTop') && 'border-b',
+    isActive ? 'border-b-[#5fc6f0]' : 'border-b-[#9CA6AF]',
     variant === 'formBottom' && 'rounded-b-lg',
     current.border,
     current.bg,
   );
-
-  const getRadioState = (value: string) => {
-    return selected === value ? 'select' : 'enabled';
-  };
 
   return (
     <div className={containerClass}>
@@ -68,8 +69,9 @@ const RadioButtonContainer = ({
             name='gender'
             value={value}
             message={name}
-            checked={selected === value}
-            onChange={setSelected}
+            checked={selectedValue === value}
+            onChange={onValueChange}
+            isActive={isActive}
           />
         ))}
       </div>
