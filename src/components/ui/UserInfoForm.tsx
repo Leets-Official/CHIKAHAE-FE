@@ -37,10 +37,14 @@ const UserInfoForm = ({
     }
   };
 
-  const containerClass = clsx('rounded-lg border shadow-md overflow-hidden', {
-    'border-[#9CA6AF] border-b-[5px]': !isActive,
-    'border-[#5fc6f0] border-b-[5px]': isActive,
-  });
+  const containerClass = clsx(
+    'rounded-lg shadow-md overflow-hidden',
+    'border-t-[2px] border-l-[2px] border-r-[2px] border-b-[5px]',
+    {
+      'border-[#9CA6AF]': !isActive,
+      'border-[#5fc6f0]': isActive,
+    },
+  );
 
   return (
     <>
@@ -51,6 +55,7 @@ const UserInfoForm = ({
             placeholder='이름을 입력해 주세요.'
             variant='formTop'
             value={name}
+            isActive={isActive}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeName(e.target.value)}
             className={clsx({
               'border-t-border-blue': isActive,
@@ -63,8 +68,9 @@ const UserInfoForm = ({
           message='성별'
           importance='basic'
           options={GENDER}
-          variant='formMiddle'
+          variant={type === 'full' ? 'formMiddle' : 'formTop'}
           selectedValue={gender}
+          isActive={isActive}
           onValueChange={onGenderChange}
           className={clsx({
             'border-t-border-blue': isActive,
@@ -79,6 +85,7 @@ const UserInfoForm = ({
           calender
           value={birthDate}
           onChange={onBirthDateChange}
+          isActive={isActive}
           className={clsx({
             'border-t-border-blue': isActive,
             'border-t-border-gray': !isActive,

@@ -6,6 +6,7 @@ interface RadioButtonProps {
   checked: boolean;
   onChange: (value: string) => void;
   required?: boolean;
+  isActive?: boolean;
 }
 
 const RadioButton = ({

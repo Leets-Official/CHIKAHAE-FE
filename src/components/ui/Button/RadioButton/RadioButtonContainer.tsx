@@ -10,6 +10,7 @@ interface RadioButtonContainerProps {
   className?: string;
   selectedValue: string | null;
   onValueChange: (value: string) => void;
+  isActive?: boolean;
 }
 
 type RadioButtonState = 'enabled' | 'select' | 'disabled';
@@ -37,6 +38,7 @@ const RadioButtonContainer = ({
   options = GENDER,
   selectedValue,
   onValueChange,
+  isActive,
 }: RadioButtonContainerProps) => {
   const state: RadioButtonState = selectedValue ? 'select' : 'enabled';
   const current = stateClassMap[state];
@@ -44,8 +46,8 @@ const RadioButtonContainer = ({
   const containerClass = clsx(
     'w-full h-[80px] px-4 py-3 flex flex-col',
     variant === 'default' && 'rounded-lg border-[2px] border-b-5 shadow-md',
-    variant !== 'default' && 'border-t border-[#9CA6AF]',
-    variant === 'formTop' && 'rounded-t-lg',
+    (variant === 'formMiddle' || variant === 'formTop') && 'border-b',
+    isActive ? 'border-b-[#5fc6f0]' : 'border-b-[#9CA6AF]',
     variant === 'formBottom' && 'rounded-b-lg',
     current.border,
     current.bg,
@@ -69,6 +71,7 @@ const RadioButtonContainer = ({
             message={name}
             checked={selectedValue === value}
             onChange={onValueChange}
+            isActive={isActive}
           />
         ))}
       </div>

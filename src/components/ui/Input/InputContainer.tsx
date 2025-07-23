@@ -14,6 +14,7 @@ type InputContainerProps = {
   star?: boolean;
   className?: string;
   value: string;
+  isActive?: boolean;
   onChange: ((e: React.ChangeEvent<HTMLInputElement>) => void) | ((formattedDate: string) => void);
 };
 
@@ -26,26 +27,28 @@ const InputContainer = ({
   className,
   value,
   onChange,
+  isActive = false,
 }: InputContainerProps) => {
-  const [state, setState] = useState<InputState>('enabled');
+  const [internalState, setInternalState] = useState<InputState>('enabled');
+  const borderColorClass = isActive ? 'border-[#5fc6f0]' : 'border-[#9CA6AF]';
 
   const containerClass = clsx(
     'h-[80px] px-4 py-3 flex flex-col gap-y-1 justify-center items-start',
     variant === 'default' && 'rounded-lg border-[2px] border-b-[5px] shadow-md',
-    variant !== 'default' && 'border-t border-[#9CA6AF]',
+    (variant === 'formMiddle' || variant === 'formTop') && 'border-b',
+    borderColorClass,
     variant === 'formTop' && 'rounded-t-lg',
     variant === 'formBottom' && 'rounded-b-lg',
     {
-      'border-[#9CA6AF] bg-white': state === 'enabled',
-      'border-[#5fc6f0] bg-white': state === 'select',
-      'border-[#9CA6AF] bg-[#BAC3CB]': state === 'disabled',
+      'bg-white': internalState === 'enabled' || internalState === 'select',
+      'bg-[#BAC3CB]': internalState === 'disabled',
     },
     className,
   );
 
   const iconColor = clsx({
-    'text-[#9CA6AF]': state === 'enabled' || state === 'disabled',
-    'text-[#3DAFD9]': state === 'select',
+    'text-[#9CA6AF]': internalState === 'enabled' || internalState === 'disabled',
+    'text-[#3DAFD9]': internalState === 'select',
   });
 
   return (
@@ -59,24 +62,23 @@ const InputContainer = ({
         <DateInput
           value={value}
           onChange={(val) => {
-            // 타입 좁히기: calender === true → string을 받는 onChange
             if (typeof onChange === 'function') {
               (onChange as (formattedDate: string) => void)(val);
             }
           }}
           iconColor={iconColor}
-          onFocus={() => setState('select')}
-          onBlur={() => setState('enabled')}
+          onFocus={() => setInternalState('select')}
+          onBlur={() => setInternalState('enabled')}
+          state='select'
         />
       ) : (
         <Input
-          inputState={state}
+          inputState={internalState}
           placeholder={placeholder}
-          onFocus={() => setState('select')}
-          onBlur={() => setState('enabled')}
+          onFocus={() => setInternalState('select')}
+          onBlur={() => setInternalState('enabled')}
           value={value}
           onChange={onChange as (e: React.ChangeEvent<HTMLInputElement>) => void}
-          className='text-sm px-0 py-0 bg-transparent'
         />
       )}
     </div>

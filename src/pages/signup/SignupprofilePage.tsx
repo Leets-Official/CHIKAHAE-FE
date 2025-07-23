@@ -20,7 +20,7 @@ const SignupProfile = ({ onNext, profileUrl }: SignupProfileProps) => {
   };
 
   const isNicknameEmpty = nickname.trim() === '';
-
+  const isActive = !isNicknameEmpty;
   return (
     <>
       <div
@@ -39,7 +39,7 @@ const SignupProfile = ({ onNext, profileUrl }: SignupProfileProps) => {
         w-full
         max-w-[480px]
         min-w-[360px]
-        mx-auto           
+        mx-auto             
       '
         >
           <div className='w-full text-left'>
@@ -109,6 +109,7 @@ const SignupProfile = ({ onNext, profileUrl }: SignupProfileProps) => {
                 label='닉네임'
                 value={nickname}
                 onChange={handleNicknameChange}
+                isActive={isActive}
               />
             </div>
           </div>
