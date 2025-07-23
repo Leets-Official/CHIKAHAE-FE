@@ -16,6 +16,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
+    "firebase": "^12.0.0",
     "framer-motion": "^12.23.0",
     "prettier": "^3.6.2",
     "react": "^19.1.0",
@@ -50,6 +51,7 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.34.1",
     "vite": "^7.0.0",
+    "vite-plugin-pwa": "^1.0.1",
     "vite-plugin-svgr": "^4.3.0"
   }
 }

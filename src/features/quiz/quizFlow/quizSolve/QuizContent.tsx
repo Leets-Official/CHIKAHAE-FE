@@ -1,6 +1,6 @@
-import QuizTitle from '@/components/Quiz/QuizTitle/QuizTitle';
-import QuizOXButton from '@/components/Quiz/QuizOXButton/QuizOXButton';
-import QuizTextButton from '@/components/Quiz/QuizTextButton/QuizTextButton';
+import QuizTitle from '@/features/quiz/QuizTitle/QuizTitle';
+import QuizOXButton from '@/features/quiz/QuizOXButton/QuizOXButton';
+import QuizTextButton from '@/features/quiz/QuizTextButton/QuizTextButton';
 import Timer from '@/components/ui/Timer/Timer';
 import type { BaseQuizProps } from '@/types/quizView';
 
