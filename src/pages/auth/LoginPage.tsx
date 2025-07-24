@@ -27,7 +27,7 @@ const LoginPage = () => {
           <SignupMainChracter />
         </div>
 
-        <div className='flex flex-col items-center gap-y-4 w-fullmax-w-[480px] min-w-[360px] px-5'>
+        <div className='flex flex-col items-center gap-y-4 w-full max-w-[480px] min-w-[360px] px-5'>
           <KakaoLoginButton />
           <p className='flex flex-col items-center justify-center font-bold text-[10px] leading-[11px] tracking-[-0.1px] text-fg-medium'>
             <span>가입하면 CHIKAHE의 </span>
