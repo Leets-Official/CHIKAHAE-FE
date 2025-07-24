@@ -30,9 +30,7 @@ api.interceptors.response.use(
     // JWT 만료나 인증 실패 등의 응답 처리
     const message = error?.response?.data?.message || '';
 
-    const isTokenExpired =
-      (error.response?.status === 401 || error.response?.status === 500) &&
-      message.includes('JWT expired');
+    const isTokenExpired = error.response?.status === 401 && message.includes('JWT expired');
 
     if (isTokenExpired) {
       console.warn('만료된 토큰입니다.');
