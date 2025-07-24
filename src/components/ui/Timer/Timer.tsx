@@ -1,7 +1,7 @@
 import { ReactComponent as TimerIcon } from '@/assets/icons/timerIcon.svg';
 import type { TimerProps } from './Timer.types';
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 // 컴포넌트 구성 - [아이콘] [프로그레스바] [남은 시간]
 
@@ -15,6 +15,16 @@ const Timer = ({ showSeconds = true, duration = 15, onComplete }: TimerProps) =>
     setIsActive(true);
   }, [duration]);
 
+  // onComplete 중복 호출 방지용 ref
+  const hasCompleted = useRef(false);
+
+  // duration 변경되면 타이머 초기화
+  useEffect(() => {
+    setRemainingTime(duration);
+    setIsActive(true);
+    hasCompleted.current = false; // 완료 플래그 초기화
+  }, [duration]);
+
   //  타이머 감소 로직
   useEffect(() => {
     if (!isActive) return;
@@ -24,7 +34,10 @@ const Timer = ({ showSeconds = true, duration = 15, onComplete }: TimerProps) =>
         if (prev <= 1) {
           clearInterval(interval);
           setIsActive(false);
-          onComplete?.();
+          if (!hasCompleted.current) {
+            hasCompleted.current = true;
+            onComplete?.();
+          }
           return 0;
         }
         return prev - 1;
@@ -32,7 +45,7 @@ const Timer = ({ showSeconds = true, duration = 15, onComplete }: TimerProps) =>
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [isActive]);
+  }, [isActive, onComplete]);
 
   return (
     <div className='relative w-full max-w-[320px] h-[48px]'>
