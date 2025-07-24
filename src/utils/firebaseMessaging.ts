@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getMessaging, onMessage, getToken } from 'firebase/messaging';
-import { registerFcmToken } from '@/api/alaram/fcmToken';
+import { registerFcmToken } from '@/api/alaram/fcmTokenAPI';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
