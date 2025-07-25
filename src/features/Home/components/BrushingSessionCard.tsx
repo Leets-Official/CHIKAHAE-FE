@@ -21,7 +21,7 @@ const BrushingSessionCard: React.FC<Props> = ({
       'w-[130px] h-[170px] flex flex-col gap-[10px] p-[16px] border-2 rounded-[8px] transition-all duration-200',
       done
         ? 'bg-bg-primary-lightblue border-border-blue opacity-50'
-        : 'bg-bg-primary-lightblue border-border-blue shadow-shadow-blue-medium opacity-100',
+        : 'bg-bg-primary-lightblue border-border-blue shadow-[0_4px_0_0_var(--color-shadow-blue-medium)] opacity-100',
     ].join(' ')}
   >
     <div className="w-[98px] h-[94px] flex flex-col gap-[8px]">
