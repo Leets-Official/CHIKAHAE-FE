@@ -18,16 +18,15 @@ const LoginPage = () => {
             올바른 양치 습관 형성
           </p>
           <p className='text-[16px] font-bold tracking-[-0.16px] text-fg-strong leading-none'>
-            <span className='block'>추가적인 설명 문구</span>
-            <span className='block'>추가적인 설명 문구</span>
+            <span className='block'>하루 3번, 같이 치카해!</span>
+            <span className='block'></span>
           </p>
         </div>
 
         <div className='flex flex-col items-center'>
           <SignupMainChracter />
         </div>
-
-        <div className='flex flex-col items-center gap-y-4 w-full max-w-[480px] min-w-[360px] px-5'>
+        <div className='flex flex-col items-center gap-y-4  max-w-[480px] min-w-[360px] px-5'>
           <KakaoLoginButton />
           <p className='flex flex-col items-center justify-center font-bold text-[10px] leading-[11px] tracking-[-0.1px] text-fg-medium'>
             <span>가입하면 CHIKAHE의 </span>
