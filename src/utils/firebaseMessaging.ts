@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getMessaging, onMessage, getToken } from 'firebase/messaging';
+import { registerFcmToken } from '@/api/alaram/fcmTokenAPI';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -28,7 +29,7 @@ async function requestFcmToken() {
     const currentToken = await getToken(messaging, { vapidKey: VAPID_KEY });
     if (currentToken) {
       console.log('FCM Token:', currentToken);
-      //TODO: 여기에 서버로 토큰 전송하는 로직 추가
+      await registerFcmToken(currentToken);
       return currentToken;
     } else {
       console.log('No registration token available.');

@@ -1,11 +1,15 @@
 // 푸시 알림 수신 이벤트 리스너
 self.addEventListener('push', function (event) {
-    const data = event.data.json();
+    const data = event.data?.json?.() || {};
+    console.log('[SW] 푸시 수신 payload:', data);
 
-    // 알림을 표시
-    self.registration.showNotification(data.notification.title, {
-        body: data.notification.body, // 알림 본문 텍스트
-        icon: '/profileImage.png', // 알림에 표시할 아이콘
+    const notification = data.notification || data;
+    const title = notification.title || '알림';
+    const body = notification.body || '새 알림이 도착했습니다';
+
+    self.registration.showNotification(title, {
+        body,
+        icon: '/profileImage.png',
     });
 });
 

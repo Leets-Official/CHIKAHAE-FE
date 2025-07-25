@@ -8,6 +8,11 @@ import type { BaseQuizProps } from '@/types/quizView';
 
 type QuizContentProps = BaseQuizProps;
 
+const OX_OPTIONS: Record<'O' | 'X', number> = {
+  O: 0,
+  X: 1,
+};
+
 const QuizContent = ({
   questionNumber,
   quiz,
@@ -20,7 +25,7 @@ const QuizContent = ({
       {/* 타이머 영역 */}
       <div className='flex justify-center pt-14 py-[18px]'>
         {/* 타이머가 끝나면 onTimeout 콜백 호출 */}
-        <Timer onComplete={onTimeout} />
+        <Timer key={questionNumber} onComplete={onTimeout} />
       </div>
 
       {/* 퀴즈 컨텐츠 영역 */}
@@ -31,8 +36,16 @@ const QuizContent = ({
         {/* 퀴즈 타입이 'OX'일 경우 */}
         {quiz.type === 'OX' ? (
           <div className='flex gap-4 mt-[48px]'>
-            <QuizOXButton type='o' selected={selectedAnswer === 0} onClick={() => onSelect(0)} />
-            <QuizOXButton type='x' selected={selectedAnswer === 1} onClick={() => onSelect(1)} />
+            <QuizOXButton
+              type='o'
+              selected={selectedAnswer === OX_OPTIONS.O}
+              onClick={() => onSelect(OX_OPTIONS.O)}
+            />
+            <QuizOXButton
+              type='x'
+              selected={selectedAnswer === OX_OPTIONS.X}
+              onClick={() => onSelect(OX_OPTIONS.X)}
+            />
           </div>
         ) : (
           // 객관식 보기인 경우
