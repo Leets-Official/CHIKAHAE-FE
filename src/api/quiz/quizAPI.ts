@@ -63,20 +63,17 @@ export type QuizResultResponse = {
 // 오늘의 퀴즈 목록
 export const fetchTodayQuiz = async (): Promise<QuizResponse> => {
   const response = await api.get<QuizResponse>('/api/quiz/today');
-  console.log(response);
   return response.data;
 };
 
 // 퀴즈 정답 제출
 export const checkAnswer = async (body: CheckAnswerRequest): Promise<CheckAnswerResponse> => {
   const response = await api.post<CheckAnswerResponse>('/api/quiz/check', body);
-  console.log(response);
   return response.data;
 };
 
 // 퀴즈 결과 및 보상 조회
 export const fetchQuizResult = async (): Promise<QuizResultResponse> => {
   const response = await api.get<QuizResultResponse>('/api/quiz/result');
-  console.log(response);
   return response.data;
 };
