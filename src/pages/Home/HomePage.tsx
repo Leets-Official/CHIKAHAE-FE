@@ -21,7 +21,7 @@ const HomePage = () => {
   });
 
   return (
-    <div className='max-w-[430px] min-w-[360px] min-h-screen flex flex-col items-center mx-auto'>
+    <div className='w-[360px] min-h-screen flex flex-col items-center mx-auto'>
       {/* 1. 상단 헤더: 상단 바 */}
       <HomeTopNav />
       <div className='h-[44px]' />
@@ -30,13 +30,13 @@ const HomePage = () => {
       <div className="left-0 top-[42px]">
         <HomeBanner />
       </div>
-      <div className="w-full flex flex-col gap-[18px] pt-[20px] px-[18px]">
+      <div className="w-full flex flex-col gap-[18px] pt-[20px] pl-[18px]">
         {/* 날짜+미션 */}
         <div className="w-full gap-[12px]">
           <span className="w-[121px] h-[16px] body-14-b">{dateString}</span>
           <div className="flex flex-row items-center gap-[8px]">
             <div className="w-[97px] h-[23px] flex items-center head-20-eb">오늘의 미션</div>
-            <Caution className="w-[16px] h-[16px]" />
+            <Caution className="w-[16px] h-[17px]" />
           </div>
         </div>
 
