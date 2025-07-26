@@ -11,7 +11,7 @@ interface Props {
   buttonText?: string;
 }
 
-const baseCardClass = 'bg-bg-primary-lightblue border-border-blue shadow-[0_4px_0_0_var(--color-shadow-blue-medium)] cursor-pointer';
+const baseCardClass = 'bg-bg-primary-lightblue border-border-blue shadow-[0_4px_0_0_var(--color-shadow-blue-medium)] cursor-inherit';
 
 const BrushingSessionCard: React.FC<Props> = ({
   title,
