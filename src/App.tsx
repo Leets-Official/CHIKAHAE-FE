@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from '@/pages/Home';
+import Home from '@/pages/Home/HomePage';
 import LoginPage from './pages/auth/LoginPage';
 import KakaoCallback from './pages/auth/KakaoCallback';
 import QuizPage from '@/pages/quiz/QuizPage';
