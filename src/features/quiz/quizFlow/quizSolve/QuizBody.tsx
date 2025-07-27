@@ -1,9 +1,14 @@
-import QuizContent from '@/components/Quiz/QuizPage/QuizContent';
-import QuizResult from '@/components/Quiz/QuizResult/QuizResult';
+import QuizContent from '@/features/quiz/quizFlow/quizSolve/QuizContent';
+import QuizResult from '@/features/quiz/quizResult/QuizResult';
 import clsx from 'clsx';
 import type { QuizFlowProps } from '@/types/quizView';
 
 // 퀴즈 본문 내용 렌더링 (QuizContent + QuizResult)
+
+type QuizBodyProps = QuizFlowProps & {
+  isCorrect: boolean;
+  answerDescription: string;
+};
 
 const QuizBody = ({
   step,
@@ -14,40 +19,47 @@ const QuizBody = ({
   correctCount,
   onSelect,
   onTimeout,
-}: QuizFlowProps) => {
+  isCorrect,
+  answerDescription,
+}: QuizBodyProps) => {
+  const isQuizStep = step === 'quiz';
+  const isResultStep = step === 'result' || step === 'final';
+
+  const resultDescription =
+    step === 'result' ? answerDescription : '정답 해설은 아래 해답에서 확인해 보세요.';
+
+  const containerPadding = {
+    quiz: 'pt-0',
+    result: 'pt-[120px]',
+    final: 'pt-[100px]',
+  }[step];
+
   return (
     <div
       className={clsx(
         'w-full max-w-[480px] min-w-[360px] mx-auto flex items-center flex-col',
-        step === 'quiz' && 'pt-0',
-        step === 'result' && 'pt-[120px]',
-        step === 'final' && 'pt-[100px]',
+        containerPadding,
       )}
     >
       <div className='relative'>
         {/* step === quiz일 경우 퀴즈 문항 화면 렌더링 */}
-        {step === 'quiz' && (
+        {isQuizStep && (
           <QuizContent
             questionNumber={questionNumber}
             quiz={quiz}
             selectedAnswer={selectedAnswer}
             onSelect={onSelect}
-            onTimeout={onTimeout} // 타임아웃 시 콜백
+            onTimeout={onTimeout}
           />
         )}
         {/* step이 result 또는 final일 경우 결과 화면 렌더링 */}
-        {(step === 'result' || step === 'final') && (
+        {isResultStep && (
           <QuizResult
-            isCorrect={step === 'result' ? selectedAnswer === quiz.answerIndex : false}
+            isCorrect={step === 'result' ? isCorrect : false}
             isLast={isLastQuestion}
             correctCount={correctCount}
             step={step}
-            //  result면 해설, final이면 정답 해설 안내
-            description={
-              step === 'result'
-                ? quiz.answerDescription
-                : '정답 해설은 아래 해답에서 확인해 보세요.'
-            }
+            description={resultDescription}
           />
         )}
       </div>

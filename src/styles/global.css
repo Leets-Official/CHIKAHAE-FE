@@ -102,12 +102,16 @@
 @theme {
   /* Background Colors */
   --color-bg-primary-blue: #5fc6f0;
+  --color-bg-primary-lightblue: #ebf9ff;
+  --color-bg-primary-clearblue: #2c6eb5;
   --color-bg-primary-white: #ffffff;
   --color-bg-primary-gray: #dce3e8;
   --color-bg-secondary-gray: #e9eef2;
   --color-bg-tertiary-pink: #ffe1ea;
   --color-bg-tertiary-blue: #d6f3ff;
   --color-bg-tertiary-gray: #fafbfc;
+  --color-bg-gray-weak: #d9d9d9;
+  --color-bg-primary-yellow: #fee500;
 
   /* Foreground Colors (icon, text) */
   --color-fg-verystrong: #000000;
@@ -131,9 +135,12 @@
   --color-fg-system-error: #d8444a;
   --color-fg-clear-blue: #4c98f5;
   --color-fg-accent-red: #de473d;
+  --color-fg-gray-weak: #949393;
 
   /* Border */
   --color-border-blue: #5fc6f0;
+  --color-border-lightblue: #b4e4f9;
+  --color-border-blue-medium: #3dafd9;
   --color-border-pink: #f05f83;
   --color-border-gray: #9ca6af;
   --color-border-medium: #bac3cb;
@@ -206,11 +213,10 @@
   animation: fade-out 0.3s ease-out forwards;
 }
 
-/* 스크롤바 숨김 유틸리티 */
-.scrollbar-hide {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
-.scrollbar-hide::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

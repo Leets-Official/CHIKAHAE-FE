@@ -1,10 +1,29 @@
 import InputContainer from './Input/InputContainer';
 import RadioButtonContainer from './Button/RadioButton/RadioButtonContainer';
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { GENDER } from '@/constants/radioOptions';
 import clsx from 'clsx';
+import { useState } from 'react';
 
-const UserInfoForm = () => {
+type UserInfoFormProps = {
+  type: 'full' | 'partial';
+  name?: string;
+  onChangeName?: (value: string) => void;
+  gender: string;
+  onGenderChange: (value: string) => void;
+  birthDate: string;
+  onBirthDateChange: (value: string) => void;
+};
+
+const UserInfoForm = ({
+  type,
+  name = '',
+  onChangeName = () => {},
+  gender,
+  onGenderChange,
+  birthDate,
+  onBirthDateChange,
+}: UserInfoFormProps) => {
   const [isActive, setIsActive] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
 
@@ -18,30 +37,60 @@ const UserInfoForm = () => {
     }
   };
 
-  const containerClass = clsx('w-[320px] rounded-lg border shadow-md overflow-hidden', {
-    'border-[#9CA6AF] border-b-[5px]': !isActive,
-
-    'border-[#5fc6f0] border-b-[5px]': isActive,
-    'active-block': isActive,
-  });
+  const containerClass = clsx(
+    'rounded-lg shadow-md overflow-hidden',
+    'border-t-[2px] border-l-[2px] border-r-[2px] border-b-[5px]',
+    {
+      'border-[#9CA6AF]': !isActive,
+      'border-[#5fc6f0]': isActive,
+    },
+  );
 
   return (
     <>
-      <style>{`
-        .active-block > div:not(:first-child) {
-          border-top-color: #5fc6f0 !important;
-        }
-      `}</style>
-
       <div ref={formRef} className={containerClass} onFocus={handleFocus} onBlur={handleBlur}>
-        <InputContainer variant='formTop' />
+        {type === 'full' && (
+          <InputContainer
+            label='성명'
+            placeholder='이름을 입력해 주세요.'
+            variant='formTop'
+            value={name}
+            isActive={isActive}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeName(e.target.value)}
+            className={clsx({
+              'border-t-border-blue': isActive,
+              'border-t-border-gray': !isActive,
+            })}
+          />
+        )}
+
         <RadioButtonContainer
           message='성별'
           importance='basic'
           options={GENDER}
-          variant='formMiddle'
+          variant={type === 'full' ? 'formMiddle' : 'formTop'}
+          selectedValue={gender}
+          isActive={isActive}
+          onValueChange={onGenderChange}
+          className={clsx({
+            'border-t-border-blue': isActive,
+            'border-t-border-gray': !isActive,
+          })}
         />
-        <InputContainer variant='formBottom' />
+
+        <InputContainer
+          variant='formBottom'
+          label='생년월일'
+          placeholder='0000.00.00'
+          calender
+          value={birthDate}
+          onChange={onBirthDateChange}
+          isActive={isActive}
+          className={clsx({
+            'border-t-border-blue': isActive,
+            'border-t-border-gray': !isActive,
+          })}
+        />
       </div>
     </>
   );

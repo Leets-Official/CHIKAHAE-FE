@@ -25,8 +25,11 @@ dist-ssr
 
 # dotenv environment variable files
 .env
-
 # PWA 관련 자동 생성 파일
 dev-dist/sw.js
 dev-dist/registerSW.js
 dev-dist/workbox-*.js
+
+# TypeScript incremental build info file
+*.tsbuildinfo
+

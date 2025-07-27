@@ -8,6 +8,7 @@ const QuizResult = ({
   isLast = false,
   correctCount = 0,
   step = 'result',
+  totalCount = 3,
 }: QuizResultProps) => {
   // 정답/오답 텍스트
   const resultText = isCorrect ? '정답입니다!' : '오답입니다!';
@@ -24,7 +25,8 @@ const QuizResult = ({
           {/* 맞힌 문제 수 */}
           <div className='flex flex-col items-center gap-0 mt-[42px]'>
             <div className='body-16-r' style={{ lineHeight: '25px' }}>
-              {correctCount}/3
+              {/* TODO: correctCount 서버 응답 확인 필요 */}
+              {correctCount}/{totalCount}
             </div>
             <div className='head-24-eb text-center'>총 {correctCount}문제를 맞히셨습니다!</div>
           </div>
