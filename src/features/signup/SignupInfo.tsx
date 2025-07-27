@@ -1,9 +1,10 @@
 import Button from '@/components/ui/Button';
 import { useState } from 'react';
 import UserInfoForm from '@/components/ui/UserInfoForm';
+import { isOver14 } from '@/utils/date';
 
 interface Props {
-  onNext: () => void;
+  onNext: (nextStep: 'complete' | 'guardianIntro') => void;
 }
 
 const SignupInfo = ({ onNext }: Props) => {
@@ -11,6 +12,11 @@ const SignupInfo = ({ onNext }: Props) => {
   const [birthDate, setBirthDate] = useState('');
 
   const isFormIncomplete = !gender || !birthDate;
+
+  const handleNext = () => {
+    const nextStep = isOver14(birthDate) ? 'complete' : 'guardianIntro';
+    onNext(nextStep);
+  };
 
   return (
     <>
@@ -92,7 +98,7 @@ const SignupInfo = ({ onNext }: Props) => {
       >
         <Button
           variant='primary'
-          onClick={onNext}
+          onClick={handleNext}
           size='large'
           fullWidth={true}
           disabled={isFormIncomplete}
