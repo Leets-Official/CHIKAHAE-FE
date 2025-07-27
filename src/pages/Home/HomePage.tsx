@@ -3,27 +3,26 @@ import BottomNav from '@/components/ui/Nav/BottomNav';
 import HomeBanner from '@/features/Home/homeBanner/HomeBanner';
 import { ReactComponent as Caution } from '@/assets/icons/caution.svg';
 import BrushingSessionList from '@/features/Home/todayMission/BrushingSessionList';
-import { brushingCards } from '@/constants/brushingSessions';
-import { useState } from 'react';
+import { useTodayMissions } from '@/hooks/queries/useGetTodayMissions';
 
 const HomePage = () => {
-  const [doneList, setDoneList] = useState(Array(brushingCards.length).fill(false));
+  const { data: cards = [] } = useTodayMissions();
 
-  const handleDone = (idx: number) => {
-    setDoneList((list) => list.map((v, i) => (i === idx ? true : v)));
-  };
+  /**
+   * ==== 미션 완료 후 (ex. 퀴즈 끝나고, 양치 끝나고) 아래 코드 호출 필요 ====
+   * queryClient.invalidateQueries(['todayMissions']);
+   */
 
   const today = new Date();
   const dateString = today.toLocaleDateString('ko-KR', {
-    month: 'long', // 7월
-    day: 'numeric', // 25
-    weekday: 'long', // 금요일
+    month: 'long',
+    day: 'numeric',
+    weekday: 'long',
   });
 
   return (
-    //FIXME: 추후 width는 반응형으로 수정될 예정
-    <div className='w-[360px] min-h-screen flex flex-col items-center mx-auto'>
-      {/* 상단 헤더: 상단 바 */}
+    <div className='max-w-[430px] min-w-[360px] w-full min-h-screen flex flex-col items-center mx-auto'>
+      {/* 홈 헤더 */}
       <HomeTopNav />
       <div className='h-14' />
 
@@ -44,7 +43,7 @@ const HomePage = () => {
         </div>
 
         {/* 양치 카드 슬라이드 */}
-        <BrushingSessionList cards={brushingCards} doneList={doneList} handleDone={handleDone} />
+        <BrushingSessionList cards={cards} />
       </div>
 
       {/* 하단 네비게이션: 아이템 리스트 */}

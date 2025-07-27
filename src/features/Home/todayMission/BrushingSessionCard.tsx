@@ -2,11 +2,11 @@ import { ReactComponent as ChikaCoinIcon } from '@/assets/icons/chikaCoin.svg';
 import Button from '@/components/ui/Button';
 import clsx from 'clsx';
 
-interface Props {
+interface BrushingSessionCardProps {
   title: string;
   description: string;
   done: boolean;
-  onClick: () => void;
+  onClick?: () => void;
   buttonClassName?: string;
   buttonText?: string;
 }
@@ -14,7 +14,7 @@ interface Props {
 const baseCardClass =
   'bg-bg-primary-lightblue border-border-blue shadow-[0_4px_0_0_var(--color-shadow-blue-medium)] cursor-inherit';
 
-const BrushingSessionCard: React.FC<Props> = ({
+const BrushingSessionCard: React.FC<BrushingSessionCardProps> = ({
   title,
   description,
   done,
@@ -31,7 +31,7 @@ const BrushingSessionCard: React.FC<Props> = ({
   >
     <div className='flex flex-col gap-[8px]'>
       <ChikaCoinIcon className='w-[48px] h-[48px]' />
-      <div className='w-[90px] h-[38px] flex flex-col gap-[4px]'>
+      <div className='h-[38px] flex flex-col gap-[4px]'>
         <span className='body-14-eb text-fg-accent-blue-strong'>{title}</span>
         <span className='body-12-r text-fg-accent-blue-weak'>{description}</span>
       </div>
