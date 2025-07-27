@@ -6,7 +6,7 @@ import QuizPage from '@/pages/quiz/QuizPage';
 import SignupPage from './pages/auth/SignupPage';
 import QuizStartPage from '@/pages/quiz/QuizStartPage';
 import BrushingStartPage from './pages/brushing/BrushingStartPage';
-import Page from './pages/test/AnimationTest';
+import AnimationTest from './pages/test/AnimationTest';
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
         <Route path='/quiz/start' element={<QuizStartPage />} />
         <Route path='/quiz' element={<QuizPage />} />
         <Route path='/brush/start' element={<BrushingStartPage />} />
-        <Route path='/animation' element={<Page />} />
+        <Route path='/animation' element={<AnimationTest />} />
       </Routes>
     </BrowserRouter>
   );

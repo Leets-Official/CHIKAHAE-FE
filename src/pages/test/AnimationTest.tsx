@@ -5,7 +5,7 @@ import { TIPS } from '@/constants/tips';
 import { useState, useEffect } from 'react';
 import { ReactComponent as BackgroundImage } from '@/assets/images/backgroundImage.svg';
 
-const Page = () => {
+const AnimationTest = () => {
   const [tipIndex, setTipIndex] = useState(0);
 
   useEffect(() => {
@@ -42,4 +42,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default AnimationTest;
