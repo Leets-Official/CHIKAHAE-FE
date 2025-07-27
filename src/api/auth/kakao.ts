@@ -1,7 +1,7 @@
 import api from '@/api/api';
 
 export const exchangeKakaoToken = async (accessToken: string) => {
-  const rest = await api.post('/auth/kakao', {
+  const rest = await api.post('/api/login/kakao', {
     accessToken,
   });
   console.log(rest);
