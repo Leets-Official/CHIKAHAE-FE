@@ -1,17 +1,40 @@
+import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import HomeTopNav from '@/components/ui/Nav/HomeTopNav';
 import BottomNav from '@/components/ui/Nav/BottomNav';
 import HomeBanner from '@/features/Home/homeBanner/HomeBanner';
 import { ReactComponent as Caution } from '@/assets/icons/caution.svg';
 import BrushingSessionList from '@/features/Home/todayMission/BrushingSessionList';
 import { useTodayMissions } from '@/hooks/queries/useGetTodayMissions';
+import { useToast } from '@/contexts/ToastContext';
 
 const HomePage = () => {
-  const { data: cards = [] } = useTodayMissions();
-
   /**
    * ==== 미션 완료 후 (ex. 퀴즈 끝나고, 양치 끝나고) 아래 코드 호출 필요 ====
+   * queryClient.invalidateQueries({ queryKey: ['pointBalance'] });
    * queryClient.invalidateQueries(['todayMissions']);
+   * navigate('/', { state: { missionCompleted: true, coinAmount: 미션 보상 코인 수 } });
    */
+
+  // 미션 완료 시 토스트 메세지 표시
+  const location = useLocation();
+  const { showToast } = useToast();
+
+  useEffect(() => {
+    const { missionCompleted, coinAmount } = location.state || {};
+
+    if (missionCompleted && coinAmount) {
+      showToast({
+        message: `치카코인 ${coinAmount}개가 적립되었습니다.`,
+        duration: 3000,
+      });
+
+      // 뒤로 가기 시 중복 방지
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state, showToast]);
+
+  const { data: cards = [] } = useTodayMissions();
 
   const today = new Date();
   const dateString = today.toLocaleDateString('ko-KR', {

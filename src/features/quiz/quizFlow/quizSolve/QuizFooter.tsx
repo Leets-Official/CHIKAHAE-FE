@@ -47,7 +47,7 @@ const QuizFooter = ({ step, selectedAnswer, onNext, onShowSummary }: QuizFooterP
               onClick={() => {
                 queryClient.invalidateQueries({ queryKey: ['pointBalance'] });
                 queryClient.invalidateQueries({ queryKey: ['todayMissions'] });
-                navigate('/');
+                navigate('/', { state: { missionCompleted: true, coinAmount: 10 } });
               }}
             >
               홈으로 이동하기
