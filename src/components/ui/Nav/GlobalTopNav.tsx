@@ -14,7 +14,7 @@ interface GlobalTopNavProps {
 
 const GlobalTopNav = ({
   isCenter,
-  type,
+  type= 'global',
   message = '기록하기',
   showCancel = true,
   showLeftIcon = true,

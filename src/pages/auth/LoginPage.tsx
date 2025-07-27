@@ -29,7 +29,7 @@ const LoginPage = () => {
         <div className='flex flex-col items-center gap-y-4  max-w-[480px] min-w-[360px] px-5'>
           <KakaoLoginButton />
           <p className='flex flex-col items-center justify-center font-bold text-[10px] leading-[11px] tracking-[-0.1px] text-fg-medium'>
-            <span>가입하면 CHIKAHE의 </span>
+            <span>가입하면 CHIKAHAE의 </span>
             <span>이용약관 및 개인정보처리방침에 동의하게 됩니다.</span>
           </p>
         </div>

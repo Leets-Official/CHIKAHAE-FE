@@ -5,9 +5,13 @@ import { useEffect, useState, useRef } from 'react';
 
 // 컴포넌트 구성 - [아이콘] [프로그레스바] [남은 시간]
 
-const Timer = ({ showSeconds = true, duration = 15, onComplete }: TimerProps) => {
+const Timer = ({ showSeconds = true, duration = 15, onComplete, size = 'default' }: TimerProps) => {
   const [isActive, setIsActive] = useState(true);
   const [remainingTime, setRemainingTime] = useState(duration);
+
+  // default(기존 퀴즈 타이머 사이즈) | wide(애니메이션 전용 넓은 타이머), 기본값은 default
+  const timerWidthClasses =
+    size === 'wide' ? 'max-w-[480px] min-w-[360px]' : 'max-w-[360px] min-w-[320px]';
 
   //  duration 변경되면 remainingTime 초기화
   useEffect(() => {
@@ -48,20 +52,21 @@ const Timer = ({ showSeconds = true, duration = 15, onComplete }: TimerProps) =>
   }, [isActive, onComplete]);
 
   return (
-    <div className='relative w-full max-w-[320px] h-[48px]'>
+    <div className={`relative w-full ${timerWidthClasses} h-[48px]`}>
       {/* 아이콘 */}
       <div className='absolute left-0 top-[35%] -translate-y-1/2 w-[48px] h-[48px] flex items-center justify-center z-10'>
         <TimerIcon />
       </div>
 
       {/* 프로그레스바 + 텍스트 */}
-      <div className='h-[40px] pl-[32px] pr-[10px] flex items-center gap-[8px]'>
+      <div className='h-[40px] pl-[32px] pr-[10px] flex items-center gap-[8px] w-full'>
         {/* 프로그레스 바 */}
-        <div className='flex h-[16px] w-[252px] bg-tangerine-weak rounded-r-full overflow-hidden relative z-0'>
+
+        <div className='flex h-[16px] flex-grow bg-tangerine-weak rounded-r-full overflow-hidden relative z-0'>
           {isActive && (
             <motion.div
               role='progressbar'
-              initial={{ width: '252px' }}
+              initial={{ width: '100%' }}
               animate={{ width: 0 }}
               transition={{ duration, ease: 'linear' }}
               className='h-full bg-tangerine-strong rounded-r-full'
