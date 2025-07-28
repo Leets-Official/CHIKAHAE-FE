@@ -6,19 +6,21 @@ import { useEffect, useState } from 'react';
 
 const LoginPage = () => {
   const prevStoredIndex = Number(sessionStorage.getItem('prevRandomIndex') ?? -1);
-  const [randomIndex, setRandomIndex] = useState(prevStoredIndex);
+  const [randomIndex, setRandomIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    setRandomIndex((prev) => {
-      let newIndex;
-      do {
-        newIndex = Math.floor(Math.random() * CHARACTER_MESSAGES.length);
-      } while (newIndex === prev); // 이전 state 값과 비교해서 중복 방지
-      sessionStorage.setItem('prevRandomIndex', newIndex.toString());
-      return newIndex;
-    });
+    let newIndex;
+    do {
+      newIndex = Math.floor(Math.random() * CHARACTER_MESSAGES.length);
+    } while (newIndex === prevStoredIndex);
+
+    setRandomIndex(newIndex);
+    sessionStorage.setItem('prevRandomIndex', newIndex.toString());
   }, []);
 
+  if (randomIndex === null) {
+    return null;
+  }
   const { main, sub, Svg } = CHARACTER_MESSAGES[randomIndex];
 
   return (
