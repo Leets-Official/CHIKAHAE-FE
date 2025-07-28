@@ -9,8 +9,8 @@ type UserInfoFormProps = {
   type: 'full' | 'partial';
   name?: string;
   onChangeName?: (value: string) => void;
-  gender: string;
-  onGenderChange: (value: string) => void;
+  gender: 'male' | 'female' | 'any' | '';
+  onGenderChange: (value: 'male' | 'female' | 'any') => void;
   birthDate: string;
   onBirthDateChange: (value: string) => void;
 };
@@ -71,7 +71,7 @@ const UserInfoForm = ({
           variant={type === 'full' ? 'formMiddle' : 'formTop'}
           selectedValue={gender}
           isActive={isActive}
-          onValueChange={onGenderChange}
+          onValueChange={(value) => onGenderChange(value as 'male' | 'female' | 'any')}
           className={clsx({
             'border-t-border-blue': isActive,
             'border-t-border-gray': !isActive,

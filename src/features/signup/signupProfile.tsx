@@ -2,15 +2,15 @@ import Image from '@/components/Image';
 import fallbackProfile from '@/assets/icons/fallbackProfile.svg';
 import InputContainer from '@/components/ui/Input/InputContainer';
 import Button from '@/components/ui/Button';
-import { useState } from 'react';
 
 interface SignupProfileProps {
+  nickname: string;
+  setNickname: React.Dispatch<React.SetStateAction<string>>;
+  profileImage: string | undefined;
+  setProfileImage: React.Dispatch<React.SetStateAction<string | undefined>>;
   onNext: () => void;
-  profileUrl?: string;
 }
-const SignupProfile = ({ onNext, profileUrl }: SignupProfileProps) => {
-  const [nickname, setNickname] = useState('');
-
+const SignupProfile = ({ nickname, setNickname, onNext, profileImage }: SignupProfileProps) => {
   const handleProfileImageClick = () => {
     console.log('프로필 사진 클릭(이미지 업로드 기능 구현 예정)');
   };
@@ -93,7 +93,7 @@ const SignupProfile = ({ onNext, profileUrl }: SignupProfileProps) => {
               onClick={handleProfileImageClick}
             >
               <Image
-                src={profileUrl || fallbackProfile}
+                src={profileImage || fallbackProfile}
                 alt='프로필 사진'
                 width={100}
                 height={100}

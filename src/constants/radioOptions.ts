@@ -1,7 +1,7 @@
 //radio button value  & label 값 저장
 
 export const GENDER = [
-  { name: '남성', value: 'male' },
   { name: '여성', value: 'female' },
-  { name: '무관', value: 'any' },
+  { name: '남성', value: 'male' },
+  { name: '기타', value: 'any' },
 ];

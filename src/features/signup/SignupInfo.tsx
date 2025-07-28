@@ -1,17 +1,17 @@
 import Button from '@/components/ui/Button';
-import { useState } from 'react';
 import UserInfoForm from '@/components/ui/UserInfoForm';
 import { isOver14 } from '@/utils/date';
 
 interface Props {
+  gender: 'male' | 'female' | 'any' | '';
+  setGender: React.Dispatch<React.SetStateAction<'male' | 'female' | 'any' | ''>>;
+  birthDate: string;
+  setBirthDate: React.Dispatch<React.SetStateAction<string>>;
   onNext: (nextStep: 'complete' | 'guardianIntro') => void;
 }
 
-const SignupInfo = ({ onNext }: Props) => {
-  const [gender, setGender] = useState('');
-  const [birthDate, setBirthDate] = useState('');
-
-  const isFormIncomplete = !gender || !birthDate;
+const SignupInfo = ({ gender, setGender, birthDate, setBirthDate, onNext }: Props) => {
+  const isFormIncomplete = gender === '' || !birthDate;
 
   const handleNext = () => {
     const nextStep = isOver14(birthDate) ? 'complete' : 'guardianIntro';
