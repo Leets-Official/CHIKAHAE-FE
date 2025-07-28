@@ -9,7 +9,6 @@ import BottomNav from '@/components/ui/Nav/BottomNav';
 import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 import Modal from '@/components/ui/Modal/Modal';
 
-
 type ModalType = 'logout' | 'withdraw' | null;
 
 const MyPage: React.FC = () => {
