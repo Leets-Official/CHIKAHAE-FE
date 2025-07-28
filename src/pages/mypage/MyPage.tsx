@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import ProfileSection from "./components/ProfileSection";
+import ProfileSection from "@/features/Mypage/components/ProfileSection";
 import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
-import MenuList from "./components/MenuList";
-import type { MenuItem } from "./components/MenuList";
+import MenuList from "@/features/Mypage/components/MenuList";
+import type { MenuItem } from "@/features/Mypage/components/MenuList";
 import BottomNav from '@/components/ui/Nav/BottomNav';
 import profile from "@/assets/icons/profile_default.svg";
 import { useNavigate } from "react-router-dom";
