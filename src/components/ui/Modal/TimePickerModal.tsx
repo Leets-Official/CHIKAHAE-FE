@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import TimePicker from '@/components/ui/TimePicker/TimePicker';
+import Button from '@/components/ui/Button/Button';
 
 interface TimePickerModalProps {
   onClose: () => void;
@@ -9,32 +10,35 @@ interface TimePickerModalProps {
   showIcon?: boolean;
 }
 
+
 const TimePickerModal: React.FC<TimePickerModalProps> = ({ onClose, isModalOpen, onConfirm }) => {
   const navigate = useNavigate();
 
   if (!isModalOpen) return null;
 
   return (
-    <div className='w-[320px] h-[294px] rounded-[8px] bg-white shadow-lg overflow-hidden'>
-      <div className='w-[320px] h-[234px] gap-[30px] pt-[30px] pr-[20px] pb-[30px] pl-[20px] flex flex-col items-center justify-center bg-white'>
+    <div className='w-[320px] h-[294px] rounded-[8px] bg-bg-primary-white shadow-lg overflow-hidden'>
+      <div className=' h-[234px] gap-[30px] py-8.5 px-5 flex flex-col items-center justify-center'>
         <TimePicker />
       </div>
-      <div className='flex w-[320px] h-[60px] gap-[10px] opacity-100 pr-[20px] pb-[20px] pl-[20px] rotate-0'>
-        <button
+      <div className='flex h-[60px] gap-[10px] px-[20px] pb-[20px]'>
+        <Button
+          variant='assistive'
           onClick={onClose}
-          className='w-[135px] h-[40px] pl-[12px] pr-[12px] rounded-[8px] border-[#CBD5DC] shadow-[0px_4px_0px_0px_#9CA6AF] bg-[#E9EEF2] text-sm font-semibold'
+          className='w-[135px] h-[40px] px-[12px] body-14-eb'
         >
           취소
-        </button>
-        <button
+        </Button>
+        <Button
+          variant='primary'
           onClick={() => {
             onConfirm();
             navigate('/mypage/alarm');
           }}
-          className='w-[135px] h-[40px] pl-[12px] pr-[12px] rounded-[8px] bg-[#5FC6F0] shadow-[0px_4px_0px_0px_#3DAFD9] text-white text-sm font-semibold'
+          className='w-[135px] h-[40px] px-[12px] body-14-eb'
         >
           확인
-        </button>
+        </Button>
       </div>
     </div>
   );

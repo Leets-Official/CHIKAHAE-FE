@@ -3,13 +3,10 @@ import { ReactComponent as RightIcon } from "@/assets/icons/chevron_right.svg";
 import TimePickerModal from '@/components/ui/Modal/TimePickerModal';
 import { useToast } from '@/contexts/ToastContext';
 
-// ModalType 타입 정의
-type ModalType = 'timePickerModal' | null;
-
 const ChikaAlarm = () => {
   const { showToast } = useToast();
-  const [modalType, setModalType] = useState<ModalType>(null);
-  const closeModal = () => setModalType(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const closeModal = () => setIsModalOpen(false);
   const handleConfirm = () => {
     showToast({ message: '알람 시간이 변경되었습니다!', duration: 3000, showIcon: false });
     closeModal();
@@ -22,23 +19,20 @@ const ChikaAlarm = () => {
 
   return (
     <>
-      <div>
+      <div className="w-full flex justify-center items-center min-h-[188px]">
         {/* 알람 리스트 */}
-        <div className='w-[320px] h-[188px] bg-[#F5F7FA] border-[2px] border-[#DCE3E8] rounded-[8px] border-solid flex relative top-[14px]'>
-          <div className='relative w-[320px] h-[160px] top-[14px] gap-[8px] flex flex-col'>
+        <div className='w-full h-[188px] bg-bg-primary-lightgray border-[2px] border-border-lightgray rounded-[8px] border-solid flex relative top-[14px]'>
+          <div className='relative h-[160px] top-[14px] gap-[8px] flex flex-col'>
             {alarms.map((alarm) => (
               <div
                 key={alarm.id}
-                className='w-[320px] h-[48px] flex justify-between pt-[12px] pr-[20px] pb-[12px] pl-[20px]'
+                className='w-[430px] h-[48px] flex justify-between px-[20px] py-[12px]'
               >
                 <span className='flex items-center justify-center body-16-eb'>{alarm.label}</span>
-                <div
-                  className='w-[72px] h-[24px] flex items-center justify-between body-16-b'
-                  style={{ color: 'var(--color-fg-medium)' }}
-                >
+                <div className='w-[72px] h-[24px] flex items-center justify-between text-fg-medium body-16-b'>
                   <span className='flex items-center justify-center body-16-b'>{alarm.time}</span>
-                  <button type='button' onClick={() => setModalType('timePickerModal')}>
-                    <RightIcon className='text-[#BAC3CB]' />
+                  <button type='button' onClick={() => setIsModalOpen(true)}>
+                    <RightIcon className='text-fg-medium' />
                   </button>
                 </div>
               </div>
@@ -46,11 +40,12 @@ const ChikaAlarm = () => {
           </div>
         </div>
       </div>
+
       {/* 타임피커모달의 확인 버튼을 누르면 Toast 띄우기 */}
-      {modalType && (
-        <div className='fixed inset-0 flex items-center justify-center bg-black/30 z-50'>
+      {isModalOpen && (
+        <div className='fixed inset-0 flex items-center justify-center bg-fg-verystrong/30 z-50'>
           <TimePickerModal
-            isModalOpen={modalType === 'timePickerModal'}
+            isModalOpen={isModalOpen}
             onClose={closeModal}
             onConfirm={handleConfirm}
             showIcon={false}

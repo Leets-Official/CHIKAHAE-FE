@@ -107,11 +107,13 @@
   --color-bg-primary-white: #ffffff;
   --color-bg-primary-gray: #dce3e8;
   --color-bg-secondary-gray: #e9eef2;
+  --color-bg-primary-lightgray: #f5f7fa;
   --color-bg-tertiary-pink: #ffe1ea;
   --color-bg-tertiary-blue: #d6f3ff;
   --color-bg-tertiary-gray: #fafbfc;
   --color-bg-gray-weak: #d9d9d9;
   --color-bg-primary-yellow: #fee500;
+  --color-bg-primary-tangerine: #ffb67a;
 
   /* Foreground Colors (icon, text) */
   --color-fg-verystrong: #000000;
@@ -129,6 +131,7 @@
   --color-fg-secondary-strong: #ffffff;
   --color-fg-primary: #181b1f;
   --color-fg-primary-blue: #5fc6f0;
+  --color-fg-secondary-blue: #00a0e9;
   --color-fg-weak: #ced6dd;
 
   --color-fg-system-success: #199b6a;
@@ -143,6 +146,7 @@
   --color-border-blue-medium: #3dafd9;
   --color-border-pink: #f05f83;
   --color-border-gray: #9ca6af;
+  --color-border-lightgray: #dce3e8;
   --color-border-medium: #bac3cb;
   --color-border-gray-weak: #ced6dd;
 
