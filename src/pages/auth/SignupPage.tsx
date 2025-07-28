@@ -6,7 +6,7 @@ import SignupGuardianIntro from '@/features/signup/SignupGuardianIntro';
 import SignupGuardianForm from '@/features/signup/SignupGuardianForm';
 import SignupComplete from '@/features/signup/SignupComplete';
 import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
-import { signupUser } from '@/api/auth/signup';
+import { signupUser } from '@/api/auth/signupAPI';
 
 type Step = 'profile' | 'info' | 'guardianIntro' | 'guardianForm' | 'complete';
 

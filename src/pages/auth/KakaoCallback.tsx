@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
-import { exchangeKakaoToken } from '@/api/auth/kakao';
+import { exchangeKakaoToken } from '@/api/auth/kakaoAPI';
 
 const KakaoCallback = () => {
   const [searchParams] = useSearchParams(); // URL 쿼리 파라미터 가져오기
