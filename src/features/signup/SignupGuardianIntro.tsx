@@ -1,10 +1,10 @@
 import Button from '@/components/ui/Button';
 
-interface Props {
+interface SignupGuardianIntroProps {
   onNext: () => void;
 }
 
-const SignupGuardianIntro = ({ onNext }: Props) => {
+const SignupGuardianIntro = ({ onNext }: SignupGuardianIntroProps) => {
   return (
     <>
       <div

@@ -1,7 +1,7 @@
 import Button from '@/components/ui/Button';
 import UserInfoForm from '@/components/ui/UserInfoForm';
 
-interface Props {
+interface SignupGuardianFormProps {
   name: string;
   setName: React.Dispatch<React.SetStateAction<string>>;
   gender: 'male' | 'female' | 'any' | '';
@@ -19,7 +19,7 @@ const SignupGuardianForm = ({
   birthDate,
   setBirthDate,
   onNext,
-}: Props) => {
+}: SignupGuardianFormProps) => {
   const isFormIncomplete = gender === '' || !birthDate || !name;
 
   return (
