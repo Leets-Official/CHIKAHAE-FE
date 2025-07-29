@@ -2,13 +2,20 @@ import React from 'react';
 import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 import UserInfoList from '@/features/Mypage/components/UserInfoList';
 import type { MenuItemType } from '@/features/Mypage/components/UserInfoList';
+import { USER_INFO_META } from '@/constants/userInfoMeta';
 
-const menuData: MenuItemType[] = [
-  { key: 'name', label: '이름', value: '김양치' },
-  { key: 'gender', label: '성별', value: '여성' },
-  { key: 'birthDate', label: '생년월일', value: '2099-99-99' },
-  { key: 'email', label: '계정', value: 'chikahea@leets.com' },
-];
+// 실제 사용자 정보는 아래처럼 가져오거나 props/context 등으로 전달
+const userValues: Record<string, string> = {
+  name: '김양치',
+  gender: '여성',
+  birthDate: '2099-99-99',
+  email: 'chikahea@leets.com',
+};
+
+const menuData: MenuItemType[] = USER_INFO_META.map(meta => ({
+  ...meta,
+  value: userValues[meta.key] || '',
+}));
 
 const UserInfoPage: React.FC = () => {
 

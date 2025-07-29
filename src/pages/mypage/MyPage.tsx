@@ -36,7 +36,9 @@ const MyPage: React.FC = () => {
   };
 
   const confirmExit = () => {
-    localStorage.clear();
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('nickname');
     navigate('/login');
   };
 
