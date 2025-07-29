@@ -40,17 +40,16 @@ const EditProfilePage = () => {
         />
       </div>
 
-      <div
+       <div
         className={`
-          fixed bottom-0 left-1/2 -translate-x-1/2
-          flex h-14 w-full max-w-[480px] min-w-[360px]
-          items-center px-[20px] pb-[20px]
-        `}
-      >
+          fixed bottom-0 left-1/2 -translate-x-1/2 
+          w-full max-w-[480px] min-w-[360px] 
+          px-4 py-2.5`}
+        >
         <Button
           size="large"
           variant="primary"
-          fullWidth
+          fullWidth={true}
           onClick={() => {
             localStorage.setItem("nickname", nickname);
             navigate("/mypage");
