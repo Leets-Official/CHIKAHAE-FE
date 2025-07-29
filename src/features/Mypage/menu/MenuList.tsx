@@ -1,6 +1,6 @@
 import React from 'react';
-import MenuItem from '@/features/Mypage/components/MenuItem';
-import type { MenuItemType } from '@/features/Mypage/components/MenuItem';
+import MenuItem from '@/features/Mypage/menu/MenuItem';
+import type { MenuItemType } from '@/features/Mypage/menu/MenuItem';
 export type MenuItem = MenuItemType;
 import { ReactComponent as RightIcon } from '@/assets/icons/chevron_right.svg';
 
@@ -17,9 +17,7 @@ const MenuList: React.FC<MenuListProps> = ({ items }) => (
         onClick={item.onClick}
       >
         <div className='w-[60px] h-[22px] flex items-center gap-1'>
-          <span className='body-16-eb leading-[22px] tracking-tight text-left'>
-            {item.label}
-          </span>
+          <span className='body-16-eb leading-[22px] tracking-tight text-left'>{item.label}</span>
         </div>
         <div className='flex items-center justify-center w-[24px] h-[24px]'>
           <RightIcon className='text-fg-medium' />

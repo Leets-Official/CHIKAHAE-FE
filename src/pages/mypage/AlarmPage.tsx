@@ -1,18 +1,18 @@
 import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
-import ChikaAlarm from '@/features/Mypage/components/ChikaAlarm';
+import AlarmContent from '@/features/Mypage/alarm/alarmSet/AlarmContent';
 
-const ChikaAlarmPage = () => {
+const AlarmPage = () => {
   return (
     <>
       <div className='w-full min-h-screen flex flex-col gap-6 mx-auto'>
-        <GlobalTopNav message='양치 알림' showCancel={false} type="global" />
+        <GlobalTopNav message='양치 알림' showCancel={false} />
         <div className='h-[24px]' />
         <div className='w-full h-[188px] rounded-[8px] px-[20px] py-[10px] mx-auto'>
-          <ChikaAlarm />
+          <AlarmContent />
         </div>
       </div>
     </>
   );
 };
 
-export default ChikaAlarmPage;
+export default AlarmPage;

@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { ReactComponent as RightIcon } from "@/assets/icons/chevron_right.svg";
 import TimePickerModal from '@/components/ui/Modal/TimePickerModal';
 import { useToast } from '@/contexts/ToastContext';
+import AlarmList from './AlarmList';
 
-const ChikaAlarm = () => {
+const AlarmContent = () => {
   const { showToast } = useToast();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const closeModal = () => setIsModalOpen(false);
@@ -19,25 +19,9 @@ const ChikaAlarm = () => {
 
   return (
     <>
-      <div className="w-full flex justify-center items-center min-h-[188px]">
-        {/* 알람 리스트 */}
+      <div className='w-full flex justify-center items-center min-h-[188px]'>
         <div className='w-full h-[188px] bg-bg-primary-lightgray border-[2px] border-border-lightgray rounded-[8px] border-solid flex relative top-[14px]'>
-          <div className='relative h-[160px] top-[14px] gap-[8px] flex flex-col'>
-            {alarms.map((alarm) => (
-              <div
-                key={alarm.id}
-                className='w-[430px] h-[48px] flex justify-between px-[20px] py-[12px]'
-              >
-                <span className='flex items-center justify-center body-16-eb'>{alarm.label}</span>
-                <div className='w-[72px] h-[24px] flex items-center justify-between text-fg-medium body-16-b'>
-                  <span className='flex items-center justify-center body-16-b'>{alarm.time}</span>
-                  <button type='button' onClick={() => setIsModalOpen(true)}>
-                    <RightIcon className='text-fg-medium' />
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
+          <AlarmList alarms={alarms} onClick={() => setIsModalOpen(true)} />
         </div>
       </div>
 
@@ -56,4 +40,4 @@ const ChikaAlarm = () => {
   );
 };
 
-export default ChikaAlarm;
+export default AlarmContent;
