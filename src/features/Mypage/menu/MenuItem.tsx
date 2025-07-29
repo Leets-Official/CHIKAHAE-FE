@@ -21,7 +21,7 @@ const MenuItem: React.FC<MenuItemProps> = ({ item }) => {
       className='w-full h-[48px] flex items-center justify-between px-[20px] py-[12px]'
     >
       <div className='flex items-center gap-1'>
-        <span className='w-[58px] h-[22px] body-16-eb leading-[22px]'>
+        <span className='w-[58px] h-[22px] body-16-eb leading-[22px] text-fg-gray-strong'>
           {item.label}
         </span>
       </div>
