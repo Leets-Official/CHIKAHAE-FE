@@ -2,9 +2,7 @@
 import { fontFamily } from 'tailwindcss/defaultTheme';
 
 export default {
-  content: [
-    './index.html', './src/**/*.{js,ts,jsx,tsx}', './src/styles/**/*.{css}',
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}', './src/styles/**/*.{css}'],
   theme: {
     extend: {
       fontFamily: {
@@ -119,10 +117,8 @@ export default {
           90: '#22272d',
           100: '#181b1f',
         },
-      }
-    }
+      },
+    },
   },
-  plugins: [
-    require('tailwind-scrollbar-hide'),
-  ],
-}
+  plugins: [require('tailwind-scrollbar-hide')],
+};
