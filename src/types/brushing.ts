@@ -2,7 +2,7 @@ export interface BrushingCardConfig {
   id: string;
   title: string;
   description: string;
-  navigate?: string;
+  route?: string;
   buttonText: string;
   isCompleted: boolean;
 }

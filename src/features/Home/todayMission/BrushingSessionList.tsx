@@ -80,9 +80,7 @@ const BrushingSessionList: React.FC<BrushingSessionListProps> = ({ cards }) => {
               title={card.title}
               description={card.description}
               done={card.isCompleted}
-              onClick={
-                card.isCompleted || !card.navigate ? undefined : () => navigate(card.navigate!)
-              }
+              onClick={card.isCompleted || !card.route ? undefined : () => navigate(card.route!)}
               buttonClassName='text-fg-secondary-strong'
               buttonText={card.buttonText}
             />

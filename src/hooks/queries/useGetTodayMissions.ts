@@ -12,8 +12,8 @@ export const useTodayMissions = () => {
         id: mission.code,
         title: mission.title,
         description: mission.description,
-        buttonText: mission.title === '오늘의 퀴즈' ? '퀴즈 도전 하기' : '양치하러 가기',
-        navigate: mission.title === '오늘의 퀴즈' ? '/quiz/start' : '/brush/start',
+        buttonText: mission.code === 'DAILY_QUIZ' ? '퀴즈 도전 하기' : '양치하러 가기',
+        route: mission.code === 'DAILY_QUIZ' ? '/quiz/start' : '/brush/start',
         isCompleted: mission.isCompleted,
       }));
     },
