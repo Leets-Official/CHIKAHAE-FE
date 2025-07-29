@@ -5,7 +5,13 @@ import { useEffect, useState, useRef } from 'react';
 
 // 컴포넌트 구성 - [아이콘] [프로그레스바] [남은 시간]
 
-const Timer = ({ showSeconds = true, duration = 15, onComplete, size = 'default' }: TimerProps) => {
+const Timer = ({
+  showSeconds = true,
+  duration = 15,
+  onComplete,
+  size = 'default',
+  mode = 'quiz',
+}: TimerProps) => {
   const [isActive, setIsActive] = useState(true);
   const [remainingTime, setRemainingTime] = useState(duration);
 
@@ -51,6 +57,14 @@ const Timer = ({ showSeconds = true, duration = 15, onComplete, size = 'default'
     return () => clearInterval(interval);
   }, [isActive, onComplete]);
 
+  const formatTime = (seconds: number) => {
+    if (mode === 'animation') {
+      const minutes = Math.floor(seconds / 60);
+      const secs = seconds % 60;
+      return `${minutes}분 ${secs}초`;
+    }
+    return seconds.toString();
+  };
   return (
     <div className={`relative w-full ${timerWidthClasses} h-[48px]`}>
       {/* 아이콘 */}
@@ -75,10 +89,10 @@ const Timer = ({ showSeconds = true, duration = 15, onComplete, size = 'default'
           )}
         </div>
 
-        {/* 텍스트 (초) */}
+        {/* 텍스트 (초 or 분:초) */}
         {showSeconds && (
-          <span className='w-[25px] text-[20px] font-extrabold leading-[23px] text-tangerine-strong text-center'>
-            {remainingTime}
+          <span className='auto-width text-[20px] font-extrabold leading-[23px] text-tangerine-strong text-center'>
+            {formatTime(remainingTime)}
           </span>
         )}
       </div>

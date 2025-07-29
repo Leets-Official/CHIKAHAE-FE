@@ -4,4 +4,5 @@ export type TimerProps = {
   onComplete?: () => void;
   onTimeout?: () => void;
   size?: 'default' | 'wide';
+  mode?: 'quiz' | 'animation';
 };
