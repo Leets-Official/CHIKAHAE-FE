@@ -4,9 +4,9 @@ import { isOver14 } from '@/utils/date';
 
 interface SignupInfoProps {
   gender: 'male' | 'female' | 'any' | '';
-  setGender: React.Dispatch<React.SetStateAction<'male' | 'female' | 'any' | ''>>;
+  setGender: (gender: 'male' | 'female' | 'any' | '') => void;
   birthDate: string;
-  setBirthDate: React.Dispatch<React.SetStateAction<string>>;
+  setBirthDate: (birthDate: string) => void;
   onNext: (nextStep: 'complete' | 'guardianIntro') => void;
 }
 

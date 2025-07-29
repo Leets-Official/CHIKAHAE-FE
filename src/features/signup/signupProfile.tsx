@@ -5,9 +5,9 @@ import Button from '@/components/ui/Button';
 
 interface SignupProfileProps {
   nickname: string;
-  setNickname: React.Dispatch<React.SetStateAction<string>>;
+  setNickname: (nickname: string) => void;
   profileImage: string | undefined;
-  setProfileImage: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setProfileImage: (profileImage: string) => void;
   onNext: () => void;
 }
 const SignupProfile = ({ nickname, setNickname, onNext, profileImage }: SignupProfileProps) => {

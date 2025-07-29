@@ -3,11 +3,11 @@ import UserInfoForm from '@/components/ui/UserInfoForm';
 
 interface SignupGuardianFormProps {
   name: string;
-  setName: React.Dispatch<React.SetStateAction<string>>;
+  setName: (name: string) => void;
   gender: 'male' | 'female' | 'any' | '';
-  setGender: React.Dispatch<React.SetStateAction<'male' | 'female' | 'any' | ''>>;
+  setGender: (gender: 'male' | 'female' | 'any' | '') => void;
   birthDate: string;
-  setBirthDate: React.Dispatch<React.SetStateAction<string>>;
+  setBirthDate: (birthDate: string) => void;
   onNext: () => void;
 }
 

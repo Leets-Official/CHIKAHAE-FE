@@ -9,21 +9,37 @@ import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 import { signupUser } from '@/api/auth/signupAPI';
 
 type Step = 'profile' | 'info' | 'guardianIntro' | 'guardianForm' | 'complete';
+type Gender = 'male' | 'female' | 'any' | '';
+
+interface UserInfo {
+  nickname: string;
+  birth: string;
+  gender: Gender;
+  profileImage?: string;
+}
+
+interface ParentInfo {
+  name: string;
+  gender: Gender;
+  birth: string;
+}
 
 function SignupPage() {
   const [step, setStep] = useState<Step>('profile');
   const navigate = useNavigate();
 
-  //유저 정보 상태
-  const [nickname, setNickname] = useState('');
-  const [birth, setBirth] = useState('');
-  const [gender, setGender] = useState<'male' | 'female' | 'any' | ''>('');
-  const [profileImage, setProfileImage] = useState<string | undefined>();
+  const [user, setUser] = useState<UserInfo>({
+    nickname: '',
+    birth: '',
+    gender: '',
+    profileImage: undefined,
+  });
 
-  // 보호자 정보 상태
-  const [parentName, setParentName] = useState('');
-  const [parentGender, setParentGender] = useState<'male' | 'female' | 'any' | ''>('');
-  const [parentBirth, setParentBirth] = useState('');
+  const [parent, setParent] = useState<ParentInfo>({
+    name: '',
+    gender: '',
+    birth: '',
+  });
 
   const goToNext = (nextStep: Step) => setStep(nextStep);
 
@@ -39,15 +55,14 @@ function SignupPage() {
       setStep(prevStep);
     } else {
       if (window.history.length > 1) {
-        //브라우저 히스토리에 이전 페이지 있는지 체크
-        navigate(-1); // 있으면 이전 페이지로 이동
+        navigate(-1);
       } else {
-        navigate('/'); // 없으면(signupprofilePage) : 홈으로 네비게이트
+        navigate('/');
       }
     }
   };
 
-  const convertGenderToBoolean = (g: 'male' | 'female' | 'any' | '') => {
+  const convertGenderToBoolean = (g: Gender) => {
     if (g === 'male') return true;
     if (g === 'female') return false;
     return undefined;
@@ -63,13 +78,13 @@ function SignupPage() {
     try {
       await signupUser({
         kakaoAccessToken,
-        nickname,
-        birth,
-        gender: convertGenderToBoolean(gender),
-        profileImage,
-        parentName: parentName || undefined,
-        parentGender: convertGenderToBoolean(parentGender),
-        parentBirth: parentBirth || undefined,
+        nickname: user.nickname,
+        birth: user.birth,
+        gender: convertGenderToBoolean(user.gender),
+        profileImage: user.profileImage,
+        parentName: parent.name || undefined,
+        parentGender: convertGenderToBoolean(parent.gender),
+        parentBirth: parent.birth || undefined,
       });
 
       goToNext('complete');
@@ -84,20 +99,22 @@ function SignupPage() {
       <div>
         {step === 'profile' && (
           <SignupProfile
-            nickname={nickname}
-            setNickname={setNickname}
-            profileImage={profileImage}
-            setProfileImage={setProfileImage}
+            nickname={user.nickname}
+            setNickname={(nickname: string) => setUser((prev) => ({ ...prev, nickname }))}
+            profileImage={user.profileImage}
+            setProfileImage={(profileImage: string) =>
+              setUser((prev) => ({ ...prev, profileImage }))
+            }
             onNext={() => goToNext('info')}
           />
         )}
 
         {step === 'info' && (
           <SignupInfo
-            birthDate={birth}
-            setBirthDate={setBirth}
-            gender={gender}
-            setGender={setGender}
+            birthDate={user.birth}
+            setBirthDate={(birth) => setUser((prev) => ({ ...prev, birth }))}
+            gender={user.gender}
+            setGender={(gender) => setUser((prev) => ({ ...prev, gender }))}
             onNext={(nextStep) => goToNext(nextStep)}
           />
         )}
@@ -108,12 +125,12 @@ function SignupPage() {
 
         {step === 'guardianForm' && (
           <SignupGuardianForm
-            name={parentName}
-            setName={setParentName}
-            gender={parentGender}
-            setGender={setParentGender}
-            birthDate={parentBirth}
-            setBirthDate={setParentBirth}
+            name={parent.name}
+            setName={(name) => setParent((prev) => ({ ...prev, name }))}
+            gender={parent.gender}
+            setGender={(gender) => setParent((prev) => ({ ...prev, gender }))}
+            birthDate={parent.birth}
+            setBirthDate={(birth) => setParent((prev) => ({ ...prev, birth }))}
             onNext={handleFinalSignup}
           />
         )}
