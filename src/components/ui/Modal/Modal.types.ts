@@ -22,4 +22,6 @@ export interface ModalProps {
 
   closeOnOverlayClick?: boolean; // 배경 클릭 시 닫기 여부 (기본: true)
   closeOnEsc?: boolean; // ESC 키로 닫기 여부 (기본: true)
+
+  className?: string;
 }
