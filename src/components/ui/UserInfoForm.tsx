@@ -13,6 +13,8 @@ type UserInfoFormProps = {
   onGenderChange: (value: string) => void;
   birthDate: string;
   onBirthDateChange: (value: string) => void;
+  phoneNumber?: string;
+  onChangePhoneNumber?: (value: string) => void;
 };
 
 const UserInfoForm = ({
@@ -23,6 +25,8 @@ const UserInfoForm = ({
   onGenderChange,
   birthDate,
   onBirthDateChange,
+  phoneNumber = '',
+  onChangePhoneNumber = () => {},
 }: UserInfoFormProps) => {
   const [isActive, setIsActive] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
@@ -37,6 +41,14 @@ const UserInfoForm = ({
     }
   };
 
+  const formatPhoneNumber = (value: string) => {
+    const digits = value.replace(/\D/g, ''); // 숫자만 남김
+    if (digits.startsWith('010')) {
+      return digits.replace(/^(\d{3})(\d{4})(\d{0,4}).*/, '$1-$2-$3').replace(/-$/, ''); // 마지막 - 제거
+    }
+    return digits;
+  };
+
   const containerClass = clsx(
     'rounded-lg shadow-md overflow-hidden',
     'border-t-[2px] border-l-[2px] border-r-[2px] border-b-[5px]',
@@ -45,6 +57,10 @@ const UserInfoForm = ({
       'border-[#5fc6f0]': isActive,
     },
   );
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    onChangePhoneNumber(formatted); 
+  };
 
   return (
     <>
@@ -79,18 +95,32 @@ const UserInfoForm = ({
         />
 
         <InputContainer
-          variant='formBottom'
+          variant='formMiddle'
           label='생년월일'
           placeholder='0000.00.00'
           calender
           value={birthDate}
           onChange={onBirthDateChange}
           isActive={isActive}
-          className={clsx({
+          className={clsx('relative z-10 w-full ', {
             'border-t-border-blue': isActive,
             'border-t-border-gray': !isActive,
           })}
         />
+        {type === 'full' && (
+          <InputContainer
+            label='전화번호'
+            placeholder='전화번호를 입력해 주세요.'
+            variant='formBottom'
+            value={phoneNumber}
+            isActive={isActive}
+            onChange={handlePhoneChange}
+            className={clsx({
+              'border-t-border-blue': isActive,
+              'border-t-border-gray': !isActive,
+            })}
+          />
+        )}
       </div>
     </>
   );
