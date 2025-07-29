@@ -7,6 +7,7 @@ import SignupGuardianForm from '@/features/signup/SignupGuardianForm';
 import SignupComplete from '@/features/signup/SignupComplete';
 import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 import { signupUser } from '@/api/auth/signupAPI';
+import Toast from '@/components/ui/Toast/Toast';
 
 type Step = 'profile' | 'info' | 'guardianIntro' | 'guardianForm' | 'complete';
 type Gender = 'male' | 'female' | 'any' | '';
@@ -41,6 +42,8 @@ function SignupPage() {
     birth: '',
   });
 
+  const [toasts, setToasts] = useState<{ id: string; message: string; duration?: number }[]>([]);
+
   const goToNext = (nextStep: Step) => setStep(nextStep);
 
   const getPrevStep = (currentStep: Step): Step | null => {
@@ -68,6 +71,16 @@ function SignupPage() {
     return undefined;
   };
 
+  // 토스트 추가 함수
+  const showToast = (id: string, message: string, duration = 3000) => {
+    setToasts((prev) => [...prev, { id, message, duration }]);
+  };
+
+  // 토스트 제거 함수
+  const removeToast = (id: string) => {
+    setToasts((prev) => prev.filter((toast) => toast.id !== id));
+  };
+
   const handleFinalSignup = async () => {
     const kakaoAccessToken = localStorage.getItem('kakaoAccessToken');
     if (!kakaoAccessToken) {
@@ -90,7 +103,7 @@ function SignupPage() {
       goToNext('complete');
     } catch (e) {
       console.error('회원가입 실패:', e);
-      alert('회원가입 중 오류가 발생했습니다. 다시 시도해주세요.');
+      showToast('signin-error', '회원가입 중 오류가 발생했습니다. 다시 시도해주세요');
     }
   };
   return (
@@ -136,6 +149,11 @@ function SignupPage() {
         )}
 
         {step === 'complete' && <SignupComplete />}
+      </div>
+      <div className='fixed top-0 right-3 flex flex-col gap-2 z-50'>
+        {toasts.map(({ id, message, duration }) => (
+          <Toast key={id} id={id} message={message} duration={duration} onClose={removeToast} />
+        ))}
       </div>
     </>
   );
