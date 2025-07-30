@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SignupProfile from '@/features/signup/signupProfile';
+import SignupProfile from '@/features/signup/SignupProfile';
 import SignupInfo from '@/features/signup/SignupInfo';
 import SignupGuardianIntro from '@/features/signup/SignupGuardianIntro';
 import SignupGuardianForm from '@/features/signup/SignupGuardianForm';
@@ -36,7 +36,7 @@ function SignupPage() {
 
   return (
     <>
-      <GlobalTopNav type='signup' message='' onClickLeft={handleBack} />
+      <GlobalTopNav type='signup' message='' onClickLeft={handleBack}/>
       <div>
         {step === 'profile' && <SignupProfile onNext={() => goToNext('info')} />}
         {step === 'info' && <SignupInfo onNext={(nextStep) => goToNext(nextStep)} />}

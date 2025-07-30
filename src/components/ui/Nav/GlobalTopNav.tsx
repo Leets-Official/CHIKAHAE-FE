@@ -14,7 +14,7 @@ interface GlobalTopNavProps {
 
 const GlobalTopNav = ({
   isCenter,
-  type= 'global',
+  type = 'global',
   message = '기록하기',
   showCancel = true,
   showLeftIcon = true,
@@ -28,10 +28,10 @@ const GlobalTopNav = ({
         fixed top-0 left-1/2 -translate-x-1/2
         flex h-14 px-4
         items-center
-        bg-bg-tertiary-gray
-        w-full
+        ${type === 'signup' ? 'bg-transparent' : 'bg-bg-tertiary-gray'}
         justify-between
-        max-w-[480px] min-w-[360px]`}
+        max-w-[480px] min-w-[360px]
+        z-10`}
     >
       <div className='w-[30px] flex justify-start'>
         {showLeftIcon && (
