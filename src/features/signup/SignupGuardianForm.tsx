@@ -1,18 +1,30 @@
 import Button from '@/components/ui/Button';
 import UserInfoForm from '@/components/ui/UserInfoForm';
 import { ReactComponent as SignupBg } from '@/assets/images/signupBackground.svg';
-import { useState } from 'react';
 
 interface Props {
+  name: string;
+  setName: (name: string) => void;
+  gender: string;
+  setGender: (gender: string) => void;
+  birthDate: string;
+  setBirthDate: (birth: string) => void;
+  phoneNumber: string;
+  setPhoneNumber: (phone: string) => void;
   onNext: () => void;
 }
 
-const SignupGuardianForm = ({ onNext }: Props) => {
-  const [name, setName] = useState('');
-  const [gender, setGender] = useState('');
-  const [birthDate, setBirthDate] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-
+const SignupGuardianForm = ({
+  name,
+  setName,
+  gender,
+  setGender,
+  birthDate,
+  setBirthDate,
+  phoneNumber,
+  setPhoneNumber,
+  onNext,
+}: Props) => {
   const isFormIncomplete =
     !gender || !birthDate || !name || phoneNumber.replace(/\D/g, '').length !== 11;
 

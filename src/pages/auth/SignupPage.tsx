@@ -22,6 +22,7 @@ interface ParentInfo {
   name: string;
   gender: string;
   birth: string;
+  phoneNumber: string;
 }
 
 function SignupPage() {
@@ -39,6 +40,7 @@ function SignupPage() {
     name: '',
     gender: '',
     birth: '',
+    phoneNumber: '',
   });
 
   const [toasts, setToasts] = useState<{ id: string; message: string; duration?: number }[]>([]);
@@ -91,6 +93,7 @@ function SignupPage() {
         parentName: parent.name || undefined,
         parentGender: parent.gender,
         parentBirth: parent.birth || undefined,
+        parentPhoneNumber: parent.phoneNumber,
       });
 
       goToNext('complete');
@@ -132,11 +135,15 @@ function SignupPage() {
         {step === 'guardianForm' && (
           <SignupGuardianForm
             name={parent.name}
-            setName={(name: any) => setParent((prev) => ({ ...prev, name }))}
+            setName={(name: string) => setParent((prev) => ({ ...prev, name }))}
             gender={parent.gender}
-            setGender={(gender: any) => setParent((prev) => ({ ...prev, gender }))}
+            setGender={(gender: string) => setParent((prev) => ({ ...prev, gender }))}
             birthDate={parent.birth}
-            setBirthDate={(birth: any) => setParent((prev) => ({ ...prev, birth }))}
+            setBirthDate={(birth: string) => setParent((prev) => ({ ...prev, birth }))}
+            phoneNumber={parent.phoneNumber}
+            setPhoneNumber={(phoneNumber: string) =>
+              setParent((prev) => ({ ...prev, phoneNumber }))
+            }
             onNext={handleFinalSignup}
           />
         )}

@@ -15,6 +15,7 @@ export interface SignupPayload {
   parentName?: string;
   parentGender?: string;
   parentBirth?: string;
+  parentPhoneNumber?: string;
 }
 
 export const signupUser = async (data: SignupPayload): Promise<SignupResponse> => {
