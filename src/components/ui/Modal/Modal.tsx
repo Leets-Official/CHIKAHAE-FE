@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import type { ModalProps } from './Modal.types';
 import Button from '@/components/ui/Button';
 import ModalPortal from './ModalPortal';
+import clsx from 'clsx';
 
 const Modal = ({
   isOpen,
@@ -15,6 +16,7 @@ const Modal = ({
   position = 'center',
   closeOnOverlayClick = true,
   closeOnEsc = true,
+  className,
 }: ModalProps) => {
   // ========== ESC 키로 모달 닫기 ========== //
   useEffect(() => {
@@ -40,7 +42,10 @@ const Modal = ({
       >
         <div className='absolute inset-0 bg-black opacity-30' />
         <div
-          className='bg-bg-primary-white shadow-lg w-[320px] h-[173px] rounded-[8px] flex flex-col gap-[1px]'
+          className={clsx(
+            'bg-bg-primary-white shadow-lg w-[320px] h-[173px] rounded-[8px] flex flex-col gap-[1px]',
+            className // 외부에서 전달된 스타일
+          )}
           onClick={(e) => e.stopPropagation()}
         >
           {/* ========== Modal Window ========== */}
@@ -65,8 +70,10 @@ const Modal = ({
               </div>
 
               {/* ========== Footer ========== */}
-              {!footer && (
-                <div className='w-full px-[20px] pb-[20px] flex gap-[10px] items-center justify-center self-stretch'>
+              {footer ? (
+                <div className="flex justify-center w-full">{footer}</div>
+              ) : (
+                <div className='flex justify-center w-full px-[20px] pb-[20px] gap-[10px] items-center self-stretch'>
                   <Button variant='assistive' size='medium' className='w-[135px]' onClick={onClose}>
                     {cancelText}
                   </Button>

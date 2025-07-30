@@ -1,12 +1,16 @@
 import Button from '@/components/ui/Button';
 import { Link } from 'react-router-dom';
+import { ReactComponent as Squirrel } from '@/assets/icons/squirrel.svg';
+import { ReactComponent as SignupBg } from '@/assets/images/signupBackground.svg';
 
 const SignupComplete = () => {
   return (
     <>
-      <div className='flex flex-col min-h-screen justify-between pt-11'>
-        <div
-          className='
+      <div className='flex flex-col items-center min-h-screen w-full '>
+        <SignupBg className='absolute top-0 left-1/2 -translate-x-1/2 max-w-[480px] min-w-[360px] h-full z-0' />
+        <div className='flex flex-col min-h-screen justify-between pt-11'>
+          <div
+            className='
         flex               
         flex-col         
         gap-y-10           
@@ -15,12 +19,13 @@ const SignupComplete = () => {
         w-full
         max-w-[480px]
         min-w-[360px]
-        mx-auto           
+        mx-auto          
+        z-10 
       '
-        >
-          <div className='w-full text-left'>
-            <p
-              className='
+          >
+            <div className='w-full text-left'>
+              <p
+                className='
               text-fg-primary
               text-[22px]
               font-extrabold
@@ -29,12 +34,12 @@ const SignupComplete = () => {
               self-stretch
               mb-2.5 
             '
-            >
-              치카해 가입이 완료되었어요!
-            </p>
+              >
+                치카해 가입이 완료되었어요!
+              </p>
 
-            <p
-              className='
+              <p
+                className='
               text-fg-primary
               text-[14px]
               font-normal
@@ -42,33 +47,29 @@ const SignupComplete = () => {
               tracking-[-0.14px]
               items-stretch
             '
-            >
-              이제 치카해의 기능을 모두 이용할 수 있어요.
-            </p>
-          </div>
+              >
+                이제 치카해의 기능을 모두 이용할 수 있어요.
+              </p>
+            </div>
 
-          <div
-            className='
-          flex              
-          flex-col       
-          items-center    
-          gap-y-[30px]     
-        '
-          ></div>
+            <div className='flex flex-col items-center justify-center py-25'>
+              <Squirrel />
+            </div>
+          </div>
         </div>
-      </div>
-      <div
-        className={`
+        <div
+          className={`
           fixed bottom-0 left-1/2 -translate-x-1/2 
-          w-full max-w-[480px] min-w-[360px] 
+           max-w-[480px] min-w-[360px] 
           px-4 py-2.5
           `}
-      >
-        <Link to='/'>
-          <Button variant='primary' size='large' fullWidth={true} disabled={false}>
-            치카해 이용하기
-          </Button>
-        </Link>
+        >
+          <Link to='/'>
+            <Button variant='primary' size='large' fullWidth={true} disabled={false}>
+              홈으로 이동하기
+            </Button>
+          </Link>
+        </div>
       </div>
     </>
   );

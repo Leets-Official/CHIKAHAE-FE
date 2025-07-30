@@ -44,7 +44,7 @@ const RadioButtonContainer = ({
   const current = stateClassMap[state];
 
   const containerClass = clsx(
-    'w-full h-[80px] px-4 py-3 flex flex-col',
+    'w-full h-[80px] px-4 py-3 flex flex-col gap justify-center items-start gap-1',
     variant === 'default' && 'rounded-lg border-[2px] border-b-5 shadow-md',
     (variant === 'formMiddle' || variant === 'formTop') && 'border-b',
     isActive ? 'border-b-[#5fc6f0]' : 'border-b-[#9CA6AF]',
@@ -55,13 +55,13 @@ const RadioButtonContainer = ({
 
   return (
     <div className={containerClass}>
-      <label className='flex items-center text-[12px] font-bold leading-[14px] tracking-[-0.12px] mb-[6px]'>
+      <label className='flex h-[56px] items-center text-[12px] font-bold leading-[14px] tracking-[-0.12px] mb-[px] '>
         {message}
         {importance === 'important' && (
           <span className='ml-[4px] text-[14px] font-medium text-fg-accent-red'>*</span>
         )}
       </label>
-      <div className='flex justify-between'>
+      <div className='flex items-center h-[20px] gap-x-20'>
         {options.map(({ name, value }) => (
           <RadioButton
             key={value}

@@ -1,37 +1,28 @@
 import Button from '@/components/ui/Button';
 import UserInfoForm from '@/components/ui/UserInfoForm';
+import { ReactComponent as SignupBg } from '@/assets/images/signupBackground.svg';
+import { useState } from 'react';
 
-interface SignupGuardianFormProps {
-  name: string;
-  setName: (name: string) => void;
-  gender: string;
-  setGender: (gender: string) => void;
-  birthDate: string;
-  setBirthDate: (birthDate: string) => void;
-  phoneNumber?: string;
-  setPhoneNumber?: (phoneNumber: string) => void;
+interface Props {
   onNext: () => void;
 }
 
-const SignupGuardianForm = ({
-  name,
-  setName,
-  gender,
-  setGender,
-  birthDate,
-  setBirthDate,
-  phoneNumber,
-  setPhoneNumber,
-  onNext,
-}: SignupGuardianFormProps) => {
-  const isFormIncomplete = !gender || !birthDate || !name;
+const SignupGuardianForm = ({ onNext }: Props) => {
+  const [name, setName] = useState('');
+  const [gender, setGender] = useState('');
+  const [birthDate, setBirthDate] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+
+  const isFormIncomplete =
+    !gender || !birthDate || !name || phoneNumber.replace(/\D/g, '').length !== 11;
 
   return (
-    <>
+    <div className='flex flex-col items-center min-h-screen w-full '>
+      <SignupBg className='absolute top-0 left-1/2 -translate-x-1/2 max-w-[480px] min-w-[360px] h-full z-0' />
       <div
         className='
       flex flex-col 
-      min-h-screen justify-between 
+      min-h-screen justify-between z
       pt-11
       '
       >
@@ -46,6 +37,7 @@ const SignupGuardianForm = ({
         max-w-[480px]
         min-w-[360px]
         mx-auto           
+        z-10
       '
         >
           <div className='w-full text-left'>
@@ -100,24 +92,24 @@ const SignupGuardianForm = ({
             </div>
           </div>
         </div>
-      </div>
-      <div
-        className={`
+        <div
+          className={`
           fixed bottom-0 left-1/2 -translate-x-1/2 
-          w-full max-w-[480px] min-w-[360px] 
+          max-w-[480px] min-w-[360px] 
           px-4 py-2.5`}
-      >
-        <Button
-          variant='primary'
-          onClick={onNext}
-          size='large'
-          fullWidth={true}
-          disabled={isFormIncomplete}
         >
-          완료
-        </Button>
+          <Button
+            variant='primary'
+            onClick={onNext}
+            size='large'
+            fullWidth={true}
+            disabled={isFormIncomplete}
+          >
+            완료
+          </Button>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

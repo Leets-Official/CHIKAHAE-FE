@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@import url('/fonts/font.css');
+@import url('/fonts/fonts.css');
 
 @layer base {
   html,
@@ -107,11 +107,13 @@
   --color-bg-primary-white: #ffffff;
   --color-bg-primary-gray: #dce3e8;
   --color-bg-secondary-gray: #e9eef2;
+  --color-bg-primary-lightgray: #f5f7fa;
   --color-bg-tertiary-pink: #ffe1ea;
   --color-bg-tertiary-blue: #d6f3ff;
   --color-bg-tertiary-gray: #fafbfc;
   --color-bg-gray-weak: #d9d9d9;
   --color-bg-primary-yellow: #fee500;
+  --color-bg-primary-tangerine: #ffb67a;
 
   /* Foreground Colors (icon, text) */
   --color-fg-verystrong: #000000;
@@ -122,13 +124,13 @@
   --color-fg-accent-pink-strong: #e04d73;
   --color-fg-accent-pink-weak: #f05f83;
   --color-fg-accent-toast: #4c98f5;
-
   --color-fg-veryweak: #f5f7fa;
   --color-fg-medium: #bac3cb;
   --color-fg-secondary: #fafbfc;
   --color-fg-secondary-strong: #ffffff;
   --color-fg-primary: #181b1f;
   --color-fg-primary-blue: #5fc6f0;
+  --color-fg-secondary-blue: #00a0e9;
   --color-fg-weak: #ced6dd;
 
   --color-fg-system-success: #199b6a;
@@ -136,6 +138,7 @@
   --color-fg-clear-blue: #4c98f5;
   --color-fg-accent-red: #de473d;
   --color-fg-gray-weak: #949393;
+  --color-fg-gray-weak-weak: #bbbbbb;
 
   /* Border */
   --color-border-blue: #5fc6f0;
@@ -143,6 +146,7 @@
   --color-border-blue-medium: #3dafd9;
   --color-border-pink: #f05f83;
   --color-border-gray: #9ca6af;
+  --color-border-lightgray: #dce3e8;
   --color-border-medium: #bac3cb;
   --color-border-gray-weak: #ced6dd;
 

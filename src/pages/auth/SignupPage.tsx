@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SignupProfile from '@/features/signup/signupProfile';
+import SignupProfile from '@/features/signup/meld';
 import SignupInfo from '@/features/signup/SignupInfo';
 import SignupGuardianIntro from '@/features/signup/SignupGuardianIntro';
 import SignupGuardianForm from '@/features/signup/SignupGuardianForm';
@@ -132,11 +132,11 @@ function SignupPage() {
         {step === 'guardianForm' && (
           <SignupGuardianForm
             name={parent.name}
-            setName={(name) => setParent((prev) => ({ ...prev, name }))}
+            setName={(name: any) => setParent((prev) => ({ ...prev, name }))}
             gender={parent.gender}
-            setGender={(gender) => setParent((prev) => ({ ...prev, gender }))}
+            setGender={(gender: any) => setParent((prev) => ({ ...prev, gender }))}
             birthDate={parent.birth}
-            setBirthDate={(birth) => setParent((prev) => ({ ...prev, birth }))}
+            setBirthDate={(birth: any) => setParent((prev) => ({ ...prev, birth }))}
             onNext={handleFinalSignup}
           />
         )}

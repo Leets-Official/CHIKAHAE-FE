@@ -2,6 +2,7 @@ import Button from '@/components/ui/Button';
 import TextButton from '@/components/ui/TextButton';
 import { useNavigate } from 'react-router-dom';
 import type { QuizFlowProps } from '@/types/quizView';
+import { useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
 
 // 퀴즈 하단부 (하단 버튼 영역 렌더링)
@@ -14,6 +15,7 @@ type QuizFooterProps = {
 };
 
 const QuizFooter = ({ step, selectedAnswer, onNext, onShowSummary }: QuizFooterProps) => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
 
   return (
@@ -38,7 +40,16 @@ const QuizFooter = ({ step, selectedAnswer, onNext, onShowSummary }: QuizFooterP
             <TextButton size='small' variant='default' fullWidth onClick={onShowSummary}>
               퀴즈 결과 확인하기
             </TextButton>
-            <Button size='large' variant='primary' fullWidth onClick={() => navigate('/')}>
+            <Button
+              size='large'
+              variant='primary'
+              fullWidth
+              onClick={() => {
+                queryClient.invalidateQueries({ queryKey: ['pointBalance'] });
+                queryClient.invalidateQueries({ queryKey: ['todayMissions'] });
+                navigate('/', { state: { missionCompleted: true, coinAmount: 10 } });
+              }}
+            >
               홈으로 이동하기
             </Button>
           </>

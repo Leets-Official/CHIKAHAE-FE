@@ -40,6 +40,7 @@ const UserInfoForm = ({
       setIsActive(false);
     }
   };
+
   const formatPhoneNumber = (value: string) => {
     const digits = value.replace(/\D/g, ''); // 숫자만 남김
     let normalized = digits.startsWith('010') ? digits : `010${digits}`;
@@ -94,14 +95,14 @@ const UserInfoForm = ({
         />
 
         <InputContainer
-          variant='formBottom'
+          variant='formMiddle'
           label='생년월일'
-          placeholder='0000.00.00'
+          placeholder='0000-00-00'
           calender
           value={birthDate}
           onChange={onBirthDateChange}
           isActive={isActive}
-          className={clsx({
+          className={clsx('relative z-10 w-full ', {
             'border-t-border-blue': isActive,
             'border-t-border-gray': !isActive,
           })}
