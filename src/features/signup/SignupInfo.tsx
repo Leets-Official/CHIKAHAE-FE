@@ -3,15 +3,15 @@ import UserInfoForm from '@/components/ui/UserInfoForm';
 import { isOver14 } from '@/utils/date';
 
 interface SignupInfoProps {
-  gender: 'male' | 'female' | 'any' | '';
-  setGender: (gender: 'male' | 'female' | 'any' | '') => void;
+  gender: string;
+  setGender: (gender: string) => void;
   birthDate: string;
   setBirthDate: (birthDate: string) => void;
   onNext: (nextStep: 'complete' | 'guardianIntro') => void;
 }
 
 const SignupInfo = ({ gender, setGender, birthDate, setBirthDate, onNext }: SignupInfoProps) => {
-  const isFormIncomplete = gender === '' || !birthDate;
+  const isFormIncomplete = !gender || !birthDate;
 
   const handleNext = () => {
     const nextStep = isOver14(birthDate) ? 'complete' : 'guardianIntro';

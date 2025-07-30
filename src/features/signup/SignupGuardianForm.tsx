@@ -4,10 +4,12 @@ import UserInfoForm from '@/components/ui/UserInfoForm';
 interface SignupGuardianFormProps {
   name: string;
   setName: (name: string) => void;
-  gender: 'male' | 'female' | 'any' | '';
-  setGender: (gender: 'male' | 'female' | 'any' | '') => void;
+  gender: string;
+  setGender: (gender: string) => void;
   birthDate: string;
   setBirthDate: (birthDate: string) => void;
+  phoneNumber: string;
+  setPhoneNumber: (phoneNumber: string) => void;
   onNext: () => void;
 }
 
@@ -18,9 +20,11 @@ const SignupGuardianForm = ({
   setGender,
   birthDate,
   setBirthDate,
+  phoneNumber,
+  setPhoneNumber,
   onNext,
 }: SignupGuardianFormProps) => {
-  const isFormIncomplete = gender === '' || !birthDate || !name;
+  const isFormIncomplete = !gender || !birthDate || !name;
 
   return (
     <>
@@ -85,11 +89,13 @@ const SignupGuardianForm = ({
               <UserInfoForm
                 type='full'
                 name={name}
-                onChangeName={setName}
+                onNameChange={setName}
                 gender={gender}
                 onGenderChange={setGender}
                 birthDate={birthDate}
                 onBirthDateChange={setBirthDate}
+                phoneNumber={phoneNumber}
+                onPhoneNumberChange={setPhoneNumber}
               />
             </div>
           </div>
