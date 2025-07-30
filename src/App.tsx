@@ -7,6 +7,7 @@ import SignupPage from './pages/auth/SignupPage';
 import QuizStartPage from '@/pages/quiz/QuizStartPage';
 import BrushingStartPage from './pages/brushing/BrushingStartPage';
 import AnimationTest from './pages/test/AnimationTest';
+import TermsPage from './pages/auth/terms/TermsPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path='/quiz' element={<QuizPage />} />
         <Route path='/brush/start' element={<BrushingStartPage />} />
         <Route path='/animation' element={<AnimationTest />} />
+        <Route path='/terms/:type' element={<TermsPage />} />
       </Routes>
     </BrowserRouter>
   );

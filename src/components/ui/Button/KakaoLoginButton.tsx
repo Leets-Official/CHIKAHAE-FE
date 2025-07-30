@@ -3,6 +3,7 @@ import { ModalSheet } from '../Modal';
 import { ReactComponent as Check } from '@/assets/icons/check.svg';
 import { ReactComponent as ChevronRight } from '@/assets/icons/chevron_right.svg';
 import Button from './Button';
+import { useNavigate } from 'react-router-dom';
 
 const KakaoLoginButton = () => {
   const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
@@ -12,6 +13,7 @@ const KakaoLoginButton = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [agreements, setAgreements] = useState([false, false, false]); // 약관 체크 상태
+  const navigate = useNavigate();
   const isCompleted = agreements.every(Boolean); // 모든 체크 확인
 
   const handleOpenModal = () => setIsModalOpen(true);
@@ -43,13 +45,11 @@ const KakaoLoginButton = () => {
             '[필수] 개인정보의 수집 및 이용에 대한 동의',
             '[선택] 개인정보의 수집 및 이용에 대한 동의',
           ].map((label, idx) => (
-            <div key={idx} onClick={() => toggleAgreement(idx)} className='cursor-pointer'>
+            <div key={idx} className='cursor-pointer'>
               <div className='flex flex-row justify-between'>
-                <div className='flex flex-row gap-2.5'>
+                <div className='flex flex-row gap-2.5' onClick={() => toggleAgreement(idx)}>
                   <Check
-                    className={`w-6 h-6 ${
-                      agreements[idx] ? 'text-fg-accent-blue-weak' : 'text-fg-medium'
-                    }`}
+                    className={`w-6 h-6 ${agreements[idx] ? 'text-fg-accent-blue-weak' : 'text-fg-medium'}`}
                   />
                   <li
                     className={`flex items-center text-[12px] font-bold leading-[14px] tracking-[-0.12px] ${
@@ -60,6 +60,12 @@ const KakaoLoginButton = () => {
                   </li>
                 </div>
                 <ChevronRight
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigate(
+                      `/terms/${['required-terms', 'required-privacy', 'optional-privacy'][idx]}`,
+                    );
+                  }}
                   className={`w-6 h-6 ${agreements[idx] ? 'text-fg-primary' : 'text-fg-medium'}`}
                 />
               </div>
