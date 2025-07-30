@@ -2,10 +2,10 @@ import { motion, useMotionValue, animate } from 'framer-motion';
 import { useEffect, useMemo, useRef } from 'react';
 import { clsx } from 'clsx';
 
-type ScrollColumnProps = {
-  items: string[];
-  selected: string;
-  onSelect: (val: string) => void;
+type ScrollColumnProps<T extends string> = {
+  items: T[];
+  selected: T;
+  onSelect: (val: T) => void;
 };
 
 const ITEM_HEIGHT = 63;
@@ -15,7 +15,11 @@ const SCROLL_DURATION = 0.1;
 
 const MIDDLE_OFFSET = (ITEM_VISIBLE_COUNT * ITEM_HEIGHT) / 2 - ITEM_HEIGHT / 2;
 
-export function ScrollColumn({ items, selected, onSelect }: ScrollColumnProps) {
+export function ScrollColumn<T extends string>({
+  items,
+  selected,
+  onSelect,
+}: ScrollColumnProps<T>) {
   const y = useMotionValue(0);
   const containerRef = useRef<HTMLDivElement>(null);
 

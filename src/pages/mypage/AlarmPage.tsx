@@ -4,12 +4,12 @@ import AlarmContent from '@/features/Mypage/alarm/alarmSet/AlarmContent';
 const AlarmPage = () => {
   return (
     <>
-      <div className='w-full min-h-screen flex flex-col gap-6 mx-auto'>
+      <div className='w-full min-h-screen flex flex-col mx-auto py-[12px]'>
         <GlobalTopNav message='양치 알림' showCancel={false} />
         <div className='h-[24px]' />
-        <div className='w-full h-[188px] rounded-[8px] px-[20px] py-[10px] mx-auto'>
+        <p className='px-[20px]'>
           <AlarmContent />
-        </div>
+        </p>
       </div>
     </>
   );
