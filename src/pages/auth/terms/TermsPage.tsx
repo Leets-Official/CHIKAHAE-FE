@@ -4,31 +4,18 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
 import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
-
-import requiredTerms from '@/assets/terms/required-terms.md?raw';
-import requiredPrivacy from '@/assets/terms/required-privacy.md?raw';
-import optionalPrivacy from '@/assets/terms/optional-privacy.md?raw';
-
-const TERMS_MAP: Record<string, string> = {
-  'required-terms': requiredTerms,
-  'required-privacy': requiredPrivacy,
-  'optional-privacy': optionalPrivacy,
-};
-const MESSAGES_MAP: Record<string, string> = {
-  'required-terms': '치카해 서비스 이용약관',
-  'required-privacy': '[필수] 개인정보 수집 및 이용에 대한 동의',
-  'optional-privacy': '[선택] 개인정보 수집 및 이용에 대한 동의',
-};
+import { TERMS } from '@/constants/terms';
+import type { TermType } from '@/constants/terms';
 
 const TermsPage = () => {
-  const { type } = useParams<{ type: string }>(); // URL 파라미터
+  const { type } = useParams<{ type: TermType }>();
   const [content, setContent] = useState('');
   const [navMessage, setNavMessage] = useState('');
 
   useEffect(() => {
-    if (type && TERMS_MAP[type]) {
-      setContent(TERMS_MAP[type]);
-      setNavMessage(MESSAGES_MAP[type] || '');
+    if (type && TERMS[type]) {
+      setContent(TERMS[type].content);
+      setNavMessage(TERMS[type].message);
     } else {
       setContent('');
       setNavMessage('');

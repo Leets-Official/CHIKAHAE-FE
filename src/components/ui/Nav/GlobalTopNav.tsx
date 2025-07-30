@@ -28,7 +28,7 @@ const GlobalTopNav = ({
         fixed top-0 left-1/2 -translate-x-1/2
         flex h-14 px-4
         items-center
-        bg-bg-tertiary-gray
+        ${type === 'signup' ? 'bg-transparent' : 'bg-bg-tertiary-gray'}
         justify-between
         max-w-[480px] min-w-[360px]
         z-10`}

@@ -43,10 +43,10 @@ const UserInfoForm = ({
 
   const formatPhoneNumber = (value: string) => {
     const digits = value.replace(/\D/g, ''); // 숫자만 남김
-    if (digits.startsWith('010')) {
-      return digits.replace(/^(\d{3})(\d{4})(\d{0,4}).*/, '$1-$2-$3').replace(/-$/, ''); // 마지막 - 제거
-    }
-    return digits;
+    let normalized = digits.startsWith('010') ? digits : `010${digits}`;
+    normalized = normalized.slice(0, 11); // 010 + 8자리까지만 허용
+
+    return normalized.replace(/^(\d{3})(\d{4})(\d{0,4}).*/, '$1-$2-$3').replace(/-$/, '');
   };
 
   const containerClass = clsx(
@@ -59,7 +59,7 @@ const UserInfoForm = ({
   );
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatPhoneNumber(e.target.value);
-    onChangePhoneNumber(formatted); 
+    onChangePhoneNumber(formatted);
   };
 
   return (
@@ -97,7 +97,7 @@ const UserInfoForm = ({
         <InputContainer
           variant='formMiddle'
           label='생년월일'
-          placeholder='0000.00.00'
+          placeholder='0000-00-00'
           calender
           value={birthDate}
           onChange={onBirthDateChange}
@@ -110,7 +110,7 @@ const UserInfoForm = ({
         {type === 'full' && (
           <InputContainer
             label='전화번호'
-            placeholder='전화번호를 입력해 주세요.'
+            placeholder='010-'
             variant='formBottom'
             value={phoneNumber}
             isActive={isActive}

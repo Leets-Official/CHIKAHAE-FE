@@ -55,13 +55,13 @@ const RadioButtonContainer = ({
 
   return (
     <div className={containerClass}>
-      <label className='flex h-[56px] items-center text-[12px] font-bold leading-[14px]  tracking-[-0.12px] mb-[px] '>
+      <label className='flex h-[56px] items-center text-[12px] font-bold leading-[14px] tracking-[-0.12px] mb-[px] '>
         {message}
         {importance === 'important' && (
           <span className='ml-[4px] text-[14px] font-medium text-fg-accent-red'>*</span>
         )}
       </label>
-      <div className='flex  items-center h-[20px] gap-x-20'>
+      <div className='flex items-center h-[20px] gap-x-20'>
         {options.map(({ name, value }) => (
           <RadioButton
             key={value}
@@ -72,7 +72,6 @@ const RadioButtonContainer = ({
             checked={selectedValue === value}
             onChange={onValueChange}
             isActive={isActive}
-    
           />
         ))}
       </div>

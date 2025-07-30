@@ -36,7 +36,7 @@ function SignupPage() {
 
   return (
     <>
-      <GlobalTopNav type='signup' message='' onClickLeft={handleBack} />
+      <GlobalTopNav type='signup' message='' onClickLeft={handleBack}/>
       <div>
         {step === 'profile' && <SignupProfile onNext={() => goToNext('info')} />}
         {step === 'info' && <SignupInfo onNext={(nextStep) => goToNext(nextStep)} />}

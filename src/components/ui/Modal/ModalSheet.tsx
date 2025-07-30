@@ -10,14 +10,7 @@ type ModalSheetProps = {
   closeOnEsc?: boolean;
 };
 
-const ModalSheet = ({
-  isOpen,
-  onClose,
-  title,
-  children,
-  closeOnOverlayClick = true,
-  closeOnEsc = true,
-}: ModalSheetProps) => {
+const ModalSheet = ({ isOpen, onClose, title, children, closeOnEsc = true }: ModalSheetProps) => {
   // ESC 키로 닫기
   useEffect(() => {
     if (!isOpen || !closeOnEsc) return;
@@ -31,10 +24,7 @@ const ModalSheet = ({
   return (
     <ModalPortal>
       {/* Overlay */}
-      <div
-        className='fixed inset-0 z-50 flex items-end justify-center'
-        onClick={closeOnOverlayClick ? onClose : undefined}
-      >
+      <div className='fixed inset-0 z-50 flex items-end justify-center' onClick={onClose}>
         <div className='absolute inset-0 bg-black opacity-40' />
         {/* Sheet */}
         <div

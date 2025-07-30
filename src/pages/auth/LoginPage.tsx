@@ -3,10 +3,20 @@ import { ReactComponent as SignupSideLogo } from '@/assets/icons/signupSideLogo.
 import KakaoLoginButton from '@/components/ui/Button/KakaoLoginButton';
 import { CHARACTER_MESSAGES } from '@/constants/characterMessages';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
   const prevStoredIndex = Number(sessionStorage.getItem('prevRandomIndex') ?? -1);
   const [randomIndex, setRandomIndex] = useState<number | null>(null);
+  const navigate = useNavigate();
+
+  // 토큰 이용해서 로그인 여부 판단 -> login 페이지 이동 시 home으로 이동시킴
+  useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      navigate('/', { replace: true });
+    }
+  }, [navigate]);
 
   useEffect(() => {
     let newIndex;

@@ -4,6 +4,8 @@ import { ReactComponent as Check } from '@/assets/icons/check.svg';
 import { ReactComponent as ChevronRight } from '@/assets/icons/chevron_right.svg';
 import Button from './Button';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { TERMS } from '@/constants/terms';
+import type { TermType } from '@/constants/terms';
 
 const KakaoLoginButton = () => {
   const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
@@ -25,7 +27,7 @@ const KakaoLoginButton = () => {
   })();
   const [agreements, setAgreements] = useState<boolean[]>(initialAgreements);
 
-  const isCompleted = agreements.every(Boolean); // 모든 체크 확인
+  const isCompleted = agreements[0] && agreements[1];
 
   const updateUrlSearchParams = (showModal: boolean, currentAgreements: boolean[]) => {
     const newSearchParams = new URLSearchParams();
@@ -73,38 +75,39 @@ const KakaoLoginButton = () => {
 
       <ModalSheet isOpen={isModalOpen} onClose={handleCloseModal}>
         <ul className='space-y-2 mb-6'>
-          {[
-            '[필수] 이용약관',
-            '[필수] 개인정보의 수집 및 이용에 대한 동의',
-            '[선택] 개인정보의 수집 및 이용에 대한 동의',
-          ].map((label, idx) => (
-            <div key={idx} className='cursor-pointer'>
-              <div className='flex flex-row justify-between'>
-                <div className='flex flex-row gap-2.5' onClick={() => toggleAgreement(idx)}>
-                  <Check
-                    className={`w-6 h-6 ${agreements[idx] ? 'text-fg-accent-blue-weak' : 'text-fg-medium'}`}
-                  />
-                  <li
-                    className={`flex items-center text-[12px] font-bold leading-[14px] tracking-[-0.12px] ${
-                      agreements[idx] ? 'text-fg-primary' : 'text-fg-medium'
-                    }`}
-                  >
-                    {label}
-                  </li>
-                </div>
-                <ChevronRight
-                  onClick={(e) => {
-                    e.stopPropagation();
+          {Object.entries(TERMS).map(([key, { message }], idx) => {
+            const termKey = key as TermType;
+            return (
+              <div key={termKey} className='cursor-pointer'>
+                <div className='flex flex-row justify-between'>
+                  <div className='flex flex-row gap-2.5' onClick={() => toggleAgreement(idx)}>
+                    <Check
+                      className={`w-6 h-6 ${
+                        agreements[idx] ? 'text-fg-accent-blue-weak' : 'text-fg-medium'
+                      }`}
+                    />
+                    <li
+                      className={`flex items-center text-[12px] font-bold leading-[14px] tracking-[-0.12px] ${
+                        agreements[idx] ? 'text-fg-primary' : 'text-fg-medium'
+                      }`}
+                    >
+                      {message}
+                    </li>
+                  </div>
+                  <ChevronRight
+                    onClick={(e) => {
+                      e.stopPropagation();
 
-                    navigate(
-                      `/terms/${['required-terms', 'required-privacy', 'optional-privacy'][idx]}?${searchParams.toString()}`,
-                    );
-                  }}
-                  className={`w-6 h-6 ${agreements[idx] ? 'text-fg-primary' : 'text-fg-medium'}`}
-                />
+                      navigate(
+                        `/terms/${['required-terms', 'required-privacy', 'optional-privacy'][idx]}?${searchParams.toString()}`,
+                      );
+                    }}
+                    className={`w-6 h-6 ${agreements[idx] ? 'text-fg-primary' : 'text-fg-medium'}`}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </ul>
 
         <div className='flex flex-row gap-2.5'>
