@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ModalSheet } from '../Modal';
 import { ReactComponent as Check } from '@/assets/icons/check.svg';
 import { ReactComponent as ChevronRight } from '@/assets/icons/chevron_right.svg';
@@ -113,7 +113,9 @@ const KakaoLoginButton = () => {
             onClick={handleLogin}
             disabled={!isCompleted}
             className={`flex-1 ${
-              isCompleted ? 'bg-bg-primary-gray border-bg-primary-gray  text-fg-primary' : 'text-fg-secondary bg-fg-weak'
+              isCompleted
+                ? 'bg-bg-primary-gray border-bg-primary-gray  text-fg-primary'
+                : 'text-fg-secondary bg-fg-weak'
             } py-2 rounded-lg`}
           >
             14세 미만입니다
