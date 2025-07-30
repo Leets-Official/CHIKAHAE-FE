@@ -14,6 +14,7 @@ const KakaoCallback = () => {
         try {
           // 1. access token 요청
           const kakaoAccessToken = await getKakaoAccessToken(code);
+          window.history.replaceState({}, '', '/kakao-callback');
           const { accessToken, refreshToken, nickname, memberId } =
             await exchangeKakaoToken(kakaoAccessToken);
 
