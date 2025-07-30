@@ -13,9 +13,9 @@ const KakaoCallback = () => {
       const handleLogin = async () => {
         try {
           // 1. access token 요청
-          const KakaoAccessToken = await getKakaoAccessToken(code);
+          const kakaoAccessToken = await getKakaoAccessToken(code);
           const { accessToken, refreshToken, nickname, memberId } =
-            await exchangeKakaoToken(KakaoAccessToken);
+            await exchangeKakaoToken(kakaoAccessToken);
 
           // 3. JWT 저장 및 페이지 이동
           localStorage.setItem('accessToken', accessToken);
