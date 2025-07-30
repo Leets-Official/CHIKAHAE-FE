@@ -51,7 +51,9 @@ const HomePage = () => {
 
       {/* 홈 배너 이미지 */}
       <div className='left-0 h-14'>
-        <HomeBanner />
+        <div className='w-screen flex justify-center'>
+          <HomeBanner />
+        </div>
       </div>
       <div className='h-[280px]' />
 
