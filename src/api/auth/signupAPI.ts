@@ -4,10 +4,10 @@ export interface SignupPayload {
   kakaoAccessToken: string;
   nickname: string;
   birth: string;
-  gender: boolean | undefined;
+  gender: string;
   profileImage?: string;
   parentName?: string;
-  parentGender?: boolean;
+  parentGender?: string;
   parentBirth?: string;
 }
 

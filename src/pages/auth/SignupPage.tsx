@@ -10,18 +10,17 @@ import { signupUser } from '@/api/auth/signupAPI';
 import Toast from '@/components/ui/Toast/Toast';
 
 type Step = 'profile' | 'info' | 'guardianIntro' | 'guardianForm' | 'complete';
-type Gender = 'male' | 'female' | 'any' | '';
 
 interface UserInfo {
   nickname: string;
   birth: string;
-  gender: Gender;
+  gender: string;
   profileImage?: string;
 }
 
 interface ParentInfo {
   name: string;
-  gender: Gender;
+  gender: string;
   birth: string;
 }
 
@@ -65,12 +64,6 @@ function SignupPage() {
     }
   };
 
-  const convertGenderToBoolean = (g: Gender) => {
-    if (g === 'male') return true;
-    if (g === 'female') return false;
-    return undefined;
-  };
-
   // 토스트 추가 함수
   const showToast = (id: string, message: string, duration = 3000) => {
     setToasts((prev) => [...prev, { id, message, duration }]);
@@ -93,10 +86,10 @@ function SignupPage() {
         kakaoAccessToken,
         nickname: user.nickname,
         birth: user.birth,
-        gender: convertGenderToBoolean(user.gender),
+        gender: user.gender,
         profileImage: user.profileImage,
         parentName: parent.name || undefined,
-        parentGender: convertGenderToBoolean(parent.gender),
+        parentGender: parent.gender,
         parentBirth: parent.birth || undefined,
       });
 

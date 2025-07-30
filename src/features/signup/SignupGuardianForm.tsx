@@ -8,8 +8,8 @@ interface SignupGuardianFormProps {
   setGender: (gender: string) => void;
   birthDate: string;
   setBirthDate: (birthDate: string) => void;
-  phoneNumber: string;
-  setPhoneNumber: (phoneNumber: string) => void;
+  phoneNumber?: string;
+  setPhoneNumber?: (phoneNumber: string) => void;
   onNext: () => void;
 }
 
