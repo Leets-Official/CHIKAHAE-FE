@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ModalSheet } from '../Modal';
 import { ReactComponent as Check } from '@/assets/icons/check.svg';
 import { ReactComponent as ChevronRight } from '@/assets/icons/chevron_right.svg';
 import Button from './Button';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 const KakaoLoginButton = () => {
   const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
@@ -11,21 +11,54 @@ const KakaoLoginButton = () => {
 
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URL}&response_type=code`;
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [agreements, setAgreements] = useState([false, false, false]); // 약관 체크 상태
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const isModalOpen = searchParams.get('showTermsModal') === 'true';
+
+  const initialAgreements = (() => {
+    const agreementsParam = searchParams.get('agreements');
+    if (agreementsParam) {
+      return agreementsParam.split(',').map((item) => item === 'true');
+    }
+    return [false, false, false];
+  })();
+  const [agreements, setAgreements] = useState<boolean[]>(initialAgreements);
+
   const isCompleted = agreements.every(Boolean); // 모든 체크 확인
 
-  const handleOpenModal = () => setIsModalOpen(true);
+  const updateUrlSearchParams = (showModal: boolean, currentAgreements: boolean[]) => {
+    const newSearchParams = new URLSearchParams();
+    if (showModal) {
+      newSearchParams.set('showTermsModal', 'true');
+    }
+    newSearchParams.set('agreements', currentAgreements.join(','));
+    setSearchParams(newSearchParams);
+  };
+
+  const handleOpenModal = () => {
+    updateUrlSearchParams(true, agreements);
+  };
+
+  const handleCloseModal = () => {
+    setSearchParams(new URLSearchParams());
+    setAgreements([false, false, false]);
+  };
 
   const handleLogin = () => {
     if (isCompleted) {
+      handleCloseModal();
       window.location.href = KAKAO_AUTH_URL;
     }
   };
 
   const toggleAgreement = (index: number) => {
-    setAgreements((prev) => prev.map((checked, i) => (i === index ? !checked : checked)));
+    setAgreements((prev) => {
+      const newAgreements = prev.map((checked, i) => (i === index ? !checked : checked));
+
+      updateUrlSearchParams(true, newAgreements);
+      return newAgreements;
+    });
   };
 
   return (
@@ -38,7 +71,7 @@ const KakaoLoginButton = () => {
         카카오로 시작하기
       </button>
 
-      <ModalSheet isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+      <ModalSheet isOpen={isModalOpen} onClose={handleCloseModal}>
         <ul className='space-y-2 mb-6'>
           {[
             '[필수] 이용약관',
@@ -62,8 +95,9 @@ const KakaoLoginButton = () => {
                 <ChevronRight
                   onClick={(e) => {
                     e.stopPropagation();
+
                     navigate(
-                      `/terms/${['required-terms', 'required-privacy', 'optional-privacy'][idx]}`,
+                      `/terms/${['required-terms', 'required-privacy', 'optional-privacy'][idx]}?${searchParams.toString()}`,
                     );
                   }}
                   className={`w-6 h-6 ${agreements[idx] ? 'text-fg-primary' : 'text-fg-medium'}`}
