@@ -107,7 +107,17 @@ const KakaoLoginButton = () => {
           ))}
         </ul>
 
-        <div className='flex'>
+        <div className='flex flex-row gap-2.5'>
+          <Button
+            variant='assistive'
+            onClick={handleLogin}
+            disabled={!isCompleted}
+            className={`flex-1 ${
+              isCompleted ? 'bg-bg-primary-gray border-bg-primary-gray  text-fg-primary' : 'text-fg-secondary bg-fg-weak'
+            } py-2 rounded-lg`}
+          >
+            14세 미만입니다
+          </Button>
           <Button
             variant='primary'
             onClick={handleLogin}
@@ -116,7 +126,7 @@ const KakaoLoginButton = () => {
               isCompleted ? 'bg-bg-primary-blue' : 'bg-fg-weak'
             } text-fg-secondary py-2 rounded-lg`}
           >
-            약관에 동의합니다
+            14세 이상입니다
           </Button>
         </div>
       </ModalSheet>
