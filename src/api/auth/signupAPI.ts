@@ -38,6 +38,6 @@ export const signupUser = async (data: SignupPayload): Promise<SignupResponse> =
     return response.data;
   } catch (err) {
     console.error('회원가입 API 에러:', err);
-    throw err; // 호출부에서 재처리할 수 있게 re-throw
+    throw err;
   }
 };

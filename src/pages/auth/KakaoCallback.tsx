@@ -40,10 +40,8 @@ const KakaoCallback = () => {
           return;
         }
 
-        // 2. 회원가입이 이미 되어 있으면 -> kakaoAccessToken으로 우리 서버 토큰 교환
-        console.log('[DEBUG] exchangeKakaoToken 호출 전');
-        const { accessToken, refreshToken, nickname: finalNickname } = await exchangeKakaoToken(); // 여기서 localStorage의 kakaoAccessToken을 사용
-        console.log('[DEBUG] exchangeKakaoToken 성공');
+        // 2. 회원가입이 이미 되어 있으면 -> kakaoAccessToken으로 서버 토큰 교환
+        const { accessToken, refreshToken, nickname: finalNickname } = await exchangeKakaoToken();
 
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', refreshToken);

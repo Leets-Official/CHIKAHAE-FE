@@ -51,7 +51,6 @@ export const requestKakaoCallback = async (code: string): Promise<KakaoCallbackR
   const response = await api.get('/login/kakao/callback', {
     params: { code },
   });
-  console.log('인가 코드:', code);
 
   if (!response.data.success) {
     const errorMsg =
