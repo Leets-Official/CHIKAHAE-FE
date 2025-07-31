@@ -15,7 +15,6 @@ interface UserInfo {
   nickname: string;
   birth: string;
   gender: string;
-  profileImage?: string;
 }
 
 interface ParentInfo {
@@ -33,7 +32,6 @@ function SignupPage() {
     nickname: '',
     birth: '',
     gender: '',
-    profileImage: undefined,
   });
 
   const [parent, setParent] = useState<ParentInfo>({
@@ -76,32 +74,42 @@ function SignupPage() {
     setToasts((prev) => prev.filter((toast) => toast.id !== id));
   };
 
-  const handleFinalSignup = async () => {
-    const kakaoAccessToken = localStorage.getItem('kakaoAccessToken');
-    if (!kakaoAccessToken) {
+  const handleFinalSignup = async (isOver14Only = false) => {
+    const accessToken = localStorage.getItem('kakaoAccessToken');
+    if (!accessToken) {
       console.error('카카오 access token 없음');
       navigate('/login');
       return;
     }
+
     try {
-      await signupUser({
-        kakaoAccessToken,
-        nickname: user.nickname,
-        birth: user.birth,
-        gender: user.gender,
-        profileImage: user.profileImage,
-        parentName: parent.name || undefined,
-        parentGender: parent.gender,
-        parentBirth: parent.birth || undefined,
-        parentPhoneNumber: parent.phoneNumber,
-      });
+      if (isOver14Only) {
+        await signupUser({
+          kakaoAccessToken: accessToken,
+          nickname: user.nickname,
+          birth: user.birth,
+          gender: user.gender,
+        });
+      } else {
+        await signupUser({
+          kakaoAccessToken: accessToken,
+          nickname: user.nickname,
+          birth: user.birth,
+          gender: user.gender,
+          parentName: parent.name,
+          parentGender: parent.gender,
+          parentBirth: parent.birth,
+          parentPhoneNumber: parent.phoneNumber,
+        });
+      }
 
       goToNext('complete');
     } catch (e) {
       console.error('회원가입 실패:', e);
-      showToast('signin-error', '회원가입 중 오류가 발생했습니다. 다시 시도해주세요');
+      showToast('signup-error', '회원가입 중 오류가 발생했습니다. 다시 시도해주세요');
     }
   };
+
   return (
     <>
       <GlobalTopNav type='signup' message='' onClickLeft={handleBack} />
@@ -110,10 +118,6 @@ function SignupPage() {
           <SignupProfile
             nickname={user.nickname}
             setNickname={(nickname: string) => setUser((prev) => ({ ...prev, nickname }))}
-            profileImage={user.profileImage}
-            setProfileImage={(profileImage: string) =>
-              setUser((prev) => ({ ...prev, profileImage }))
-            }
             onNext={() => goToNext('info')}
           />
         )}
@@ -124,7 +128,13 @@ function SignupPage() {
             setBirthDate={(birth) => setUser((prev) => ({ ...prev, birth }))}
             gender={user.gender}
             setGender={(gender) => setUser((prev) => ({ ...prev, gender }))}
-            onNext={(nextStep) => goToNext(nextStep)}
+            onNext={(nextStep) => {
+              if (nextStep === 'complete') {
+                handleFinalSignup(true); // 14세 이상
+              } else {
+                goToNext(nextStep); // 14세 미만
+              }
+            }}
           />
         )}
 

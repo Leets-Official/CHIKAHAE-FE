@@ -1,5 +1,5 @@
 import Image from '@/components/Image';
-import fallbackProfile from '@/assets/icons/fallbackProfile.svg';
+import ProfileImage from '@/assets/icons/fallbackProfile.svg';
 import InputContainer from '@/components/ui/Input/InputContainer';
 import { ReactComponent as SignupBg } from '@/assets/images/signupBackground.svg';
 import Button from '@/components/ui/Button';
@@ -7,15 +7,9 @@ import Button from '@/components/ui/Button';
 interface SignupProfileProps {
   nickname: string;
   setNickname: (nickname: string) => void;
-  profileImage: string | undefined;
-  setProfileImage: (profileImage: string) => void;
   onNext: () => void;
 }
-const SignupProfile = ({ nickname, setNickname, onNext, profileImage }: SignupProfileProps) => {
-  const handleProfileImageClick = () => {
-    console.log('프로필 사진 클릭(이미지 업로드 기능 구현 예정)');
-  };
-
+const SignupProfile = ({ nickname, setNickname, onNext }: SignupProfileProps) => {
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);
   };
@@ -78,35 +72,19 @@ const SignupProfile = ({ nickname, setNickname, onNext, profileImage }: SignupPr
 
             <div
               className='
-          flex              
-          flex-col       
-          items-center    
-          gap-y-[30px]     
-          
-        '
-            >
-              <div
-                className='
-              w-[108px]
-              h-[108px]
-              flex
-              items-center
-              justify-center
-              overflow-hidden
-              mx-auto                
-              cursor-pointer
-            '
-              onClick={handleProfileImageClick}
+    flex              
+    flex-col       
+    items-center    
+    gap-y-[30px]     
+'
             >
               <Image
-                src={profileImage || fallbackProfile}
+                src={ProfileImage}
                 alt='프로필 사진'
                 width={100}
                 height={100}
                 className='object-cover'
-                fallbackSrc={fallbackProfile}
               />
-            </div>
 
               <div className='w-full'>
                 <InputContainer
