@@ -22,12 +22,10 @@ if ('serviceWorker' in navigator) {
 }
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ToastProvider>
-        <App />
-      </ToastProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
-  </StrictMode>,
+  <QueryClientProvider client={queryClient}>
+    <ToastProvider>
+      <App />
+    </ToastProvider>
+    <ReactQueryDevtools initialIsOpen={false} />
+  </QueryClientProvider>,
 );
