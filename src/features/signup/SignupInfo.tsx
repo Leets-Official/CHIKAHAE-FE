@@ -1,17 +1,17 @@
 import Button from '@/components/ui/Button';
-import { useState } from 'react';
 import UserInfoForm from '@/components/ui/UserInfoForm';
 import { ReactComponent as SignupBg } from '@/assets/images/signupBackground.svg';
 import { isOver14 } from '@/utils/date';
 
-interface Props {
+interface SignupInfoProps {
+  gender: string;
+  setGender: (gender: string) => void;
+  birthDate: string;
+  setBirthDate: (birthDate: string) => void;
   onNext: (nextStep: 'complete' | 'guardianIntro') => void;
 }
 
-const SignupInfo = ({ onNext }: Props) => {
-  const [gender, setGender] = useState('');
-  const [birthDate, setBirthDate] = useState('');
-
+const SignupInfo = ({ gender, setGender, birthDate, setBirthDate, onNext }: SignupInfoProps) => {
   const isFormIncomplete = !gender || !birthDate;
 
   const handleNext = () => {
