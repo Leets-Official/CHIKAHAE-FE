@@ -29,7 +29,7 @@ export const getKakaoAccessToken = async (code: string): Promise<KakaoTokenRespo
     new URLSearchParams({
       grant_type: 'authorization_code',
       client_id: import.meta.env.VITE_KAKAO_REST_API_KEY,
-      redirect_uri: import.meta.env.VITE_REDIRECT_URI,
+      redirect_uri: import.meta.env.VITE_KAKAO_REDIRECT_URI,
       code,
     }),
     {
