@@ -49,7 +49,7 @@ const KakaoCallback = () => {
         localStorage.setItem('refreshToken', refreshToken);
         localStorage.setItem('nickname', finalNickname);
 
-        navigate('/');
+        navigate('/', { state: { isNewLogin: true } });
       } catch (err: any) {
         console.error('카카오 로그인 처리 실패:', err.message);
         navigate('/login?error=kakao');

@@ -7,6 +7,7 @@ import { ReactComponent as Caution } from '@/assets/icons/caution.svg';
 import BrushingSessionList from '@/features/Home/todayMission/BrushingSessionList';
 import { useTodayMissions } from '@/hooks/queries/useGetTodayMissions';
 import { useToast } from '@/contexts/ToastContext';
+import { requestAndRegisterFcmToken } from '@/features/alarm/fcm';
 
 const HomePage = () => {
   /**
@@ -21,8 +22,15 @@ const HomePage = () => {
   const { showToast } = useToast();
 
   useEffect(() => {
-    const { missionCompleted, coinAmount } = location.state || {};
+    const { missionCompleted, coinAmount, isNewLogin } = location.state || {};
 
+    // FCM 등록 - 로그인 또는 회원가입 후에만
+    if (isNewLogin) {
+      requestAndRegisterFcmToken();
+      window.history.replaceState({}, document.title); // 뒤로 가기 시 중복 방지
+    }
+
+    // 코인 적립 토스트
     if (missionCompleted && coinAmount) {
       showToast({
         message: `치카코인 ${coinAmount}개가 적립되었습니다.`,

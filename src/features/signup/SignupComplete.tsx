@@ -1,9 +1,11 @@
 import Button from '@/components/ui/Button';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Squirrel } from '@/assets/icons/squirrel.svg';
 import { ReactComponent as SignupBg } from '@/assets/images/signupBackground.svg';
 
 const SignupComplete = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className='flex flex-col items-center min-h-screen w-full '>
@@ -64,11 +66,14 @@ const SignupComplete = () => {
           px-4 py-2.5
           `}
         >
-          <Link to='/'>
-            <Button variant='primary' size='large' fullWidth={true} disabled={false}>
-              홈으로 이동하기
-            </Button>
-          </Link>
+          <Button
+            variant='primary'
+            size='large'
+            fullWidth={true}
+            onClick={() => navigate('/', { state: { isNewLogin: true } })}
+          >
+            홈으로 이동하기
+          </Button>
         </div>
       </div>
     </>
