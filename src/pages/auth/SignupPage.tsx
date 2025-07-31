@@ -7,7 +7,7 @@ import SignupGuardianForm from '@/features/signup/SignupGuardianForm';
 import SignupComplete from '@/features/signup/SignupComplete';
 import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 import { signupUser } from '@/api/auth/signupAPI';
-import Toast from '@/components/ui/Toast/Toast';
+import { useToast } from '@/contexts/ToastContext';
 
 type Step = 'profile' | 'info' | 'guardianIntro' | 'guardianForm' | 'complete';
 
@@ -27,6 +27,7 @@ interface ParentInfo {
 function SignupPage() {
   const [step, setStep] = useState<Step>('profile');
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const [user, setUser] = useState<UserInfo>({
     nickname: '',
@@ -40,8 +41,6 @@ function SignupPage() {
     birth: '',
     phoneNumber: '',
   });
-
-  const [toasts, setToasts] = useState<{ id: string; message: string; duration?: number }[]>([]);
 
   const goToNext = (nextStep: Step) => setStep(nextStep);
 
@@ -62,16 +61,6 @@ function SignupPage() {
         navigate('/');
       }
     }
-  };
-
-  // 토스트 추가 함수
-  const showToast = (id: string, message: string, duration = 3000) => {
-    setToasts((prev) => [...prev, { id, message, duration }]);
-  };
-
-  // 토스트 제거 함수
-  const removeToast = (id: string) => {
-    setToasts((prev) => prev.filter((toast) => toast.id !== id));
   };
 
   const handleFinalSignup = async (isOver14Only = false) => {
@@ -106,7 +95,7 @@ function SignupPage() {
       goToNext('complete');
     } catch (e) {
       console.error('회원가입 실패:', e);
-      showToast('signup-error', '회원가입 중 오류가 발생했습니다. 다시 시도해주세요');
+      showToast({ message: '회원가입 중 오류가 발생했습니다.', showIcon: false });
     }
   };
 
@@ -160,11 +149,7 @@ function SignupPage() {
 
         {step === 'complete' && <SignupComplete />}
       </div>
-      <div className='fixed top-0 right-3 flex flex-col gap-2 z-50'>
-        {toasts.map(({ id, message, duration }) => (
-          <Toast key={id} id={id} message={message} duration={duration} onClose={removeToast} />
-        ))}
-      </div>
+      <div className='fixed top-0 right-3 flex flex-col gap-2 z-50'></div>
     </>
   );
 }
