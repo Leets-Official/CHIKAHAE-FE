@@ -27,14 +27,14 @@ export const BottomNav = () => {
             className='flex flex-col items-center justify-center w-[90px] h-[56px]'
           >
             <div
-            className={`
-              flex items-center justify-center box-border w-[48px] h-[48px]
-              ${isActive
-                ? 'rounded-[8px] border-2 border-border-blue bg-bg-tertiary-blue'
-                : ''}
-            `}
+              className={`
+                flex items-center justify-center w-[52px] h-[52px] box-border
+                ${isActive
+                  ? 'rounded-[8px] border-2 border-border-blue bg-bg-tertiary-blue'
+                  : ''}
+              `}
             >
-              <Icon className='w-[48px] h-[48px]'/>
+              <Icon className='w-[48px] h-[48px]' />
             </div>
           </Link>
         );
