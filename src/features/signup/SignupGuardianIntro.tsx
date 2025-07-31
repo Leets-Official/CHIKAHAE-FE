@@ -1,5 +1,5 @@
 import Button from '@/components/ui/Button';
-import { ReactComponent as SignupBg } from '@/assets/images/signupBackground.svg';
+import SignupBg from '@/assets/images/signupBackground.svg';
 import { ReactComponent as Squirrel } from '@/assets/icons/squirrel.svg';
 interface Props {
   onNext: () => void;
@@ -9,7 +9,11 @@ const SignupGuardianIntro = ({ onNext }: Props) => {
   return (
     <>
       <div className='flex flex-col items-center min-h-screen w-ful  '>
-        <SignupBg className='absolute top-0 left-1/2 -translate-x-1/2 max-w-[480px] min-w-[360px] h-full z-0' />
+        <img
+          src={SignupBg}
+          alt='Signup Background'
+          className='absolute inset-0 w-full h-full object-cover mx-auto'
+        />
         <div
           className='
           flex flex-col  

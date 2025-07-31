@@ -1,7 +1,7 @@
 import Button from '@/components/ui/Button';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Squirrel } from '@/assets/icons/squirrel.svg';
-import { ReactComponent as SignupBg } from '@/assets/images/signupBackground.svg';
+import SignupBg from '@/assets/images/signupBackground.svg';
 
 const SignupComplete = () => {
   const navigate = useNavigate();
@@ -9,7 +9,11 @@ const SignupComplete = () => {
   return (
     <>
       <div className='flex flex-col items-center min-h-screen w-full '>
-        <SignupBg className='absolute top-0 left-1/2 -translate-x-1/2 max-w-[480px] min-w-[360px] h-full z-0' />
+        <img
+          src={SignupBg}
+          alt='Signup Background'
+          className='absolute inset-0 w-full h-full object-cover'
+        />
         <div className='flex flex-col min-h-screen justify-between pt-11'>
           <div
             className='

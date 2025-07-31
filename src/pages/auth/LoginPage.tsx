@@ -1,4 +1,4 @@
-import { ReactComponent as SignupBg } from '@/assets/images/signupBackground.svg';
+import SignupBg from '@/assets/images/signupBackground.svg';
 import { ReactComponent as SignupSideLogo } from '@/assets/icons/signupSideLogo.svg';
 import KakaoLoginButton from '@/components/ui/Button/KakaoLoginButton';
 import { CHARACTER_MESSAGES } from '@/constants/characterMessages';
@@ -35,7 +35,12 @@ const LoginPage = () => {
 
   return (
     <div className='flex flex-col items-center justify-center min-h-screen'>
-      <SignupBg className='absolute top-0 left-1/2 -translate-x-1/2 max-w-[480px] min-w-[360px] h-full z-0' />
+      <img
+        src={SignupBg}
+        alt='Signup Background'
+        className='absolute inset-0 w-full h-full object-cover'
+      />
+      {/*  */}
 
       <div className='absolute top-0 left-1/2 -translate-x-1/2 max-w-[480px] min-w-[360px] h-full z-10'>
         <SignupSideLogo className='absolute top-7 right-5' />
