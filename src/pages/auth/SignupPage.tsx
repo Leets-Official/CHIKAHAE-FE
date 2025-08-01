@@ -7,7 +7,7 @@ import SignupGuardianForm from '@/features/signup/SignupGuardianForm';
 import SignupComplete from '@/features/signup/SignupComplete';
 import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 import { signupUser } from '@/api/auth/signupAPI';
-import Toast from '@/components/ui/Toast/Toast';
+import { useToast } from '@/contexts/ToastContext';
 
 type Step = 'profile' | 'info' | 'guardianIntro' | 'guardianForm' | 'complete';
 
@@ -15,7 +15,6 @@ interface UserInfo {
   nickname: string;
   birth: string;
   gender: string;
-  profileImage?: string;
 }
 
 interface ParentInfo {
@@ -28,12 +27,12 @@ interface ParentInfo {
 function SignupPage() {
   const [step, setStep] = useState<Step>('profile');
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const [user, setUser] = useState<UserInfo>({
     nickname: '',
     birth: '',
     gender: '',
-    profileImage: undefined,
   });
 
   const [parent, setParent] = useState<ParentInfo>({
@@ -42,8 +41,6 @@ function SignupPage() {
     birth: '',
     phoneNumber: '',
   });
-
-  const [toasts, setToasts] = useState<{ id: string; message: string; duration?: number }[]>([]);
 
   const goToNext = (nextStep: Step) => setStep(nextStep);
 
@@ -66,42 +63,42 @@ function SignupPage() {
     }
   };
 
-  // 토스트 추가 함수
-  const showToast = (id: string, message: string, duration = 3000) => {
-    setToasts((prev) => [...prev, { id, message, duration }]);
-  };
-
-  // 토스트 제거 함수
-  const removeToast = (id: string) => {
-    setToasts((prev) => prev.filter((toast) => toast.id !== id));
-  };
-
-  const handleFinalSignup = async () => {
-    const kakaoAccessToken = localStorage.getItem('kakaoAccessToken');
-    if (!kakaoAccessToken) {
+  const handleFinalSignup = async (isOver14Only = false) => {
+    const accessToken = localStorage.getItem('kakaoAccessToken');
+    if (!accessToken) {
       console.error('카카오 access token 없음');
       navigate('/login');
       return;
     }
+
     try {
-      await signupUser({
-        kakaoAccessToken,
-        nickname: user.nickname,
-        birth: user.birth,
-        gender: user.gender,
-        profileImage: user.profileImage,
-        parentName: parent.name || undefined,
-        parentGender: parent.gender,
-        parentBirth: parent.birth || undefined,
-        parentPhoneNumber: parent.phoneNumber,
-      });
+      if (isOver14Only) {
+        await signupUser({
+          kakaoAccessToken: accessToken,
+          nickname: user.nickname,
+          birth: user.birth,
+          gender: user.gender,
+        });
+      } else {
+        await signupUser({
+          kakaoAccessToken: accessToken,
+          nickname: user.nickname,
+          birth: user.birth,
+          gender: user.gender,
+          parentName: parent.name,
+          parentGender: parent.gender,
+          parentBirth: parent.birth,
+          parentPhoneNumber: parent.phoneNumber,
+        });
+      }
 
       goToNext('complete');
     } catch (e) {
       console.error('회원가입 실패:', e);
-      showToast('signin-error', '회원가입 중 오류가 발생했습니다. 다시 시도해주세요');
+      showToast({ message: '회원가입 중 오류가 발생했습니다.', showIcon: false });
     }
   };
+
   return (
     <>
       <GlobalTopNav type='signup' message='' onClickLeft={handleBack} />
@@ -110,10 +107,6 @@ function SignupPage() {
           <SignupProfile
             nickname={user.nickname}
             setNickname={(nickname: string) => setUser((prev) => ({ ...prev, nickname }))}
-            profileImage={user.profileImage}
-            setProfileImage={(profileImage: string) =>
-              setUser((prev) => ({ ...prev, profileImage }))
-            }
             onNext={() => goToNext('info')}
           />
         )}
@@ -124,7 +117,13 @@ function SignupPage() {
             setBirthDate={(birth) => setUser((prev) => ({ ...prev, birth }))}
             gender={user.gender}
             setGender={(gender) => setUser((prev) => ({ ...prev, gender }))}
-            onNext={(nextStep) => goToNext(nextStep)}
+            onNext={(nextStep) => {
+              if (nextStep === 'complete') {
+                handleFinalSignup(true); // 14세 이상
+              } else {
+                goToNext(nextStep); // 14세 미만
+              }
+            }}
           />
         )}
 
@@ -150,11 +149,7 @@ function SignupPage() {
 
         {step === 'complete' && <SignupComplete />}
       </div>
-      <div className='fixed top-0 right-3 flex flex-col gap-2 z-50'>
-        {toasts.map(({ id, message, duration }) => (
-          <Toast key={id} id={id} message={message} duration={duration} onClose={removeToast} />
-        ))}
-      </div>
+      <div className='fixed top-0 right-3 flex flex-col gap-2 z-50'></div>
     </>
   );
 }

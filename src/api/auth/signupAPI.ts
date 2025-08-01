@@ -2,8 +2,16 @@ import api from '@/api/api';
 
 interface SignupResponse {
   success: boolean;
-  message?: string;
-  userId?: string;
+  data: {
+    nickname: string;
+    accessToken: string;
+    refreshToken: string;
+  };
+  error?: {
+    code: number;
+    message: string;
+    exceptionMessage: string;
+  };
 }
 
 export interface SignupPayload {
@@ -11,7 +19,6 @@ export interface SignupPayload {
   nickname: string;
   birth: string;
   gender: string;
-  profileImage?: string;
   parentName?: string;
   parentGender?: string;
   parentBirth?: string;
@@ -20,10 +27,17 @@ export interface SignupPayload {
 
 export const signupUser = async (data: SignupPayload): Promise<SignupResponse> => {
   try {
-    const res = await api.post('/api/signup', data);
-    return res.data;
+    const response = await api.post('/api/signup/kakao', data);
+    const { nickname, accessToken, refreshToken } = response.data.data;
+
+    localStorage.setItem('nickname', nickname);
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
+
+    console.log('회원가입성공:', response);
+    return response.data;
   } catch (err) {
     console.error('회원가입 API 에러:', err);
-    throw err; // 호출부에서 재처리할 수 있게 re-throw
+    throw err;
   }
 };

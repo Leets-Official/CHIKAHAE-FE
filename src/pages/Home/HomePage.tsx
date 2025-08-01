@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import HomeTopNav from '@/components/ui/Nav/HomeTopNav';
 import BottomNav from '@/components/ui/Nav/BottomNav';
@@ -7,6 +7,7 @@ import { ReactComponent as Caution } from '@/assets/icons/caution.svg';
 import BrushingSessionList from '@/features/Home/todayMission/BrushingSessionList';
 import { useTodayMissions } from '@/hooks/queries/useGetTodayMissions';
 import { useToast } from '@/contexts/ToastContext';
+import { requestAndRegisterFcmToken } from '@/features/alarm/fcm';
 
 const HomePage = () => {
   /**
@@ -15,14 +16,28 @@ const HomePage = () => {
    * queryClient.invalidateQueries(['todayMissions']);
    * navigate('/', { state: { missionCompleted: true, coinAmount: 미션 보상 코인 수 } });
    */
-
-  // 미션 완료 시 토스트 메세지 표시
+  const navigate = useNavigate();
   const location = useLocation();
   const { showToast } = useToast();
 
+  // accessToken 검사 - 로그인 안 했으면 /login으로 리디렉트
   useEffect(() => {
-    const { missionCompleted, coinAmount } = location.state || {};
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+      navigate('/login');
+    }
+  }, [navigate]);
 
+  useEffect(() => {
+    const { missionCompleted, coinAmount, isNewLogin } = location.state || {};
+
+    // FCM 등록 - 로그인 또는 회원가입 후에만
+    if (isNewLogin) {
+      requestAndRegisterFcmToken();
+      window.history.replaceState({}, document.title); // 뒤로 가기 시 중복 방지
+    }
+
+    // 코인 적립 토스트
     if (missionCompleted && coinAmount) {
       showToast({
         message: `치카코인 ${coinAmount}개가 적립되었습니다.`,

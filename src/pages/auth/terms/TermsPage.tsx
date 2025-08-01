@@ -25,9 +25,12 @@ const TermsPage = () => {
   return (
     <div className='flex flex-col w-[320px] h-screen mx-auto'>
       <GlobalTopNav message={navMessage} showCancel={false} />
-      <div className='flex-1  pt-15 min-w-full text-[12px] leading-[14px] tracking-[-0.12px]'>
+      <div className='flex-1  pt-15 text-[12px] leading-[14px] tracking-[-0.12px]'>
         {content ? (
-          <div className='prose prose-sm max-w-none' style={{ whiteSpace: 'pre-wrap' }}>
+          <div
+            className='prose prose-sm max-w-none [&_h1]:text-[16px] [&_h1]:font-bold [&_h2]:text-[14px] [&_h2]:font-bold [&_h3]:text-[16px] [&_h3]:font-semibold'
+            style={{ whiteSpace: 'pre-wrap' }}
+          >
             <ReactMarkdown
               remarkPlugins={[remarkBreaks, remarkGfm]}
               components={{

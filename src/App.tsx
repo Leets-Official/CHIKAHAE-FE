@@ -22,7 +22,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/signup' element={<SignupPage />} />
-        <Route path='/auth/kakao/callback' element={<KakaoCallback />} />
+        <Route path='/login/kakao/callback' element={<KakaoCallback />} />
         <Route path='/quiz/start' element={<QuizStartPage />} />
         <Route path='/quiz' element={<QuizPage />} />
         <Route path='/brush/start' element={<BrushingStartPage />} />
@@ -34,7 +34,6 @@ function App() {
         <Route path='/edit' element={<MyPageEdit />} />
         <Route path='/mypage/alarm' element={<ChikaAlarmPage />} />
         <Route path='/mypage/userinfo' element={<UserInfoPage />} />
-
       </Routes>
     </BrowserRouter>
   );
