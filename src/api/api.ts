@@ -81,7 +81,7 @@ api.interceptors.response.use(
       } catch (refreshError) {
         console.error('토큰 재발급 실패:', refreshError);
         localStorage.clear();
-        window.location.href = '/'; // 로그인 페이지로 이동
+        window.location.href = '/login'; // 로그인 페이지로 이동
         return Promise.reject(refreshError);
       }
     }
