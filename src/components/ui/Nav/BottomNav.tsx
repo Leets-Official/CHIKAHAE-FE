@@ -12,26 +12,30 @@ export const BottomNav = () => {
         justify-between items-center
         bg-bg-tertiary-gray
         w-full max-w-[480px] min-w-[360px]
+        border-t border-border-gray
       `}
       role='navigation'
       aria-label='하단 네비게이션'
     >
-      {NAV_ITEMS.map(({ label, to, icon: Icon }) => {
+      {NAV_ITEMS.map(({ to, icon: Icon }) => {
         const isActive = location.pathname === to;
 
         return (
           <Link
             key={to}
             to={to}
-            className='flex w-full flex-col items-center justify-center'
-            aria-label={label}
+            className='flex flex-col items-center justify-center w-[90px] h-[56px]'
           >
-            <Icon className={`w-6 h-6 ${isActive ? 'text-fg-clear-blue' : 'text-gray-400'}`} />
-            <span
-              className={`text-[12px] mt-1 ${isActive ? 'text-fg-clear-blue' : 'text-gray-400'}`}
+            <div
+              className={`
+                flex items-center justify-center w-[52px] h-[52px] box-border
+                ${isActive
+                  ? 'rounded-[8px] border-2 border-border-blue bg-bg-tertiary-blue'
+                  : ''}
+              `}
             >
-              {label}
-            </span>
+              <Icon className='w-[48px] h-[48px]' />
+            </div>
           </Link>
         );
       })}
