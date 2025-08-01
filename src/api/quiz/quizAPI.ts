@@ -1,4 +1,3 @@
-// src/apis/quizAPI.ts
 import api from '@/api/api';
 
 // 퀴즈 응답 타입 정의
@@ -9,14 +8,17 @@ export type QuizItem = {
   options: string[];
 };
 
+// 공통 에러 타입
+export type APIError = {
+  code: number;
+  message: string;
+  exceptionMessage?: string;
+};
+
 export type QuizResponse = {
   success: boolean;
   data: QuizItem[];
-  error?: {
-    code: number;
-    message: string;
-    exceptionMessage?: string;
-  };
+  error?: APIError;
 };
 
 // 퀴즈 정답 결과 타입
@@ -38,11 +40,7 @@ export type CheckAnswerRequest = {
 export type CheckAnswerResponse = {
   success: boolean;
   data: QuizAnswerResult;
-  error: {
-    code: number;
-    message: string;
-    exceptionMessage: string;
-  };
+  error?: APIError;
 };
 
 // 퀴즈 결과 및 보상 조회 응답 타입
@@ -53,27 +51,32 @@ export type QuizResultResponse = {
     coinReward: number;
     checkQuizResponse: QuizAnswerResult[];
   };
-  error: {
-    code: number;
-    message: string;
-    exceptionMessage?: string;
-  };
+  error?: APIError;
 };
 
 // 오늘의 퀴즈 목록
 export const fetchTodayQuiz = async (): Promise<QuizResponse> => {
   const response = await api.get<QuizResponse>('/api/quiz/today');
+  if (!response.data.success) {
+    throw new Error(response.data.error?.message || '퀴즈 조회 실패');
+  }
   return response.data;
 };
 
 // 퀴즈 정답 제출
 export const checkAnswer = async (body: CheckAnswerRequest): Promise<CheckAnswerResponse> => {
   const response = await api.post<CheckAnswerResponse>('/api/quiz/check', body);
+  if (!response.data.success) {
+    throw new Error(response.data.error?.message || '퀴즈 정답 제출 실패');
+  }
   return response.data;
 };
 
 // 퀴즈 결과 및 보상 조회
 export const fetchQuizResult = async (): Promise<QuizResultResponse> => {
   const response = await api.get<QuizResultResponse>('/api/quiz/result');
+  if (!response.data.success) {
+    throw new Error(response.data.error?.message || '퀴즈 결과 조회 실패');
+  }
   return response.data;
 };
