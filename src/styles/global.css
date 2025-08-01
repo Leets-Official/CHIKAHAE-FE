@@ -124,7 +124,6 @@
   --color-fg-accent-pink-strong: #e04d73;
   --color-fg-accent-pink-weak: #f05f83;
   --color-fg-accent-toast: #4c98f5;
-
   --color-fg-veryweak: #f5f7fa;
   --color-fg-medium: #bac3cb;
   --color-fg-secondary: #fafbfc;
@@ -141,6 +140,7 @@
 
   --color-fg-gray-strong: #22272d;
   --color-fg-gray-weak: #949393;
+  --color-fg-gray-weak-weak: #bbbbbb;
 
   /* Border */
   --color-border-blue: #5fc6f0;

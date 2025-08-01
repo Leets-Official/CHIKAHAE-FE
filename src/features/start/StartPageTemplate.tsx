@@ -28,8 +28,8 @@ const StartPageTemplate = ({
   return (
     <>
       {/* 페이지 상단 영역 */}
-      <div className='relative min-h-screen flex justify-center'>
-        <div className='flex flex-col w-full max-w-[430px] min-w-[360px] px-[18px] gap-[10px]'>
+      <div className='flex flex-col min-h-screen w-full max-w-[430px] min-w-[360px] mx-auto px-[18px]'>
+        <div className='flex flex-col w-full gap-[10px] pb-[30px]'>
           <GlobalTopNav message={navTitle} showCancel={false} showLeftIcon={false} />
 
           {/* 상단 대표 이미지 (향후 SVG로 교체 예정) */}
@@ -40,12 +40,14 @@ const StartPageTemplate = ({
           />
 
           {/* 메인 제목 */}
-          <h1 className='head-24-eb text-left'>{title}</h1>
+          <div className='gap-[8px]'>
+            <h1 className='head-24-eb text-left'>{title}</h1>
 
-          {/* 코인 아이콘 + 지급 텍스트 */}
-          <div className='flex items-center gap-[6px] mb-[10px]'>
-            <Coin className='h-[20px] w-[20px] translate-y-[-1.5px]' />
-            <p className='body-16-r text-left leading-[20px]'>{coinText}</p>
+            {/* 코인 아이콘 + 지급 텍스트 */}
+            <div className='flex items-center gap-[6px] mb-[10px]'>
+              <Coin className='h-[20px] w-[20px] translate-y-[-1.5px]' />
+              <p className='body-16-r text-left leading-[20px]'>{coinText}</p>
+            </div>
           </div>
 
           {/* 유의사항 리스트 */}
@@ -55,7 +57,7 @@ const StartPageTemplate = ({
 
       {/* 시작하기 버튼 */}
       <div className='fixed bottom-0 left-0 right-0 flex justify-center'>
-        <div className='w-full max-w-[480px] min-w-[360px] px-[20px] pb-[115px]'>
+        <div className='w-full max-w-[430px] min-w-[360px] px-[20px] pb-[110px]'>
           <Button size='large' variant='primary' fullWidth onClick={onStart}>
             {startButtonText}
           </Button>

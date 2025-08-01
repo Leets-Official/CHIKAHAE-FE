@@ -55,7 +55,7 @@ const DateInput = ({
 }: DateInputProps) => {
   const handleChange = (date: Date | null) => {
     if (!date) return;
-    const formatted = dayjs(date).format('YYYY.MM.DD');
+    const formatted = dayjs(date).format('YYYY-MM-DD');
     onChange(formatted);
   };
 
@@ -68,7 +68,7 @@ const DateInput = ({
     <DatePicker
       selected={value ? new Date(value.replace(/\./g, '-')) : null}
       onChange={handleChange}
-      dateFormat='yyyy.MM.dd'
+      dateFormat='yyyy-MM-dd'
       locale={ko}
       popperPlacement='bottom'
       showPopperArrow={false}
