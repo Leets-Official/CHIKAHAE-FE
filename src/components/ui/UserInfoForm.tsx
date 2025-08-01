@@ -8,25 +8,25 @@ import { useState } from 'react';
 type UserInfoFormProps = {
   type: 'full' | 'partial';
   name?: string;
-  onChangeName?: (value: string) => void;
+  onNameChange?: (value: string) => void;
   gender: string;
   onGenderChange: (value: string) => void;
   birthDate: string;
   onBirthDateChange: (value: string) => void;
   phoneNumber?: string;
-  onChangePhoneNumber?: (value: string) => void;
+  onPhoneNumberChange?: (value: string) => void;
 };
 
 const UserInfoForm = ({
   type,
   name = '',
-  onChangeName = () => {},
+  onNameChange = () => {},
   gender,
   onGenderChange,
   birthDate,
   onBirthDateChange,
   phoneNumber = '',
-  onChangePhoneNumber = () => {},
+  onPhoneNumberChange = () => {},
 }: UserInfoFormProps) => {
   const [isActive, setIsActive] = useState(false);
   const formRef = useRef<HTMLDivElement>(null);
@@ -59,7 +59,7 @@ const UserInfoForm = ({
   );
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatPhoneNumber(e.target.value);
-    onChangePhoneNumber(formatted);
+    onPhoneNumberChange(formatted);
   };
 
   return (
@@ -72,7 +72,7 @@ const UserInfoForm = ({
             variant='formTop'
             value={name}
             isActive={isActive}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeName(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => onNameChange(e.target.value)}
             className={clsx({
               'border-t-border-blue': isActive,
               'border-t-border-gray': !isActive,
@@ -87,7 +87,7 @@ const UserInfoForm = ({
           variant={type === 'full' ? 'formMiddle' : 'formTop'}
           selectedValue={gender}
           isActive={isActive}
-          onValueChange={onGenderChange}
+          onValueChange={(value) => onGenderChange(value)}
           className={clsx({
             'border-t-border-blue': isActive,
             'border-t-border-gray': !isActive,
