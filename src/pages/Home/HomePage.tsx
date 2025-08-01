@@ -26,7 +26,7 @@ const HomePage = () => {
     if (!accessToken) {
       navigate('/login');
     }
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     const { missionCompleted, coinAmount, isNewLogin } = location.state || {};
