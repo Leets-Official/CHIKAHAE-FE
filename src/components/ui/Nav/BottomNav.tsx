@@ -7,12 +7,12 @@ export const BottomNav = () => {
   return (
     <nav
       className={`
-        fixed bottom-0 left-1/2 -translate-x-1/2
-        flex h-14 px-1
+        fixed bottom-[14px] left-1/2 -translate-x-1/2
+        flex h-14 px-[2px]
         justify-between items-center
         bg-bg-tertiary-gray
         w-full max-w-[480px] min-w-[360px]
-        border-t border-border-gray
+      border-t border-t-bg-secondary-gray
       `}
       role='navigation'
       aria-label='하단 네비게이션'
@@ -21,17 +21,11 @@ export const BottomNav = () => {
         const isActive = location.pathname === to;
 
         return (
-          <Link
-            key={to}
-            to={to}
-            className='flex flex-col items-center justify-center w-[90px] h-[56px]'
-          >
+          <Link key={to} to={to} className='flex w-full flex-col items-center justify-center'>
             <div
               className={`
-                flex items-center justify-center w-[52px] h-[52px] box-border
-                ${isActive
-                  ? 'rounded-[8px] border-2 border-border-blue bg-bg-tertiary-blue'
-                  : ''}
+                flex items-center justify-center box-border
+                ${isActive ? 'rounded-[8px] border-2 border-border-blue bg-bg-tertiary-blue' : ''}
               `}
             >
               <Icon className='w-[48px] h-[48px]' />
