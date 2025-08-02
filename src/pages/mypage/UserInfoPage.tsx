@@ -18,8 +18,7 @@ const UserInfoPage: React.FC = () => {
         const data = await fetchUserProfile();
 
         const items: MenuItemType[] = [
-          { key: 'name', label: '이름', value: data.name },
-          { key: 'gender', label: '성별', value: data.gender === 'female' ? '여성' : '남성' },
+          { key: 'gender', label: '성별', value: data.gender === 'FEMALE' ? '여성' : '남성' },
           { key: 'birth', label: '생일', value: formatBirth(data.birth) },
           { key: 'email', label: '이메일', value: data.kakaoEmail },
         ];
