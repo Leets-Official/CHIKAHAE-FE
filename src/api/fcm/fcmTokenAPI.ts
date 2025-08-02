@@ -3,7 +3,7 @@ import api from '@/api/api';
 // FCM 토큰 등록
 export const registerFcmToken = async (fcmToken: string) => {
   const response = await api.post('/api/users/fcm-tokens', { fcmToken });
-  console.log(response);
+  console.log('토큰 등록: ', fcmToken);
   return response.data;
 };
 
