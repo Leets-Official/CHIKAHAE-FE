@@ -7,9 +7,9 @@ const AlarmPage = () => {
       <div className='w-full min-h-screen flex flex-col mx-auto py-[12px]'>
         <GlobalTopNav message='양치 알림' showCancel={false} />
         <div className='h-[24px]' />
-        <p className='px-[20px]'>
+        <div className='px-[20px]'>
           <AlarmContent />
-        </p>
+        </div>
       </div>
     </>
   );
