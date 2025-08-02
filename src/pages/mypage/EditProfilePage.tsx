@@ -62,7 +62,7 @@ const EditProfilePage = () => {
         className={`
           fixed bottom-0 left-1/2 -translate-x-1/2 
           w-full max-w-[480px] min-w-[360px] 
-          px-4 py-2.5`}
+          px-[16px] py-[28px]`}
       >
         <Button size='large' variant='primary' fullWidth={true} onClick={handleSubmit}>
           확인
