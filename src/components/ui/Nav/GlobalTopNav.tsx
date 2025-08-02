@@ -30,7 +30,7 @@ const GlobalTopNav = ({
         items-center
         ${type === 'signup' ? 'bg-transparent' : 'bg-bg-tertiary-gray'}
         justify-between
-        max-w-[480px] min-w-[360px]
+        max-w-[480px] min-w-[360px] w-full
         z-10`}
     >
       <div className='w-[30px] flex justify-start'>
@@ -47,7 +47,7 @@ const GlobalTopNav = ({
             className={`
               flex-1 
               ${isCenter ? 'text-left' : 'text-center'} 
-              text-fg-primary body-16-eb
+              text-fg-primary head-20-eb
             `}
           >
             {message}
