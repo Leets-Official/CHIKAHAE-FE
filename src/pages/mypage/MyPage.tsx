@@ -10,6 +10,7 @@ import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 import Modal from '@/components/ui/Modal/Modal';
 import { logout, withdraw } from '@/api/myPage/authAPI';
 import { useToast } from '@/contexts/ToastContext';
+import { clearFcmToken } from '@/utils/fcmTokenMAnager';
 
 type ModalType = 'logout' | 'withdraw' | null;
 
@@ -34,20 +35,24 @@ const MyPage: React.FC = () => {
   // 로그아웃
   const handleLogout = async () => {
     try {
+      await clearFcmToken();
       await logout();
+      localStorage.clear();
       navigate('/login');
     } catch (error) {
-      showToast({ message: '로그아웃에 실패했습니다.' });
+      showToast({ message: '로그아웃에 실패했습니다.', showIcon: false });
     }
   };
 
   // 회원 탈퇴
   const handleWithdraw = async () => {
     try {
+      await clearFcmToken();
       await withdraw();
+      localStorage.clear();
       navigate('/login');
     } catch (error) {
-      showToast({ message: '회원 탈퇴에 실패했습니다.' });
+      showToast({ message: '회원 탈퇴에 실패했습니다.', showIcon: false });
     }
   };
 
