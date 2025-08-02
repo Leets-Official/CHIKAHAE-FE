@@ -8,7 +8,7 @@ export const TERMS: Record<
 > = {
   'required-terms': {
     content: requiredTerms,
-    message: '[팔수] 치카해 서비스 이용약관',
+    message: '[필수] 치카해 서비스 이용약관',
   },
   'required-privacy': {
     content: requiredPrivacy,
