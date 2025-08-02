@@ -82,7 +82,7 @@ const Timer = ({
 
         {/* 텍스트 (초 or 분:초) */}
         {showSeconds && (
-          <span className='auto-width text-[20px] font-extrabold leading-[23px] w-[75px] text-tangerine-strong text-center'>
+          <span className='auto-width text-[20px] font-extrabold leading-[23px] w-[80px] text-tangerine-strong text-center'>
             {formatTime(remainingTime)}
           </span>
         )}
