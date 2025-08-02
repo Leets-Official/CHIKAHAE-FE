@@ -5,4 +5,5 @@ export type TimerProps = {
   onTimeout?: () => void;
   size?: 'default' | 'wide';
   mode?: 'quiz' | 'animation';
+  isActive?: boolean;
 };

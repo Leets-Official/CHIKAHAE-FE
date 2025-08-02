@@ -11,8 +11,8 @@ const Timer = ({
   onComplete,
   size = 'default',
   mode = 'quiz',
+  isActive = true,
 }: TimerProps) => {
-  const [isActive, setIsActive] = useState(true);
   const [remainingTime, setRemainingTime] = useState(duration);
 
   // default(기존 퀴즈 타이머 사이즈) | wide(애니메이션 전용 넓은 타이머), 기본값은 default
@@ -22,7 +22,6 @@ const Timer = ({
   //  duration 변경되면 remainingTime 초기화
   useEffect(() => {
     setRemainingTime(duration);
-    setIsActive(true);
   }, [duration]);
 
   // onComplete 중복 호출 방지용 ref
@@ -31,7 +30,6 @@ const Timer = ({
   // duration 변경되면 타이머 초기화
   useEffect(() => {
     setRemainingTime(duration);
-    setIsActive(true);
     hasCompleted.current = false; // 완료 플래그 초기화
   }, [duration]);
 
@@ -43,7 +41,6 @@ const Timer = ({
       setRemainingTime((prev) => {
         if (prev <= 1) {
           clearInterval(interval);
-          setIsActive(false);
           if (!hasCompleted.current) {
             hasCompleted.current = true;
             onComplete?.();
@@ -81,10 +78,9 @@ const Timer = ({
             <motion.div
               role='progressbar'
               initial={{ width: '100%' }}
-              animate={{ width: 0 }}
+              animate={{ width: `${(remainingTime / duration) * 100}%` }}
               transition={{ duration, ease: 'linear' }}
               className='h-full bg-tangerine-strong rounded-r-full'
-              onAnimationComplete={() => setIsActive(false)}
             />
           )}
         </div>

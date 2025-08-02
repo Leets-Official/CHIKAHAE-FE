@@ -4,11 +4,15 @@ import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 import { TIPS } from '@/constants/tips';
 import { useState, useEffect } from 'react';
 import { ReactComponent as BackgroundImage } from '@/assets/images/backgroundImage.svg';
+import PlayPauseButton from '@/components/ui/Button/AnimationButton';
 
 const AnimationTest = () => {
   const [tipIndex, setTipIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
 
   useEffect(() => {
+    if (!isPlaying) return;
+
     const interval = setInterval(() => {
       // 10초마다 함수 반복 실행
       setTipIndex((prev) => {
@@ -21,16 +25,17 @@ const AnimationTest = () => {
     }, 10000);
 
     return () => clearInterval(interval); // 메모리 누수 방지용
-  }, []);
+  }, [isPlaying]);
   return (
     <>
-      <GlobalTopNav type='global' showCancel={false} message='양치' />
+      <GlobalTopNav type='global' showCancel={false} message='양치하기' />
       <div className='flex flex-col items-center justify-center min-h-screen gap-10 relative z-0 px-4'>
-        <Timer duration={180} size='wide' mode='animation'/>
+        <Timer duration={180} size='default' mode='animation' isActive={isPlaying} />
         <div className='relative flex justify-center items-center max-w-[480px] min-w-[360px] w-full min-h-[450px]'>
-          <BackgroundImage className='absolute top-0 left-1/2 -translate-x-1/2 w-full h-full not-visited:lz-0' />
-          <div className='relative z-10 flex justify-center items-center pt-10'>
+          <BackgroundImage className='absolute top-0 left-1/2 -translate-x-1/2 w-[360px] h-full not-visited:lz-0' />
+          <div className='relative z-10 flex flex-col justify-center items-center pt-25'>
             <LottieTest />
+            <PlayPauseButton isPlaying={isPlaying} onToggle={() => setIsPlaying((prev) => !prev)} />
           </div>
         </div>
 
