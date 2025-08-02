@@ -6,8 +6,8 @@ import Button from '@/components/ui/Button';
 
 type StartPageTemplateProps = {
   navTitle: string;
-  imageSrc: string; // FIXME: 추후 svg로 수정될 예정
-  imageAlt: string; // FIXME: svg 삽입되면 삭제 예정
+  imageSrc: string;
+  imageAlt: string;
   title: string; // 페이지 주요 제목
   coinText: string; // 보상 관련 텍스트
   noticeList: string[]; // 유의사항 리스트
@@ -28,36 +28,36 @@ const StartPageTemplate = ({
   return (
     <>
       {/* 페이지 상단 영역 */}
-      <div className='flex flex-col min-h-screen w-full max-w-[430px] min-w-[360px] mx-auto px-[18px]'>
+      <div className='flex flex-col min-h-screen w-full max-w-[430px] min-w-[360px] mx-auto'>
         <div className='flex flex-col w-full gap-[10px] pb-[30px]'>
           <GlobalTopNav message={navTitle} showCancel={false} showLeftIcon={false} />
 
-          {/* 상단 대표 이미지 (향후 SVG로 교체 예정) */}
+          {/* 상단 대표 이미지 */}
           <img
             src={imageSrc}
             alt={imageAlt}
-            className='flex items-center justify-start mt-14 h-[220px] rounded-[8px] bg-fg-weak mb-[10px]'
+            className='flex items-center justify-start mt-14 w-full bg-fg-weak mb-[10px]'
           />
-
-          {/* 메인 제목 */}
-          <div className='gap-[8px]'>
-            <h1 className='head-24-eb text-left'>{title}</h1>
+          {/* 메인 제목 + 코인 텍스트 + 유의사항 리스트 */}
+          <div className='px-[20px]'>
+            {/* 메인 제목 */}
+            <h1 className='head-24-eb text-left mb-[8px]'>{title}</h1>
 
             {/* 코인 아이콘 + 지급 텍스트 */}
-            <div className='flex items-center gap-[6px] mb-[10px]'>
+            <div className='flex items-center gap-[8px] mb-[23px]'>
               <Coin className='h-[20px] w-[20px] translate-y-[-1.5px]' />
               <p className='body-16-r text-left leading-[20px]'>{coinText}</p>
             </div>
-          </div>
 
-          {/* 유의사항 리스트 */}
-          <QuizNoticeList noticeList={noticeList} />
+            {/* 유의사항 리스트 */}
+            <QuizNoticeList noticeList={noticeList} />
+          </div>
         </div>
       </div>
 
       {/* 시작하기 버튼 */}
       <div className='fixed bottom-0 left-0 right-0 flex justify-center'>
-        <div className='w-full max-w-[430px] min-w-[360px] px-[20px] pb-[110px]'>
+        <div className='w-full max-w-[430px] min-w-[360px] px-[20px] pb-[100px]'>
           <Button size='large' variant='primary' fullWidth onClick={onStart}>
             {startButtonText}
           </Button>
