@@ -73,21 +73,16 @@ const Timer = ({
       <div className='h-[40px] pl-[32px] pr-[10px] flex items-center gap-[8px] w-full'>
         {/* 프로그레스 바 */}
 
-        <div className='flex h-[16px] flex-grow bg-tangerine-weak rounded-r-full overflow-hidden relative z-0'>
-          {isActive && (
-            <motion.div
-              role='progressbar'
-              initial={{ width: '100%' }}
-              animate={{ width: `${(remainingTime / duration) * 100}%` }}
-              transition={{ duration, ease: 'linear' }}
-              className='h-full bg-tangerine-strong rounded-r-full'
-            />
-          )}
+        <div className='flex h-[16px] flex-grow bg-tangerine-weak rounded-r-full overflow-hidden'>
+          <div
+            className='h-full bg-tangerine-strong rounded-r-full'
+            style={{ width: `${(remainingTime / duration) * 100}%` }}
+          />
         </div>
 
         {/* 텍스트 (초 or 분:초) */}
         {showSeconds && (
-          <span className='auto-width text-[20px] font-extrabold leading-[23px] text-tangerine-strong text-center'>
+          <span className='auto-width text-[20px] font-extrabold leading-[23px] w-[75px] text-tangerine-strong text-center'>
             {formatTime(remainingTime)}
           </span>
         )}
