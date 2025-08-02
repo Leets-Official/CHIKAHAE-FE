@@ -4,19 +4,16 @@ import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 import InputContainer from '@/components/ui/Input/InputContainer';
 import Button from '@/components/ui/Button';
 import { ReactComponent as Profile } from '@/assets/images/profile/profile_default.svg';
-import { ReactComponent as Camera } from '@/assets/icons/camera.svg';
 import { updateUserProfile } from '@/api/myPage/profileAPI';
 import { useToast } from '@/contexts/ToastContext';
 
 const EditProfilePage = () => {
   const { showToast } = useToast();
   const navigate = useNavigate();
-  const [nickname, setNickname] = useState('');
+  const [nickname, setNickname] = useState(() => localStorage.getItem('nickname') || '');
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);
   };
-
-  // TOAST 사용 예정
 
   const handleSubmit = async () => {
     if (!nickname.trim()) {
@@ -27,7 +24,7 @@ const EditProfilePage = () => {
     try {
       await updateUserProfile({
         nickname,
-        profileImage: '', // 프로필 이미지 아직 없음
+        profileImage: '',
       });
 
       // 업데이트 성공했을 경우 로컬스토리지 업데이트
@@ -46,18 +43,9 @@ const EditProfilePage = () => {
       <GlobalTopNav message='프로필 수정' showCancel={false} type='global' />
       <div className='h-[70px]' />
 
-      {/* TODO: 프로필 사진 마이페이지에서 어떻게 할 건지 */}
-
       {/* 프로필 사진 */}
       <div className='w-full h-[126px] px-[20px] flex items-center justify-center relative'>
         <Profile className='z-0' />
-        <button
-          type='button'
-          aria-label='프로필 사진 변경'
-          className='w-[28px] h-[28px] bg-bg-primary-tangerine rounded-full z-10 flex items-center justify-center absolute top-[89px] left-[239px]'
-        >
-          <Camera className='z-20' />
-        </button>
       </div>
 
       {/* 인풋창 및 공통 버튼 */}

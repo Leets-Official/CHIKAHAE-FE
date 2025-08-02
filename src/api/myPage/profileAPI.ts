@@ -23,8 +23,9 @@ interface ApiResponse<T> {
 
 // 프로필 조회
 export const fetchUserProfile = async (): Promise<UserProfile> => {
-  const res = await api.get<ApiResponse<UserProfile>>('/api/mypage/profile');
-  return res.data.data;
+  const response = await api.get<ApiResponse<UserProfile>>('/api/mypage/profile');
+  console.log('프로필 조회 성공:', response);
+  return response.data.data;
 };
 
 // 프로필 수정
@@ -32,8 +33,8 @@ export const updateUserProfile = async (payload: {
   nickname: string;
   profileImage: string;
 }): Promise<void> => {
-  const res = await api.post<ApiResponse<null>>('/api/mypage/profile', payload);
-  if (!res.data.success) {
-    throw new Error(res.data.error.message || '프로필 수정 실패');
+  const response = await api.patch<ApiResponse<null>>('/api/mypage/profile', payload);
+  if (!response.data.success) {
+    throw new Error(response.data.error.message || '프로필 수정 실패');
   }
 };
