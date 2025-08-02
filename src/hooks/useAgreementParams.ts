@@ -11,43 +11,49 @@ import { useState, useEffect } from 'react';
 export const useAgreementParams = (defaultValue = [false, false, false]) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [agreements, setAgreements] = useState<boolean[]>(defaultValue);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // URL 쿼리파라미터로부터 agreements 값을 읽어와 상태 초기화/동기화
   useEffect(() => {
     const param = searchParams.get('agreements');
+    const showModal = searchParams.get('showTermsModal') === 'true';
+
     if (param) {
       setAgreements(param.split(',').map((item) => item === 'true'));
     }
-  }, [searchParams]);
+    setIsModalOpen(showModal);
+  }, []);
 
   // agreements 상태를 URL 파라미터에 반영
-  const updateParams = (showModal: boolean, newAgreements: boolean[]) => {
+  useEffect(() => {
     const newSearchParams = new URLSearchParams();
-    if (showModal) newSearchParams.set('showTermsModal', 'true');
-    newSearchParams.set('agreements', newAgreements.join(','));
-    setSearchParams(newSearchParams); // URL 갱신
-  };
+    if (isModalOpen) newSearchParams.set('showTermsModal', 'true');
+    newSearchParams.set('agreements', agreements.join(','));
+    setSearchParams(newSearchParams);
+  }, [agreements, isModalOpen]);
 
   // 특정 인덱스의 약관 동의 여부 토글
   const toggleAgreement = (idx: number) => {
-    setAgreements((prev) => {
-      const next = prev.map((val, i) => (i === idx ? !val : val));
-      updateParams(true, next);
-      return next;
-    });
+    if (idx === -1) {
+      // 전체보기 클릭한 경우 → 모달 열기만
+      setIsModalOpen(true);
+    } else {
+      setAgreements((prev) => prev.map((val, i) => (i === idx ? !val : val)));
+    }
   };
 
   // 동의 상태 및 쿼리파라미터 초기화
   const reset = () => {
-    setSearchParams(new URLSearchParams());
     setAgreements(defaultValue);
+    setIsModalOpen(false);
+    setSearchParams(new URLSearchParams());
   };
 
   return {
     agreements, // 현재 동의 상태
-    isCompleted: agreements[0] && agreements[1], // 필수 항목 2개 모두 동의했는지 여부
-    toggleAgreement, // 동의 토글 함수
-    reset, // 상태 초기화 함수
-    isModalOpen: searchParams.get('showTermsModal') === 'true', // 모달 열림 여부
+    isCompleted: agreements[0] && agreements[1], // 필수 항목 모두 동의했는지
+    toggleAgreement, // 개별 약관 토글 또는 전체보기
+    reset, // 상태 초기화
+    isModalOpen, // 모달 열림 여부
   };
 };
