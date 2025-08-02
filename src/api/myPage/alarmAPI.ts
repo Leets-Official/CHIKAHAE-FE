@@ -6,12 +6,7 @@ export type SlotType = 'MORNING' | 'LUNCH' | 'EVENING';
 // 개별 슬롯 정보
 export interface AlarmSlot {
   slotType: SlotType;
-  sendTime: {
-    hour: number;
-    minute: number;
-    second: number; // TODO: 백엔드 수정 요청
-    nano: number;
-  };
+  sendTime: string;
   enabled: boolean;
   title: string;
   message: string;

@@ -10,10 +10,15 @@ type SelectedAlarm = AlarmSlot & {
 export const useSelectedAlarm = () => {
   const [selectedAlarm, setSelectedAlarm] = useState<SelectedAlarm | null>(null);
 
-  // ex. 15:00 -> 03:00:PM 으로 표시
-  const parseTime = (hourNum: number, minute: number) => {
-    const period: 'AM' | 'PM' = hourNum >= 12 ? 'PM' : 'AM';
-    const hour12 = hourNum % 12 || 12;
+  // 'HH:mm' → { hour: '03', minute: '30', period: 'PM' }
+  const parseTime = (sendTime: string) => {
+    const [hourStr, minuteStr] = sendTime.split(':');
+    const hour24 = parseInt(hourStr, 10);
+    const minute = parseInt(minuteStr, 10);
+
+    const period: 'AM' | 'PM' = hour24 >= 12 ? 'PM' : 'AM';
+    const hour12 = hour24 % 12 === 0 ? 12 : hour24 % 12;
+
     return {
       hour: String(hour12).padStart(2, '0'),
       minute: String(minute).padStart(2, '0'),
@@ -22,7 +27,7 @@ export const useSelectedAlarm = () => {
   };
 
   const selectAlarm = (alarm: AlarmSlot) => {
-    const { hour, minute, period } = parseTime(alarm.sendTime.hour, alarm.sendTime.minute);
+    const { hour, minute, period } = parseTime(alarm.sendTime);
 
     setSelectedAlarm({
       ...alarm,

@@ -7,11 +7,10 @@ interface AlarmListProps {
   onClick: (alarm: AlarmSlot) => void;
 }
 
-// ex. hour: 2, minute: 30 -> 02:30
-const formatTime = (hour: number, minute: number) => {
-  const paddedHour = String(hour).padStart(2, '0');
-  const paddedMinute = String(minute).padStart(2, '0');
-  return `${paddedHour}:${paddedMinute}`;
+// 'HH:mm:ss' -> 07:30
+const formatTime = (sendTime: string) => {
+  const [hour, minute] = sendTime.split(':');
+  return `${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`;
 };
 
 // ex. MORNING -> 아침
@@ -29,16 +28,22 @@ const translateSlotType = (slotType: SlotType) => {
 };
 
 const AlarmList = ({ alarms, onClick }: AlarmListProps) => {
+  const sortedSlotOrder: SlotType[] = ['MORNING', 'LUNCH', 'EVENING'];
+
+  const sortedAlarms = [...alarms].sort(
+    (a, b) => sortedSlotOrder.indexOf(a.slotType) - sortedSlotOrder.indexOf(b.slotType),
+  );
+
   return (
-    <div className='relative top-[14px] gap-[8px] flex flex-col px-[20px]'>
-      {alarms.map((alarm) => (
+    <div className='relative top-[14px] gap-[8px] flex flex-col'>
+      {sortedAlarms.map((alarm) => (
         <div key={alarm.slotType} className='flex justify-between px-[20px] py-[12px]'>
           <span className='flex items-center justify-center body-16-eb text-fg-gray-strong'>
             {translateSlotType(alarm.slotType)}
           </span>
           <div className='w-[72px] h-[24px] flex items-center justify-between text-fg-medium body-16-b'>
             <span className='flex items-center justify-center body-16-b'>
-              {formatTime(alarm.sendTime.hour, alarm.sendTime.minute)}
+              {formatTime(alarm.sendTime)}
             </span>
             <button type='button' onClick={() => onClick(alarm)}>
               <RightIcon className='text-fg-medium' />

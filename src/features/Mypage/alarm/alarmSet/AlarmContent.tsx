@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import TimePickerModal from '@/components/ui/Modal/TimePickerModal';
 import { useToast } from '@/contexts/ToastContext';
 import AlarmList from './AlarmList';
@@ -15,6 +16,7 @@ const AlarmContent = () => {
   const [isAlarmToggleOn, setIsAlarmToggleOn] = useState(false); // 토글 상태
   const [isBlockedModalOpen, setBlockedModalOpen] = useState(false); // 모달 상태 관리
 
+  const queryClient = useQueryClient();
   const { selectedAlarm, selectAlarm, reset } = useSelectedAlarm();
   const { data: alarmSlots = [] } = useAlarmSlots();
 
@@ -37,6 +39,8 @@ const AlarmContent = () => {
     updateSlotTime(selectedAlarm.slotType, sendTime)
       .then(() => {
         showToast({ message: '알람 시간이 변경되었습니다!', duration: 3000, showIcon: false });
+
+        queryClient.invalidateQueries({ queryKey: ['alarmSlots'] });
       })
       .catch(() => {
         showToast({ message: '시간 변경에 실패했습니다.', duration: 3000, showIcon: false });
@@ -90,14 +94,12 @@ const AlarmContent = () => {
         onClose={() => setBlockedModalOpen(false)}
         title='알림 권한이 차단되어 있어요'
         onConfirm={() => {
-          // 브라우저 설정 페이지 열도록 안내
-          window.open('chrome://settings/content/notifications', '_blank'); // 크롬 한정
           setBlockedModalOpen(false);
         }}
-        confirmText='설정 열기'
+        confirmText='확인'
         cancelText='닫기'
       >
-        브라우저 설정에서 알림 권한을 허용해주세요.
+        브라우저 설정에서 알림을 허용해주세요
       </Modal>
     </>
   );
