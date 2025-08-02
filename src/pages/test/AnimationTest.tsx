@@ -9,23 +9,30 @@ import PlayPauseButton from '@/components/ui/Button/AnimationButton';
 const AnimationTest = () => {
   const [tipIndex, setTipIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
+  const [tipRemainingTime, setTipRemainingTime] = useState(10);
 
   useEffect(() => {
     if (!isPlaying) return;
 
     const interval = setInterval(() => {
-      // 10초마다 함수 반복 실행
-      setTipIndex((prev) => {
-        let next;
-        do {
-          next = Math.floor(Math.random() * TIPS.length);
-        } while (next === prev); //중복 방지
-        return next;
+      setTipRemainingTime((prev) => {
+        if (prev <= 1) {
+          // 0초 도달 → 팁 변경 후 다시 10초 세팅
+          setTipIndex((prevTip) => {
+            let next;
+            do {
+              next = Math.floor(Math.random() * TIPS.length);
+            } while (next === prevTip); // 중복 방지
+            return next;
+          });
+          return 10;
+        }
+        return prev - 1;
       });
-    }, 10000);
-
-    return () => clearInterval(interval); // 메모리 누수 방지용
+    }, 1000);
+    return () => clearInterval(interval);
   }, [isPlaying]);
+
   return (
     <>
       <GlobalTopNav type='global' showCancel={false} message='양치하기' />
