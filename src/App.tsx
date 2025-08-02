@@ -7,9 +7,7 @@ import SignupPage from './pages/auth/SignupPage';
 import QuizStartPage from '@/pages/quiz/QuizStartPage';
 import BrushingStartPage from './pages/brushing/BrushingStartPage';
 import AnimationTest from './pages/test/AnimationTest';
-
 import TermsPage from './pages/auth/terms/TermsPage';
-
 import MyPage from '@/pages/mypage/MyPage';
 import MyPageEdit from '@/pages/mypage/EditProfilePage';
 import AlarmPage from '@/pages/mypage/AlarmPage';
@@ -27,9 +25,7 @@ function App() {
         <Route path='/quiz' element={<QuizPage />} />
         <Route path='/brush/start' element={<BrushingStartPage />} />
         <Route path='/animation' element={<AnimationTest />} />
-
         <Route path='/terms/:type' element={<TermsPage />} />
-
         <Route path='/mypage' element={<MyPage />} />
         <Route path='/edit' element={<MyPageEdit />} />
         <Route path='/mypage/alarm' element={<AlarmPage />} />
