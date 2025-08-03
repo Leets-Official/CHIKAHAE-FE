@@ -6,7 +6,7 @@ export const HomeTopNav = () => {
   return (
     <div className='fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] min-w-[360px] p-[10px_20px] h-14 flex items-center justify-between bg-bg-tertiary-gray z-999'>
       <HomeLogo />
-      <Link to='/'>
+      <Link to='/mypage/alarm'>
         <BellIcon />
       </Link>
     </div>
