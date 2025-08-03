@@ -59,18 +59,15 @@ const HomePage = () => {
   });
 
   return (
-    <div className='max-w-[430px] min-w-[360px] w-full min-h-screen flex flex-col items-center mx-auto'>
+    <div className='w-screen max-w-full min-h-screen h-full flex flex-col items-center mx-auto'>
       {/* 홈 헤더 */}
       <HomeTopNav />
       <div className='h-14' />
 
       {/* 홈 배너 이미지 */}
-      <div className='left-0 h-14'>
-        <div className='w-screen flex justify-center'>
-          <HomeBanner />
-        </div>
+      <div className='w-full flex justify-center'>
+        <HomeBanner />
       </div>
-      <div className='h-[280px]' />
 
       {/* 날짜+미션 */}
       <div className='w-full pl-[18px] pt-[20px] pb-[25px] flex flex-col mx-auto'>
