@@ -1,6 +1,5 @@
 import { ReactComponent as TimerIcon } from '@/assets/icons/timerIcon.svg';
 import type { TimerProps } from './Timer.types';
-import { motion } from 'framer-motion';
 import { useEffect, useState, useRef } from 'react';
 
 // 컴포넌트 구성 - [아이콘] [프로그레스바] [남은 시간]
