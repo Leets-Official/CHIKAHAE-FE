@@ -44,9 +44,6 @@ const KakaoLoginButton = () => {
       localStorage.setItem('refreshToken', refreshToken);
       localStorage.setItem('nickname', nickname);
 
-
-      localStorage.removeItem('kakaoAccessToken');
-
       // 회원가입 완료 후 홈으로 이동
       reset(); // 모달 상태 초기화
       navigate('/', { state: { isNewLogin: true } });

@@ -24,10 +24,6 @@ const KakaoCallback = () => {
           nickname,
         } = await requestKakaoCallback(code);
 
-        localStorage.setItem('kakaoAccessToken', kakaoAccessToken);
-        localStorage.setItem('kakaoRefreshToken', kakaoRefreshToken);
-        localStorage.setItem('memberId', memberId);
-
         // 1. 회원가입이 필요한 유저
         if (!memberId) {
           localStorage.removeItem('kakaoAccessToken');
@@ -37,7 +33,7 @@ const KakaoCallback = () => {
             state: {
               kakaoAccessToken,
               kakaoRefreshToken,
-              nickname: nickname,
+              nickname,
             },
           });
           return;

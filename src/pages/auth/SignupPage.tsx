@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import SignupProfile from '@/features/signup/SignupProfile';
 import SignupInfo from '@/features/signup/SignupInfo';
 import SignupGuardianIntro from '@/features/signup/SignupGuardianIntro';
@@ -64,8 +64,9 @@ function SignupPage() {
   };
 
   const handleFinalSignup = async (isOver14Only = false) => {
-    const accessToken = localStorage.getItem('kakaoAccessToken');
-    if (!accessToken) {
+    const { kakaoAccessToken } = useLocation().state || {};
+
+    if (!kakaoAccessToken) {
       console.error('카카오 access token 없음');
       navigate('/login');
       return;
@@ -74,14 +75,14 @@ function SignupPage() {
     try {
       if (isOver14Only) {
         await signupUser({
-          kakaoAccessToken: accessToken,
+          kakaoAccessToken: kakaoAccessToken,
           nickname: user.nickname,
           birth: user.birth,
           gender: user.gender,
         });
       } else {
         await signupUser({
-          kakaoAccessToken: accessToken,
+          kakaoAccessToken: kakaoAccessToken,
           nickname: user.nickname,
           birth: user.birth,
           gender: user.gender,
@@ -119,7 +120,7 @@ function SignupPage() {
             setGender={(gender) => setUser((prev) => ({ ...prev, gender }))}
             onNext={(nextStep) => {
               if (nextStep === 'complete') {
-                handleFinalSignup(true); // 14세 이상 
+                handleFinalSignup(true); // 14세 이상
               } else {
                 goToNext(nextStep); // 14세 미만
               }
