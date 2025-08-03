@@ -32,7 +32,8 @@ const KakaoCallback = () => {
         if (!memberId) {
           localStorage.removeItem('kakaoAccessToken');
           localStorage.removeItem('kakaoRefreshToken');
-          navigate('/signup', {
+          navigate('/signup?needsAgreement=true', {
+            replace: true,
             state: {
               kakaoAccessToken,
               kakaoRefreshToken,
