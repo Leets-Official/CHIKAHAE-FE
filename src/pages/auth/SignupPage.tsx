@@ -119,7 +119,7 @@ function SignupPage() {
             setGender={(gender) => setUser((prev) => ({ ...prev, gender }))}
             onNext={(nextStep) => {
               if (nextStep === 'complete') {
-                handleFinalSignup(true); // 14세 이상
+                handleFinalSignup(true); // 14세 이상 
               } else {
                 goToNext(nextStep); // 14세 미만
               }

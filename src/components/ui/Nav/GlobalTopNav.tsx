@@ -31,11 +31,11 @@ const GlobalTopNav = ({
         ${type === 'signup' ? 'bg-transparent' : 'bg-bg-tertiary-gray'}
         justify-between
         max-w-[480px] min-w-[360px]
-        z-10`}
+        z-50`}
     >
       <div className='w-[30px] flex justify-start'>
         {showLeftIcon && (
-          <button onClick={onClickLeft ?? (() => navigate(-1))}>
+          <button onClick={() => onClickLeft?.()}>
             <LeftIcon className='w-[24px] h-[24px]' />
           </button>
         )}
