@@ -64,12 +64,9 @@ const BrushingSessionList: React.FC<BrushingSessionListProps> = ({ cards }) => {
   return (
     <div
       ref={sliderRef}
-      className={`pb-[8px] w-full snap-x scroll-smooth overflow-x-auto overflow-y-hidden flex no-scrollbar select-none mt-[18px]`
-        + ` ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
-      style={{
-        paddingLeft: 'env(safe-area-inset-left, 18px)',
-        paddingRight: 'env(safe-area-inset-right, 18px)',
-      }}
+      className={`pb-[8px] w-full snap-x scroll-smooth overflow-x-auto overflow-y-hidden flex no-scrollbar select-none mt-[18px] px-[18px] 
+        ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}
+      `}
       onMouseDown={onMouseDown}
       onMouseMove={onMouseMove}
       onMouseUp={stopDrag}
@@ -78,7 +75,7 @@ const BrushingSessionList: React.FC<BrushingSessionListProps> = ({ cards }) => {
       {/* 카드 리스트 */}
       <div className='flex gap-[15px] flex-nowrap w-full'>
         {sortedCards.map((card) => (
-          <div key={card.id} className='snap-start shrink-0 min-w-[140px] max-w-[80vw] w-auto'>
+          <div key={card.id} className='snap-start shrink-0 min-w-[130px] max-w-[80vw] w-auto'>
             <BrushingSessionCard
               title={card.title}
               description={card.description}
