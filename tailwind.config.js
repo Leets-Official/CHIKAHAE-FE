@@ -1,0 +1,126 @@
+/** @type {import('tailwindcss').Config} */
+import { fontFamily } from 'tailwindcss/defaultTheme';
+
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}', './src/styles/**/*.{css}'],
+  theme: {
+    extend: {
+      fontFamily: {
+        nanum: ['NanumSquareRound', ...fontFamily.sans],
+      },
+
+      colors: {
+        // ────────────────
+        // Primitive Colors
+        // ────────────────
+        sunsetRed: {
+          10: '#ffe9eb',
+          30: '#fcafb2',
+          50: '#f2545b',
+          70: '#d8444a',
+          100: '#b52f35',
+        },
+        forest: {
+          10: '#e6f8f1',
+          30: '#a6e9cf',
+          50: '#2bc48a',
+          70: '#199b6a',
+          100: '#10644b',
+        },
+        watermelonPink: {
+          0: '#fff5f8',
+          10: '#ffe1ea',
+          20: '#ffc3d3',
+          30: '#ffa1b8',
+          40: '#ff7f9d',
+          50: '#f05f83',
+          60: '#e04d73',
+          70: '#cc3f67',
+          80: '#b03559',
+          90: '#962b4b',
+          100: '#7c213c',
+        },
+        tangerine: {
+          0: '#fff4ec',
+          10: '#ffe8d7',
+          20: '#ffdcc3',
+          30: '#ffd0ae',
+          40: '#ffc49a',
+          50: '#ffb985',
+          60: '#ffb67a',
+          70: '#e69f66',
+          80: '#cc8753',
+          90: '#a86542',
+          100: '#854d33',
+        },
+        white: {
+          10: '#ffffff1a',
+          20: '#ffffff33',
+          30: '#ffffff4d',
+          40: '#ffffff66',
+          50: '#ffffff80',
+          60: '#ffffff99',
+          70: '#ffffffb3',
+          80: '#ffffffcc',
+          90: '#ffffffe6',
+          100: '#ffffff',
+        },
+        clearBlue: {
+          0: '#eaf4ff',
+          10: '#d6ebfe',
+          20: '#c1e1fe',
+          30: '#a6d3fd',
+          40: '#8bc4fc',
+          50: '#72b6f9',
+          60: '#4c98f5',
+          70: '#3c83d6',
+          80: '#2c6eb5',
+          90: '#1d5992',
+          100: '#12416b',
+        },
+        softAqua: {
+          0: '#ebf9ff',
+          10: '#d6f3ff',
+          20: '#c0edff',
+          30: '#aae6ff',
+          40: '#94e0ff',
+          50: '#7fd8ff',
+          60: '#5fc6f0',
+          70: '#3dafd9',
+          80: '#2593bd',
+          90: '#186f92',
+          100: '#0d4c66',
+        },
+        black: {
+          10: '#0000001a',
+          20: '#00000033',
+          30: '#0000004d',
+          40: '#00000066',
+          50: '#00000080',
+          60: '#00000099',
+          70: '#000000b3',
+          80: '#000000cc',
+          90: '#000000e6',
+          100: '#000000',
+        },
+        coolGrey: {
+          0: '#fafbfc',
+          10: '#f5f7fa',
+          20: '#e9eef2',
+          25: '#dce3e8',
+          30: '#ced6dd',
+          40: '#bac3cb',
+          50: '#9ca6af',
+          60: '#7e8994',
+          70: '#5e6975',
+          80: '#3d4650',
+          90: '#22272d',
+          100: '#181b1f',
+        },
+      },
+    },
+  },
+
+  plugins: [require('tailwind-scrollbar-hide'), require('@tailwindcss/typography')],
+
+};
