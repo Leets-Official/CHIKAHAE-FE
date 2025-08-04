@@ -64,7 +64,7 @@ const QuizResult = ({
             <QuizResultBlock isCorrect={isCorrect} />
           </motion.div>
 
-          <div className='text-center w-[280px] mt-[42px]'>
+          <div className='text-center w-[360px] mt-[42px] px-[18px]'>
             <div className='head-24-eb mb-[24px]'>{resultText}</div>
             {description && <div className='body-16-r mt-[24px]'>{description}</div>}
           </div>

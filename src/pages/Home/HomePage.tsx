@@ -63,10 +63,14 @@ const HomePage = () => {
   });
 
   return (
-    <div className='w-screen max-w-full min-h-screen h-full flex flex-col items-center mx-auto'>
+    <div className='w-screen max-w-[480px] min-w-[360px] min-h-screen h-full flex flex-col items-center mx-auto'>
       {/* 홈 헤더 */}
       <HomeTopNav />
       <div className='h-14' />
+
+      <div className='relative w-full max-w-[480px] h-[5px] mx-auto'>
+        <div className='absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[5px] bg-[#72B6F9] z-20' />
+      </div>
 
       {/* 홈 배너 이미지 */}
       <div className='w-full flex justify-center'>

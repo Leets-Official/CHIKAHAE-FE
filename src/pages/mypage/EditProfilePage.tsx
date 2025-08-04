@@ -39,7 +39,7 @@ const EditProfilePage = () => {
   };
 
   return (
-    <div className='max-w-[430px] min-w-[360px] min-h-screen flex flex-col gap-6 mx-auto'>
+    <div className='max-w-[480px] min-w-[360px] min-h-screen flex flex-col gap-6 mx-auto'>
       <GlobalTopNav message='프로필 수정' showCancel={false} type='global' />
       <div className='h-[70px]' />
 
@@ -49,7 +49,7 @@ const EditProfilePage = () => {
       </div>
 
       {/* 인풋창 및 공통 버튼 */}
-      <div className='w-full flex flex-col gap-4 px-[16px]'>
+      <div className='w-full max-w-[480px] min-w-[360px] flex flex-col gap-4 px-[20px]'>
         <InputContainer
           placeholder={nickname}
           label='닉네임'
