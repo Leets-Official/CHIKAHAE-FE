@@ -21,7 +21,7 @@ const KakaoLoginButton = () => {
     if (searchParams.get('needsAgreement') === 'true') {
       toggleAgreement(-1);
     }
-  }, [searchParams]);
+  }, [searchParams, toggleAgreement]);
 
   const startKakaoLogin = () => {
     if (!isModalOpen) {
