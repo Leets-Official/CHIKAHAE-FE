@@ -9,7 +9,7 @@ import PlayPauseButton from '@/components/ui/Button/AnimationButton';
 const AnimationTest = () => {
   const [tipIndex, setTipIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [tipRemainingTime, setTipRemainingTime] = useState(10);
+  const [, setTipRemainingTime] = useState(10);
 
   useEffect(() => {
     if (!isPlaying) return;
