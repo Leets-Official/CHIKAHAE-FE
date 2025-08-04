@@ -26,7 +26,7 @@ const CoinRewardResult = ({
 
       <div className='flex flex-col items-center gap-0 mt-[42px]'>
         {isQuizPage && (
-          <div className='body-16-r' style={{ lineHeight: '25px' }}>
+          <div className='body-16-r leading-[25px]'>
             {correctCount}/{totalCount}
           </div>
         )}
