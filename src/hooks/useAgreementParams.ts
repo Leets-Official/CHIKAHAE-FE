@@ -22,7 +22,7 @@ export const useAgreementParams = (defaultValue = [false, false, false]) => {
       setAgreements(param.split(',').map((item) => item === 'true'));
     }
     setIsModalOpen(showModal);
-  }, []);
+  }, [searchParams]);
 
   // agreements 상태를 URL 파라미터에 반영
   useEffect(() => {
