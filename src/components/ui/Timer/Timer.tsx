@@ -74,14 +74,18 @@ const Timer = ({
 
         <div className='flex h-[16px] flex-grow bg-tangerine-weak rounded-r-full overflow-hidden'>
           <div
-            className='h-full bg-tangerine-strong rounded-r-full'
+            className='h-full bg-tangerine-strong rounded-r-full transition-all duration-1000 ease-linear'
             style={{ width: `${(remainingTime / duration) * 100}%` }}
           />
         </div>
 
         {/* 텍스트 (초 or 분:초) */}
         {showSeconds && (
-          <span className='auto-width text-[20px] font-extrabold leading-[23px] w-[80px] text-tangerine-strong text-center'>
+          <span
+            className={`auto-width text-[20px] font-extrabold leading-[23px] text-tangerine-strong text-center ${
+              mode !== 'quiz' ? 'w-[80px]' : ''
+            }`}
+          >
             {formatTime(remainingTime)}
           </span>
         )}
