@@ -5,6 +5,8 @@ import { useNavigate, useSearchParams, useLocation } from 'react-router-dom';
 import { useAgreementParams } from '@/hooks/useAgreementParams';
 import { useEffect } from 'react';
 import { exchangeKakaoToken } from '@/api/auth/kakaoAPI';
+import { ReactComponent as KakaoIcon } from '@/assets/icons/KaKaoSymbol.svg';
+
 
 const KakaoLoginButton = () => {
   const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
@@ -60,8 +62,7 @@ const KakaoLoginButton = () => {
         onClick={startKakaoLogin}
         className='flex items-center justify-center bg-bg-primary-yellow h-12 rounded-lg w-full gap-2 cursor-pointer'
       >
-        <img src='src/assets/icons/KaKaoSymbol.svg' alt='KakaoIcon' />
-        <span className='body-16-eb'>카카오로 시작하기</span>
+        <KakaoIcon /> <span className='body-16-eb'>카카오로 시작하기</span>
       </button>
 
       <ModalSheet isOpen={isModalOpen} onClose={reset}>

@@ -23,9 +23,9 @@ const QuizContent = ({
   return (
     <>
       {/* 타이머 영역 */}
-      <div className='flex justify-center pt-14 py-[18px]'>
+      <div className='flex justify-center pt-14 py-[18px] px-[18px] w-full max-w-[480px] min-w-[360px]'>
         {/* 타이머가 끝나면 onTimeout 콜백 호출 */}
-        <Timer key={questionNumber} onComplete={onTimeout} />
+        <Timer key={questionNumber} size='wide' onComplete={onTimeout} />
       </div>
 
       {/* 퀴즈 컨텐츠 영역 */}

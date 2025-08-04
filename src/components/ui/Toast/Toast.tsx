@@ -56,6 +56,7 @@ const Toast = ({
     <div
       className={clsx(
         'inline-flex',
+        'w-full max-w-[400px]',
         'px-[18px]',
         'py-[14px]',
         'justify-center',
@@ -70,14 +71,16 @@ const Toast = ({
       {/* 조건부 아이콘 렌더링 */}
       {showIcon && <Coin className='w-[20px] h-[20px]' />}
 
-      <span className={clsx('body-12-eb', 'leading-[14px]', 'text-fg-accent-toast')}>
+      <span
+        className={'max-w-[400px] whitespace-nowrap body-12-eb leading-[14px] text-fg-accent-toast'}
+      >
         {message}
       </span>
 
       {actionText && (
         <button
           onClick={handleActionClick}
-          className={clsx('body-12-eb', 'text-fg-accent-toast', 'px-2', 'py-1', 'hover:opacity-80')}
+          className={'body-12-eb text-fg-accent-toast px-2 py-1 hover:opacity-80'}
         >
           {actionText}
         </button>

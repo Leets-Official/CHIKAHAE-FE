@@ -71,7 +71,11 @@ const QuizPage = () => {
         showToast({ message: '치카코인 1개가 적립되었어요.', duration: TOAST_DURATION });
       }
     } catch {
-      showToast({ message: '정답 확인 중 오류가 발생했어요.', duration: TOAST_DURATION });
+      showToast({
+        message: '정답 확인 중 오류가 발생했어요.',
+        duration: TOAST_DURATION,
+        showIcon: false,
+      });
       setIsCorrect(false);
       setAnswerExplanation('정답 확인 실패');
     }
@@ -123,7 +127,11 @@ const QuizPage = () => {
         queryClient.invalidateQueries({ queryKey: ['pointBalance'] });
         queryClient.invalidateQueries({ queryKey: ['todayMissions'] });
       } catch {
-        showToast({ message: '최종 결과 조회 중 오류가 발생했어요.', duration: TOAST_DURATION });
+        showToast({
+          message: '최종 결과 조회 중 오류가 발생했어요.',
+          duration: TOAST_DURATION,
+          showIcon: false,
+        });
       }
     };
 

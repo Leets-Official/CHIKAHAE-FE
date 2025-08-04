@@ -1,5 +1,5 @@
-import { ReactComponent as Quiz_O } from '@/assets/icons/Quiz_O.svg';
-import { ReactComponent as Quiz_X } from '@/assets/icons/Quiz_X.svg';
+import { ReactComponent as Quiz_O } from '@/assets/icons/quiz_O.svg';
+import { ReactComponent as Quiz_X } from '@/assets/icons/quiz_X.svg';
 import type { QuizResultBlockProps } from './QuizResultBlock.types';
 import clsx from 'clsx';
 

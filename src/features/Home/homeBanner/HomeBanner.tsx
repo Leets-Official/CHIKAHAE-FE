@@ -11,7 +11,6 @@ const HomeBanner = () => {
         alt='홈 배경'
         className='absolute inset-0 w-full h-full object-cover object-bottom z-0'
       />
-      {/* 중앙에 묶어서 배치 */}
       <div className='absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[-35px] z-10'>
         <Toothbrush className='absolute top-[-80px] left-[-60px]' />
         <Rabbit className='relative w-[71.12px] h-[120px]' />
