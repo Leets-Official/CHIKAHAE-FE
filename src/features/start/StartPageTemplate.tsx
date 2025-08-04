@@ -28,15 +28,16 @@ const StartPageTemplate = ({
   return (
     <>
       {/* 페이지 상단 영역 */}
-      <div className='flex flex-col min-h-screen w-full max-w-[430px] min-w-[360px] mx-auto'>
+      <div className='flex flex-col min-h-screen w-full max-w-[480px] min-w-[360px] mx-auto'>
         <div className='flex flex-col w-full gap-[10px] pb-[30px]'>
           <GlobalTopNav message={navTitle} showCancel={false} showLeftIcon={false} />
 
+          <div className='h-14' />
           {/* 상단 대표 이미지 */}
           <img
             src={imageSrc}
             alt={imageAlt}
-            className='flex items-center justify-start mt-14 w-full bg-fg-weak mb-[10px]'
+            className='flex items-center justify-start **:w-full bg-fg-weak mb-[10px]'
           />
           {/* 메인 제목 + 코인 텍스트 + 유의사항 리스트 */}
           <div className='px-[20px]'>
@@ -53,14 +54,14 @@ const StartPageTemplate = ({
             <QuizNoticeList noticeList={noticeList} />
           </div>
         </div>
-      </div>
 
-      {/* 시작하기 버튼 */}
-      <div className='fixed bottom-0 left-0 right-0 flex justify-center'>
-        <div className='w-full max-w-[430px] min-w-[360px] px-[20px] pb-[100px]'>
-          <Button size='large' variant='primary' fullWidth onClick={onStart}>
-            {startButtonText}
-          </Button>
+        {/* 시작하기 버튼 */}
+        <div className='flex justify-center mt-auto'>
+          <div className='w-full max-w-[480px] min-w-[360px] px-[20px] pb-[100px]'>
+            <Button size='large' variant='primary' fullWidth onClick={onStart}>
+              {startButtonText}
+            </Button>
+          </div>
         </div>
       </div>
 

@@ -76,7 +76,7 @@ const MyPage: React.FC = () => {
 
   return (
     <>
-      <div className='max-w-[430px] min-w-[360px] min-h-screen flex flex-col items-center gap-6 mx-auto'>
+      <div className='max-w-[480px] min-w-[360px] min-h-screen flex flex-col items-center gap-6 mx-auto'>
         {/* 상단 헤더: 상단 바 */}
         <GlobalTopNav message='마이페이지' showCancel={false} showLeftIcon={false} type='global' />
         <div className='h-[44px]' />
