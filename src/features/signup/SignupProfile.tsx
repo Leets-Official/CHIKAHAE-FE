@@ -1,8 +1,9 @@
 import Image from '@/components/Image';
-import ProfileImage from '@/assets/icons/fallbackProfile.svg';
+import ProfileImage from '@/assets/icons/profileImage.svg';
 import InputContainer from '@/components/ui/Input/InputContainer';
 import SignupBg from '@/assets/images/signupBackground.svg';
 import Button from '@/components/ui/Button';
+import { useAuthRedirect } from '@/hooks/useAuthRedirect';
 
 interface SignupProfileProps {
   nickname: string;
@@ -10,6 +11,7 @@ interface SignupProfileProps {
   onNext: () => void;
 }
 const SignupProfile = ({ nickname, setNickname, onNext }: SignupProfileProps) => {
+  useAuthRedirect();
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);
   };
