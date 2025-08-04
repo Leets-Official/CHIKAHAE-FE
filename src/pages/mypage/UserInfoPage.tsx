@@ -1,23 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
-import UserInfoList from '@/features/Mypage/components/UserInfoList';
-import type { MenuItemType } from '@/features/Mypage/components/UserInfoList';
-import { USER_INFO_META } from '@/constants/userInfoMeta';
+import UserInfoList from '@/features/Mypage/userInfo/UserInfoList';
+import type { MenuItemType } from '@/features/Mypage/userInfo/UserInfoList';
+import { fetchUserProfile } from '@/api/myPage/profileAPI';
 
-// 실제 사용자 정보는 아래처럼 가져오거나 props/context 등으로 전달
-const userValues: Record<string, string> = {
-  name: '김양치',
-  gender: '여성',
-  birthDate: '2099-99-99',
-  email: 'chikahea@leets.com',
+const formatBirth = (birth: string) => {
+  // 'YYYY-MM-DD' → 'YYYY.MM.DD'
+  return birth.replace(/-/g, '.');
 };
 
-const menuData: MenuItemType[] = USER_INFO_META.map(meta => ({
-  ...meta,
-  value: userValues[meta.key] || '',
-}));
-
 const UserInfoPage: React.FC = () => {
+  const [menuData, setMenuData] = useState<MenuItemType[]>([]);
+
+  useEffect(() => {
+    const loadUserProfile = async () => {
+      try {
+        const data = await fetchUserProfile();
+
+        const items: MenuItemType[] = [
+          { key: 'gender', label: '성별', value: data.gender === 'FEMALE' ? '여성' : '남성' },
+          { key: 'birth', label: '생일', value: formatBirth(data.birth) },
+          { key: 'email', label: '이메일', value: data.kakaoEmail },
+        ];
+
+        setMenuData(items);
+      } catch (error) {
+        console.error('사용자 정보 불러오기 실패:', error);
+      }
+    };
+
+    loadUserProfile();
+  }, []);
 
   return (
     <div className='max-w-[430px] min-w-[360px] min-h-screen flex flex-col mx-auto'>

@@ -16,7 +16,7 @@ export default defineConfig({
       registerType: 'autoUpdate', // 서비스 워커가 자동으로 갱신됨
       injectRegister: 'auto',
       devOptions: {
-        enabled: true,
+        enabled: false,
         type: 'module',
       },
       manifest: {

@@ -44,7 +44,7 @@ const Modal = ({
         <div
           className={clsx(
             'bg-bg-primary-white shadow-lg w-[320px] h-[173px] rounded-[8px] flex flex-col gap-[1px]',
-            className // 외부에서 전달된 스타일
+            className, // 외부에서 전달된 스타일
           )}
           onClick={(e) => e.stopPropagation()}
         >
@@ -53,7 +53,6 @@ const Modal = ({
             <div
               className={`
             w-[320px]
-            h-[173px]
             rounded-[8px]
             opacity-100
             bg-bg-primary-white
@@ -64,14 +63,14 @@ const Modal = ({
               onClick={(e) => e.stopPropagation()}
             >
               {/* ========== Header + Body ========== */}
-              <div className='flex flex-col items-center justify-center w-[320px] h-[112px] gap-[10px] opacity-100 pt-[30px] pr-[20px] pb-[32px] pl-[20px]'>
+              <div className='flex flex-col items-center justify-center w-[320px] gap-[10px] pt-[30px] pr-[20px] pb-[32px] pl-[20px]'>
                 {title && <h2 className='text-center text-fg-primary head-20-eb'>{title}</h2>}
                 <div className='text-center text-fg-strong body-16-b'>{children}</div>
               </div>
 
               {/* ========== Footer ========== */}
               {footer ? (
-                <div className="flex justify-center w-full">{footer}</div>
+                <div className='flex justify-center w-full'>{footer}</div>
               ) : (
                 <div className='flex justify-center w-full px-[20px] pb-[20px] gap-[10px] items-center self-stretch'>
                   <Button variant='assistive' size='medium' className='w-[135px]' onClick={onClose}>

@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getMessaging, onMessage, getToken } from 'firebase/messaging';
-import { registerFcmToken } from '@/api/fcm/fcmAPI';
+import { registerFcmToken } from '@/api/fcm/fcmTokenAPI';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -25,17 +25,29 @@ const messaging = getMessaging(app);
  */
 async function requestFcmToken() {
   try {
-    // 현재 디바이스의 FCM 토큰 요청
-    const currentToken = await getToken(messaging, { vapidKey: VAPID_KEY });
+    const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js'); // 💥 직접 등록해줌
+    console.log('[FCM] ServiceWorker 등록 완료:', registration);
+
+    const permission = await Notification.requestPermission();
+    if (permission !== 'granted') {
+      console.warn('[FCM] 알림 권한 거부됨');
+      return;
+    }
+
+    const currentToken = await getToken(messaging, {
+      vapidKey: VAPID_KEY,
+      serviceWorkerRegistration: registration,
+    });
+
     if (currentToken) {
-      console.log('FCM Token:', currentToken);
+      console.log('[FCM] 토큰:', currentToken);
       await registerFcmToken(currentToken);
       return currentToken;
     } else {
-      console.log('No registration token available.');
+      console.warn('[FCM] 토큰이 존재하지 않음');
     }
   } catch (error) {
-    console.error('An error occurred while retrieving token. ', error);
+    console.error('[FCM] 토큰 요청 중 오류:', error);
   }
 }
 
