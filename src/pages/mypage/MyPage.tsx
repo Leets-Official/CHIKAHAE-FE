@@ -10,7 +10,7 @@ import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 import Modal from '@/components/ui/Modal/Modal';
 import { logout, withdraw } from '@/api/myPage/authAPI';
 import { useToast } from '@/contexts/ToastContext';
-import { clearFcmToken } from '@/utils/fcmTokenMAnager';
+import { clearFcmToken } from '@/utils/fcmTokenManager';
 
 type ModalType = 'logout' | 'withdraw' | null;
 
@@ -20,14 +20,32 @@ const MyPage: React.FC = () => {
   const [modalType, setModalType] = useState<ModalType>(null);
   const closeModal = () => setModalType(null);
 
-  // FIXME: 경로 수정 필요
   const menuData: MenuItem[] = [
-    { label: '계정정보', path: '/mypage/userinfo', onClick: () => navigate('/mypage/userinfo') },
-    { label: '공지사항', path: '/notice', onClick: () => navigate('/notice') },
-    { label: 'FAQ', path: '/faq', onClick: () => navigate('/faq') },
-    { label: '이용약관', path: '/tos', onClick: () => navigate('/tos') },
-    { label: '로그아웃', path: '', onClick: () => setModalType('logout') },
-    { label: '회원탈퇴', path: '', onClick: () => setModalType('withdraw') },
+    { label: '계정정보', onClick: () => navigate('/mypage/userinfo') },
+    {
+      label: '공지사항',
+      onClick: () =>
+        window.open(
+          'https://prairie-dietician-01c.notion.site/2450b56c63ab809ca140ff2d2c9855f7?pvs=143',
+          '_blank',
+        ),
+    },
+    {
+      label: 'FAQ',
+      onClick: () =>
+        window.open(
+          'https://prairie-dietician-01c.notion.site/FAQ-2450b56c63ab80e7b38adc752612fa9a?pvs=143',
+        ),
+    },
+    {
+      label: '이용약관',
+      onClick: () =>
+        window.open(
+          'https://prairie-dietician-01c.notion.site/2450b56c63ab8011b5deeb2d0fd6be32?pvs=143',
+        ),
+    },
+    { label: '로그아웃', onClick: () => setModalType('logout') },
+    { label: '회원탈퇴', onClick: () => setModalType('withdraw') },
   ];
 
   const [nickName] = useState(() => localStorage.getItem('nickname') || '닉네임');
