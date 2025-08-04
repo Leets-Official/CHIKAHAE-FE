@@ -1,11 +1,12 @@
 import { getToken } from 'firebase/messaging';
 import { messaging } from '@/utils/firebaseMessaging';
 import { registerFcmToken } from '@/api/fcm/fcmTokenAPI';
+import { isNotificationGranted } from '@/utils/notification';
 
 export const registerFcmTokenIfPermitted = async ({
   requestPermission = false,
 }: { requestPermission?: boolean } = {}) => {
-  if (Notification.permission !== 'granted') {
+  if (!isNotificationGranted()) {
     if (!requestPermission || (await Notification.requestPermission()) !== 'granted') {
       console.log('[FCM] 알림 권한 없음.');
       return;

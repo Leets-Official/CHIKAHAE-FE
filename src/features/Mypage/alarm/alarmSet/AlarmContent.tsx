@@ -9,6 +9,7 @@ import { updateSlotTime } from '@/api/myPage/alarmAPI';
 import { useSelectedAlarm } from '@/hooks/useSelectedAlarm';
 import { formatTo24Hour } from '@/utils/formatSendTime';
 import { Modal } from '@/components/ui/Modal';
+import { isNotificationGranted } from '@/utils/notification';
 
 const AlarmContent = () => {
   const { showToast } = useToast();
@@ -22,9 +23,8 @@ const AlarmContent = () => {
 
   //  브라우저 권한 + 서버 알림 설정 여부 확인
   useEffect(() => {
-    const browserGranted = Notification.permission === 'granted';
     const allSlotsEnabled = alarmSlots.length > 0 && alarmSlots.every((slot) => slot.enabled);
-    setIsAlarmToggleOn(browserGranted && allSlotsEnabled);
+    setIsAlarmToggleOn(isNotificationGranted() && allSlotsEnabled);
   }, [alarmSlots]);
 
   const closeModal = () => {
