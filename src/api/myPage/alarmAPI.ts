@@ -23,6 +23,11 @@ interface ApiResponse<T> {
   };
 }
 
+const patchSlot = async <T>(url: string, payload: object): Promise<T> => {
+  const res = await api.patch<ApiResponse<T>>(url, payload);
+  return res.data.data;
+};
+
 // 알림 슬롯 전체 조회
 export const getAlarmSlots = async (): Promise<AlarmSlot[]> => {
   const res = await api.get<ApiResponse<AlarmSlot[]>>('/api/notifications/slots');
@@ -31,22 +36,13 @@ export const getAlarmSlots = async (): Promise<AlarmSlot[]> => {
 };
 
 // 슬롯별 시간 변경
-export const updateSlotTime = async (slotType: SlotType, sendTime: string): Promise<void> => {
-  await api.patch<ApiResponse<{}>>(`/api/notifications/slots/${slotType}/time`, {
-    sendTime,
-  });
-};
+export const updateSlotTime = (slotType: SlotType, sendTime: string) =>
+  patchSlot(`/api/notifications/slots/${slotType}/time`, { sendTime });
 
 // 슬롯별 활성화 토글 변경
-export const updateSlotEnabled = async (slotType: SlotType, enabled: boolean): Promise<void> => {
-  await api.patch<ApiResponse<{}>>(`/api/notifications/slots/${slotType}/enabled`, {
-    enabled,
-  });
-};
+export const updateSlotEnabled = (slotType: SlotType, enabled: boolean) =>
+  patchSlot(`/api/notifications/slots/${slotType}/enabled`, { enabled });
 
 // 전체 슬롯 활성화 상태 변경
-export const updateAllSlotsEnabled = async (enabled: boolean): Promise<void> => {
-  await api.patch<ApiResponse<{}>>('/api/notifications/slots/enabled', {
-    enabled,
-  });
-};
+export const updateAllSlotsEnabled = (enabled: boolean) =>
+  patchSlot('/api/notifications/slots/enabled', { enabled });
