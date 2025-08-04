@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useToast } from '@/contexts/ToastContext';
 import { useNavigate } from 'react-router-dom';
-// import { quizMockData } from '@/mocks/quizMock';
 import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 import QuizBody from '@/features/quiz/quizFlow/quizSolve/QuizBody';
 import QuizFooter from '@/features/quiz/quizFlow/quizSolve/QuizFooter';
@@ -9,6 +8,7 @@ import QuizSummary from '@/features/quiz/quizFlow/QuizSummary';
 import { useLocation } from 'react-router-dom';
 import { Modal } from '@/components/ui/Modal';
 import { checkAnswer, fetchQuizResult } from '@/api/quiz/quizAPI';
+import { useQueryClient } from '@tanstack/react-query';
 
 // 퀴즈 (문제 풀이) / 퀴즈 결과 / 최종 결과 화면
 
@@ -19,6 +19,7 @@ const TOAST_DURATION = 3000;
 const TIMEOUT_DELAY = 1000;
 
 const QuizPage = () => {
+  const queryClient = useQueryClient();
   const { showToast } = useToast();
   const navigate = useNavigate();
   const location = useLocation();
@@ -47,16 +48,14 @@ const QuizPage = () => {
 
   // 제한 시간 초과 시 호출
   const handleTimeout = async () => {
-    const timeoutIndex = -1;
-    setSelectedAnswer(timeoutIndex);
-
-    await processAnswer(timeoutIndex); // 서버에 오답 처리 요청
+    await processAnswer(null, true); // null과 timeout 여부를 명시
     setTimeout(() => setStep('result'), TIMEOUT_DELAY);
   };
 
   // 정답 처리 로직
-  const processAnswer = async (index: number) => {
-    const selected = currentQuiz.options[index] || '';
+  const processAnswer = async (index: number | null, isTimeout = false) => {
+    const selected = isTimeout ? '' : currentQuiz.options[index!] || '';
+
     try {
       const res = await checkAnswer({
         quizId: currentQuiz.quizId,
@@ -77,7 +76,7 @@ const QuizPage = () => {
       setAnswerExplanation('정답 확인 실패');
     }
 
-    setUserAnswers((prev) => [...prev, index]);
+    setUserAnswers((prev) => [...prev, index ?? -1]); // null은 -1로 저장
     setStep('result');
   };
 
@@ -120,6 +119,9 @@ const QuizPage = () => {
 
         setCorrectCount(correctCount); // API 기준 정답 수로 갱신
         setAnswerExplanation(`치카코인 ${coinReward}개가 적립되었어요!`);
+
+        queryClient.invalidateQueries({ queryKey: ['pointBalance'] });
+        queryClient.invalidateQueries({ queryKey: ['todayMissions'] });
       } catch {
         showToast({ message: '최종 결과 조회 중 오류가 발생했어요.', duration: TOAST_DURATION });
       }

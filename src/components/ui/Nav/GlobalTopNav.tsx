@@ -47,7 +47,7 @@ const GlobalTopNav = ({
             className={`
               flex-1 
               ${isCenter ? 'text-left' : 'text-center'} 
-              text-fg-primary body-16-eb
+              text-fg-primary head-20-eb
             `}
           >
             {message}

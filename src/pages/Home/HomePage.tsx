@@ -7,7 +7,7 @@ import { ReactComponent as Caution } from '@/assets/icons/caution.svg';
 import BrushingSessionList from '@/features/Home/todayMission/BrushingSessionList';
 import { useTodayMissions } from '@/hooks/queries/useGetTodayMissions';
 import { useToast } from '@/contexts/ToastContext';
-import { requestAndRegisterFcmToken } from '@/features/alarm/fcm';
+import { registerFcmTokenIfPermitted } from '@/features/alarm/registerFcmToken';
 
 const HomePage = () => {
   /**
@@ -31,10 +31,14 @@ const HomePage = () => {
   useEffect(() => {
     const { missionCompleted, coinAmount, isNewLogin } = location.state || {};
 
-    // FCM 등록 - 로그인 또는 회원가입 후에만
+    // FCM 등록: 새 로그인일 경우 권한 요청 포함, 아닌 경우 무조건 토큰만 확보
     if (isNewLogin) {
-      requestAndRegisterFcmToken();
-      window.history.replaceState({}, document.title); // 뒤로 가기 시 중복 방지
+      console.log('[FCM] 새 로그인이므로 권한 요청 + 등록 시작');
+      registerFcmTokenIfPermitted({ requestPermission: true });
+      window.history.replaceState({}, document.title);
+    } else {
+      console.log('[FCM] 기존 로그인 - 권한 없이 토큰만 재등록 시도');
+      registerFcmTokenIfPermitted(); // 이미 권한 있으면 재등록
     }
 
     // 코인 적립 토스트

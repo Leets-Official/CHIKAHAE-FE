@@ -2,7 +2,7 @@ import Button from '@/components/ui/Button';
 import TextButton from '@/components/ui/TextButton';
 import { useNavigate } from 'react-router-dom';
 import type { QuizFlowProps } from '@/types/quizView';
-import { useQueryClient } from '@tanstack/react-query';
+import { completeMission } from '@/api/home/missionAPI';
 import clsx from 'clsx';
 
 // 퀴즈 하단부 (하단 버튼 영역 렌더링)
@@ -15,8 +15,16 @@ type QuizFooterProps = {
 };
 
 const QuizFooter = ({ step, selectedAnswer, onNext, onShowSummary }: QuizFooterProps) => {
-  const queryClient = useQueryClient();
   const navigate = useNavigate();
+
+  const handleGoHome = async () => {
+    try {
+      await completeMission('DAILY_QUIZ');
+      navigate('/'); // 홈으로 이동
+    } catch (error) {
+      console.log('미션 완료 실패: ', error);
+    }
+  };
 
   return (
     <div className='fixed bottom-0 left-0 right-0 flex justify-center pb-[20px]'>
@@ -45,9 +53,7 @@ const QuizFooter = ({ step, selectedAnswer, onNext, onShowSummary }: QuizFooterP
               variant='primary'
               fullWidth
               onClick={() => {
-                queryClient.invalidateQueries({ queryKey: ['pointBalance'] });
-                queryClient.invalidateQueries({ queryKey: ['todayMissions'] });
-                navigate('/', { state: { missionCompleted: true, coinAmount: 10 } });
+                handleGoHome();
               }}
             >
               홈으로 이동하기

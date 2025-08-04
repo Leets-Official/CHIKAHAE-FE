@@ -1,6 +1,5 @@
 import { ReactComponent as TimerIcon } from '@/assets/icons/timerIcon.svg';
 import type { TimerProps } from './Timer.types';
-import { motion } from 'framer-motion';
 import { useEffect, useState, useRef } from 'react';
 
 // 컴포넌트 구성 - [아이콘] [프로그레스바] [남은 시간]
@@ -11,8 +10,8 @@ const Timer = ({
   onComplete,
   size = 'default',
   mode = 'quiz',
+  isActive = true,
 }: TimerProps) => {
-  const [isActive, setIsActive] = useState(true);
   const [remainingTime, setRemainingTime] = useState(duration);
 
   // default(기존 퀴즈 타이머 사이즈) | wide(애니메이션 전용 넓은 타이머), 기본값은 default
@@ -22,7 +21,6 @@ const Timer = ({
   //  duration 변경되면 remainingTime 초기화
   useEffect(() => {
     setRemainingTime(duration);
-    setIsActive(true);
   }, [duration]);
 
   // onComplete 중복 호출 방지용 ref
@@ -31,7 +29,6 @@ const Timer = ({
   // duration 변경되면 타이머 초기화
   useEffect(() => {
     setRemainingTime(duration);
-    setIsActive(true);
     hasCompleted.current = false; // 완료 플래그 초기화
   }, [duration]);
 
@@ -43,7 +40,6 @@ const Timer = ({
       setRemainingTime((prev) => {
         if (prev <= 1) {
           clearInterval(interval);
-          setIsActive(false);
           if (!hasCompleted.current) {
             hasCompleted.current = true;
             onComplete?.();
@@ -76,22 +72,16 @@ const Timer = ({
       <div className='h-[40px] pl-[32px] pr-[10px] flex items-center gap-[8px] w-full'>
         {/* 프로그레스 바 */}
 
-        <div className='flex h-[16px] flex-grow bg-tangerine-weak rounded-r-full overflow-hidden relative z-0'>
-          {isActive && (
-            <motion.div
-              role='progressbar'
-              initial={{ width: '100%' }}
-              animate={{ width: 0 }}
-              transition={{ duration, ease: 'linear' }}
-              className='h-full bg-tangerine-strong rounded-r-full'
-              onAnimationComplete={() => setIsActive(false)}
-            />
-          )}
+        <div className='flex h-[16px] flex-grow bg-tangerine-weak rounded-r-full overflow-hidden'>
+          <div
+            className='h-full bg-tangerine-strong rounded-r-full'
+            style={{ width: `${(remainingTime / duration) * 100}%` }}
+          />
         </div>
 
         {/* 텍스트 (초 or 분:초) */}
         {showSeconds && (
-          <span className='auto-width text-[20px] font-extrabold leading-[23px] text-tangerine-strong text-center'>
+          <span className='auto-width text-[20px] font-extrabold leading-[23px] w-[80px] text-tangerine-strong text-center'>
             {formatTime(remainingTime)}
           </span>
         )}
