@@ -10,6 +10,9 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
+  "engines": {
+    "node": "20.x"
+  },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.16",
     "@tanstack/react-query": "^5.81.5",
