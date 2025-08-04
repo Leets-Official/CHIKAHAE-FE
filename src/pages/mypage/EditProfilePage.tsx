@@ -49,7 +49,7 @@ const EditProfilePage = () => {
       </div>
 
       {/* 인풋창 및 공통 버튼 */}
-      <div className='w-full flex flex-col gap-4 '>
+      <div className='w-full flex flex-col gap-4 px-[16px]'>
         <InputContainer
           placeholder={nickname}
           label='닉네임'
