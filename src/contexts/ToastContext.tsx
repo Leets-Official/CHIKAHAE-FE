@@ -53,7 +53,7 @@ export const ToastProvider = ({ children }: { children: ReactNode }) => {
       {children}
 
       {/* 화면 상단 중앙에 토스트 렌더링 */}
-      <div className='fixed top-[46px] left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2'>
+      <div className='fixed top-[60px] left-1/2 -translate-x-1/2 z-50 flex flex-col gap-2'>
         {toasts.map((toast) => (
           <Toast
             key={toast.id}

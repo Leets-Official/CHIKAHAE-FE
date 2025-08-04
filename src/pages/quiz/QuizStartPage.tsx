@@ -1,5 +1,5 @@
 import StartPageTemplate from '@/features/start/StartPageTemplate';
-import image from '@/assets/images/quizStart.png';
+import image from '@/assets/images/quizStart.svg';
 import { useNavigate } from 'react-router-dom';
 import { fetchTodayQuiz } from '@/api/quiz/quizAPI';
 import { useState } from 'react';
@@ -30,10 +30,15 @@ const QuizStartPage = () => {
       imageSrc={image}
       imageAlt='퀴즈 시작 이미지'
       title='매일 퀴즈 도전하기'
-      coinText='획득 치카코인'
-      noticeList={['문항 수', '객관식, OX', '중도 이탈', '결과 확인']}
+      coinText='1 치카코인 획득'
+      noticeList={[
+        '하루 한 번, 치카박사에 도전하세요!',
+        '딱 3문제! OX 2개와 객관식 1개로 가볍게 시작해요.',
+        '주의! 퀴즈 도중 나가면 처음부터 다시 시작해야 해요.',
+        '정답과 함께 해설도 확인할 수 있어요.',
+      ]}
       onStart={handleStart}
-      startButtonText={loading ? '불러오는 중...' : '시작하기'} // 임시
+      startButtonText={loading ? '불러오는 중...' : '시작하기'}
     />
   );
 };
