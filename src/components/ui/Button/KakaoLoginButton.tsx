@@ -3,6 +3,7 @@ import TermsList from '@/features/login/TermsList';
 import Button from './Button';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAgreementParams } from '@/hooks/useAgreementParams';
+import { ReactComponent as KakaoIcon } from '@/assets/icons/KaKaoSymbol.svg';
 
 const KakaoLoginButton = () => {
   const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
@@ -28,8 +29,7 @@ const KakaoLoginButton = () => {
         onClick={() => toggleAgreement(-1)}
         className='flex items-center justify-center bg-bg-primary-yellow h-12 rounded-lg w-full gap-2 cursor-pointer'
       >
-        <img src='src/assets/icons/KaKaoSymbol.svg' alt='KakaoIcon' />
-        <span className='body-16-eb'>카카오로 시작하기</span>
+        <KakaoIcon /> <span className='body-16-eb'>카카오로 시작하기</span>
       </button>
 
       <ModalSheet isOpen={isModalOpen} onClose={reset}>
