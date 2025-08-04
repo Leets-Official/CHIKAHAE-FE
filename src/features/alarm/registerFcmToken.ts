@@ -5,19 +5,9 @@ import { registerFcmToken } from '@/api/fcm/fcmTokenAPI';
 export const registerFcmTokenIfPermitted = async ({
   requestPermission = false,
 }: { requestPermission?: boolean } = {}) => {
-  let permission = Notification.permission;
-
-  // 권한 요청이 필요한 경우
-  if (permission !== 'granted') {
-    if (requestPermission) {
-      const newPermission = (await Notification.requestPermission()) as NotificationPermission;
-      if (newPermission !== 'granted') {
-        console.log('[FCM] 알림 권한이 거부되었거나 대기 중입니다.');
-        return;
-      }
-      permission = newPermission;
-    } else {
-      console.log('[FCM] 알림 권한 없음. 요청도 하지 않음');
+  if (Notification.permission !== 'granted') {
+    if (!requestPermission || (await Notification.requestPermission()) !== 'granted') {
+      console.log('[FCM] 알림 권한 없음.');
       return;
     }
   }
@@ -34,7 +24,7 @@ export const registerFcmTokenIfPermitted = async ({
 
     const savedToken = localStorage.getItem('fcmToken');
 
-    if (savedToken === null || token !== savedToken) {
+    if (!savedToken || token !== savedToken) {
       await registerFcmToken(token);
       localStorage.setItem('fcmToken', token);
       console.log('[FCM] 토큰 등록 완료 및 저장됨');
