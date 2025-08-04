@@ -14,7 +14,7 @@ export interface UserProfile {
 interface ApiResponse<T> {
   success: boolean;
   data: T;
-  error: {
+  error?: {
     code: number;
     message: string;
     exceptionMessage: string;
@@ -35,6 +35,6 @@ export const updateUserProfile = async (payload: {
 }): Promise<void> => {
   const response = await api.patch<ApiResponse<null>>('/api/mypage/profile', payload);
   if (!response.data.success) {
-    throw new Error(response.data.error.message || '프로필 수정 실패');
+    throw new Error(response.data.error?.message || '프로필 수정 실패');
   }
 };
