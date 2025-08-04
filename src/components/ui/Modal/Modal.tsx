@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import type { ModalProps } from './Modal.types';
 import Button from '@/components/ui/Button';
 import ModalPortal from './ModalPortal';
@@ -18,6 +18,9 @@ const Modal = ({
   closeOnEsc = true,
   className,
 }: ModalProps) => {
+  const [visible, setVisible] = useState(false);
+  const [showAnimation, setShowAnimation] = useState(false);
+
   // ========== ESC 키로 모달 닫기 ========== //
   useEffect(() => {
     if (!isOpen || !closeOnEsc) return;
@@ -26,7 +29,20 @@ const Modal = ({
     return () => document.removeEventListener('keydown', onKey);
   }, [isOpen, closeOnEsc, onClose]);
 
-  if (!isOpen) return null;
+  // 애니메이션용 상태 관리
+  useEffect(() => {
+    if (isOpen) {
+      setVisible(true);
+      // 다음 프레임에서 showAnimation 켜기
+      requestAnimationFrame(() => setShowAnimation(true));
+    } else {
+      setShowAnimation(false); // 사라지는 애니메이션 트리거
+      const timeout = setTimeout(() => setVisible(false), 200);
+      return () => clearTimeout(timeout);
+    }
+  }, [isOpen]);
+
+  if (!isOpen && !visible) return null;
 
   const posClasses = {
     center: 'items-center',
@@ -41,55 +57,47 @@ const Modal = ({
         onClick={closeOnOverlayClick ? onClose : undefined}
       >
         <div className='absolute inset-0 bg-black opacity-30' />
+
+        {/* 등장/퇴장 애니메이션 제어 */}
         <div
           className={clsx(
-            'bg-bg-primary-white shadow-lg w-[320px] h-[173px] rounded-[8px] flex flex-col gap-[1px]',
-            className, // 외부에서 전달된 스타일
+            'z-50 transition-all duration-200 transform',
+            showAnimation ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4',
           )}
           onClick={(e) => e.stopPropagation()}
         >
-          {/* ========== Modal Window ========== */}
-          <div className={`fixed inset-0 flex justify-center ${posClasses} z-50 px-4`}>
-            <div
-              className={`
-            w-[320px]
-            rounded-[8px]
-            opacity-100
-            bg-bg-primary-white
-            flex
-            flex-col
-            gap-[1px]
-          `}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* ========== Header + Body ========== */}
-              <div className='flex flex-col items-center justify-center w-[320px] gap-[10px] pt-[30px] pr-[20px] pb-[32px] pl-[20px]'>
-                {title && <h2 className='text-center text-fg-primary head-20-eb'>{title}</h2>}
-                <div className='text-center text-fg-strong body-16-b'>{children}</div>
-              </div>
-
-              {/* ========== Footer ========== */}
-              {footer ? (
-                <div className='flex justify-center w-full'>{footer}</div>
-              ) : (
-                <div className='flex justify-center w-full px-[20px] pb-[20px] gap-[10px] items-center self-stretch'>
-                  <Button variant='assistive' size='medium' className='w-[135px]' onClick={onClose}>
-                    {cancelText}
-                  </Button>
-                  <Button
-                    variant='primary'
-                    size='medium'
-                    className='w-[135px]'
-                    onClick={() => {
-                      if (onConfirm) onConfirm();
-                      onClose();
-                    }}
-                  >
-                    {confirmText}
-                  </Button>
-                </div>
-              )}
+          <div
+            className={clsx(
+              'bg-bg-primary-white shadow-lg w-[320px] rounded-[8px] flex flex-col gap-[1px]',
+              className, // 외부에서 전달된 스타일
+            )}
+          >
+            {/* ========== Header + Body ========== */}
+            <div className='flex flex-col items-center justify-center w-[320px] gap-[10px] pt-[30px] pr-[20px] pb-[32px] pl-[20px]'>
+              {title && <h2 className='text-center text-fg-primary head-20-eb'>{title}</h2>}
+              <div className='text-center text-fg-strong body-16-b'>{children}</div>
             </div>
+            {/* ========== Footer ========== */}
+            {footer ? (
+              <div className='flex justify-center w-full'>{footer}</div>
+            ) : (
+              <div className='flex justify-center w-full px-[20px] pb-[20px] gap-[10px] items-center self-stretch'>
+                <Button variant='assistive' size='medium' className='w-[135px]' onClick={onClose}>
+                  {cancelText}
+                </Button>
+                <Button
+                  variant='primary'
+                  size='medium'
+                  className='w-[135px]'
+                  onClick={() => {
+                    if (onConfirm) onConfirm();
+                    onClose();
+                  }}
+                >
+                  {confirmText}
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </div>

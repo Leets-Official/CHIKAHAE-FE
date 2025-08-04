@@ -1,6 +1,9 @@
 import QuizResultBlock from './QuizResultBlock';
 import type { QuizResultProps } from './QuizResult.types';
-import { ReactComponent as ChikaCoin } from '@/assets/icons/chikaCoin.svg';
+import Confetti from 'react-confetti';
+import { useWindowSize } from 'react-use';
+import { motion } from 'framer-motion';
+import CoinRewardResult from '@/components/ui/CoinRewardResult';
 
 const QuizResult = ({
   isCorrect,
@@ -10,42 +13,59 @@ const QuizResult = ({
   step = 'result',
   totalCount = 3,
 }: QuizResultProps) => {
+  const { width, height } = useWindowSize();
+
   // 정답/오답 텍스트
   const resultText = isCorrect ? '정답입니다!' : '오답입니다!';
 
   // 최종 결과 화면을 보여줘야 하는지 여부 판단
   const isFinalResult = isLast && step === 'final';
 
+  // 컨페티 애니메이션 조건
+  const showConfetti = isCorrect && step === 'result';
+
+  // 흔들림 애니메이션
+  const shakeAnimation = {
+    initial: { x: 0 },
+    animate: {
+      x: [0, -10, 10, -10, 10, 0],
+      transition: { duration: 0.4 },
+    },
+  };
+
   return (
-    <div className='flex flex-col w-[280px] items-center'>
+    <div className='flex flex-col w-[280px] items-center relative'>
+      {showConfetti && (
+        <div className='fixed top-0 left-0 w-screen h-screen z-50 pointer-events-none'>
+          <Confetti
+            width={width}
+            height={height}
+            numberOfPieces={200}
+            gravity={0.6}
+            recycle={false}
+          />
+        </div>
+      )}
       {isFinalResult ? (
-        <>
-          <ChikaCoin className='w-[140px] h-[140px]' />
-
-          {/* 맞힌 문제 수 */}
-          <div className='flex flex-col items-center gap-0 mt-[42px]'>
-            <div className='body-16-r' style={{ lineHeight: '25px' }}>
-              {/* TODO: correctCount 서버 응답 확인 필요 */}
-              {correctCount}/{totalCount}
-            </div>
-            <div className='head-24-eb text-center'>총 {correctCount}문제를 맞히셨습니다!</div>
-          </div>
-
-          {/* 해설 텍스트 있으면 출력 */}
-          {description && (
-            <div className='body-16-r mt-[24px] text-center w-[280px]'>{description}</div>
-          )}
-        </>
+        <CoinRewardResult
+          correctCount={correctCount}
+          totalCount={totalCount}
+          description={description}
+        />
       ) : (
         <>
           {/* 정답 or 오답 표시 */}
-          <QuizResultBlock isCorrect={isCorrect} />
+          <motion.div
+            variants={isCorrect ? undefined : shakeAnimation}
+            initial={isCorrect ? { scale: 0.8, opacity: 0 } : 'initial'}
+            animate={isCorrect ? { scale: 1, opacity: 1 } : 'animate'}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+          >
+            <QuizResultBlock isCorrect={isCorrect} />
+          </motion.div>
 
           <div className='text-center w-[280px] mt-[42px]'>
-            {/* 결과 문구 (정답입니다! / 오답입니다!) */}
             <div className='head-24-eb mb-[24px]'>{resultText}</div>
-
-            {/* 해설 텍스트 있으면 출력 */}
             {description && <div className='body-16-r mt-[24px]'>{description}</div>}
           </div>
         </>

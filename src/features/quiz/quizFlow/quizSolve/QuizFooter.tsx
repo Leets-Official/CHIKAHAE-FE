@@ -19,8 +19,13 @@ const QuizFooter = ({ step, selectedAnswer, onNext, onShowSummary }: QuizFooterP
 
   const handleGoHome = async () => {
     try {
-      await completeMission('DAILY_QUIZ');
-      navigate('/'); // 홈으로 이동
+      const coinAmount = await completeMission('DAILY_QUIZ');
+      navigate('/', {
+        state: {
+          missionCompleted: true,
+          coinAmount,
+        },
+      });
     } catch (error) {
       console.log('미션 완료 실패: ', error);
     }

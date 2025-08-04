@@ -1,8 +1,13 @@
 import React from 'react';
-import MenuItem from '@/features/Mypage/menu/MenuItem';
-import type { MenuItemType } from '@/features/Mypage/menu/MenuItem';
-export type MenuItem = MenuItemType;
 import { ReactComponent as RightIcon } from '@/assets/icons/chevron_right.svg';
+
+export interface MenuItemType {
+  label: string;
+  icon?: string;
+  onClick?: () => void;
+}
+
+export type MenuItem = MenuItemType;
 
 interface MenuListProps {
   items: MenuItemType[];
