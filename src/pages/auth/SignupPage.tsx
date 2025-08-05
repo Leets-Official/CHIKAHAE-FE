@@ -80,15 +80,17 @@ function SignupPage() {
     }
 
     try {
+      let payload;
+
       if (isOver14Only) {
-        await signupUser({
+        payload = {
           kakaoAccessToken: kakaoAccessToken,
           nickname: user.nickname,
           birth: user.birth,
           gender: user.gender,
-        });
+        };
       } else {
-        await signupUser({
+        payload = {
           kakaoAccessToken: kakaoAccessToken,
           nickname: user.nickname,
           birth: user.birth,
@@ -97,8 +99,13 @@ function SignupPage() {
           parentGender: parent.gender,
           parentBirth: parent.birth,
           parentPhoneNumber: parent.phoneNumber,
-        });
+        };
       }
+
+      // 디버깅용
+      console.log('회원가입 요청 payload:', payload);
+
+      await signupUser(payload);
 
       localStorage.removeItem('kakaoAccessToken');
       localStorage.removeItem('kakaoRefreshToken');

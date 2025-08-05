@@ -29,7 +29,7 @@ const StartPageTemplate = ({
     <>
       {/* 페이지 상단 영역 */}
       <div className='flex flex-col min-h-screen w-full max-w-[480px] min-w-[360px] mx-auto'>
-        <div className='flex flex-col w-full gap-[10px] pb-[30px]'>
+        <div className='flex flex-col w-full'>
           <GlobalTopNav message={navTitle} showCancel={false} showLeftIcon={false} />
 
           <div className='h-14' />
