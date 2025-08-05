@@ -17,6 +17,6 @@ export const useTodayMissions = () => {
         isCompleted: mission.isCompleted,
       }));
     },
-    staleTime: 1000 * 60, // 1분 정도 캐시 유효
+    staleTime: 1000 * 60 * 5,
   });
 };
