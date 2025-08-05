@@ -3,6 +3,7 @@ import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 import UserInfoList from '@/features/Mypage/userInfo/UserInfoList';
 import type { MenuItemType } from '@/features/Mypage/userInfo/UserInfoList';
 import { fetchUserProfile } from '@/api/myPage/profileAPI';
+import { useNavigate } from 'react-router-dom';
 
 const formatBirth = (birth: string) => {
   // 'YYYY-MM-DD' → 'YYYY.MM.DD'
@@ -11,6 +12,7 @@ const formatBirth = (birth: string) => {
 
 const UserInfoPage: React.FC = () => {
   const [menuData, setMenuData] = useState<MenuItemType[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadUserProfile = async () => {
@@ -34,7 +36,12 @@ const UserInfoPage: React.FC = () => {
 
   return (
     <div className='max-w-[430px] min-w-[360px] min-h-screen flex flex-col mx-auto'>
-      <GlobalTopNav message='계정 정보' showCancel={false} type='global' />
+      <GlobalTopNav
+        message='계정 정보'
+        showCancel={false}
+        type='global'
+        onClickLeft={() => navigate(-1)}
+      />
       <div className='h-[84px]' />
 
       {/* 사용자 정보 리스트 */}

@@ -9,6 +9,8 @@ import { useLocation } from 'react-router-dom';
 import { Modal } from '@/components/ui/Modal';
 import { checkAnswer, fetchQuizResult } from '@/api/quiz/quizAPI';
 import { useQueryClient } from '@tanstack/react-query';
+import type { QuizResult } from '@/types/quiz';
+import { completeMission } from '@/api/home/missionAPI';
 
 // 퀴즈 (문제 풀이) / 퀴즈 결과 / 최종 결과 화면
 
@@ -36,6 +38,7 @@ const QuizPage = () => {
   const [correctCount, setCorrectCount] = useState(0); // 정답 개수
   const [answerExplanation, setAnswerExplanation] = useState('');
   const [isCorrect, setIsCorrect] = useState(false);
+  const [checkQuizResult, setCheckQuizResult] = useState<QuizResult | null>(null);
 
   const [showSummary, setShowSummary] = useState(false); // 최종 결과 화면 이동 여부
   const [showExitModal, setShowExitModal] = useState(false);
@@ -112,6 +115,20 @@ const QuizPage = () => {
     navigate('/quiz/start'); // 퀴즈 초기화됨
   };
 
+  const handleGoHome = async () => {
+    try {
+      const coinAmount = await completeMission('DAILY_QUIZ');
+      navigate('/', {
+        state: {
+          missionCompleted: true,
+          coinAmount,
+        },
+      });
+    } catch (error) {
+      console.log('미션 완료 실패: ', error);
+    }
+  };
+
   //최종 결과 도달 시 최종 결과 API 호출
   useEffect(() => {
     const fetchFinalResult = async () => {
@@ -119,10 +136,11 @@ const QuizPage = () => {
 
       try {
         const res = await fetchQuizResult();
-        const { correctCount, coinReward } = res.data;
+        const { correctCount, coinReward, checkQuizResponse } = res.data;
 
         setCorrectCount(correctCount); // API 기준 정답 수로 갱신
         setAnswerExplanation(`치카코인 ${coinReward}개가 적립되었어요!`);
+        setCheckQuizResult({ correctCount, coinReward, checkQuizResponse });
 
         queryClient.invalidateQueries({ queryKey: ['pointBalance'] });
         queryClient.invalidateQueries({ queryKey: ['todayMissions'] });
@@ -141,8 +159,13 @@ const QuizPage = () => {
   return (
     <div className='relative min-h-screen pt-[18px] flex justify-start items-center flex-col'>
       <GlobalTopNav message='퀴즈' showCancel={false} onClickLeft={handleLeftClick} />
-      {showSummary ? (
-        <QuizSummary quizList={quizList} userAnswers={userAnswers} onClose={() => navigate('/')} />
+      {showSummary && checkQuizResult ? (
+        <QuizSummary
+          quizList={quizList}
+          userAnswers={userAnswers}
+          resultData={checkQuizResult}
+          onClose={handleGoHome}
+        />
       ) : (
         <>
           {/* 본문 (문제 / 결과) */}
@@ -164,6 +187,7 @@ const QuizPage = () => {
             selectedAnswer={selectedAnswer}
             onNext={handleNextStep}
             onShowSummary={() => setShowSummary(true)}
+            onGoHome={handleGoHome}
           />
         </>
       )}
