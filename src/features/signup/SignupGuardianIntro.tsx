@@ -1,14 +1,12 @@
 import Button from '@/components/ui/Button';
 import SignupBg from '@/assets/images/signupBackground.svg';
 import { ReactComponent as Squirrel } from '@/assets/icons/squirrel.svg';
-import { useAuthRedirect } from '@/hooks/useAuthRedirect';
 
 interface Props {
   onNext: () => void;
 }
 
 const SignupGuardianIntro = ({ onNext }: Props) => {
-  useAuthRedirect();
   return (
     <>
       <div className='flex flex-col items-center min-h-screen w-ful  '>
