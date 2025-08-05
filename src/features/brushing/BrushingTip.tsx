@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { TIPS } from '@/constants/tips';
+import { motion } from 'framer-motion';
 
 interface BrushingTipProps {
   isPlaying: boolean;
@@ -19,25 +20,30 @@ const BrushingTip = ({ isPlaying }: BrushingTipProps) => {
         } while (next === prevTip);
         return next;
       });
-    }, 10000); // 10초 간격
+    }, 10000);
 
     return () => clearInterval(interval);
   }, [isPlaying]);
 
-  // 마침표 기준으로 문장 나누고, 공백 trim + 빈 문자열 제외
   const sentences = TIPS[tipIndex]
     .split('.')
     .map((s) => s.trim())
     .filter((s) => s.length > 0);
 
   return (
-    <div className='absolute bottom-[42px] w-full text-center z-20'>
-      <div className='text-center body-16-eb text-fg-gray-strong z-9999'>
+    <div className='absolute bottom-[42px] w-full flex justify-center z-20'>
+      <motion.div
+        key={tipIndex}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className='w-full max-w-[480px] min-w-[360px] px-4 py-2 text-center body-16-eb text-fg-gray-strong bg-bg-tertiary-gray/50'
+      >
         <div>TIP:</div>
         {sentences.map((line, idx) => (
           <div key={idx}>{line}.</div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };
