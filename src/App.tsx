@@ -12,6 +12,7 @@ import MyPage from '@/pages/mypage/MyPage';
 import MyPageEdit from '@/pages/mypage/EditProfilePage';
 import AlarmPage from '@/pages/mypage/AlarmPage';
 import UserInfoPage from '@/pages/mypage/UserInfoPage';
+import BrushingPage from '@/pages/brushing/BrushingPage';
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
         <Route path='/quiz/start' element={<QuizStartPage />} />
         <Route path='/quiz' element={<QuizPage />} />
         <Route path='/brush/start' element={<BrushingStartPage />} />
-        <Route path='/animation' element={<AnimationTest />} />
+        <Route path='/brush' element={<BrushingPage />} />
         <Route path='/terms/:type' element={<TermsPage />} />
         <Route path='/mypage' element={<MyPage />} />
         <Route path='/edit' element={<MyPageEdit />} />
