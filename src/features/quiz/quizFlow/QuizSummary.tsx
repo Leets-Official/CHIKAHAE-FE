@@ -1,17 +1,17 @@
 import Button from '@/components/ui/Button';
-import type { Quiz } from '@/types/quiz';
+import type { Quiz, QuizResult } from '@/types/quiz';
 
 // 퀴즈 최종 결과 (오답 페이지)
 
 type Props = {
   quizList: Quiz[];
   userAnswers: number[];
+  resultData: QuizResult;
   onClose: () => void;
 };
 
-const QuizSummary = ({ quizList, userAnswers, onClose }: Props) => {
-  // 맞힌 문제 개수 계산
-  const correctCount = userAnswers.filter((answer, i) => answer === quizList[i].answerIndex).length;
+const QuizSummary = ({ quizList, resultData, onClose }: Props) => {
+  const { correctCount, checkQuizResponse } = resultData;
 
   return (
     <div className='w-full max-w-[480px] min-w-[360px] py-10 mx-auto px-[20px]'>
@@ -26,8 +26,12 @@ const QuizSummary = ({ quizList, userAnswers, onClose }: Props) => {
       {/* 각 문제 요약 */}
       <ul className='space-y-6'>
         {quizList.map((quiz, i) => {
-          const userAnswer = userAnswers[i];
-          const isCorrect = userAnswer === quiz.answerIndex;
+          const result = checkQuizResponse.find((r) => r.quizId === quiz.quizId);
+          if (!result) return null;
+
+          const isCorrect = result.isCorrect;
+          const userAnswer = result.selectedAnswer;
+          const selectedText = userAnswer ? userAnswer : '선택 안 함';
 
           return (
             <li key={i}>
@@ -44,7 +48,7 @@ const QuizSummary = ({ quizList, userAnswers, onClose }: Props) => {
                 </div>
 
                 {/* 사용자의 선택 답안 텍스트 */}
-                <p className='body-14-r'>선택 답안: {quiz.options[userAnswer] ?? '선택 안 함'}</p>
+                <p className='body-14-r'>선택 답안: {selectedText}</p>
               </div>
             </li>
           );
