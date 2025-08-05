@@ -10,6 +10,7 @@ import { Modal } from '@/components/ui/Modal';
 import { checkAnswer, fetchQuizResult } from '@/api/quiz/quizAPI';
 import { useQueryClient } from '@tanstack/react-query';
 import type { QuizResult } from '@/types/quiz';
+import { completeMission } from '@/api/home/missionAPI';
 
 // 퀴즈 (문제 풀이) / 퀴즈 결과 / 최종 결과 화면
 
@@ -114,6 +115,20 @@ const QuizPage = () => {
     navigate('/quiz/start'); // 퀴즈 초기화됨
   };
 
+  const handleGoHome = async () => {
+    try {
+      const coinAmount = await completeMission('DAILY_QUIZ');
+      navigate('/', {
+        state: {
+          missionCompleted: true,
+          coinAmount,
+        },
+      });
+    } catch (error) {
+      console.log('미션 완료 실패: ', error);
+    }
+  };
+
   //최종 결과 도달 시 최종 결과 API 호출
   useEffect(() => {
     const fetchFinalResult = async () => {
@@ -149,7 +164,7 @@ const QuizPage = () => {
           quizList={quizList}
           userAnswers={userAnswers}
           resultData={checkQuizResult}
-          onClose={() => navigate('/')}
+          onClose={handleGoHome}
         />
       ) : (
         <>
@@ -172,6 +187,7 @@ const QuizPage = () => {
             selectedAnswer={selectedAnswer}
             onNext={handleNextStep}
             onShowSummary={() => setShowSummary(true)}
+            onGoHome={handleGoHome}
           />
         </>
       )}
