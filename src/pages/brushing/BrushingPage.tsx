@@ -47,13 +47,30 @@ const BrushingPage = () => {
   const animationStartTimeRef = useRef<number | null>(null);
   const remainingTimeRef = useRef<number>(30000);
 
+  // duration 구하는 함수
+  const getCurrentDuration = (index: number) => {
+    const isLast = index === animations.length - 1;
+    return isLast ? 35000 : 30000; // 마지막 애니메이션은 35초
+  };
+
   // 타이머 시작
   const startAnimationTimer = () => {
     animationStartTimeRef.current = Date.now();
+    const duration = getCurrentDuration(animationIndex);
+    remainingTimeRef.current = duration;
+
     animationTimerRef.current = setTimeout(() => {
-      setAnimationIndex((prev) => (prev + 1) % animations.length);
-      remainingTimeRef.current = 30000; // 다음 애니메이션 위한 초기화
-    }, remainingTimeRef.current);
+      // 마지막 애니메이션이면 종료
+      const isLast = animationIndex === animations.length - 1;
+      if (isLast) {
+        setIsPlaying(false);
+        setIsFinished(true);
+        audioRef.current?.pause();
+      } else {
+        setAnimationIndex((prev) => (prev + 1) % animations.length);
+        remainingTimeRef.current = getCurrentDuration(animationIndex + 1);
+      }
+    }, duration);
   };
 
   // 타이머 정지
@@ -72,22 +89,25 @@ const BrushingPage = () => {
     if (isFinished) return;
 
     if (isPlaying) {
+      remainingTimeRef.current = getCurrentDuration(animationIndex);
       startAnimationTimer();
     } else {
       pauseAnimation();
     }
 
+    // 타이머 중복 제거
     return () => {
       if (animationTimerRef.current) {
         clearTimeout(animationTimerRef.current);
+        animationTimerRef.current = null;
       }
     };
-  }, [isPlaying]);
+  }, [isPlaying, animationIndex, isFinished]);
 
   // 애니메이션 전환 시 타이머 재설정
   useEffect(() => {
     if (isFinished || !isPlaying) return;
-    remainingTimeRef.current = 30000;
+    remainingTimeRef.current = getCurrentDuration(animationIndex);
     startAnimationTimer();
   }, [animationIndex]);
 
