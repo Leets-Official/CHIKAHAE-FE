@@ -2,7 +2,7 @@ import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ToastProvider } from './contexts/ToastContext';
 import '@/styles/global.css';
-// import '@/styles/fonts.css';
+import '@/styles/fonts.css';
 import App from './App';
 
 const queryClient = new QueryClient();
