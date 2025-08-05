@@ -40,7 +40,12 @@ const EditProfilePage = () => {
 
   return (
     <div className='max-w-[480px] min-w-[360px] min-h-screen flex flex-col gap-6 mx-auto'>
-      <GlobalTopNav message='프로필 수정' showCancel={false} type='global' />
+      <GlobalTopNav
+        message='프로필 수정'
+        showCancel={false}
+        type='global'
+        onClickLeft={() => navigate(-1)}
+      />
       <div className='h-[70px]' />
 
       {/* 프로필 사진 */}
