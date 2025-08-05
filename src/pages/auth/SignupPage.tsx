@@ -26,6 +26,9 @@ interface ParentInfo {
 
 function SignupPage() {
   const [step, setStep] = useState<Step>('profile');
+  const location = useLocation();
+  const kakaoAccessToken = location.state?.kakaoAccessToken;
+
   const navigate = useNavigate();
   const { showToast } = useToast();
 
@@ -64,8 +67,6 @@ function SignupPage() {
   };
 
   const handleFinalSignup = async (isOver14Only = false) => {
-    const { kakaoAccessToken } = useLocation().state || {};
-
     if (!kakaoAccessToken) {
       console.error('카카오 access token 없음');
       navigate('/login');

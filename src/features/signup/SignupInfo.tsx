@@ -2,7 +2,6 @@ import Button from '@/components/ui/Button';
 import UserInfoForm from '@/components/ui/UserInfoForm';
 import SignupBg from '@/assets/images/signupBackground.svg';
 import { isOver14 } from '@/utils/date';
-import { useNavigate } from 'react-router-dom';
 
 interface SignupInfoProps {
   gender: string;
@@ -13,8 +12,6 @@ interface SignupInfoProps {
 }
 
 const SignupInfo = ({ gender, setGender, birthDate, setBirthDate, onNext }: SignupInfoProps) => {
-  const navigate = useNavigate();
-
   const isFormIncomplete = !gender || !birthDate;
 
   const handleNext = () => {
