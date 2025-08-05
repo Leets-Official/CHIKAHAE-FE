@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import SignupProfile from '@/features/signup/SignupProfile';
 import SignupInfo from '@/features/signup/SignupInfo';
 import SignupGuardianIntro from '@/features/signup/SignupGuardianIntro';
@@ -26,8 +26,12 @@ interface ParentInfo {
 
 function SignupPage() {
   const [step, setStep] = useState<Step>('profile');
+  const location = useLocation();
   const navigate = useNavigate();
   const { showToast } = useToast();
+
+  const kakaoAccessToken =
+    location.state?.kakaoAccessToken || localStorage.getItem('KakaoAccessToken');
 
   const [user, setUser] = useState<UserInfo>({
     nickname: '',
@@ -41,6 +45,11 @@ function SignupPage() {
     birth: '',
     phoneNumber: '',
   });
+
+  // 부모 정보 업데이트 함수
+  const updateParent = (key: keyof ParentInfo, value: string) => {
+    setParent((prev) => ({ ...prev, [key]: value }));
+  };
 
   const goToNext = (nextStep: Step) => setStep(nextStep);
 
@@ -64,8 +73,7 @@ function SignupPage() {
   };
 
   const handleFinalSignup = async (isOver14Only = false) => {
-    const accessToken = localStorage.getItem('kakaoAccessToken');
-    if (!accessToken) {
+    if (!kakaoAccessToken) {
       console.error('카카오 access token 없음');
       navigate('/login');
       return;
@@ -74,14 +82,14 @@ function SignupPage() {
     try {
       if (isOver14Only) {
         await signupUser({
-          kakaoAccessToken: accessToken,
+          kakaoAccessToken: kakaoAccessToken,
           nickname: user.nickname,
           birth: user.birth,
           gender: user.gender,
         });
       } else {
         await signupUser({
-          kakaoAccessToken: accessToken,
+          kakaoAccessToken: kakaoAccessToken,
           nickname: user.nickname,
           birth: user.birth,
           gender: user.gender,
@@ -92,12 +100,19 @@ function SignupPage() {
         });
       }
 
+      localStorage.removeItem('kakaoAccessToken');
+      localStorage.removeItem('kakaoRefreshToken');
       goToNext('complete');
     } catch (e) {
       console.error('회원가입 실패:', e);
       showToast({ message: '회원가입 중 오류가 발생했습니다.', showIcon: false });
     }
   };
+
+  // 디버깅용
+  useEffect(() => {
+    console.log('parent state 업데이트됨:', parent);
+  }, [parent]);
 
   return (
     <>
@@ -134,15 +149,13 @@ function SignupPage() {
         {step === 'guardianForm' && (
           <SignupGuardianForm
             name={parent.name}
-            setName={(name: string) => setParent((prev) => ({ ...prev, name }))}
+            setName={(value) => updateParent('name', value)}
             gender={parent.gender}
-            setGender={(gender: string) => setParent((prev) => ({ ...prev, gender }))}
+            setGender={(value) => updateParent('gender', value)}
             birthDate={parent.birth}
-            setBirthDate={(birth: string) => setParent((prev) => ({ ...prev, birth }))}
+            setBirthDate={(value) => updateParent('birth', value)}
             phoneNumber={parent.phoneNumber}
-            setPhoneNumber={(phoneNumber: string) =>
-              setParent((prev) => ({ ...prev, phoneNumber }))
-            }
+            setPhoneNumber={(value) => updateParent('phoneNumber', value)}
             onNext={handleFinalSignup}
           />
         )}

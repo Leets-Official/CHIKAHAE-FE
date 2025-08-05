@@ -64,7 +64,7 @@ const BrushingSessionList: React.FC<BrushingSessionListProps> = ({ cards }) => {
   return (
     <div
       ref={sliderRef}
-      className={`pb-[8px] w-full snap-x scroll-smooth overflow-x-auto overflow-y-hidden flex no-scrollbar select-none mt-[18px] px-[18px] 
+      className={`pb-[8px] w-full snap-x scroll-smooth overflow-x-auto overflow-y-hidden flex no-scrollbar select-none mt-[18px] px-[18px]
         ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}
       `}
       onMouseDown={onMouseDown}
@@ -74,18 +74,24 @@ const BrushingSessionList: React.FC<BrushingSessionListProps> = ({ cards }) => {
     >
       {/* 카드 리스트 */}
       <div className='flex gap-[15px] flex-nowrap w-full'>
-        {sortedCards.map((card) => (
-          <div key={card.id} className='snap-start shrink-0 min-w-[130px] max-w-[80vw] w-auto'>
-            <BrushingSessionCard
-              title={card.title}
-              description={card.description}
-              done={card.isCompleted}
-              onClick={card.isCompleted || !card.route ? undefined : () => navigate(card.route!)}
-              buttonClassName='text-fg-secondary-strong'
-              buttonText={card.buttonText}
-            />
-          </div>
-        ))}
+        {sortedCards.map((card, index) => {
+          const isLast = index === sortedCards.length - 1;
+          return (
+            <div
+              key={card.id}
+              className={`snap-start shrink-0 min-w-[130px] max-w-[80vw] w-auto ${isLast ? 'pr-[18px]' : ''}`}
+            >
+              <BrushingSessionCard
+                title={card.title}
+                description={card.description}
+                done={card.isCompleted}
+                onClick={card.isCompleted || !card.route ? undefined : () => navigate(card.route!)}
+                buttonClassName='text-fg-secondary-strong'
+                buttonText={card.buttonText}
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );

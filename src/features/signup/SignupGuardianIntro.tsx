@@ -1,6 +1,7 @@
 import Button from '@/components/ui/Button';
 import SignupBg from '@/assets/images/signupBackground.svg';
 import { ReactComponent as Squirrel } from '@/assets/icons/squirrel.svg';
+
 interface Props {
   onNext: () => void;
 }
