@@ -27,10 +27,12 @@ interface ParentInfo {
 function SignupPage() {
   const [step, setStep] = useState<Step>('profile');
   const location = useLocation();
-  const kakaoAccessToken = location.state?.kakaoAccessToken;
 
   const navigate = useNavigate();
   const { showToast } = useToast();
+
+  const kakaoAccessToken =
+    location.state?.kakaoAccessToken || localStorage.getItem('KakaoAccessToken');
 
   const [user, setUser] = useState<UserInfo>({
     nickname: '',
@@ -94,6 +96,8 @@ function SignupPage() {
         });
       }
 
+      localStorage.removeItem('KakaoAccessToken');
+      localStorage.removeItem('KakaoRefreshToken');
       goToNext('complete');
     } catch (e) {
       console.error('회원가입 실패:', e);

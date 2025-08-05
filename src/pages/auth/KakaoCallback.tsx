@@ -26,6 +26,9 @@ const KakaoCallback = () => {
 
         // 1. 회원가입이 필요한 유저
         if (!memberId) {
+          localStorage.setItem('KakaoAccessToken', kakaoAccessToken);
+          localStorage.setItem('KakaoRefreshToken', kakaoRefreshToken);
+
           navigate('/signup?needsAgreement=true', {
             state: {
               kakaoAccessToken,
