@@ -15,8 +15,8 @@ export const BottomNav = () => {
       >
         <nav
           className={`
-            flex h-14 px-[2px]
-            justify-between items-center
+            flex h-[65px] px-[2px]
+            justify-between items-center 
             bg-bg-tertiary-gray
             border-t border-t-bg-secondary-gray
           `}
@@ -27,7 +27,7 @@ export const BottomNav = () => {
             const isActive = location.pathname === to;
 
             return (
-              <Link key={to} to={to} className='flex w-full flex-col items-center justify-center'>
+              <Link key={to} to={to} className='flex w-full items-center justify-center'>
                 <div
                   className={`
                     flex items-center justify-center box-border
@@ -42,7 +42,7 @@ export const BottomNav = () => {
         </nav>
 
         {/* 여백도 같이 고정 */}
-        <div className='h-[14px] bg-bg-tertiary-gray' />
+        {/* <div className='h-[12px] bg-bg-tertiary-gray' /> */}
       </div>
     </>
   );
