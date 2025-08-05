@@ -12,24 +12,30 @@ import MyPage from '@/pages/mypage/MyPage';
 import MyPageEdit from '@/pages/mypage/EditProfilePage';
 import AlarmPage from '@/pages/mypage/AlarmPage';
 import UserInfoPage from '@/pages/mypage/UserInfoPage';
+import RequireAuth from './components/routes/RequireAuth';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Home />} />
+        {/* 로그인 필요 없는 페이지 */}
         <Route path='/login' element={<LoginPage />} />
         <Route path='/signup' element={<SignupPage />} />
         <Route path='/login/kakao/callback' element={<KakaoCallback />} />
-        <Route path='/quiz/start' element={<QuizStartPage />} />
-        <Route path='/quiz' element={<QuizPage />} />
-        <Route path='/brush/start' element={<BrushingStartPage />} />
-        <Route path='/animation' element={<AnimationTest />} />
-        <Route path='/terms/:type' element={<TermsPage />} />
-        <Route path='/mypage' element={<MyPage />} />
-        <Route path='/edit' element={<MyPageEdit />} />
-        <Route path='/mypage/alarm' element={<AlarmPage />} />
-        <Route path='/mypage/userinfo' element={<UserInfoPage />} />
+
+        {/* 로그인 필요 페이지 */}
+        <Route element={<RequireAuth />}>
+          <Route path='/' element={<Home />} />
+          <Route path='/quiz/start' element={<QuizStartPage />} />
+          <Route path='/quiz' element={<QuizPage />} />
+          <Route path='/brush/start' element={<BrushingStartPage />} />
+          <Route path='/animation' element={<AnimationTest />} />
+          <Route path='/terms/:type' element={<TermsPage />} />
+          <Route path='/mypage' element={<MyPage />} />
+          <Route path='/edit' element={<MyPageEdit />} />
+          <Route path='/mypage/alarm' element={<AlarmPage />} />
+          <Route path='/mypage/userinfo' element={<UserInfoPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
