@@ -100,8 +100,8 @@ function SignupPage() {
         });
       }
 
-      localStorage.removeItem('KakaoAccessToken');
-      localStorage.removeItem('KakaoRefreshToken');
+      localStorage.removeItem('kakaoAccessToken');
+      localStorage.removeItem('kakaoRefreshToken');
       goToNext('complete');
     } catch (e) {
       console.error('회원가입 실패:', e);
