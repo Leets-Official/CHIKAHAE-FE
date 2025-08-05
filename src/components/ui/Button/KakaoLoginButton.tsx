@@ -7,12 +7,11 @@ import { useEffect } from 'react';
 import { exchangeKakaoToken } from '@/api/auth/kakaoAPI';
 import { ReactComponent as KakaoIcon } from '@/assets/icons/KaKaoSymbol.svg';
 
-
 const KakaoLoginButton = () => {
   const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API_KEY;
   const REDIRECT_URI = import.meta.env.VITE_KAKAO_REDIRECT_URI;
 
-  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+  const KAKAO_AUTH_URI = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -27,7 +26,7 @@ const KakaoLoginButton = () => {
 
   const startKakaoLogin = () => {
     if (!isModalOpen) {
-      window.location.href = KAKAO_AUTH_URL;
+      window.location.href = KAKAO_AUTH_URI;
     }
   };
 
