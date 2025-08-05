@@ -6,7 +6,6 @@ import QuizPage from '@/pages/quiz/QuizPage';
 import SignupPage from './pages/auth/SignupPage';
 import QuizStartPage from '@/pages/quiz/QuizStartPage';
 import BrushingStartPage from './pages/brushing/BrushingStartPage';
-import AnimationTest from './pages/test/AnimationTest';
 import TermsPage from './pages/auth/terms/TermsPage';
 import MyPage from '@/pages/mypage/MyPage';
 import MyPageEdit from '@/pages/mypage/EditProfilePage';
