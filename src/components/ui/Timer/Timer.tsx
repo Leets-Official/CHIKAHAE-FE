@@ -8,6 +8,7 @@ const Timer = ({
   showSeconds = true,
   duration = 15,
   onComplete,
+  onTimeout,
   size = 'default',
   mode = 'quiz',
   isActive = true,
@@ -34,15 +35,16 @@ const Timer = ({
 
   //  타이머 감소 로직
   useEffect(() => {
-    if (!isActive) return;
-
     const interval = setInterval(() => {
+      if (!isActive) return;
+
       setRemainingTime((prev) => {
         if (prev <= 1) {
           clearInterval(interval);
           if (!hasCompleted.current) {
             hasCompleted.current = true;
             onComplete?.();
+            onTimeout?.();
           }
           return 0;
         }
@@ -61,6 +63,7 @@ const Timer = ({
     }
     return seconds.toString();
   };
+
   return (
     <div className={`relative w-full ${timerWidthClasses} h-[48px]`}>
       {/* 아이콘 */}
