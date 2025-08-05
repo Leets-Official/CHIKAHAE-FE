@@ -1,7 +1,6 @@
 import Button from '@/components/ui/Button';
 import UserInfoForm from '@/components/ui/UserInfoForm';
 import SignupBg from '@/assets/images/signupBackground.svg';
-import { useAuthRedirect } from '@/hooks/useAuthRedirect';
 
 interface Props {
   name: string;
@@ -16,7 +15,6 @@ interface Props {
 }
 
 const SignupGuardianForm = ({
-
   name,
   setName,
   gender,
@@ -27,7 +25,6 @@ const SignupGuardianForm = ({
   setPhoneNumber,
   onNext,
 }: Props) => {
-  useAuthRedirect();
   const isFormIncomplete =
     !gender || !birthDate || !name || phoneNumber.replace(/\D/g, '').length !== 11;
 

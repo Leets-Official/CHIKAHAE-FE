@@ -2,10 +2,8 @@ import Button from '@/components/ui/Button';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Squirrel } from '@/assets/icons/squirrel.svg';
 import SignupBg from '@/assets/images/signupBackground.svg';
-import { useAuthRedirect } from '@/hooks/useAuthRedirect';
 
 const SignupComplete = () => {
-  useAuthRedirect();
   const navigate = useNavigate();
 
   return (
