@@ -3,12 +3,19 @@ import image from '@/assets/images/quizStart.svg';
 import { useNavigate } from 'react-router-dom';
 import { fetchTodayQuiz } from '@/api/quiz/quizAPI';
 import { useState } from 'react';
+import { useTodayMissions } from '@/hooks/queries/useGetTodayMissions';
 
 const QuizStartPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
+  const { data: missions, isLoading: missionsLoading } = useTodayMissions();
+  const dailyQuiz = missions?.find((m) => m.id === 'DAILY_QUIZ');
+  const isQuizCompleted = dailyQuiz?.isCompleted;
+
   const handleStart = async () => {
+    if (isQuizCompleted) return;
+
     try {
       setLoading(true);
       const data = await fetchTodayQuiz();
@@ -38,7 +45,16 @@ const QuizStartPage = () => {
         '정답과 함께 해설도 확인할 수 있어요.',
       ]}
       onStart={handleStart}
-      startButtonText={loading ? '불러오는 중...' : '시작하기'}
+      startButtonText={
+        missionsLoading
+          ? '불러오는 중...'
+          : isQuizCompleted
+            ? '오늘은 이미 도전 완료!'
+            : loading
+              ? '퀴즈 불러오는 중...'
+              : '시작하기'
+      }
+      startButtonDisabled={missionsLoading || isQuizCompleted}
     />
   );
 };

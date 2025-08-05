@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import SignupProfile from '@/features/signup/SignupProfile';
 import SignupInfo from '@/features/signup/SignupInfo';
@@ -32,6 +32,13 @@ function SignupPage() {
 
   const kakaoAccessToken =
     location.state?.kakaoAccessToken || localStorage.getItem('kakaoAccessToken');
+
+  // kakaoAccessToken이 없다면 로그인 페이지로 이동
+  useEffect(() => {
+    if (!kakaoAccessToken) {
+      navigate('/login', { replace: true });
+    }
+  }, [navigate]);
 
   const [user, setUser] = useState<UserInfo>({
     nickname: '',
