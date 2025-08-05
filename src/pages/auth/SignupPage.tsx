@@ -31,7 +31,7 @@ function SignupPage() {
   const { showToast } = useToast();
 
   const kakaoAccessToken =
-    location.state?.kakaoAccessToken || localStorage.getItem('KakaoAccessToken');
+    location.state?.kakaoAccessToken || localStorage.getItem('kakaoAccessToken');
 
   const [user, setUser] = useState<UserInfo>({
     nickname: '',

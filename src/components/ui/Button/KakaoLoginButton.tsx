@@ -35,7 +35,7 @@ const KakaoLoginButton = () => {
 
     try {
       const kakaoAccessToken =
-        location.state?.kakaoAccessToken || localStorage.getItem('KakaoAccessToken');
+        location.state?.kakaoAccessToken || localStorage.getItem('kakaoAccessToken');
       if (!kakaoAccessToken) {
         throw new Error('카카오 액세스 토큰이 없습니다.');
       }
