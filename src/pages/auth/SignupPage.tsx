@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import SignupProfile from '@/features/signup/SignupProfile';
 import SignupInfo from '@/features/signup/SignupInfo';
@@ -116,11 +116,6 @@ function SignupPage() {
     }
   };
 
-  // 디버깅용
-  useEffect(() => {
-    console.log('parent state 업데이트됨:', parent);
-  }, [parent]);
-
   return (
     <>
       <GlobalTopNav type='signup' message='' onClickLeft={handleBack} />
@@ -163,7 +158,7 @@ function SignupPage() {
             setBirthDate={(value) => updateParent('birth', value)}
             phoneNumber={parent.phoneNumber}
             setPhoneNumber={(value) => updateParent('phoneNumber', value)}
-            onNext={handleFinalSignup}
+            onNext={() => handleFinalSignup(false)}
           />
         )}
 
