@@ -45,6 +45,8 @@ const KakaoCallback = () => {
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', refreshToken);
         localStorage.setItem('nickname', finalNickname);
+        localStorage.removeItem('KakaoAccessToken');
+        localStorage.removeItem('KakaoRefreshToken');
 
         navigate('/', { state: { isNewLogin: true } });
       } catch (err: any) {
