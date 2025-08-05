@@ -29,7 +29,7 @@ const KakaoCallback = () => {
 
         // 1. 회원가입이 필요한 유저
         if (!memberId) {
-          navigate('/signup?needsAgreement=true', {
+          navigate('/login?needsAgreement=true', {
             state: {
               kakaoAccessToken,
               kakaoRefreshToken,
