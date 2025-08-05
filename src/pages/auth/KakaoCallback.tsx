@@ -26,10 +26,7 @@ const KakaoCallback = () => {
 
         // 1. 회원가입이 필요한 유저
         if (!memberId) {
-          localStorage.removeItem('kakaoAccessToken');
-          localStorage.removeItem('kakaoRefreshToken');
           navigate('/signup?needsAgreement=true', {
-            replace: true,
             state: {
               kakaoAccessToken,
               kakaoRefreshToken,
@@ -45,9 +42,6 @@ const KakaoCallback = () => {
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', refreshToken);
         localStorage.setItem('nickname', finalNickname);
-
-        localStorage.removeItem('kakaoAccessToken');
-        localStorage.removeItem('kakaoRefreshToken');
 
         navigate('/', { state: { isNewLogin: true } });
       } catch (err: any) {
