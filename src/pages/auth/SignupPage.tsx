@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import SignupProfile from '@/features/signup/SignupProfile';
 import SignupInfo from '@/features/signup/SignupInfo';
@@ -27,7 +27,6 @@ interface ParentInfo {
 function SignupPage() {
   const [step, setStep] = useState<Step>('profile');
   const location = useLocation();
-
   const navigate = useNavigate();
   const { showToast } = useToast();
 
@@ -46,6 +45,11 @@ function SignupPage() {
     birth: '',
     phoneNumber: '',
   });
+
+  // 부모 정보 업데이트 함수
+  const updateParent = (key: keyof ParentInfo, value: string) => {
+    setParent((prev) => ({ ...prev, [key]: value }));
+  };
 
   const goToNext = (nextStep: Step) => setStep(nextStep);
 
@@ -105,6 +109,11 @@ function SignupPage() {
     }
   };
 
+  // 디버깅용
+  useEffect(() => {
+    console.log('parent state 업데이트됨:', parent);
+  }, [parent]);
+
   return (
     <>
       <GlobalTopNav type='signup' message='' onClickLeft={handleBack} />
@@ -140,15 +149,13 @@ function SignupPage() {
         {step === 'guardianForm' && (
           <SignupGuardianForm
             name={parent.name}
-            setName={(name: string) => setParent((prev) => ({ ...prev, name }))}
+            setName={(value) => updateParent('name', value)}
             gender={parent.gender}
-            setGender={(gender: string) => setParent((prev) => ({ ...prev, gender }))}
+            setGender={(value) => updateParent('gender', value)}
             birthDate={parent.birth}
-            setBirthDate={(birth: string) => setParent((prev) => ({ ...prev, birth }))}
+            setBirthDate={(value) => updateParent('birth', value)}
             phoneNumber={parent.phoneNumber}
-            setPhoneNumber={(phoneNumber: string) =>
-              setParent((prev) => ({ ...prev, phoneNumber }))
-            }
+            setPhoneNumber={(value) => updateParent('phoneNumber', value)}
             onNext={handleFinalSignup}
           />
         )}
