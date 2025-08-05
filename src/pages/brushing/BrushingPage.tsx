@@ -42,6 +42,55 @@ const BrushingPage = () => {
     DefendSquirrel,
   ];
 
+  // 애니메이션 타이머 관련 ref
+  const animationTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const animationStartTimeRef = useRef<number | null>(null);
+  const remainingTimeRef = useRef<number>(30000);
+
+  // 타이머 시작
+  const startAnimationTimer = () => {
+    animationStartTimeRef.current = Date.now();
+    animationTimerRef.current = setTimeout(() => {
+      setAnimationIndex((prev) => (prev + 1) % animations.length);
+      remainingTimeRef.current = 30000; // 다음 애니메이션 위한 초기화
+    }, remainingTimeRef.current);
+  };
+
+  // 타이머 정지
+  const pauseAnimation = () => {
+    if (animationTimerRef.current) {
+      clearTimeout(animationTimerRef.current);
+      animationTimerRef.current = null;
+    }
+    const now = Date.now();
+    const elapsed = now - (animationStartTimeRef.current ?? now);
+    remainingTimeRef.current = Math.max(0, remainingTimeRef.current - elapsed);
+  };
+
+  // isPlaying 상태 변화 감지 (타이머 관리)
+  useEffect(() => {
+    if (isFinished) return;
+
+    if (isPlaying) {
+      startAnimationTimer();
+    } else {
+      pauseAnimation();
+    }
+
+    return () => {
+      if (animationTimerRef.current) {
+        clearTimeout(animationTimerRef.current);
+      }
+    };
+  }, [isPlaying]);
+
+  // 애니메이션 전환 시 타이머 재설정
+  useEffect(() => {
+    if (isFinished || !isPlaying) return;
+    remainingTimeRef.current = 30000;
+    startAnimationTimer();
+  }, [animationIndex]);
+
   // 헤더 왼쪽 버튼 클릭 시 처리
   const handleLeftClick = () => {
     if (isFinished)
@@ -55,7 +104,7 @@ const BrushingPage = () => {
     navigate('/brush/start'); // 양치 시작 페이지로 이동
   };
 
-  // 컴포넌트 마운트 시 배경 음악 자동 재생
+  // 배경 음악 자동 재생
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -73,19 +122,9 @@ const BrushingPage = () => {
     tryPlay();
   }, []);
 
-  // 재생 중이면 30초마다 애니메이션 교체
-  useEffect(() => {
-    if (!isPlaying) return;
-    const interval = setInterval(() => {
-      setAnimationIndex((prev) => (prev + 1) % animations.length);
-    }, 30000); // 30초마다 변경
-    return () => clearInterval(interval);
-  }, [isPlaying]);
-
-  // 마지막 카운트다운 여부 확인
+  // 카운트다운
   const isLastCountdown = countdownIndex === COUNTDOWN_TEXT.length - 1;
 
-  // 카운트다운 로직
   useEffect(() => {
     if (!isCountingDown) return;
 
@@ -96,7 +135,7 @@ const BrushingPage = () => {
       } else {
         setCountdownIndex((prev) => prev + 1);
       }
-    }, 1000); // 1초 간격
+    }, 1000);
 
     return () => clearTimeout(timeout);
   }, [countdownIndex, isCountingDown]);

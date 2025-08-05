@@ -1,4 +1,5 @@
 import Lottie from 'lottie-react';
+import { useEffect, useRef } from 'react';
 import AnimationButton from '@/components/ui/Button/AnimationButton';
 import BackgroundImage from '@/assets/images/animation_background.svg';
 import { COUNTDOWN_TEXT } from '@/constants/counterdownText';
@@ -24,6 +25,19 @@ const BrushingAnimation = ({
   countdownIndex,
   onTogglePlay,
 }: BrushingAnimationProps) => {
+  const lottieRef = useRef<any>(null);
+
+  //  isPlaying이 변경될 때 Lottie 애니메이션 재생/정지
+  useEffect(() => {
+    if (!lottieRef.current) return;
+
+    if (isPlaying) {
+      lottieRef.current.play(); // 재생 상태면 항상 play
+    } else {
+      lottieRef.current.pause(); // 일시정지 상태면 항상 pause
+    }
+  }, [isPlaying, animationIndex]);
+
   return (
     <div className='relative w-full max-w-[480px] min-w-[360px] h-[360px] mx-auto'>
       {/* 상단 파란 바 */}
@@ -40,8 +54,10 @@ const BrushingAnimation = ({
       {/* Lottie 애니메이션 */}
       <div className='absolute inset-0 w-full h-full z-10 pointer-events-none overflow-hidden'>
         <Lottie
+          lottieRef={lottieRef} // ref 연결
           animationData={animationData}
           loop
+          autoplay={false} // 수동 재생
           className={`w-full h-full ${
             isBrushingAnimation(animationIndex) ? '-translate-y-[-27%]' : ''
           }`}
