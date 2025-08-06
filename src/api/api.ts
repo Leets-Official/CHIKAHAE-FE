@@ -73,10 +73,14 @@ api.interceptors.response.use(
     if (isTokenExpired) {
       try {
         originalRequest._retry = true; // 무한 루프 방지
-        const newAccessToken = await reissueToken();
 
-        // 새로운 accessToken으로 헤더 수정 후 재요청
-        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+        const { accessToken } = await reissueToken();
+
+        // 새 토큰으로 api 인스턴스 기본값도 갱신
+        api.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+
+        // 재요청 헤더에도 반영
+        originalRequest.headers.Authorization = `Bearer ${accessToken}`;
         return api(originalRequest);
       } catch (refreshError) {
         console.error('토큰 재발급 실패:', refreshError);

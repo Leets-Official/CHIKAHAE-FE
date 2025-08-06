@@ -4,6 +4,7 @@ import { ToastProvider } from './contexts/ToastContext';
 import '@/styles/global.css';
 import '@/styles/fonts.css';
 import App from './App';
+import api from './api/api';
 
 const queryClient = new QueryClient();
 
@@ -13,6 +14,11 @@ if ('serviceWorker' in navigator) {
       console.error('SW 등록 실패:', err);
     });
   });
+}
+
+const accessToken = localStorage.getItem('accessToken');
+if (accessToken) {
+  api.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 }
 
 createRoot(document.getElementById('root')!).render(
