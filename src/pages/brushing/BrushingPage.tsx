@@ -47,18 +47,15 @@ const BrushingPage = () => {
   // 애니메이션 타이머 관련 ref
   const animationTimerRef = useRef<NodeJS.Timeout | null>(null);
   const animationStartTimeRef = useRef<number | null>(null);
-  const remainingTimeRef = useRef<number>(30000);
+  const remainingTimeRef = useRef<number>(0);
 
   // duration 구하는 함수
-  const getCurrentDuration = (index: number) => {
-    const isLast = index === animations.length - 1;
-    return isLast ? 35000 : 30000; // 마지막 애니메이션은 35초
-  };
+  const getDuration = (index: number) => (index === animations.length - 1 ? 35000 : 30000);
 
   // 타이머 시작
   const startAnimationTimer = () => {
     animationStartTimeRef.current = Date.now();
-    const duration = getCurrentDuration(animationIndex);
+    const duration = getDuration(animationIndex);
     remainingTimeRef.current = duration;
 
     animationTimerRef.current = setTimeout(() => {
@@ -69,35 +66,17 @@ const BrushingPage = () => {
         setIsFinished(true);
         audioRef.current?.pause();
       } else {
-        setAnimationIndex((prev) => (prev + 1) % animations.length);
-        remainingTimeRef.current = getCurrentDuration(animationIndex + 1);
+        setAnimationIndex((prev) => prev + 1);
       }
     }, duration);
   };
 
-  // 타이머 정지
-  const pauseAnimation = () => {
-    if (animationTimerRef.current) {
-      clearTimeout(animationTimerRef.current);
-      animationTimerRef.current = null;
-    }
-    const now = Date.now();
-    const elapsed = now - (animationStartTimeRef.current ?? now);
-    remainingTimeRef.current = Math.max(0, remainingTimeRef.current - elapsed);
-  };
-
-  // isPlaying 상태 변화 감지 (타이머 관리)
   useEffect(() => {
-    if (isFinished) return;
+    if (isFinished || !isPlaying) return;
 
-    if (isPlaying) {
-      remainingTimeRef.current = getCurrentDuration(animationIndex);
-      startAnimationTimer();
-    } else {
-      pauseAnimation();
-    }
+    // 남은 시간 기준으로 타이머 시작
+    startAnimationTimer();
 
-    // 타이머 중복 제거
     return () => {
       if (animationTimerRef.current) {
         clearTimeout(animationTimerRef.current);
@@ -105,13 +84,6 @@ const BrushingPage = () => {
       }
     };
   }, [isPlaying, animationIndex, isFinished]);
-
-  // 애니메이션 전환 시 타이머 재설정
-  useEffect(() => {
-    if (isFinished || !isPlaying) return;
-    remainingTimeRef.current = getCurrentDuration(animationIndex);
-    startAnimationTimer();
-  }, [animationIndex]);
 
   // 헤더 왼쪽 버튼 클릭 시 처리
   const handleLeftClick = () => {
