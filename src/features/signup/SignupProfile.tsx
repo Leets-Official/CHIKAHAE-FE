@@ -1,8 +1,10 @@
 import Image from '@/components/Image';
+import { useState } from 'react';
 import ProfileImage from '@/assets/images/profile/profile_default.svg';
 import InputContainer from '@/components/ui/Input/InputContainer';
 import SignupBg from '@/assets/images/signupBackground.svg';
 import Button from '@/components/ui/Button';
+import { validateNickname } from '@/utils/validateUserInfo';
 
 interface SignupProfileProps {
   nickname: string;
@@ -10,11 +12,18 @@ interface SignupProfileProps {
   onNext: () => void;
 }
 const SignupProfile = ({ nickname, setNickname, onNext }: SignupProfileProps) => {
+  const [error, setError] = useState<string | null>(null);
+
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNickname(e.target.value);
+    const value = e.target.value;
+    setNickname(value);
+    setError(validateNickname(value));
   };
 
   const isNicknameEmpty = nickname.trim() === '';
+
+  const isFormIncomplete = isNicknameEmpty || !!error;
+
   return (
     <div className='flex flex-col items-center min-h-screen w-full max-w-[480px]'>
       <img
@@ -50,6 +59,11 @@ const SignupProfile = ({ nickname, setNickname, onNext }: SignupProfileProps) =>
                 value={nickname}
                 onChange={handleNicknameChange}
               />
+              {error && (
+                <p className='text-fg-system-error body-12-r h-[14px] text-left flex px-4 flex-col items-start mt-[10px]'>
+                  {error}
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -61,7 +75,7 @@ const SignupProfile = ({ nickname, setNickname, onNext }: SignupProfileProps) =>
           onClick={onNext}
           size='large'
           fullWidth
-          disabled={isNicknameEmpty}
+          disabled={isFormIncomplete}
         >
           다음
         </Button>

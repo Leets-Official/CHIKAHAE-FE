@@ -1,7 +1,8 @@
 import Button from '@/components/ui/Button';
 import UserInfoForm from '@/components/ui/UserInfoForm';
 import SignupBg from '@/assets/images/signupBackground.svg';
-import { isOver14 } from '@/utils/date';
+import { useState } from 'react';
+import { isOver14, isFutureDate } from '@/utils/date';
 
 interface SignupInfoProps {
   gender: string;
@@ -12,7 +13,19 @@ interface SignupInfoProps {
 }
 
 const SignupInfo = ({ gender, setGender, birthDate, setBirthDate, onNext }: SignupInfoProps) => {
-  const isFormIncomplete = !gender || !birthDate;
+  const [error, setError] = useState<string | null>(null);
+
+  const isFormIncomplete = !gender || !birthDate || !!error;
+
+  // 생년월일 변경 시 에러 검사
+  const handleBirthDateChange = (date: string) => {
+    setBirthDate(date);
+    if (isFutureDate(date)) {
+      setError('생년월일은 오늘 이전 날짜로 입력해 주세요.');
+    } else {
+      setError(null);
+    }
+  };
 
   const handleNext = () => {
     const nextStep = isOver14(birthDate) ? 'complete' : 'guardianIntro';
@@ -45,8 +58,13 @@ const SignupInfo = ({ gender, setGender, birthDate, setBirthDate, onNext }: Sign
                 gender={gender}
                 onGenderChange={setGender}
                 birthDate={birthDate}
-                onBirthDateChange={setBirthDate}
+                onBirthDateChange={handleBirthDateChange}
               />
+              {error && (
+                <p className='text-fg-system-error body-12-r h-[14px] text-left flex px-4 flex-col items-start mt-[10px]'>
+                  {error}
+                </p>
+              )}
             </div>
           </div>
         </div>
