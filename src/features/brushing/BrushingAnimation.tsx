@@ -32,8 +32,6 @@ const BrushingAnimation = ({
     const lottie = lottieRef.current;
     if (!lottie) return;
 
-    lottie.stop();
-
     if (isPlaying) {
       lottie.play();
     } else {
