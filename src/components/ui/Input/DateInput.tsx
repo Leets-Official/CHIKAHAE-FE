@@ -33,11 +33,11 @@ const CustomInput = forwardRef<HTMLInputElement, DateInputProps>(
         ref={ref}
         readOnly
         placeholder='0000.00.00'
-        className='flex-grow px-0 py-0 bg-transparent outline-none border-none cursor-pointer'
+        className='flex-grow bg-transparent outline-none border-none cursor-pointer body-14-r'
       />
       <CalendarIcon
         onClick={onClick}
-        className={clsx('ml-2 h-[24px] w-[24px] cursor-pointer', iconColor)}
+        className={clsx('cursor-pointer -translate-y-[2px]', iconColor)}
       />
     </div>
   ),

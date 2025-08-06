@@ -1,6 +1,7 @@
 import { ReactComponent as TimerIcon } from '@/assets/icons/timerIcon.svg';
 import type { TimerProps } from './Timer.types';
 import { useEffect, useState, useRef } from 'react';
+import { motion } from 'framer-motion';
 
 // 컴포넌트 구성 - [아이콘] [프로그레스바] [남은 시간]
 
@@ -67,9 +68,19 @@ const Timer = ({
   return (
     <div className={`relative w-full ${timerWidthClasses} h-[48px]`}>
       {/* 아이콘 */}
-      <div className='absolute left-0 top-[35%] -translate-y-1/2 w-[48px] h-[48px] flex items-center justify-center z-10'>
+      <motion.div
+        className='absolute left-0 top-[35%] -translate-y-1/2 w-[48px] h-[48px] flex items-center justify-center z-10'
+        style={{ transformOrigin: 'bottom center' }}
+        animate={remainingTime <= 5 ? { x: [0, -1.5, 1.5, -1.5, 1.5, 0] } : { x: 0 }}
+        transition={{
+          duration: 0.3,
+
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      >
         <TimerIcon />
-      </div>
+      </motion.div>
 
       {/* 프로그레스바 + 텍스트 */}
       <div className='h-[40px] pl-[32px] pr-[10px] flex items-center gap-[8px] w-full'>

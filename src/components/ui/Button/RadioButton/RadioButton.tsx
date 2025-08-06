@@ -21,7 +21,7 @@ const RadioButton = ({
   return (
     <label
       htmlFor={id}
-      className={`flex items-center space-x-1 cursor-pointer select-none p-2 first:pl-0 rounded-md`}
+      className={`flex items-center space-x-1 cursor-pointer select-none rounded-md w-full h-full`}
     >
       <input
         type='radio'

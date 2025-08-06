@@ -10,7 +10,7 @@ export const CHARACTER_MESSAGES = [
   },
 
   {
-    main: '치카해와 올바른 양치 습관 형성',
+    main: ['치카해와', '올바른 양치 습관 형성'],
     sub: '오늘도 깨끗하게 치카해!',
     Svg: AuthCharacterRandom2,
   },
