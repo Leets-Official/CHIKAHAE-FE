@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import BrushingAnimation from '@/features/brushing/BrushingAnimation';
 import BrushingResult from '@/features/brushing/BrushingResult';
 import BrushingHeader from '@/features/brushing/BrushingHeader';
@@ -17,8 +17,10 @@ import { COUNTDOWN_TEXT } from '@/constants/counterdownText';
 const isBrushingAnimation = (index: number) => index % 2 === 0;
 
 const BrushingPage = () => {
+  const location = useLocation();
   const navigate = useNavigate();
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const missionId = location.state?.missionId;
 
   // 카운트다운 상태
   const [countdownIndex, setCountdownIndex] = useState(0);
@@ -167,7 +169,7 @@ const BrushingPage = () => {
 
       {isFinished ? (
         // 양치 종료 후 결과 화면
-        <BrushingResult />
+        <BrushingResult missionId={missionId} />
       ) : (
         <>
           {/* 헤더 (타이머 및 종료 버튼 포함) */}

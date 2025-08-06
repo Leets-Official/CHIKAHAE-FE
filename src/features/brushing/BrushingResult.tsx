@@ -1,40 +1,56 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '@/components/ui/Button';
 import CoinRewardResult from '@/components/ui/CoinRewardResult';
 import { useTodayMissions } from '@/hooks/queries/useGetTodayMissions';
 import { getNextAnimationMission } from '@/utils/getNextAnimationMission';
 import { completeMission } from '@/api/home/missionAPI';
+import { useToast } from '@/contexts/ToastContext';
 
 // 보상 화면 (코인 획득)
 
-const BrushingResult = () => {
+interface BrushingResultProps {
+  missionId?: 'MORNING_ANIMATION' | 'LUNCH_ANIMATION' | 'EVENING_ANIMATION';
+}
+
+const isValidMissionId = (
+  id: string | null,
+): id is 'MORNING_ANIMATION' | 'LUNCH_ANIMATION' | 'EVENING_ANIMATION' => {
+  return id === 'MORNING_ANIMATION' || id === 'LUNCH_ANIMATION' || id === 'EVENING_ANIMATION';
+};
+
+const BrushingResult = ({ missionId }: BrushingResultProps) => {
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   // 오늘의 미션 목록
   const { data: missions } = useTodayMissions();
 
-  // "홈으로 이동하기" 버튼 클릭 시 동작
+  //  진입 시 미션 성공 토스트 표시
+  useEffect(() => {
+    showToast({ message: '양치 미션 성공!', showIcon: false });
+  }, [showToast]);
+
+  // 아직 완료되지 않은 애니메이션 미션 중 다음 미션을 가져옴
   const handleGoHome = async () => {
     if (!missions) return;
 
-    // 아직 완료되지 않은 애니메이션 미션 중 다음 미션을 가져옴
-    const nextMission = getNextAnimationMission(missions);
-    if (!nextMission) {
+    const fallbackId = getNextAnimationMission(missions);
+    const resolvedMissionId = missionId ?? fallbackId;
+
+    if (!isValidMissionId(resolvedMissionId)) {
       navigate('/');
       return;
     }
 
     try {
-      // 다음 미션을 완료 처리하고 보상 코인 수량을 받음
-      const coinAmount = await completeMission(
-        nextMission as 'MORNING_ANIMATION' | 'LUNCH_ANIMATION' | 'EVENING_ANIMATION',
-      );
-      // 홈으로 이동하면서 보상 정보를 state로 전달
+      const coinAmount = await completeMission(resolvedMissionId);
       navigate('/', {
         state: { missionCompleted: true, coinAmount },
       });
     } catch (error) {
       console.error('미션 완료 실패:', error);
+      showToast({ message: '미션 완료 처리 중 문제가 발생했어요', showIcon: false });
     }
   };
 
