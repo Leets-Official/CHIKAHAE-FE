@@ -48,14 +48,12 @@ const BrushingAnimation = ({
       <img
         src={BackgroundImage}
         alt='배경 이미지'
-        style={{ objectPosition: 'center 25%' }}
-        className='absolute inset-0 w-full h-full object-cover z-0'
+        className='absolute inset-0 w-full h-full object-cover z-0 object-[center_25%]'
       />
 
       {/* Lottie 애니메이션 */}
       <div className='absolute inset-0 w-full h-full z-10 pointer-events-none overflow-hidden'>
         <Lottie
-          key={animationIndex}
           lottieRef={lottieRef} // ref 연결
           animationData={animationData}
           loop
