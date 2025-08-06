@@ -7,6 +7,7 @@ import { getNextAnimationMission } from '@/utils/getNextAnimationMission';
 import { completeMission } from '@/api/home/missionAPI';
 import { useToast } from '@/contexts/ToastContext';
 import { useQueryClient } from '@tanstack/react-query';
+import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 
 // 보상 화면 (코인 획득)
 
@@ -62,6 +63,7 @@ const BrushingResult = ({ missionId }: BrushingResultProps) => {
   return (
     <>
       {/* 상단 여백 (Header와 간격) */}
+      <GlobalTopNav message='양치하기' showCancel={false} onClickLeft={handleGoHome} />
       <div className='h-14' />
 
       <div className='h-[100px]' />
