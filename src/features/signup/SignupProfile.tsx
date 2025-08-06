@@ -20,16 +20,16 @@ const SignupProfile = ({ nickname, setNickname, onNext }: SignupProfileProps) =>
       <img
         src={SignupBg}
         alt='Signup Background'
-        className='absolute inset-0 w-full h-full object-cover mx-auto'
+        className='absolute inset-0 w-full h-full object-cover'
       />
 
-      <div className='flex flex-col min-h-screen justify-between pt-11'>
-        <div className='flex flex-col gap-y-10 px-5 mt-10 w-full max-w-[480px] min-w-[360px] mx-auto z-9999'>
-          <div className='w-full text-left'>
-            <p className='text-fg-primary text-[22px] font-extrabold leading-[25px] tracking-[-0.22px] self-stretch mb-2.5'>
+      <div className='flex flex-col justify-between w-full pt-11 px-[20px]'>
+        <div className='flex flex-col gap-y-10 mt-10 w-full max-w-[480px] min-w-[360px] mx-auto z-10'>
+          <div className='text-left'>
+            <p className='text-fg-primary text-[22px] font-extrabold leading-[25px] tracking-[-0.22px] mb-2.5'>
               프로필을 만들어봐요
             </p>
-            <p className='text-fg-primary text-[14px] font-normal leading-[16px] tracking-[-0.14px] items-stretch'>
+            <p className='text-fg-primary text-[14px] font-normal leading-[16px] tracking-[-0.14px]'>
               치카해에서 사용할 프로필을 만들어주세요
             </p>
           </div>
@@ -55,7 +55,7 @@ const SignupProfile = ({ nickname, setNickname, onNext }: SignupProfileProps) =>
         </div>
       </div>
 
-      <div className='absolute bottom-0 left-1/2 -translate-x-1/2 max-w-[480px] min-w-[360px] px-4 py-5.75'>
+      <div className='absolute bottom-0 left-1/2 -translate-x-1/2 max-w-[480px] min-w-[360px] w-full px-[20px] py-5.75'>
         <Button
           variant='primary'
           onClick={onNext}

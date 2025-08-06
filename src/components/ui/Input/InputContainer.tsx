@@ -40,7 +40,7 @@ const InputContainer = ({
   const borderColorClass = getBorderColor(inputState, isActive);
 
   const containerClass = clsx(
-    'h-[80px] px-4 py-3 flex flex-col gap-y-1 justify-center items-start',
+    'h-[80px] px-4 py-3 flex flex-col gap-y-[4px] justify-center items-start',
     variant === 'default' && 'rounded-lg border-[2px] border-b-[5px] shadow-md',
     (variant === 'formMiddle' || variant === 'formTop') && 'border-b',
     borderColorClass,
@@ -56,9 +56,9 @@ const InputContainer = ({
   const handleBlur = () => setinputState('enabled');
   return (
     <div className={containerClass}>
-      <label className='flex items-center text-[12px] font-bold leading-[14px] tracking-[-0.12px]  '>
+      <label className='flex items-center body-12-eb mt-[3px] leading-[14px] tracking-[-0.12px]'>
         {label}
-        {star && <span className='ml-[4px] text-[14px] font-medium text-fg-accent-red'>*</span>}
+        {star && <span className='body-14-r text-fg-accent-red'>*</span>}
       </label>
 
       {calender ? (
