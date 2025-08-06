@@ -1,5 +1,5 @@
 import Image from '@/components/Image';
-import ProfileImage from '@/assets/icons/profileImage.svg';
+import ProfileImage from '@/assets/images/profile/profile_default.svg';
 import InputContainer from '@/components/ui/Input/InputContainer';
 import SignupBg from '@/assets/images/signupBackground.svg';
 import Button from '@/components/ui/Button';
