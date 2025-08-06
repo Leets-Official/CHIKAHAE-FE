@@ -29,6 +29,16 @@ const QuizPage = () => {
   const quizData = location.state;
   const quizList = quizData?.quizList || [];
 
+  useEffect(() => {
+    if (!quizData || !quizList.length) {
+      showToast({
+        message: '퀴즈 정보가 없습니다. 처음부터 다시 시도해주세요.',
+        duration: 3000,
+      });
+      navigate('/quiz/start');
+    }
+  }, [quizData, quizList]);
+
   // step - 문제 풀이(quiz), 결과(result), 최종 결과(final)
   const [step, setStep] = useState<QuizStep>('quiz');
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // 현재 퀴즈 인덱스
@@ -70,7 +80,6 @@ const QuizPage = () => {
       setIsCorrect(isCorrect);
       setAnswerExplanation(answerDescription);
       if (isCorrect) {
-        setCorrectCount((prev) => prev + 1);
         showToast({ message: '치카코인 1개가 적립되었어요.', duration: TOAST_DURATION });
       }
     } catch {
@@ -118,6 +127,7 @@ const QuizPage = () => {
   const handleGoHome = async () => {
     try {
       const coinAmount = await completeMission('DAILY_QUIZ');
+      await queryClient.invalidateQueries({ queryKey: ['todayMissions'] });
       navigate('/', {
         state: {
           missionCompleted: true,
