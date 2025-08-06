@@ -62,7 +62,7 @@ const SignupGuardianForm = ({
             </div>
           </div>
         </div>
-        <div className='absolute bottom-0 left-1/2 -translate-x-1/2 max-w-[480px] min-w-[360px] w-full px-[20px] py-5.75'>
+        <div className='fixed bottom-0 left-1/2 -translate-x-1/2 max-w-[480px] min-w-[360px] w-full px-[20px] py-5.75 z-10'>
           <Button
             variant='primary'
             onClick={onNext}

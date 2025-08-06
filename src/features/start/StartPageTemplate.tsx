@@ -59,7 +59,7 @@ const StartPageTemplate = ({
 
         {/* 시작하기 버튼 */}
         <div className='flex justify-center mt-auto'>
-          <div className='w-full max-w-[480px] min-w-[360px] px-[20px] pb-[100px]'>
+          <div className='w-full max-w-[480px] min-w-[360px] px-[20px] pb-[100px] pt-[20px]'>
             <Button
               size='large'
               variant='primary'
