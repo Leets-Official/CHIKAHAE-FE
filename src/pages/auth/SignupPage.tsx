@@ -31,7 +31,14 @@ function SignupPage() {
   const { showToast } = useToast();
 
   const kakaoAccessToken =
-    location.state?.kakaoAccessToken || localStorage.getItem('KakaoAccessToken');
+    location.state?.kakaoAccessToken || localStorage.getItem('kakaoAccessToken');
+
+  // kakaoAccessToken이 없다면 로그인 페이지로 이동
+  useEffect(() => {
+    if (!kakaoAccessToken) {
+      navigate('/login', { replace: true });
+    }
+  }, [navigate]);
 
   const [user, setUser] = useState<UserInfo>({
     nickname: '',
@@ -80,15 +87,17 @@ function SignupPage() {
     }
 
     try {
+      let payload;
+
       if (isOver14Only) {
-        await signupUser({
+        payload = {
           kakaoAccessToken: kakaoAccessToken,
           nickname: user.nickname,
           birth: user.birth,
           gender: user.gender,
-        });
+        };
       } else {
-        await signupUser({
+        payload = {
           kakaoAccessToken: kakaoAccessToken,
           nickname: user.nickname,
           birth: user.birth,
@@ -97,8 +106,13 @@ function SignupPage() {
           parentGender: parent.gender,
           parentBirth: parent.birth,
           parentPhoneNumber: parent.phoneNumber,
-        });
+        };
       }
+
+      // 디버깅용
+      console.log('회원가입 요청 payload:', payload);
+
+      await signupUser(payload);
 
       localStorage.removeItem('kakaoAccessToken');
       localStorage.removeItem('kakaoRefreshToken');
@@ -108,11 +122,6 @@ function SignupPage() {
       showToast({ message: '회원가입 중 오류가 발생했습니다.', showIcon: false });
     }
   };
-
-  // 디버깅용
-  useEffect(() => {
-    console.log('parent state 업데이트됨:', parent);
-  }, [parent]);
 
   return (
     <>
@@ -156,7 +165,7 @@ function SignupPage() {
             setBirthDate={(value) => updateParent('birth', value)}
             phoneNumber={parent.phoneNumber}
             setPhoneNumber={(value) => updateParent('phoneNumber', value)}
-            onNext={handleFinalSignup}
+            onNext={() => handleFinalSignup(false)}
           />
         )}
 

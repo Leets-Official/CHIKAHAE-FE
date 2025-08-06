@@ -1,10 +1,9 @@
 import { ModalSheet } from '../Modal';
 import TermsList from '@/features/login/TermsList';
 import Button from './Button';
-import { useNavigate, useSearchParams, useLocation } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAgreementParams } from '@/hooks/useAgreementParams';
 import { useEffect } from 'react';
-import { exchangeKakaoToken } from '@/api/auth/kakaoAPI';
 import { ReactComponent as KakaoIcon } from '@/assets/icons/KaKaoSymbol.svg';
 
 const KakaoLoginButton = () => {
@@ -15,7 +14,6 @@ const KakaoLoginButton = () => {
 
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const location = useLocation();
   const { agreements, isCompleted, toggleAgreement, reset, isModalOpen } = useAgreementParams();
 
   useEffect(() => {
@@ -30,29 +28,9 @@ const KakaoLoginButton = () => {
     }
   };
 
-  const handleFinalSignup = async () => {
+  const handleSignup = async () => {
     if (!isCompleted) return;
-
-    try {
-      const { kakaoAccessToken } = location.state || {};
-      if (!kakaoAccessToken) {
-        throw new Error('카카오 액세스 토큰이 없습니다.');
-      }
-      localStorage.setItem('kakaoAccessToken', kakaoAccessToken);
-
-      const { accessToken, refreshToken, nickname } = await exchangeKakaoToken();
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
-      localStorage.setItem('nickname', nickname);
-
-      // 회원가입 완료 후 홈으로 이동
-      reset(); // 모달 상태 초기화
-      navigate('/', { state: { isNewLogin: true } });
-    } catch (err: any) {
-      console.error('최종 회원가입 처리 실패:', err.message);
-      reset();
-      navigate('/login?error=signup_failed');
-    }
+    navigate('/signup');
   };
 
   return (
@@ -75,7 +53,7 @@ const KakaoLoginButton = () => {
         <div className='flex flex-row gap-2.5'>
           <Button
             variant='assistive'
-            onClick={handleFinalSignup}
+            onClick={handleSignup}
             disabled={!isCompleted}
             className={`flex-1 ${
               isCompleted
@@ -87,7 +65,7 @@ const KakaoLoginButton = () => {
           </Button>
           <Button
             variant='primary'
-            onClick={handleFinalSignup}
+            onClick={handleSignup}
             disabled={!isCompleted}
             className={`flex-1 ${
               isCompleted ? 'bg-bg-primary-blue' : 'bg-fg-weak'

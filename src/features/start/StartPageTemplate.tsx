@@ -13,6 +13,7 @@ type StartPageTemplateProps = {
   noticeList: string[]; // 유의사항 리스트
   onStart: () => void; // 시작 버튼 클릭 시 호출되는 콜백
   startButtonText?: string; // 시작 버튼 텍스트 (기본값: 시작하기)
+  startButtonDisabled?: boolean;
 };
 
 const StartPageTemplate = ({
@@ -24,12 +25,13 @@ const StartPageTemplate = ({
   noticeList,
   onStart,
   startButtonText = '시작하기',
+  startButtonDisabled = false,
 }: StartPageTemplateProps) => {
   return (
     <>
       {/* 페이지 상단 영역 */}
       <div className='flex flex-col min-h-screen w-full max-w-[480px] min-w-[360px] mx-auto'>
-        <div className='flex flex-col w-full gap-[10px] pb-[30px]'>
+        <div className='flex flex-col w-full'>
           <GlobalTopNav message={navTitle} showCancel={false} showLeftIcon={false} />
 
           <div className='h-14' />
@@ -58,7 +60,13 @@ const StartPageTemplate = ({
         {/* 시작하기 버튼 */}
         <div className='flex justify-center mt-auto'>
           <div className='w-full max-w-[480px] min-w-[360px] px-[20px] pb-[100px]'>
-            <Button size='large' variant='primary' fullWidth onClick={onStart}>
+            <Button
+              size='large'
+              variant='primary'
+              fullWidth
+              onClick={onStart}
+              disabled={startButtonDisabled}
+            >
               {startButtonText}
             </Button>
           </div>
