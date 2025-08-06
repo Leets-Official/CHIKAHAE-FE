@@ -6,6 +6,7 @@ import { useTodayMissions } from '@/hooks/queries/useGetTodayMissions';
 import { getNextAnimationMission } from '@/utils/getNextAnimationMission';
 import { completeMission } from '@/api/home/missionAPI';
 import { useToast } from '@/contexts/ToastContext';
+import { useQueryClient } from '@tanstack/react-query';
 
 // 보상 화면 (코인 획득)
 
@@ -22,6 +23,7 @@ const isValidMissionId = (
 const BrushingResult = ({ missionId }: BrushingResultProps) => {
   const navigate = useNavigate();
   const { showToast } = useToast();
+  const queryClient = useQueryClient();
 
   // 오늘의 미션 목록
   const { data: missions } = useTodayMissions();
@@ -45,6 +47,9 @@ const BrushingResult = ({ missionId }: BrushingResultProps) => {
 
     try {
       const coinAmount = await completeMission(resolvedMissionId);
+      queryClient.invalidateQueries({ queryKey: ['pointBalance'] });
+      queryClient.invalidateQueries({ queryKey: ['todayMissions'] });
+
       navigate('/', {
         state: { missionCompleted: true, coinAmount },
       });
