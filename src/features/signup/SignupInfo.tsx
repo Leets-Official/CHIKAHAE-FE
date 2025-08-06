@@ -20,7 +20,7 @@ const SignupInfo = ({ gender, setGender, birthDate, setBirthDate, onNext }: Sign
   };
 
   return (
-    <div className='flex flex-col items-center min-h-screen w-full'>
+    <div className='flex flex-col items-center min-h-screen w-full max-w-[480px]'>
       <img
         src={SignupBg}
         alt='Signup Background'
