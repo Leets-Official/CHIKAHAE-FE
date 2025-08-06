@@ -1,14 +1,13 @@
 /** @type {import('tailwindcss').Config} */
-import { fontFamily } from 'tailwindcss/defaultTheme';
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}', './src/styles/**/*.{css}'],
   theme: {
     extend: {
       fontFamily: {
-        nanum: ['NanumSquareRound', ...fontFamily.sans],
+        cookie: ['CookieRunBlack', ...defaultTheme.fontFamily.sans,],
       },
-
       colors: {
         // ────────────────
         // Primitive Colors

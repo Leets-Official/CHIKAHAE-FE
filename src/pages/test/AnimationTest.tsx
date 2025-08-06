@@ -3,7 +3,6 @@ import Timer from '@/components/ui/Timer/Timer';
 import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 import { TIPS } from '@/constants/tips';
 import { useState, useEffect } from 'react';
-import { ReactComponent as BackgroundImage } from '@/assets/images/backgroundImage.svg';
 import PlayPauseButton from '@/components/ui/Button/AnimationButton';
 
 const AnimationTest = () => {
@@ -39,7 +38,7 @@ const AnimationTest = () => {
       <div className='flex flex-col items-center justify-center min-h-screen gap-10 relative z-0 px-4'>
         <Timer duration={180} size='default' mode='animation' isActive={isPlaying} />
         <div className='relative flex justify-center items-center max-w-[480px] min-w-[360px] w-full min-h-[450px]'>
-          <BackgroundImage className='absolute top-0 left-1/2 -translate-x-1/2 w-[360px] h-full' />
+          {/* <BackgroundImage className='absolute top-0 left-1/2 -translate-x-1/2 w-[360px] h-full' /> */}
           <div className='relative z-10 flex flex-col justify-center items-center'>
             <LottieTest />
             <PlayPauseButton isPlaying={isPlaying} onToggle={() => setIsPlaying((prev) => !prev)} />

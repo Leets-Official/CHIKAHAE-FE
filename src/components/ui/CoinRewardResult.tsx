@@ -2,15 +2,15 @@ import { ReactComponent as ChikaCoin } from '@/assets/icons/chikaCoin.svg';
 import { motion } from 'framer-motion';
 
 interface CoinRewardResultProps {
-  correctCount: number;
-  totalCount: number;
+  correctCount?: number;
+  totalCount?: number;
   description?: string;
   isQuizPage?: boolean;
 }
 
 const CoinRewardResult = ({
   correctCount,
-  totalCount,
+  totalCount = 3,
   description,
   isQuizPage = true,
 }: CoinRewardResultProps) => {
