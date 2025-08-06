@@ -47,43 +47,55 @@ const BrushingPage = () => {
   // 애니메이션 타이머 관련 ref
   const animationTimerRef = useRef<NodeJS.Timeout | null>(null);
   const animationStartTimeRef = useRef<number | null>(null);
-  const remainingTimeRef = useRef<number>(0);
+  const remainingTimeRef = useRef<number>(30000);
 
   // duration 구하는 함수
-  const getDuration = (index: number) => (index === animations.length - 1 ? 35000 : 30000);
+  const getDuration = (index: number) => {
+    return index === animations.length - 1 ? 35000 : 30000;
+  };
 
-  // 타이머 시작
   const startAnimationTimer = () => {
-    animationStartTimeRef.current = Date.now();
-    const duration = getDuration(animationIndex);
-    remainingTimeRef.current = duration;
+    const duration = remainingTimeRef.current; // 남은 시간으로 타이머 설정
+    animationStartTimeRef.current = Date.now(); // 시작 시각 기록
 
     animationTimerRef.current = setTimeout(() => {
-      // 마지막 애니메이션이면 종료
       const isLast = animationIndex === animations.length - 1;
       if (isLast) {
-        setIsPlaying(false);
         setIsFinished(true);
+        setIsPlaying(false);
         audioRef.current?.pause();
       } else {
         setAnimationIndex((prev) => prev + 1);
+        remainingTimeRef.current = getDuration(animationIndex + 1); // 다음 애니메이션 남은 시간 초기화
+        animationStartTimeRef.current = Date.now(); // 다음 시작 시간 갱신
       }
     }, duration);
   };
 
   useEffect(() => {
-    if (isFinished || !isPlaying) return;
+    if (!isPlaying || isFinished) return;
 
-    // 남은 시간 기준으로 타이머 시작
-    startAnimationTimer();
+    startAnimationTimer(); // 재생할 때 타이머 시작
 
     return () => {
-      if (animationTimerRef.current) {
-        clearTimeout(animationTimerRef.current);
-        animationTimerRef.current = null;
-      }
+      if (animationTimerRef.current) clearTimeout(animationTimerRef.current);
     };
   }, [isPlaying, animationIndex, isFinished]);
+
+  const handleTogglePlay = () => {
+    if (isPlaying) {
+      // 일시정지 시 남은 시간 계산
+      if (animationTimerRef.current) clearTimeout(animationTimerRef.current);
+      const now = Date.now();
+      const elapsed = now - (animationStartTimeRef.current ?? now);
+      const duration = getDuration(animationIndex);
+      remainingTimeRef.current = Math.max(0, duration - elapsed);
+      setIsPlaying(false);
+    } else {
+      // 재생 시 타이머 시작
+      setIsPlaying(true);
+    }
+  };
 
   // 헤더 왼쪽 버튼 클릭 시 처리
   const handleLeftClick = () => {
@@ -126,6 +138,8 @@ const BrushingPage = () => {
       if (isLastCountdown) {
         setIsCountingDown(false);
         setIsPlaying(true);
+        animationStartTimeRef.current = Date.now();
+        remainingTimeRef.current = getDuration(animationIndex);
       } else {
         setCountdownIndex((prev) => prev + 1);
       }
@@ -166,7 +180,7 @@ const BrushingPage = () => {
             isPlaying={isPlaying}
             isCountingDown={isCountingDown}
             countdownIndex={countdownIndex}
-            onTogglePlay={() => setIsPlaying((prev) => !prev)}
+            onTogglePlay={handleTogglePlay}
           />
 
           {/* 양치 툴팁 */}
