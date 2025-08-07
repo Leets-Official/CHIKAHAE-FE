@@ -37,7 +37,7 @@ const QuizStartPage = () => {
       imageSrc={image}
       imageAlt='퀴즈 시작 이미지'
       title='매일 퀴즈 도전하기'
-      coinText='10 치카코인 획득'
+      coinText='1 치카코인 획득'
       noticeList={[
         '하루 한 번, 치카박사에 도전하세요!',
         '딱 3문제! OX 2개와 객관식 1개로 가볍게 시작해요.',
