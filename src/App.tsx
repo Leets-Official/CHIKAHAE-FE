@@ -22,6 +22,7 @@ function App() {
         <Route path='/login' element={<LoginPage />} />
         <Route path='/signup' element={<SignupPage />} />
         <Route path='/login/kakao/callback' element={<KakaoCallback />} />
+        <Route path='/terms/:type' element={<TermsPage />} />
 
         {/* 로그인 필요 페이지 */}
         <Route element={<RequireAuth />}>
@@ -30,9 +31,8 @@ function App() {
           <Route path='/quiz' element={<QuizPage />} />
           <Route path='/brush/start' element={<BrushingStartPage />} />
           <Route path='/brush' element={<BrushingPage />} />
-          <Route path='/terms/:type' element={<TermsPage />} />
-          <Route path='/mypage' element={<MyPage />} />
           <Route path='/edit' element={<MyPageEdit />} />
+          <Route path='/mypage' element={<MyPage />} />
           <Route path='/mypage/alarm' element={<AlarmPage />} />
           <Route path='/mypage/userinfo' element={<UserInfoPage />} />
         </Route>
