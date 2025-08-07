@@ -20,11 +20,6 @@ const Timer = ({
   const timerWidthClasses =
     size === 'wide' ? 'max-w-[480px] min-w-[360px]' : 'max-w-[360px] min-w-[320px]';
 
-  //  duration 변경되면 remainingTime 초기화
-  useEffect(() => {
-    setRemainingTime(duration);
-  }, [duration]);
-
   // onComplete 중복 호출 방지용 ref
   const hasCompleted = useRef(false);
 
@@ -97,7 +92,7 @@ const Timer = ({
         {showSeconds && (
           <span
             className={`auto-width text-[20px] font-extrabold leading-[23px] text-tangerine-strong text-center ${
-              mode !== 'quiz' ? 'w-[80px]' : ''
+              mode !== 'quiz' ? 'w-[80px]' : 'w-[25px]'
             }`}
           >
             {formatTime(remainingTime)}
