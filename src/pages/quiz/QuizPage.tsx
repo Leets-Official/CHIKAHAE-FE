@@ -80,6 +80,7 @@ const QuizPage = () => {
       setIsCorrect(isCorrect);
       setAnswerExplanation(answerDescription);
       if (isCorrect) {
+        setCorrectCount((prev) => prev + 1);
         showToast({ message: '치카코인 1개가 적립되었어요.', duration: TOAST_DURATION });
       }
     } catch {
