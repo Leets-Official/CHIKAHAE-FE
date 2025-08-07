@@ -22,7 +22,7 @@ export type PointBalance = number;
 export const getPointBalance = async (): Promise<PointBalance> => {
   try {
     const response = await api.get('/api/points/balance');
-    return response.data;
+    return response.data.data;
   } catch (error) {
     logApiError(error, '포인트 잔액 조회');
     throw error;
