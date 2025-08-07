@@ -6,14 +6,23 @@ import Button from '@/components/ui/Button';
 import { ReactComponent as Profile } from '@/assets/images/profile/profile_default.svg';
 import { updateUserProfile } from '@/api/myPage/profileAPI';
 import { useToast } from '@/contexts/ToastContext';
+import { validateNickname } from '@/utils/validateUserInfo';
 
 const EditProfilePage = () => {
   const { showToast } = useToast();
   const navigate = useNavigate();
   const [nickname, setNickname] = useState(() => localStorage.getItem('nickname') || '');
+  const [error, setError] = useState<string | null>(null);
+
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNickname(e.target.value);
+    const value = e.target.value;
+    setNickname(value);
+    setError(validateNickname(value));
   };
+
+  const isNicknameEmpty = nickname.trim() === '';
+
+  const isFormIncomplete = isNicknameEmpty || !!error;
 
   const handleSubmit = async () => {
     if (!nickname.trim()) {
@@ -54,13 +63,18 @@ const EditProfilePage = () => {
       </div>
 
       {/* 인풋창 및 공통 버튼 */}
-      <div className='w-full max-w-[480px] min-w-[360px] flex flex-col gap-4 px-[20px]'>
+      <div className='w-full max-w-[480px] min-w-[360px] flex flex-col px-[20px]'>
         <InputContainer
           placeholder={nickname}
           label='닉네임'
           value={nickname}
           onChange={handleNicknameChange}
         />
+        {error && (
+          <p className='text-fg-system-error body-12-r h-[14px] text-left flex px-4 flex-col items-start mt-[10px]'>
+            {error}
+          </p>
+        )}
       </div>
 
       <div
@@ -69,7 +83,13 @@ const EditProfilePage = () => {
           w-full max-w-[480px] min-w-[360px] 
           px-[16px] py-[28px]`}
       >
-        <Button size='large' variant='primary' fullWidth={true} onClick={handleSubmit}>
+        <Button
+          size='large'
+          variant='primary'
+          fullWidth={true}
+          onClick={handleSubmit}
+          disabled={isFormIncomplete}
+        >
           확인
         </Button>
       </div>
