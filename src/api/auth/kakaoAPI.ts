@@ -58,7 +58,6 @@ export const requestKakaoCallback = async (code: string): Promise<KakaoCallbackR
     throw new Error(errorMsg);
   }
 
-  console.log('카카오 인가 코드 전달:', response);
   return response.data.data;
 };
 

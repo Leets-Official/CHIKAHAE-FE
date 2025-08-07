@@ -31,7 +31,6 @@ const patchSlot = async <T>(url: string, payload: object): Promise<T> => {
 // 알림 슬롯 전체 조회
 export const getAlarmSlots = async (): Promise<AlarmSlot[]> => {
   const res = await api.get<ApiResponse<AlarmSlot[]>>('/api/notifications/slots');
-  console.log('알람 슬롯 조회 성공: ', res);
   return res.data.data;
 };
 

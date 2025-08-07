@@ -34,7 +34,6 @@ export const signupUser = async (data: SignupPayload): Promise<SignupResponse> =
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);
 
-    console.log('회원가입성공:', response);
     return response.data;
   } catch (err) {
     console.error('회원가입 API 에러:', err);

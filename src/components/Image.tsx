@@ -23,7 +23,7 @@ const Image = ({ src, alt, width, height, className, onClick }: ImageProps) => {
         alt={alt}
         width={width}
         height={height}
-        className={`transition-transform hover:scale-105 rounded-2xl ${className ?? ''}`}
+        className={`transition-transform rounded-2xl ${className ?? ''}`}
         onClick={onClick}
       />
     </>

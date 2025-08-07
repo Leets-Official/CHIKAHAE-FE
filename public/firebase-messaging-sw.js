@@ -1,7 +1,6 @@
 // 푸시 알림 수신 이벤트 리스너
 self.addEventListener('push', function (event) {
     const data = event.data?.json?.() || {};
-    console.log('[SW] 푸시 수신 payload:', data);
 
     const notification = data.notification || data;
     const title = notification.title || '알림';
@@ -25,7 +24,6 @@ self.addEventListener('activate', () => {
 
 // 알림 클릭 시 이벤트 리스너
 self.addEventListener('notificationclick', function (event) {
-    console.log('[SW] 알림 클릭됨', event);
     event.notification.close(); // 알림 창 닫기
 
     event.waitUntil(

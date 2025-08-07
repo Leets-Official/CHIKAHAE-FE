@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import { validateName } from '@/utils/validateUserInfo';
+import { isFutureDate } from '@/utils/date';
 import Button from '@/components/ui/Button';
 import UserInfoForm from '@/components/ui/UserInfoForm';
 import SignupBg from '@/assets/images/signupBackground.svg';
@@ -25,8 +28,25 @@ const SignupGuardianForm = ({
   setPhoneNumber,
   onNext,
 }: Props) => {
+  const [error, setError] = useState<string | null>(null);
+
+  const handleNameChange = (value: string) => {
+    setName(value);
+    const result = validateName(value);
+    setError(result);
+  };
+
+  const handleBirthDateChange = (value: string) => {
+    setBirthDate(value);
+    if (isFutureDate(value)) {
+      setError('생년월일은 오늘 이전 날짜로 입력해 주세요.');
+    } else {
+      setError(null);
+    }
+  };
+
   const isFormIncomplete =
-    !gender || !birthDate || !name || phoneNumber.replace(/\D/g, '').length !== 11;
+    !gender || !birthDate || !name || phoneNumber.replace(/\D/g, '').length !== 11 || !!error;
 
   return (
     <div className='flex flex-col items-center min-h-screen w-full'>
@@ -51,18 +71,24 @@ const SignupGuardianForm = ({
               <UserInfoForm
                 type='full'
                 name={name}
-                onNameChange={setName}
+                onNameChange={handleNameChange}
                 gender={gender}
                 onGenderChange={setGender}
                 birthDate={birthDate}
-                onBirthDateChange={setBirthDate}
+                onBirthDateChange={handleBirthDateChange}
                 phoneNumber={phoneNumber}
                 onPhoneNumberChange={setPhoneNumber}
               />
+
+              {error && (
+                <p className='text-fg-system-error body-12-r h-[14px] text-left flex px-4 flex-col items-start mt-[10px]'>
+                  {error}
+                </p>
+              )}
             </div>
           </div>
         </div>
-        <div className='fixed bottom-0 left-1/2 -translate-x-1/2 max-w-[480px] min-w-[360px] w-full px-[20px] py-5.75 z-10'>
+        <div className='absolute bottom-0 left-1/2 -translate-x-1/2 max-w-[480px] min-w-[360px] w-full px-[20px] py-5.75 z-10'>
           <Button
             variant='primary'
             onClick={onNext}

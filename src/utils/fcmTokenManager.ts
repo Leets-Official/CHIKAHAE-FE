@@ -7,7 +7,6 @@ export const clearFcmToken = async () => {
   try {
     await deleteFcmToken(token);
     localStorage.removeItem('fcmToken');
-    console.log('FCM 토큰 삭제 완료');
   } catch (err) {
     console.error('FCM 토큰 삭제 실패:', err);
   }

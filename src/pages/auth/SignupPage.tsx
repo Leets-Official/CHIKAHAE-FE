@@ -109,9 +109,6 @@ function SignupPage() {
         };
       }
 
-      // 디버깅용
-      console.log('회원가입 요청 payload:', payload);
-
       await signupUser(payload);
 
       localStorage.removeItem('kakaoAccessToken');

@@ -24,7 +24,6 @@ interface ApiResponse<T> {
 // 프로필 조회
 export const fetchUserProfile = async (): Promise<UserProfile> => {
   const response = await api.get<ApiResponse<UserProfile>>('/api/mypage/profile');
-  console.log('프로필 조회 성공:', response);
   return response.data.data;
 };
 

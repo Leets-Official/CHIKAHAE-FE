@@ -25,12 +25,11 @@ const messaging = getMessaging(app);
  */
 async function requestFcmToken() {
   try {
-    const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js'); // 💥 직접 등록해줌
-    console.log('[FCM] ServiceWorker 등록 완료:', registration);
+    const registration = await navigator.serviceWorker.register('/firebase-messaging-sw.js');
 
     const permission = await Notification.requestPermission();
     if (permission !== 'granted') {
-      console.warn('[FCM] 알림 권한 거부됨');
+      console.warn('FCM 알림 권한 거부됨');
       return;
     }
 
@@ -40,14 +39,11 @@ async function requestFcmToken() {
     });
 
     if (currentToken) {
-      console.log('[FCM] 토큰:', currentToken);
       await registerFcmToken(currentToken);
       return currentToken;
-    } else {
-      console.warn('[FCM] 토큰이 존재하지 않음');
     }
   } catch (error) {
-    console.error('[FCM] 토큰 요청 중 오류:', error);
+    console.error('FCM 토큰 요청 중 오류:', error);
   }
 }
 
