@@ -6,11 +6,13 @@ import remarkBreaks from 'remark-breaks';
 import GlobalTopNav from '@/components/ui/Nav/GlobalTopNav';
 import { TERMS } from '@/constants/terms';
 import type { TermType } from '@/constants/terms';
+import { useNavigate } from 'react-router-dom';
 
 const TermsPage = () => {
   const { type } = useParams<{ type: TermType }>();
   const [content, setContent] = useState('');
   const [navMessage, setNavMessage] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (type && TERMS[type]) {
@@ -24,7 +26,7 @@ const TermsPage = () => {
 
   return (
     <div className='flex flex-col w-[320px] h-screen mx-auto'>
-      <GlobalTopNav message={navMessage} showCancel={false} />
+      <GlobalTopNav message={navMessage} showCancel={false} onClickLeft={() => navigate(-1)} />
       <div className='flex-1  pt-15 text-[12px] leading-[14px] tracking-[-0.12px]'>
         {content ? (
           <div
