@@ -81,7 +81,7 @@ const QuizPage = () => {
       setAnswerExplanation(answerDescription);
       if (isCorrect) {
         setCorrectCount((prev) => prev + 1);
-        showToast({ message: '치카코인 1개가 적립되었어요.', duration: TOAST_DURATION });
+        showToast({ message: '치카코인 10개가 적립되었어요.', duration: TOAST_DURATION });
       }
     } catch {
       showToast({
@@ -105,7 +105,7 @@ const QuizPage = () => {
     } else if (step === 'result') {
       if (isLastQuestion) {
         showToast({
-          message: `총 치카코인 ${correctCount}개를 획득하였습니다.`,
+          message: `총 치카코인 ${correctCount * 10}개를 획득하였습니다.`,
           duration: TOAST_DURATION,
         });
         setStep('final');
