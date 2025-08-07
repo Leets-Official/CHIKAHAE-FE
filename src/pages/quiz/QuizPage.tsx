@@ -149,7 +149,7 @@ const QuizPage = () => {
         const { correctCount, coinReward, checkQuizResponse } = res.data;
 
         setCorrectCount(correctCount); // API 기준 정답 수로 갱신
-        setAnswerExplanation(`치카코인 ${coinReward}개가 적립되었어요!`);
+        setAnswerExplanation(`치카코인 ${correctCount}개가 적립되었어요!`);
         setCheckQuizResult({ correctCount, coinReward, checkQuizResponse });
 
         queryClient.invalidateQueries({ queryKey: ['pointBalance'] });
