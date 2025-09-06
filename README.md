@@ -1,7 +1,8 @@
 # 🦷 치카해-FE
 
 > **Leets 5기 최종 프로젝트 개발 기간: 2025.06.24 ~ 2025.08.07** <br/>
-<img width="1921" height="1080" alt="Slide 16_9 - 96 (1)" src="https://github.com/user-attachments/assets/a20c26ce-03c6-4cad-a338-14260294b729" />
+<img width="1921" height="1080" alt="Slide 16_9 - 235" src="https://github.com/user-attachments/assets/f1c8d3e2-791f-4be8-bf9a-3210521c4890" />
+
 
 </br>
 </br>
